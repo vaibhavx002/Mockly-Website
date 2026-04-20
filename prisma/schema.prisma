@@ -1,0 +1,100 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model User {
+  id           String         @id @default(cuid())
+  email        String         @unique
+  name         String
+  phone        String?
+  passwordHash String
+  createdAt    DateTime       @default(now())
+  lastLoginAt  DateTime?
+  attempts     Attempt[]
+  refreshTokens RefreshToken[]
+  profile      PersonalizationProfile?
+  incompleteSession IncompleteSession?
+
+  @@index([createdAt])
+}
+
+model Attempt {
+  id              String   @id @default(cuid())
+  attemptId       String   @unique
+  userId          String
+  user            User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+  examId          String
+  paperId         String
+  score           Float
+  maxScore        Float
+  scorePercent    Float
+  correct         Int
+  wrong           Int
+  unanswered      Int
+  totalQuestions  Int
+  accuracyPercent Float
+  durationMinutes Int
+  timeTakenSeconds Int
+  launchMode      String
+  isAutoSubmitted Boolean  @default(false)
+  sectionStats    Json?
+  weakTopics      Json?
+  lowScoreWarnings Json?
+  submittedAt     DateTime
+  createdAt       DateTime @default(now())
+
+  @@index([userId, submittedAt(sort: Desc)])
+  @@index([examId, submittedAt(sort: Desc)])
+}
+
+model RefreshToken {
+  id        String   @id @default(cuid())
+  tokenHash String   @unique
+  userId    String
+  user      User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+  createdAt DateTime @default(now())
+  expiresAt DateTime
+
+  @@index([userId, createdAt(sort: Desc)])
+  @@index([expiresAt])
+}
+
+model PersonalizationProfile {
+  id                        String   @id @default(cuid())
+  userId                    String   @unique
+  user                      User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+  lastSelectedExamId        String?
+  lastRecommendedExamId     String?
+  selectionCountByExam      Json?    @default("{}")
+  launchCountByExam         Json?    @default("{}")
+  recommendationCountByExam Json?    @default("{}")
+  eventSourceByExam         Json?    @default("{}")
+  preferences               Json?
+  updatedAt                 DateTime @updatedAt
+}
+
+model IncompleteSession {
+  id                   String   @id @default(cuid())
+  userId               String   @unique
+  user                 User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+  examId               String
+  paperId              String
+  sessionId            String?
+  startUrl             String?
+  resumeUrl            String?
+  totalQuestions       Int      @default(0)
+  currentQuestionIndex Int      @default(0)
+  currentSectionIndex  Int      @default(0)
+  durationMinutes      Int      @default(1)
+  timerSeconds         Int      @default(0)
+  progressPercent      Float    @default(0)
+  selectedLanguage     String   @default("en")
+  questionStates       Json?    @default("[]")
+  sectionTimeById      Json?    @default("{}")
+  updatedAt            DateTime @updatedAt
+}

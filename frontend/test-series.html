@@ -1,0 +1,311 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Test Series | Mockly</title>
+    <script>
+        (function () {
+            try {
+                var prefersReducedMotion = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+                var lowMemory = typeof navigator.deviceMemory === 'number' && navigator.deviceMemory <= 4;
+                var lowCpu = typeof navigator.hardwareConcurrency === 'number' && navigator.hardwareConcurrency <= 4;
+
+                if (prefersReducedMotion || lowMemory || lowCpu) {
+                    document.documentElement.classList.add('performance-lite');
+                }
+            } catch (error) {
+                // Ignore environment-specific feature detection issues.
+            }
+        })();
+    </script>
+    <link rel="preload" href="vendor/fontawesome/css/all.min.css" as="style">
+    <link href="vendor/fontawesome/css/all.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="test-series.css">
+</head>
+<body>
+    <header class="navbar">
+        <div class="nav-container">
+            <a href="/#home" class="logo">
+                <div class="logo-icon">M</div>
+                <span class="logo-text">Mockly</span>
+            </a>
+
+            <nav class="nav-links">
+                <a href="/#home">Home</a>
+                <a href="/all-exams">All Exams</a>
+                <a href="/test-series" class="active" aria-current="page">Test Series</a>
+                <a href="/chapter-wise">Chapter Wise</a>
+                <a href="/pyq-questions">PYQ Questions</a>
+                <a href="/#pass">Mockly Pass <span class="tag-pro">PRO</span></a>
+            </nav>
+
+            <div class="nav-actions">
+                <button class="dark-mode-toggle" id="theme-toggle" aria-label="Toggle theme">
+                    <div class="toggle-track">
+                        <div class="toggle-thumb">
+                            <i class="fa-solid fa-moon moon-icon"></i>
+                            <i class="fa-solid fa-sun sun-icon"></i>
+                        </div>
+                    </div>
+                </button>
+                <div class="auth-actions">
+                    <button id="nav-login-btn" class="btn-text" type="button">Log In</button>
+                    <button id="nav-signup-btn" class="btn-small-primary" type="button">Sign Up</button>
+                </div>
+            </div>
+
+            <button class="menu-toggle" aria-label="Toggle navigation menu" aria-expanded="false" title="Menu">
+                <i class="fas fa-bars"></i>
+            </button>
+        </div>
+    </header>
+
+    <main class="test-series-page">
+        <section class="test-hero">
+            <div class="test-hero-shell">
+                <div class="test-hero-copy">
+                    <span class="badge hero-badge"><i class="fa-solid fa-layer-group" aria-hidden="true"></i> Dynamic Test Library</span>
+                    <h1>Browse live mock instances for <span id="target-label">All Exams</span>.</h1>
+                    <p>
+                        This page streams paginated test cards from the backend contract and keeps rendering smooth at scale.
+                        Sort by freshness, competition intensity, or difficulty without breaking the flow.
+                    </p>
+
+                    <div class="candidate-trust-row" role="list" aria-label="Candidate trust promises">
+                        <article class="candidate-trust-item" role="listitem">
+                            <i class="fa-solid fa-shield-heart" aria-hidden="true"></i>
+                            <div>
+                                <strong>Transparent difficulty</strong>
+                                <span>No hidden surprises before attempt.</span>
+                            </div>
+                        </article>
+                        <article class="candidate-trust-item" role="listitem">
+                            <i class="fa-solid fa-bolt" aria-hidden="true"></i>
+                            <div>
+                                <strong>Fast load at scale</strong>
+                                <span>Infinite feed tuned for heavy catalogs.</span>
+                            </div>
+                        </article>
+                        <article class="candidate-trust-item" role="listitem">
+                            <i class="fa-solid fa-language" aria-hidden="true"></i>
+                            <div>
+                                <strong>Language clarity</strong>
+                                <span>EN/HI support visible on every card.</span>
+                            </div>
+                        </article>
+                    </div>
+
+                    <form id="series-toolbar-form" class="series-toolbar" role="search">
+                        <label class="sr-only" for="series-search">Search test title</label>
+                        <div class="series-search-wrap">
+                            <i class="fa-solid fa-magnifying-glass" aria-hidden="true"></i>
+                            <input id="series-search" type="search" placeholder="Search by title, exam, or stream">
+                        </div>
+
+                        <label class="sr-only" for="series-sort">Sort test series</label>
+                        <select id="series-sort" aria-label="Sort test series">
+                            <option value="newly-added">Sort: Newly Added</option>
+                            <option value="most-given">Sort: Most Given</option>
+                            <option value="easy">Sort: Easy First</option>
+                            <option value="moderate">Sort: Moderate Focus</option>
+                            <option value="hard">Sort: Hard Focus</option>
+                        </select>
+
+                    </form>
+
+                    <div class="series-sort-chips" role="group" aria-label="Quick sort options">
+                        <button class="series-chip active" data-sort="newly-added" type="button">Newly Added</button>
+                        <button class="series-chip" data-sort="most-given" type="button">Most Given</button>
+                        <button class="series-chip" data-sort="easy" type="button">Easy</button>
+                        <button class="series-chip" data-sort="moderate" type="button">Moderate</button>
+                        <button class="series-chip" data-sort="hard" type="button">Hard</button>
+                    </div>
+                </div>
+
+                <div class="test-hero-hud">
+                    <article class="hud-card">
+                        <span>Live Pool</span>
+                        <strong id="hud-total">--</strong>
+                        <p>Total tests available for this target</p>
+                    </article>
+                    <article class="hud-card">
+                        <span>Loaded</span>
+                        <strong id="hud-loaded">0</strong>
+                        <p>Cards currently rendered client-side</p>
+                    </article>
+                    <article class="hud-card">
+                        <span>Trust Metrics</span>
+                        <strong id="hud-rating">4.9/5</strong>
+                        <p><span id="hud-aspirants">800k+</span> aspirants are active now</p>
+                    </article>
+                    <article class="hud-card accent-hud-card">
+                        <span>Candidate Focus</span>
+                        <strong id="hud-focus">Rank Growth</strong>
+                        <p id="hud-focus-copy">Pick a test with your target pressure and attempt window.</p>
+                    </article>
+                </div>
+            </div>
+        </section>
+
+        <section class="trust-builder-section">
+            <div class="trust-builder-shell">
+                <article class="trust-builder-copy">
+                    <span class="section-eyebrow">Trust Builder Layer</span>
+                    <h2>What serious candidates check before pressing Start Mock</h2>
+                    <p>Mockly keeps decision-critical signals visible: competition intensity, test freshness, expected duration, and language format. You should never feel blind before an attempt.</p>
+
+                    <div class="trust-builder-grid" role="list" aria-label="Test credibility signals">
+                        <article class="trust-builder-card" role="listitem">
+                            <i class="fa-solid fa-ranking-star" aria-hidden="true"></i>
+                            <strong>Competition Signal</strong>
+                            <span>Most given tests surface instantly for realistic pressure calibration.</span>
+                        </article>
+                        <article class="trust-builder-card" role="listitem">
+                            <i class="fa-solid fa-hourglass-half" aria-hidden="true"></i>
+                            <strong>Duration Honesty</strong>
+                            <span>Each card shows time expectation so planning stays practical.</span>
+                        </article>
+                        <article class="trust-builder-card" role="listitem">
+                            <i class="fa-solid fa-rotate" aria-hidden="true"></i>
+                            <strong>Freshness Tracking</strong>
+                            <span>Newly added feed ensures you practice evolving exam patterns.</span>
+                        </article>
+                    </div>
+                </article>
+
+                <aside class="candidate-checklist">
+                    <h3>Attempt Checklist</h3>
+                    <ul>
+                        <li>Choose the stream that matches your immediate target.</li>
+                        <li>Pick difficulty based on your current preparation stage.</li>
+                        <li>Use competition pressure to simulate exam-day intensity.</li>
+                        <li>Start with one timed attempt and one review attempt.</li>
+                    </ul>
+                    <a href="#series-grid" class="btn btn-primary">Pick My Next Mock</a>
+                </aside>
+            </div>
+        </section>
+
+        <section class="series-catalog-section">
+            <div class="series-catalog-shell">
+                <div class="series-catalog-head">
+                    <div>
+                        <span class="section-eyebrow">Infinite Catalog</span>
+                        <h2>Server-driven feed with quiet infinite loading</h2>
+                        <p>As you scroll, the next page is fetched and appended before you reach the bottom.</p>
+                    </div>
+                    <a class="btn btn-outline btn-hover-sweep" href="/all-exams">Back to All Exams</a>
+                </div>
+
+                <p id="series-status" class="series-status" aria-live="polite">Preparing test series feed...</p>
+                <div id="series-grid" class="series-grid" aria-live="polite"></div>
+
+                <div id="series-empty" class="series-empty" hidden>
+                    <strong>No tests matched your search.</strong>
+                    <span>Try another keyword or switch sort mode.</span>
+                    <button type="button" class="catalog-reset-btn" id="series-reset-btn">Reset Filters</button>
+                </div>
+
+                <div id="series-loading" class="series-loading" hidden>
+                    <i class="fa-solid fa-spinner fa-spin" aria-hidden="true"></i>
+                    <span>Loading more tests...</span>
+                </div>
+
+                <div id="scroll-sentinel" class="scroll-sentinel" aria-hidden="true"></div>
+            </div>
+        </section>
+    </main>
+
+    <footer class="site-footer">
+        <div class="footer-top-cta">
+            <div>
+                <h3>Ready to move from browsing to real attempt practice?</h3>
+                <p>Pick your target stream, open the next test instantly, and keep your momentum with ranked competition flow.</p>
+            </div>
+            <a href="/all-exams" class="btn btn-primary">Explore Categories <i class="fa-solid fa-arrow-right"></i></a>
+        </div>
+
+        <div class="footer-container">
+            <div class="footer-brand">
+                <a href="/#home" class="logo">
+                    <div class="logo-icon">M</div>
+                    <span class="logo-text">Mockly</span>
+                </a>
+                <p>Mockly helps aspirants preparing for SSC, RRB, and UPSC with exam-accurate interface, bilingual practice, and smart analytics designed for real selection outcomes.</p>
+
+                <div class="footer-trust-chips">
+                    <span><i class="fa-solid fa-users"></i> 800k+ Aspirants</span>
+                    <span><i class="fa-solid fa-trophy"></i> 12k+ Selections</span>
+                    <span><i class="fa-solid fa-star"></i> 4.9/5 Rating</span>
+                </div>
+
+                <div class="footer-contact">
+                    <a href="mailto:support@mockly.in"><i class="fa-regular fa-envelope"></i> support@mockly.in</a>
+                    <a href="tel:+919876543210"><i class="fa-solid fa-phone"></i> +91 98765 43210</a>
+                </div>
+            </div>
+
+            <div class="footer-links-grid">
+                <div>
+                    <h4>Exam Categories</h4>
+                    <a href="/all-exams?stream=ssc">SSC Mock Tests</a>
+                    <a href="/all-exams?stream=rrb">RRB Mock Tests</a>
+                    <a href="/all-exams?stream=upsc">UPSC Mock Tests</a>
+                    <a href="/all-exams">All Exam Directory</a>
+                </div>
+                <div>
+                    <h4>Preparation Tools</h4>
+                    <a href="/test-series">Live Competitions</a>
+                    <a href="/#pyq">Daily Quiz & Current Affairs</a>
+                    <a href="/#features">Performance Analytics</a>
+                    <a href="/all-exams#exam-spotlight">Quick Assessment</a>
+                </div>
+                <div>
+                    <h4>Company</h4>
+                    <a href="/#home">About Mockly</a>
+                    <a href="mailto:support@mockly.in?subject=Partnership%20Query">Partner With Us</a>
+                    <a href="mailto:support@mockly.in?subject=Hiring%20Interest">Careers & Hiring</a>
+                </div>
+                <div>
+                    <h4>Legal & Help</h4>
+                    <a href="privacy.html">Privacy Policy</a>
+                    <a href="terms.html">Terms of Use</a>
+                    <a href="refund.html">Refund Policy</a>
+                    <a href="help.html">Help Center</a>
+                </div>
+            </div>
+
+            <aside class="footer-app-card">
+                <h4>Get Daily Updates</h4>
+                <p>Receive exam alerts, daily quizzes, and strategy tips directly in your inbox.</p>
+                <form class="footer-newsletter" onsubmit="event.preventDefault();">
+                    <label class="sr-only" for="footer-email">Email address</label>
+                    <input id="footer-email" type="email" placeholder="Enter your email" required>
+                    <button type="submit" class="btn btn-primary">Subscribe</button>
+                </form>
+                <div class="footer-app-badges">
+                    <a href="/#dashboard"><i class="fa-solid fa-chart-column"></i> Open Dashboard</a>
+                    <a href="/all-exams"><i class="fa-solid fa-file-pen"></i> Pick Another Exam</a>
+                </div>
+            </aside>
+        </div>
+
+        <div class="footer-bottom">
+            <p>&copy; 2026 Mockly. Crafted for serious government exam aspirants.</p>
+            <div class="footer-bottom-links">
+                <a href="privacy.html">Privacy</a>
+                <a href="terms.html">Terms</a>
+                <a href="mailto:support@mockly.in">Contact</a>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        window.MOCKLY_ENABLE_API = true;
+        window.MOCKLY_API_BASE = '/api';
+    </script>
+    <script src="test-series.js" defer></script>
+</body>
+</html>

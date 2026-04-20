@@ -1,0 +1,32 @@
+{
+  "paperId": "ssc-cgl-tier1-2025-set1",
+  "examId": "ssc-cgl",
+  "title": "SSC CGL Tier-I 2025 Set 1",
+  "totalQuestions": 100,
+  "durationMinutes": 60,
+  "marksPerQuestion": 2,
+  "maxScore": 200,
+  "negativeMarks": 0.5,
+  "sections": [
+    {
+      "sectionId": "reasoning",
+      "name": "General Intelligence & Reasoning",
+      "questionCount": 25
+    },
+    {
+      "sectionId": "awareness",
+      "name": "General Awareness",
+      "questionCount": 25
+    },
+    {
+      "sectionId": "quant",
+      "name": "Quantitative Aptitude",
+      "questionCount": 25
+    },
+    {
+      "sectionId": "english",
+      "name": "English Comprehension",
+      "questionCount": 25
+    }
+  ]
+}

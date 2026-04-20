@@ -1,0 +1,522 @@
+{
+  "version": "2026-04-19",
+  "bodies": [
+    {
+      "id": "ssc",
+      "title": "Staff Selection Commission",
+      "source": "https://ssc.gov.in/",
+      "examIds": [
+        "ssc-cgl",
+        "ssc-chsl",
+        "ssc-cpo",
+        "ssc-gd",
+        "ssc-mts",
+        "ssc-je",
+        "ssc-stenographer",
+        "ssc-jht",
+        "ssc-selection-post",
+        "delhi-police-constable",
+        "delhi-police-si"
+      ]
+    },
+    {
+      "id": "rrb",
+      "title": "Railway Recruitment Boards",
+      "source": "https://www.rrbcdg.gov.in/",
+      "examIds": [
+        "rrb-ntpc",
+        "rrb-group-d",
+        "rrb-alp-technician",
+        "rrb-je",
+        "rrb-paramedical",
+        "rrb-ministerial-isolated",
+        "rrb-rpf-si-constable"
+      ]
+    },
+    {
+      "id": "upsc",
+      "title": "Union Public Service Commission",
+      "source": "https://www.upsc.gov.in/",
+      "examIds": [
+        "upsc-prelims",
+        "upsc-csat",
+        "upsc-cds",
+        "upsc-nda-na",
+        "upsc-capf-ac",
+        "upsc-ese",
+        "upsc-cms",
+        "upsc-ifs"
+      ]
+    }
+  ],
+  "exams": [
+    {
+      "id": "ssc-cgl",
+      "bodyId": "ssc",
+      "stream": "SSC",
+      "title": "SSC CGL",
+      "description": "Tier-wise mocks, PYQ-aligned drills, and analytics for graduate-level SSC roles.",
+      "iconClass": "fa-solid fa-graduation-cap",
+      "tags": ["ssc", "graduate", "bilingual", "popular"],
+      "recommendedDuration": "60 mins",
+      "recommendedLevel": "Moderate",
+      "isLive": true,
+      "dataFolder": "cgl",
+      "paperConfig": {
+        "defaultPaperId": "ssc-cgl-tier1-2025-set1",
+        "availablePaperIds": ["ssc-cgl-tier1-2025-set1"],
+        "languageSupport": ["en", "hi"]
+      }
+    },
+    {
+      "id": "ssc-chsl",
+      "bodyId": "ssc",
+      "stream": "SSC",
+      "title": "SSC CHSL",
+      "description": "CHSL-focused speed and accuracy practice for 10+2 entry pathways.",
+      "iconClass": "fa-solid fa-pen-to-square",
+      "tags": ["ssc", "higher-secondary", "bilingual"],
+      "recommendedDuration": "60 mins",
+      "recommendedLevel": "Beginner to Moderate",
+      "isLive": true,
+      "dataFolder": "chsl",
+      "paperConfig": {
+        "defaultPaperId": "ssc-chsl-tier1-2025-set1",
+        "availablePaperIds": ["ssc-chsl-tier1-2025-set1"],
+        "languageSupport": ["en", "hi"]
+      }
+    },
+    {
+      "id": "rrb-ntpc",
+      "bodyId": "rrb",
+      "stream": "RRB",
+      "title": "RRB NTPC",
+      "description": "CBT style coverage for commercial apprentice and station-based NTPC roles.",
+      "iconClass": "fa-solid fa-train",
+      "tags": ["rrb", "ntpc", "bilingual", "popular"],
+      "recommendedDuration": "25 mins",
+      "recommendedLevel": "Moderate",
+      "isLive": true,
+      "dataFolder": "ntpc",
+      "paperConfig": {
+        "defaultPaperId": "rrb-ntpc-cbt1-2025-set1",
+        "availablePaperIds": ["rrb-ntpc-cbt1-2025-set1"],
+        "languageSupport": ["en", "hi"]
+      }
+    },
+    {
+      "id": "rrb-group-d",
+      "bodyId": "rrb",
+      "stream": "RRB",
+      "title": "RRB Group D",
+      "description": "Foundational railway recruitment practice with revision-friendly section loops.",
+      "iconClass": "fa-solid fa-route",
+      "tags": ["rrb", "group-d", "bilingual"],
+      "recommendedDuration": "20 mins",
+      "recommendedLevel": "Beginner",
+      "isLive": true,
+      "dataFolder": "group-d",
+      "paperConfig": {
+        "defaultPaperId": "rrb-group-d-cbt-2025-set1",
+        "availablePaperIds": ["rrb-group-d-cbt-2025-set1"],
+        "languageSupport": ["en", "hi"]
+      }
+    },
+    {
+      "id": "upsc-prelims",
+      "bodyId": "upsc",
+      "stream": "UPSC",
+      "title": "UPSC Prelims GS",
+      "description": "Concept-heavy GS prelims practice for broad static and current affairs readiness.",
+      "iconClass": "fa-solid fa-landmark",
+      "tags": ["upsc", "prelims", "gs"],
+      "recommendedDuration": "30 mins",
+      "recommendedLevel": "Advanced",
+      "isLive": true,
+      "dataFolder": "upsc-gs",
+      "paperConfig": {
+        "defaultPaperId": "upsc-prelims-gs1-2025-set1",
+        "availablePaperIds": ["upsc-prelims-gs1-2025-set1"],
+        "languageSupport": ["en"]
+      }
+    },
+    {
+      "id": "upsc-csat",
+      "bodyId": "upsc",
+      "stream": "UPSC",
+      "title": "UPSC CSAT",
+      "description": "Aptitude and reasoning precision for CSAT qualifying confidence.",
+      "iconClass": "fa-solid fa-scale-balanced",
+      "tags": ["upsc", "csat", "aptitude", "popular"],
+      "recommendedDuration": "25 mins",
+      "recommendedLevel": "Advanced",
+      "isLive": true,
+      "dataFolder": "csat",
+      "paperConfig": {
+        "defaultPaperId": "upsc-csat-2025-set1",
+        "availablePaperIds": ["upsc-csat-2025-set1"],
+        "languageSupport": ["en"]
+      }
+    },
+    {
+      "id": "ssc-cpo",
+      "bodyId": "ssc",
+      "stream": "SSC",
+      "title": "SSC CPO",
+      "description": "Sub-inspector pathway mocks for CAPF and Delhi Police aligned sections.",
+      "iconClass": "fa-solid fa-shield-halved",
+      "tags": ["ssc", "cpo", "delhi-police"],
+      "recommendedDuration": "22 mins",
+      "recommendedLevel": "Moderate",
+      "isLive": false,
+      "dataFolder": "ssc-cpo",
+      "paperConfig": {
+        "defaultPaperId": "ssc-cpo-tier1-2026-set1",
+        "availablePaperIds": ["ssc-cpo-tier1-2026-set1"],
+        "languageSupport": ["en", "hi"]
+      }
+    },
+    {
+      "id": "ssc-gd",
+      "bodyId": "ssc",
+      "stream": "SSC",
+      "title": "SSC GD Constable",
+      "description": "General duty constable practice with daily mixed section drills.",
+      "iconClass": "fa-solid fa-user-shield",
+      "tags": ["ssc", "gd", "constable"],
+      "recommendedDuration": "18 mins",
+      "recommendedLevel": "Beginner to Moderate",
+      "isLive": false,
+      "dataFolder": "ssc-gd",
+      "paperConfig": {
+        "defaultPaperId": "ssc-gd-2026-set1",
+        "availablePaperIds": ["ssc-gd-2026-set1"],
+        "languageSupport": ["en", "hi"]
+      }
+    },
+    {
+      "id": "ssc-mts",
+      "bodyId": "ssc",
+      "stream": "SSC",
+      "title": "SSC MTS",
+      "description": "Foundational MTS preparation with timed objective practice sets.",
+      "iconClass": "fa-solid fa-briefcase",
+      "tags": ["ssc", "mts"],
+      "recommendedDuration": "16 mins",
+      "recommendedLevel": "Beginner",
+      "isLive": false,
+      "dataFolder": "ssc-mts",
+      "paperConfig": {
+        "defaultPaperId": "ssc-mts-2026-set1",
+        "availablePaperIds": ["ssc-mts-2026-set1"],
+        "languageSupport": ["en", "hi"]
+      }
+    },
+    {
+      "id": "ssc-je",
+      "bodyId": "ssc",
+      "stream": "SSC",
+      "title": "SSC JE",
+      "description": "Technical + general section readiness for junior engineer recruitment.",
+      "iconClass": "fa-solid fa-screwdriver-wrench",
+      "tags": ["ssc", "je", "technical"],
+      "recommendedDuration": "24 mins",
+      "recommendedLevel": "Moderate to Advanced",
+      "isLive": false,
+      "dataFolder": "ssc-je",
+      "paperConfig": {
+        "defaultPaperId": "ssc-je-2026-set1",
+        "availablePaperIds": ["ssc-je-2026-set1"],
+        "languageSupport": ["en", "hi"]
+      }
+    },
+    {
+      "id": "ssc-stenographer",
+      "bodyId": "ssc",
+      "stream": "SSC",
+      "title": "SSC Stenographer",
+      "description": "Grade C and D objective practice with speed-oriented section balancing.",
+      "iconClass": "fa-solid fa-keyboard",
+      "tags": ["ssc", "stenographer"],
+      "recommendedDuration": "17 mins",
+      "recommendedLevel": "Beginner to Moderate",
+      "isLive": false,
+      "dataFolder": "ssc-stenographer",
+      "paperConfig": {
+        "defaultPaperId": "ssc-stenographer-2026-set1",
+        "availablePaperIds": ["ssc-stenographer-2026-set1"],
+        "languageSupport": ["en", "hi"]
+      }
+    },
+    {
+      "id": "ssc-jht",
+      "bodyId": "ssc",
+      "stream": "SSC",
+      "title": "SSC JHT",
+      "description": "Junior Hindi Translator practice with language-focused paper structure.",
+      "iconClass": "fa-solid fa-language",
+      "tags": ["ssc", "jht", "language"],
+      "recommendedDuration": "22 mins",
+      "recommendedLevel": "Moderate",
+      "isLive": false,
+      "dataFolder": "ssc-jht",
+      "paperConfig": {
+        "defaultPaperId": "ssc-jht-2026-set1",
+        "availablePaperIds": ["ssc-jht-2026-set1"],
+        "languageSupport": ["en", "hi"]
+      }
+    },
+    {
+      "id": "ssc-selection-post",
+      "bodyId": "ssc",
+      "stream": "SSC",
+      "title": "SSC Selection Post",
+      "description": "Matric, higher-secondary, and graduate level post-specific objective sets.",
+      "iconClass": "fa-solid fa-list-check",
+      "tags": ["ssc", "selection-post"],
+      "recommendedDuration": "18 mins",
+      "recommendedLevel": "Beginner to Moderate",
+      "isLive": false,
+      "dataFolder": "ssc-selection-post",
+      "paperConfig": {
+        "defaultPaperId": "ssc-selection-post-2026-set1",
+        "availablePaperIds": ["ssc-selection-post-2026-set1"],
+        "languageSupport": ["en", "hi"]
+      }
+    },
+    {
+      "id": "delhi-police-constable",
+      "bodyId": "ssc",
+      "stream": "SSC",
+      "title": "Delhi Police Constable",
+      "description": "Delhi Police constable objective coverage under SSC recruitment ecosystem.",
+      "iconClass": "fa-solid fa-building-shield",
+      "tags": ["delhi-police", "constable", "ssc"],
+      "recommendedDuration": "18 mins",
+      "recommendedLevel": "Beginner to Moderate",
+      "isLive": false,
+      "dataFolder": "delhi-police-constable",
+      "paperConfig": {
+        "defaultPaperId": "delhi-police-constable-2026-set1",
+        "availablePaperIds": ["delhi-police-constable-2026-set1"],
+        "languageSupport": ["en", "hi"]
+      }
+    },
+    {
+      "id": "delhi-police-si",
+      "bodyId": "ssc",
+      "stream": "SSC",
+      "title": "Delhi Police SI",
+      "description": "Sub-inspector exam path aligned to SSC CPO preparation tracks.",
+      "iconClass": "fa-solid fa-user-tie",
+      "tags": ["delhi-police", "si", "ssc"],
+      "recommendedDuration": "22 mins",
+      "recommendedLevel": "Moderate",
+      "isLive": false,
+      "dataFolder": "delhi-police-si",
+      "paperConfig": {
+        "defaultPaperId": "delhi-police-si-2026-set1",
+        "availablePaperIds": ["delhi-police-si-2026-set1"],
+        "languageSupport": ["en", "hi"]
+      }
+    },
+    {
+      "id": "rrb-alp-technician",
+      "bodyId": "rrb",
+      "stream": "RRB",
+      "title": "RRB ALP and Technician",
+      "description": "Assistant Loco Pilot and Technician preparation with CBT pattern sequencing.",
+      "iconClass": "fa-solid fa-train-subway",
+      "tags": ["rrb", "alp", "technician"],
+      "recommendedDuration": "22 mins",
+      "recommendedLevel": "Moderate",
+      "isLive": false,
+      "dataFolder": "rrb-alp-technician",
+      "paperConfig": {
+        "defaultPaperId": "rrb-alp-technician-2026-set1",
+        "availablePaperIds": ["rrb-alp-technician-2026-set1"],
+        "languageSupport": ["en", "hi"]
+      }
+    },
+    {
+      "id": "rrb-je",
+      "bodyId": "rrb",
+      "stream": "RRB",
+      "title": "RRB JE",
+      "description": "Junior Engineer test flow with technical and general section balancing.",
+      "iconClass": "fa-solid fa-gears",
+      "tags": ["rrb", "je", "technical"],
+      "recommendedDuration": "24 mins",
+      "recommendedLevel": "Moderate to Advanced",
+      "isLive": false,
+      "dataFolder": "rrb-je",
+      "paperConfig": {
+        "defaultPaperId": "rrb-je-2026-set1",
+        "availablePaperIds": ["rrb-je-2026-set1"],
+        "languageSupport": ["en", "hi"]
+      }
+    },
+    {
+      "id": "rrb-paramedical",
+      "bodyId": "rrb",
+      "stream": "RRB",
+      "title": "RRB Paramedical",
+      "description": "Paramedical role readiness with domain-aware objective practice.",
+      "iconClass": "fa-solid fa-kit-medical",
+      "tags": ["rrb", "paramedical"],
+      "recommendedDuration": "22 mins",
+      "recommendedLevel": "Moderate",
+      "isLive": false,
+      "dataFolder": "rrb-paramedical",
+      "paperConfig": {
+        "defaultPaperId": "rrb-paramedical-2026-set1",
+        "availablePaperIds": ["rrb-paramedical-2026-set1"],
+        "languageSupport": ["en", "hi"]
+      }
+    },
+    {
+      "id": "rrb-ministerial-isolated",
+      "bodyId": "rrb",
+      "stream": "RRB",
+      "title": "RRB Ministerial and Isolated",
+      "description": "Focused objective set strategy for ministerial and isolated railway categories.",
+      "iconClass": "fa-solid fa-file-signature",
+      "tags": ["rrb", "ministerial", "isolated"],
+      "recommendedDuration": "20 mins",
+      "recommendedLevel": "Moderate",
+      "isLive": false,
+      "dataFolder": "rrb-ministerial-isolated",
+      "paperConfig": {
+        "defaultPaperId": "rrb-ministerial-isolated-2026-set1",
+        "availablePaperIds": ["rrb-ministerial-isolated-2026-set1"],
+        "languageSupport": ["en", "hi"]
+      }
+    },
+    {
+      "id": "rrb-rpf-si-constable",
+      "bodyId": "rrb",
+      "stream": "RRB",
+      "title": "RPF SI and Constable",
+      "description": "Railway Protection Force exam preparation with tier-appropriate mock sequencing.",
+      "iconClass": "fa-solid fa-shield",
+      "tags": ["rrb", "rpf", "si", "constable"],
+      "recommendedDuration": "20 mins",
+      "recommendedLevel": "Moderate",
+      "isLive": false,
+      "dataFolder": "rrb-rpf-si-constable",
+      "paperConfig": {
+        "defaultPaperId": "rrb-rpf-si-constable-2026-set1",
+        "availablePaperIds": ["rrb-rpf-si-constable-2026-set1"],
+        "languageSupport": ["en", "hi"]
+      }
+    },
+    {
+      "id": "upsc-cds",
+      "bodyId": "upsc",
+      "stream": "UPSC",
+      "title": "UPSC CDS",
+      "description": "Combined Defence Services objective preparation for OTA, IMA, INA, and AFA routes.",
+      "iconClass": "fa-solid fa-helmet-un",
+      "tags": ["upsc", "cds", "defence"],
+      "recommendedDuration": "24 mins",
+      "recommendedLevel": "Advanced",
+      "isLive": false,
+      "dataFolder": "upsc-cds",
+      "paperConfig": {
+        "defaultPaperId": "upsc-cds-2026-set1",
+        "availablePaperIds": ["upsc-cds-2026-set1"],
+        "languageSupport": ["en"]
+      }
+    },
+    {
+      "id": "upsc-nda-na",
+      "bodyId": "upsc",
+      "stream": "UPSC",
+      "title": "UPSC NDA and NA",
+      "description": "National Defence Academy and Naval Academy exam readiness with timed practice.",
+      "iconClass": "fa-solid fa-jet-fighter-up",
+      "tags": ["upsc", "nda", "defence"],
+      "recommendedDuration": "24 mins",
+      "recommendedLevel": "Moderate to Advanced",
+      "isLive": false,
+      "dataFolder": "upsc-nda-na",
+      "paperConfig": {
+        "defaultPaperId": "upsc-nda-na-2026-set1",
+        "availablePaperIds": ["upsc-nda-na-2026-set1"],
+        "languageSupport": ["en"]
+      }
+    },
+    {
+      "id": "upsc-capf-ac",
+      "bodyId": "upsc",
+      "stream": "UPSC",
+      "title": "UPSC CAPF AC",
+      "description": "Assistant Commandant objective coverage with security and governance focus.",
+      "iconClass": "fa-solid fa-user-ninja",
+      "tags": ["upsc", "capf", "ac"],
+      "recommendedDuration": "24 mins",
+      "recommendedLevel": "Advanced",
+      "isLive": false,
+      "dataFolder": "upsc-capf-ac",
+      "paperConfig": {
+        "defaultPaperId": "upsc-capf-ac-2026-set1",
+        "availablePaperIds": ["upsc-capf-ac-2026-set1"],
+        "languageSupport": ["en"]
+      }
+    },
+    {
+      "id": "upsc-ese",
+      "bodyId": "upsc",
+      "stream": "UPSC",
+      "title": "UPSC ESE",
+      "description": "Engineering Services prelims objective training with high-rigor standards.",
+      "iconClass": "fa-solid fa-compass-drafting",
+      "tags": ["upsc", "ese", "engineering"],
+      "recommendedDuration": "26 mins",
+      "recommendedLevel": "Advanced",
+      "isLive": false,
+      "dataFolder": "upsc-ese",
+      "paperConfig": {
+        "defaultPaperId": "upsc-ese-2026-set1",
+        "availablePaperIds": ["upsc-ese-2026-set1"],
+        "languageSupport": ["en"]
+      }
+    },
+    {
+      "id": "upsc-cms",
+      "bodyId": "upsc",
+      "stream": "UPSC",
+      "title": "UPSC CMS",
+      "description": "Combined Medical Services objective route with medicine-first topic weighting.",
+      "iconClass": "fa-solid fa-stethoscope",
+      "tags": ["upsc", "cms", "medical"],
+      "recommendedDuration": "24 mins",
+      "recommendedLevel": "Advanced",
+      "isLive": false,
+      "dataFolder": "upsc-cms",
+      "paperConfig": {
+        "defaultPaperId": "upsc-cms-2026-set1",
+        "availablePaperIds": ["upsc-cms-2026-set1"],
+        "languageSupport": ["en"]
+      }
+    },
+    {
+      "id": "upsc-ifs",
+      "bodyId": "upsc",
+      "stream": "UPSC",
+      "title": "UPSC IFoS",
+      "description": "Indian Forest Service prelims-mains bridge with ecology and environment emphasis.",
+      "iconClass": "fa-solid fa-tree",
+      "tags": ["upsc", "ifos", "forest"],
+      "recommendedDuration": "26 mins",
+      "recommendedLevel": "Advanced",
+      "isLive": false,
+      "dataFolder": "upsc-ifos",
+      "paperConfig": {
+        "defaultPaperId": "upsc-ifs-2026-set1",
+        "availablePaperIds": ["upsc-ifs-2026-set1"],
+        "languageSupport": ["en"]
+      }
+    }
+  ]
+}

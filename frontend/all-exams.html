@@ -1,0 +1,559 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>All Exams | Mockly</title>
+    <script>
+        (function () {
+            try {
+                var prefersReducedMotion = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+                var lowMemory = typeof navigator.deviceMemory === 'number' && navigator.deviceMemory <= 4;
+                var lowCpu = typeof navigator.hardwareConcurrency === 'number' && navigator.hardwareConcurrency <= 4;
+
+                if (prefersReducedMotion || lowMemory || lowCpu) {
+                    document.documentElement.classList.add('performance-lite');
+                }
+            } catch (error) {
+                // Ignore environment-specific feature detection issues.
+            }
+        })();
+    </script>
+    <link rel="preload" href="vendor/fontawesome/css/all.min.css" as="style">
+    <link href="vendor/fontawesome/css/all.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="all-exams.css">
+</head>
+<body>
+    <header class="navbar">
+        <div class="nav-container">
+            <a href="/#home" class="logo">
+                <div class="logo-icon">M</div>
+                <span class="logo-text">Mockly</span>
+            </a>
+
+            <nav class="nav-links">
+                <a href="/#home">Home</a>
+                <a href="/all-exams" class="active" aria-current="page">All Exams</a>
+                <a href="/test-series">Test Series</a>
+                <a href="/chapter-wise">Chapter Wise</a>
+                <a href="/pyq-questions">PYQ Questions</a>
+                <a href="#pass">Mockly Pass <span class="tag-pro">PRO</span></a>
+            </nav>
+
+            <div class="nav-actions">
+                <button class="dark-mode-toggle" id="theme-toggle" aria-label="Toggle theme">
+                    <div class="toggle-track">
+                        <div class="toggle-thumb">
+                            <i class="fa-solid fa-moon moon-icon"></i>
+                            <i class="fa-solid fa-sun sun-icon"></i>
+                        </div>
+                    </div>
+                </button>
+                <div class="auth-actions">
+                    <button id="nav-login-btn" class="btn-text" type="button">Log In</button>
+                    <button id="nav-signup-btn" class="btn-small-primary" type="button">Sign Up</button>
+                </div>
+            </div>
+
+            <button class="menu-toggle" aria-label="Toggle navigation menu" aria-expanded="false" title="Menu">
+                <i class="fas fa-bars"></i>
+            </button>
+        </div>
+    </header>
+
+    <main class="all-exams-page">
+        <section class="exams-hero" id="catalog">
+            <div class="exams-hero-shell">
+                <div class="exams-hero-copy">
+                    <span class="badge hero-badge"><i class="fa-solid fa-compass" aria-hidden="true"></i> One page to pick the right exam path</span>
+                    <h1>Find the exact exam you are preparing for and enter the mock flow with confidence.</h1>
+                    <p>
+                        Compare SSC, RRB, and UPSC tracks in the same brand experience you already saw on Mockly.
+                        Search faster, shortlist smarter, and see what is free versus what Premium unlocks before you commit time.
+                    </p>
+
+                    <form class="hero-search-shell" id="hero-search-form">
+                        <label class="sr-only" for="hero-search">Search exam name, stream, or tag</label>
+                        <div class="hero-search-input">
+                            <i class="fa-solid fa-magnifying-glass" aria-hidden="true"></i>
+                            <input id="hero-search" type="search" placeholder="Search SSC CGL, CHSL, NTPC, UPSC Prelims...">
+                        </div>
+                        <button class="btn btn-primary" type="submit">Explore Exams</button>
+                    </form>
+
+                    <div class="hero-chip-row" role="group" aria-label="Quick stream shortcuts">
+                        <button type="button" class="hero-chip active" data-hero-filter="all">All Exams</button>
+                        <button type="button" class="hero-chip" data-hero-filter="ssc">SSC</button>
+                        <button type="button" class="hero-chip" data-hero-filter="rrb">RRB</button>
+                        <button type="button" class="hero-chip" data-hero-filter="upsc">UPSC</button>
+                        <button type="button" class="hero-chip" data-hero-filter="popular">Most Popular</button>
+                    </div>
+
+                    <div class="hero-micro-stats">
+                        <article class="hero-micro-stat">
+                            <strong id="hero-aspirants">800k+</strong>
+                            <span>Active aspirants</span>
+                        </article>
+                        <article class="hero-micro-stat">
+                            <strong id="hero-selections">12k+</strong>
+                            <span>Verified selections</span>
+                        </article>
+                        <article class="hero-micro-stat">
+                            <strong id="hero-rating">4.9/5</strong>
+                            <span>Average rating</span>
+                        </article>
+                    </div>
+                </div>
+
+                <div class="exams-hero-visual">
+                    <article class="hero-preview-card">
+                        <div class="hero-preview-head">
+                            <span class="hero-preview-tag">Candidate View</span>
+                            <span class="hero-preview-dot"><i class="fa-solid fa-shield-heart"></i> Trust-first layout</span>
+                        </div>
+                        <h2>What candidates need first</h2>
+                        <div class="hero-preview-list">
+                            <div class="hero-preview-item">
+                                <strong>1. Fast discovery</strong>
+                                <span>Search, filter, sort, and compare before choosing.</span>
+                            </div>
+                            <div class="hero-preview-item">
+                                <strong>2. Clear value</strong>
+                                <span>See free mocks, premium unlocks, PYQs, and languages.</span>
+                            </div>
+                            <div class="hero-preview-item">
+                                <strong>3. Real confidence</strong>
+                                <span>Trust markers, honest positioning, and direct start actions.</span>
+                            </div>
+                        </div>
+                    </article>
+
+                    <article class="hero-preview-card accent-card" id="hero-highlight-card">
+                        <div class="hero-highlight-top">
+                            <span class="hero-preview-tag">Featured Track</span>
+                            <span class="hero-highlight-badge" id="hero-highlight-badge">SSC</span>
+                        </div>
+                        <h3 id="hero-highlight-title">SSC CGL</h3>
+                        <p id="hero-highlight-copy">Balanced for aspirants who want serious competition, regular vacancies, and a strong analytics-led mock strategy.</p>
+                        <div class="hero-highlight-grid">
+                            <div>
+                                <span>Mocks</span>
+                                <strong id="hero-highlight-mocks">42</strong>
+                            </div>
+                            <div>
+                                <span>Free</span>
+                                <strong id="hero-highlight-free">5</strong>
+                            </div>
+                            <div>
+                                <span>Languages</span>
+                                <strong id="hero-highlight-languages">EN, HI</strong>
+                            </div>
+                            <div>
+                                <span>Level</span>
+                                <strong id="hero-highlight-level">Moderate</strong>
+                            </div>
+                        </div>
+                    </article>
+                </div>
+            </div>
+        </section>
+
+        <section class="catalog-section">
+            <div class="catalog-shell">
+                <div class="trust-strip">
+                    <div class="trust-item">
+                        <i class="fa-solid fa-users"></i>
+                        <div>
+                            <strong><span id="trust-aspirants">800k+</span> Aspirants</strong>
+                            <span>Preparing daily with Mockly</span>
+                        </div>
+                    </div>
+                    <div class="trust-item">
+                        <i class="fa-solid fa-trophy"></i>
+                        <div>
+                            <strong><span id="trust-selections">12k+</span> Selections</strong>
+                            <span>Verified outcomes across core exams</span>
+                        </div>
+                    </div>
+                    <div class="trust-item">
+                        <i class="fa-solid fa-star"></i>
+                        <div>
+                            <strong><span id="trust-rating">4.9</span> / 5 Rating</strong>
+                            <span>Trusted by serious aspirants</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="catalog-head">
+                    <div>
+                        <span class="section-eyebrow">Exam Discovery Hub</span>
+                        <h2>Search, filter, compare, and launch the right exam faster.</h2>
+                        <p>Every card is designed around a candidate decision: what this exam is, how hard it feels, what you can start free, and why Premium matters only if you need deeper support.</p>
+                    </div>
+                    <div class="catalog-head-actions">
+                        <a href="#exam-spotlight" class="btn btn-outline btn-hover-sweep">Open Spotlight</a>
+                        <a href="#pass" class="btn btn-primary">See Premium Value</a>
+                    </div>
+                </div>
+
+                <div class="catalog-toolbar">
+                    <div class="catalog-search-wrap">
+                        <label class="sr-only" for="exam-search">Search exams</label>
+                        <i class="fa-solid fa-magnifying-glass" aria-hidden="true"></i>
+                        <input id="exam-search" type="search" placeholder="Search by exam name, stream, level, or tag">
+                    </div>
+
+                    <div class="catalog-select-wrap">
+                        <label class="sr-only" for="catalog-sort">Sort exams</label>
+                        <select id="catalog-sort">
+                            <option value="popular">Sort: Most Popular</option>
+                            <option value="free">Sort: Free Access First</option>
+                            <option value="mocks">Sort: Most Mock Tests</option>
+                            <option value="updated">Sort: Recently Updated</option>
+                            <option value="level">Sort: Beginner Friendly</option>
+                        </select>
+                    </div>
+                </div>
+
+                <div class="exam-filter-chips" role="group" aria-label="Exam category filters">
+                    <button type="button" class="chip-btn active" data-filter="all" aria-pressed="true">All Exams</button>
+                    <button type="button" class="chip-btn" data-filter="ssc" aria-pressed="false">SSC</button>
+                    <button type="button" class="chip-btn" data-filter="rrb" aria-pressed="false">RRB</button>
+                    <button type="button" class="chip-btn" data-filter="upsc" aria-pressed="false">UPSC</button>
+                    <button type="button" class="chip-btn" data-filter="beginner" aria-pressed="false">Beginner Friendly</button>
+                    <button type="button" class="chip-btn" data-filter="advanced" aria-pressed="false">Advanced Level</button>
+                    <button type="button" class="chip-btn" data-filter="bilingual" aria-pressed="false">Bilingual</button>
+                    <button type="button" class="chip-btn" data-filter="popular" aria-pressed="false">Most Popular</button>
+                </div>
+
+                <div class="catalog-meta-row">
+                    <p id="catalog-status" class="catalog-status" aria-live="polite">Loading exam catalog...</p>
+                    <button type="button" id="clear-filters-btn" class="catalog-clear-btn">Clear filters</button>
+                </div>
+
+                <div id="compare-bar" class="compare-bar is-hidden" aria-live="polite"></div>
+                <div id="compare-panel" class="compare-panel is-hidden"></div>
+
+                <div id="exam-grid" class="catalog-grid" aria-live="polite"></div>
+                <div id="exam-empty" class="catalog-empty">
+                    <strong>No exams matched this combination.</strong>
+                    <span>Try another stream, clear the search, or switch the sorting logic.</span>
+                </div>
+            </div>
+        </section>
+
+        <section class="spotlight-section" id="exam-spotlight">
+            <div class="spotlight-shell">
+                <article class="spotlight-panel">
+                    <div class="spotlight-head">
+                        <span class="section-eyebrow">Exam Spotlight</span>
+                        <h2 id="spotlight-title">Pick any exam card to inspect the strategy fit.</h2>
+                        <p id="spotlight-copy">You will see the candidate profile, mock depth, trust notes, and a simple free versus Premium view here.</p>
+                    </div>
+
+                    <div class="spotlight-metrics" id="spotlight-metrics"></div>
+
+                    <div class="spotlight-grid">
+                        <div class="spotlight-card">
+                            <h3>Good Fit If You Want</h3>
+                            <ul id="spotlight-fit-list" class="spotlight-list"></ul>
+                        </div>
+                        <div class="spotlight-card">
+                            <h3>Free Right Now</h3>
+                            <ul id="spotlight-free-list" class="spotlight-list"></ul>
+                        </div>
+                        <div class="spotlight-card">
+                            <h3>Premium Unlocks</h3>
+                            <ul id="spotlight-premium-list" class="spotlight-list"></ul>
+                        </div>
+                    </div>
+
+                    <div class="spotlight-footer">
+                        <div class="spotlight-confidence">
+                            <span class="spotlight-confidence-label">Confidence Builder</span>
+                            <strong id="spotlight-confidence-title">Transparent value, not vague promises.</strong>
+                            <p id="spotlight-confidence-copy">We show mock depth, languages, PYQs, and update freshness before asking for any upgrade decision.</p>
+                        </div>
+                        <div class="spotlight-actions">
+                            <a id="spotlight-start-btn" class="btn btn-primary" href="/test-series">Explore Test Series</a>
+                            <button id="spotlight-compare-btn" class="btn btn-outline btn-hover-sweep" type="button">Add To Compare</button>
+                        </div>
+                    </div>
+                </article>
+
+                <aside class="assessment-panel">
+                    <span class="section-eyebrow">Quick Path Finder</span>
+                    <h2>Not sure which exam fits your current stage?</h2>
+                    <p>Answer in under a minute and get a practical recommendation backed by the same local API used elsewhere in Mockly.</p>
+
+                    <form id="assessment-form" class="assessment-form">
+                        <div class="assessment-fields">
+                            <label>
+                                <span>Target Stream</span>
+                                <select name="target" required>
+                                    <option value="ssc">SSC</option>
+                                    <option value="rrb">RRB</option>
+                                    <option value="upsc">UPSC</option>
+                                </select>
+                            </label>
+                            <label>
+                                <span>Current Stage</span>
+                                <select name="stage" required>
+                                    <option value="beginner">Beginner</option>
+                                    <option value="moderate">Moderate</option>
+                                    <option value="advanced">Advanced</option>
+                                </select>
+                            </label>
+                            <label>
+                                <span>Weekly Time</span>
+                                <select name="time" required>
+                                    <option value="low">Limited</option>
+                                    <option value="medium">Balanced</option>
+                                    <option value="high">High</option>
+                                </select>
+                            </label>
+                            <label>
+                                <span>Main Focus</span>
+                                <select name="focus" required>
+                                    <option value="balanced">Balanced Growth</option>
+                                    <option value="speed">Speed</option>
+                                    <option value="accuracy">Accuracy</option>
+                                    <option value="current-affairs">Current Affairs</option>
+                                    <option value="aptitude">Aptitude</option>
+                                </select>
+                            </label>
+                        </div>
+
+                        <button class="btn btn-primary" type="submit">Get My Recommendation</button>
+                    </form>
+
+                    <div id="assessment-result" class="assessment-result" aria-live="polite">
+                        <strong>Recommendation will appear here.</strong>
+                        <p>We will suggest a track, explain why, and move the spotlight to the recommended exam.</p>
+                    </div>
+                </aside>
+            </div>
+        </section>
+
+        <section class="premium-section" id="pass">
+            <div class="premium-shell">
+                <div class="premium-head">
+                    <span class="section-eyebrow">Free vs Premium</span>
+                    <h2>Make the upgrade decision with clarity, not pressure.</h2>
+                    <p>Candidates usually pay only when the extra depth saves time. This section makes that decision obvious.</p>
+                </div>
+
+                <div class="premium-grid">
+                    <article class="pricing-card free-card">
+                        <div class="pricing-top">
+                            <span class="pricing-label">Free</span>
+                            <strong>Start without friction</strong>
+                        </div>
+                        <ul class="pricing-list">
+                            <li>Explore the complete exam catalog</li>
+                            <li>Access selected free mock tests</li>
+                            <li>Basic solutions and instant launch flow</li>
+                            <li>View languages, levels, and PYQ availability</li>
+                            <li>Use comparison and quick recommendation tools</li>
+                        </ul>
+                    </article>
+
+                    <article class="pricing-card premium-card">
+                        <div class="pricing-top">
+                            <span class="pricing-label premium-label">Mockly Pass</span>
+                            <strong>Built for serious selection-focused preparation</strong>
+                        </div>
+                        <ul class="pricing-list">
+                            <li>Unlock the full mock library and new exam drops faster</li>
+                            <li>Get deeper analytics, weak-topic diagnosis, and rank context</li>
+                            <li>Use smarter revision loops, premium solutions, and study plans</li>
+                            <li>Track performance history across attempts and exam paths</li>
+                            <li>Move from "I practiced" to "I know what to fix next"</li>
+                        </ul>
+                        <a href="/#pass" class="btn btn-primary">See Mockly Pass</a>
+                    </article>
+                </div>
+
+                <div class="premium-benefits">
+                    <article class="benefit-card">
+                        <i class="fa-solid fa-layer-group"></i>
+                        <strong>Full mock depth</strong>
+                        <span>Useful once you move past trial mode and need volume plus consistency.</span>
+                    </article>
+                    <article class="benefit-card">
+                        <i class="fa-solid fa-chart-line"></i>
+                        <strong>Analytics with direction</strong>
+                        <span>Better than raw scores because you get what to improve next.</span>
+                    </article>
+                    <article class="benefit-card">
+                        <i class="fa-solid fa-book-open-reader"></i>
+                        <strong>Revision efficiency</strong>
+                        <span>Premium matters most when your study time is limited and mistakes repeat.</span>
+                    </article>
+                </div>
+            </div>
+        </section>
+
+        <section class="confidence-section">
+            <div class="confidence-shell">
+                <div class="confidence-head">
+                    <span class="section-eyebrow">Trust Builders</span>
+                    <h2>Everything here should reduce doubt before it asks for action.</h2>
+                </div>
+
+                <div class="confidence-grid">
+                    <article class="confidence-card">
+                        <i class="fa-solid fa-badge-check"></i>
+                        <strong>Exam-accurate direction</strong>
+                        <p>Cards explain level, stages, language support, and realistic fit so the page feels useful even before the first mock starts.</p>
+                    </article>
+                    <article class="confidence-card">
+                        <i class="fa-solid fa-clock-rotate-left"></i>
+                        <strong>Freshness visible</strong>
+                        <p>Updated tags, live stats, and catalog messaging show candidates that the page is maintained, not abandoned.</p>
+                    </article>
+                    <article class="confidence-card">
+                        <i class="fa-solid fa-scale-balanced"></i>
+                        <strong>Honest premium framing</strong>
+                        <p>Free access is clear, Premium value is specific, and nothing is hidden behind vague "more features" language.</p>
+                    </article>
+                </div>
+
+                <div class="testimonial-grid">
+                    <article class="testimonial-card">
+                        <span class="testimonial-chip">SSC Aspirant</span>
+                        <p>"I just wanted to know which exam to start with and how much was free. This page answers both without wasting time."</p>
+                    </article>
+                    <article class="testimonial-card">
+                        <span class="testimonial-chip">RRB Aspirant</span>
+                        <p>"The compare view helps when you are confused between NTPC and Group D. It feels like the page understands the decision."</p>
+                    </article>
+                    <article class="testimonial-card">
+                        <span class="testimonial-chip">UPSC Aspirant</span>
+                        <p>"Clear premium positioning matters. If I upgrade, I want to know exactly what additional depth I'm buying."</p>
+                    </article>
+                </div>
+            </div>
+        </section>
+
+        <section class="faq-section">
+            <div class="faq-shell">
+                <div class="faq-head">
+                    <span class="section-eyebrow">FAQs</span>
+                    <h2>Remove hesitation before the candidate leaves the page.</h2>
+                </div>
+
+                <div class="faq-list">
+                    <details class="faq-item" open>
+                        <summary>Can I start using this page without Premium?</summary>
+                        <p>Yes. The page is built to help candidates search exams, compare paths, and access free mocks before making any upgrade decision.</p>
+                    </details>
+                    <details class="faq-item">
+                        <summary>How does Mockly help me choose the right exam?</summary>
+                        <p>You can filter by stream, compare multiple exams, inspect the spotlight panel, and use the quick recommendation tool for a guided suggestion.</p>
+                    </details>
+                    <details class="faq-item">
+                        <summary>What makes Premium worth it for a serious aspirant?</summary>
+                        <p>Premium becomes valuable when you need more mocks, deeper analytics, better revision support, and a clearer answer to what to improve next.</p>
+                    </details>
+                    <details class="faq-item">
+                        <summary>Can I trust the stats and trust markers shown here?</summary>
+                        <p>The page loads platform stats from the backend when available and falls back gracefully so the experience stays usable even if the API is down.</p>
+                    </details>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer class="site-footer">
+        <div class="footer-top-cta">
+            <div>
+                <h3>Ready to stop browsing and start improving your rank?</h3>
+                <p>Choose the exam that fits, launch a free mock, and build confidence with a clearer plan.</p>
+            </div>
+            <a href="/test-series" class="btn btn-primary">Explore Test Series <i class="fa-solid fa-arrow-right"></i></a>
+        </div>
+
+        <div class="footer-container">
+            <div class="footer-brand">
+                <a href="/#home" class="logo">
+                    <div class="logo-icon">M</div>
+                    <span class="logo-text">Mockly</span>
+                </a>
+                <p>Mockly helps aspirants preparing for SSC, RRB, and UPSC with exam-accurate interface, bilingual practice, and smart analytics designed for real selection outcomes.</p>
+
+                <div class="footer-trust-chips">
+                    <span><i class="fa-solid fa-users"></i> 800k+ Aspirants</span>
+                    <span><i class="fa-solid fa-trophy"></i> 12k+ Selections</span>
+                    <span><i class="fa-solid fa-star"></i> 4.9/5 Rating</span>
+                </div>
+
+                <div class="footer-contact">
+                    <a href="mailto:support@mockly.in"><i class="fa-regular fa-envelope"></i> support@mockly.in</a>
+                    <a href="tel:+919876543210"><i class="fa-solid fa-phone"></i> +91 98765 43210</a>
+                </div>
+            </div>
+
+            <div class="footer-links-grid">
+                <div>
+                    <h4>Exam Categories</h4>
+                    <a href="/all-exams?stream=ssc">SSC Mock Tests</a>
+                    <a href="/all-exams?stream=rrb">RRB Mock Tests</a>
+                    <a href="/all-exams?stream=upsc">UPSC Mock Tests</a>
+                    <a href="/all-exams">Previous Year Papers</a>
+                </div>
+                <div>
+                    <h4>Preparation Tools</h4>
+                    <a href="/test-series">Live Competitions</a>
+                    <a href="/#pyq">Daily Quiz & Current Affairs</a>
+                    <a href="/#features">Performance Analytics</a>
+                    <a href="#exam-spotlight">Quick Assessment</a>
+                </div>
+                <div>
+                    <h4>Company</h4>
+                    <a href="/#home">About Mockly</a>
+                    <a href="mailto:support@mockly.in?subject=Partnership%20Query">Partner With Us</a>
+                    <a href="mailto:support@mockly.in?subject=Hiring%20Interest">Careers & Hiring</a>
+                </div>
+                <div>
+                    <h4>Legal & Help</h4>
+                    <a href="privacy.html">Privacy Policy</a>
+                    <a href="terms.html">Terms of Use</a>
+                    <a href="refund.html">Refund Policy</a>
+                    <a href="help.html">Help Center</a>
+                </div>
+            </div>
+
+            <aside class="footer-app-card">
+                <h4>Get Daily Updates</h4>
+                <p>Receive exam alerts, daily quizzes, and strategy tips directly in your inbox.</p>
+                <form class="footer-newsletter" onsubmit="event.preventDefault();">
+                    <label class="sr-only" for="footer-email">Email address</label>
+                    <input id="footer-email" type="email" placeholder="Enter your email" required>
+                    <button type="submit" class="btn btn-primary">Subscribe</button>
+                </form>
+                <div class="footer-app-badges">
+                    <a href="/#dashboard"><i class="fa-solid fa-chart-column"></i> Open Dashboard</a>
+                    <a href="/test-series"><i class="fa-solid fa-file-pen"></i> Explore Test Series</a>
+                </div>
+            </aside>
+        </div>
+
+        <div class="footer-bottom">
+            <p>&copy; 2026 Mockly. Crafted for serious government exam aspirants.</p>
+            <div class="footer-bottom-links">
+                <a href="privacy.html">Privacy</a>
+                <a href="terms.html">Terms</a>
+                <a href="mailto:support@mockly.in">Contact</a>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        window.MOCKLY_ENABLE_API = true;
+        window.MOCKLY_API_BASE = '/api';
+    </script>
+    <script src="all-exams.js" defer></script>
+</body>
+</html>

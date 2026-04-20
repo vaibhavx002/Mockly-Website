@@ -1,0 +1,301 @@
+{
+  "timestamp": "2026-04-18T08:45:17.523Z",
+  "nodeVersion": "v24.13.0",
+  "service": "mockly-local-api",
+  "checks": {
+    "health": {
+      "ok": true,
+      "status": 200,
+      "payload": {
+        "ok": true,
+        "service": "mockly-local-api",
+        "version": "1.0.0",
+        "timestamp": "2026-04-18T08:45:17.744Z"
+      }
+    },
+    "exams": {
+      "ok": true,
+      "status": 200,
+      "payload": {
+        "exams": [
+          {
+            "id": "ssc-cgl",
+            "stream": "SSC",
+            "title": "SSC CGL",
+            "description": "Full-length mocks, PYQ drills, and tier-wise analytics for stable score growth.",
+            "iconClass": "fa-solid fa-graduation-cap",
+            "tags": [
+              "beginner",
+              "bilingual",
+              "popular",
+              "ssc"
+            ],
+            "recommendedDuration": "20 mins",
+            "recommendedLevel": "Moderate",
+            "paperConfig": {
+              "defaultPaperId": "ssc-cgl-tier1-2025-set1",
+              "availablePaperIds": [
+                "ssc-cgl-tier1-2025-set1"
+              ],
+              "languageSupport": [
+                "en",
+                "hi"
+              ]
+            }
+          },
+          {
+            "id": "ssc-chsl",
+            "stream": "SSC",
+            "title": "SSC CHSL",
+            "description": "Practice basics faster with chapter-based tests and easy-to-track progress charts.",
+            "iconClass": "fa-solid fa-pen-to-square",
+            "tags": [
+              "beginner",
+              "bilingual",
+              "ssc"
+            ],
+            "recommendedDuration": "18 mins",
+            "recommendedLevel": "Beginner to Moderate",
+            "paperConfig": {
+              "defaultPaperId": "ssc-chsl-tier1-2025-set1",
+              "availablePaperIds": [
+                "ssc-chsl-tier1-2025-set1"
+              ],
+              "languageSupport": [
+                "en",
+                "hi"
+              ]
+            }
+          },
+          {
+            "id": "rrb-ntpc",
+            "stream": "RRB",
+            "title": "RRB NTPC",
+            "description": "Balanced mock strategy for speed and accuracy with real-paper style sequencing.",
+            "iconClass": "fa-solid fa-train",
+            "tags": [
+              "beginner",
+              "bilingual",
+              "popular",
+              "rrb"
+            ],
+            "recommendedDuration": "25 mins",
+            "recommendedLevel": "Moderate",
+            "paperConfig": {
+              "defaultPaperId": "rrb-ntpc-cbt1-2025-set1",
+              "availablePaperIds": [
+                "rrb-ntpc-cbt1-2025-set1"
+              ],
+              "languageSupport": [
+                "en",
+                "hi"
+              ]
+            }
+          },
+          {
+            "id": "rrb-group-d",
+            "stream": "RRB",
+            "title": "RRB Group D",
+            "description": "Daily sectional boosters and memory-friendly revision loops for stronger retention.",
+            "iconClass": "fa-solid fa-route",
+            "tags": [
+              "beginner",
+              "bilingual",
+              "rrb"
+            ],
+            "recommendedDuration": "20 mins",
+            "recommendedLevel": "Beginner",
+            "paperConfig": {
+              "defaultPaperId": "rrb-group-d-cbt-2025-set1",
+              "availablePaperIds": [
+                "rrb-group-d-cbt-2025-set1"
+              ],
+              "languageSupport": [
+                "en",
+                "hi"
+              ]
+            }
+          },
+          {
+            "id": "upsc-prelims",
+            "stream": "UPSC",
+            "title": "UPSC Prelims",
+            "description": "Concept-intense mocks with detailed explanations and current-affairs integration.",
+            "iconClass": "fa-solid fa-landmark",
+            "tags": [
+              "advanced",
+              "bilingual",
+              "upsc"
+            ],
+            "recommendedDuration": "30 mins",
+            "recommendedLevel": "Advanced",
+            "paperConfig": {
+              "defaultPaperId": "upsc-prelims-gs1-2025-set1",
+              "availablePaperIds": [
+                "upsc-prelims-gs1-2025-set1"
+              ],
+              "languageSupport": [
+                "en"
+              ]
+            }
+          },
+          {
+            "id": "upsc-csat",
+            "stream": "UPSC",
+            "title": "UPSC CSAT",
+            "description": "Improve aptitude precision with timed practice, concept refreshers, and elimination-based solving.",
+            "iconClass": "fa-solid fa-scale-balanced",
+            "tags": [
+              "advanced",
+              "bilingual",
+              "popular",
+              "upsc"
+            ],
+            "recommendedDuration": "25 mins",
+            "recommendedLevel": "Advanced",
+            "paperConfig": {
+              "defaultPaperId": "upsc-csat-2025-set1",
+              "availablePaperIds": [
+                "upsc-csat-2025-set1"
+              ],
+              "languageSupport": [
+                "en"
+              ]
+            }
+          }
+        ],
+        "count": 6,
+        "source": "local-api"
+      }
+    },
+    "launch": {
+      "ok": false,
+      "status": 401,
+      "payload": {
+        "message": "Authentication required."
+      }
+    },
+    "authSignup": {
+      "ok": true,
+      "status": 201,
+      "payload": {
+        "ok": true,
+        "message": "Account created successfully.",
+        "authenticated": true,
+        "user": {
+          "email": "phase0-1776501917846@mockly.in",
+          "name": "Phase Zero User",
+          "phone": "9876543210"
+        },
+        "accessToken": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJwaGFzZTAtMTc3NjUwMTkxNzg0NkBtb2NrbHkuaW4iLCJpYXQiOjE3NzY1MDE5MTcsImV4cCI6MTc3NjUwMjgxN30.A27eB-0wamoDnScN-kTYtE5zJZIV9hpUzMUBAwXb6YY",
+        "accessTokenExpiresInSeconds": 900
+      }
+    },
+    "authLogin": {
+      "ok": true,
+      "status": 200,
+      "payload": {
+        "ok": true,
+        "message": "Login successful.",
+        "authenticated": true,
+        "user": {
+          "email": "phase0-1776501917846@mockly.in",
+          "name": "Phase Zero User",
+          "phone": "9876543210"
+        },
+        "accessToken": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJwaGFzZTAtMTc3NjUwMTkxNzg0NkBtb2NrbHkuaW4iLCJpYXQiOjE3NzY1MDE5MTcsImV4cCI6MTc3NjUwMjgxN30.A27eB-0wamoDnScN-kTYtE5zJZIV9hpUzMUBAwXb6YY",
+        "accessTokenExpiresInSeconds": 900
+      }
+    },
+    "attemptWriteWithoutToken": {
+      "ok": false,
+      "status": 401,
+      "payload": {
+        "message": "Authentication required."
+      }
+    },
+    "dashboardReadByEmailWithoutToken": {
+      "ok": false,
+      "status": 401,
+      "payload": {
+        "message": "Authentication required."
+      }
+    },
+    "incompleteSessionWriteWithoutToken": {
+      "ok": false,
+      "status": 401,
+      "payload": {
+        "message": "Authentication required."
+      }
+    },
+    "mockWindow": {
+      "ok": true,
+      "status": 200,
+      "autoSubmitHookFound": true,
+      "resultBreakdownFound": true,
+      "resultExplanationFound": true
+    }
+  },
+  "risks": {
+    "inMemoryStoreDetected": false,
+    "unsaltedSha256PasswordHashDetected": false,
+    "tokenAuthRoutesDetected": true,
+    "emailScopedAttemptWriteWithoutAuth": false,
+    "emailScopedDashboardReadWithoutAuth": false,
+    "emailScopedIncompleteSessionWriteWithoutAuth": false
+  },
+  "paperProfiles": [
+    {
+      "examId": "ssc-cgl",
+      "title": "SSC CGL Tier-I 2025 Set 1",
+      "totalQuestions": 20,
+      "durationMinutes": 20,
+      "marksPerQuestion": 2,
+      "negativeMarks": 0.5
+    },
+    {
+      "examId": "ssc-chsl",
+      "title": "SSC CHSL Tier-I 2025 Set 1",
+      "totalQuestions": 20,
+      "durationMinutes": 18,
+      "marksPerQuestion": 2,
+      "negativeMarks": 0.5
+    },
+    {
+      "examId": "rrb-ntpc",
+      "title": "RRB NTPC CBT-1 2025 Set 1",
+      "totalQuestions": 20,
+      "durationMinutes": 25,
+      "marksPerQuestion": 1,
+      "negativeMarks": 0.33
+    },
+    {
+      "examId": "rrb-group-d",
+      "title": "RRB Group D CBT 2025 Set 1",
+      "totalQuestions": 20,
+      "durationMinutes": 18,
+      "marksPerQuestion": 1,
+      "negativeMarks": 0.33
+    },
+    {
+      "examId": "upsc-prelims",
+      "title": "UPSC Prelims GS Paper-I 2025 Set 1",
+      "totalQuestions": 20,
+      "durationMinutes": 30,
+      "marksPerQuestion": 2,
+      "negativeMarks": 0.66
+    },
+    {
+      "examId": "upsc-csat",
+      "title": "UPSC CSAT 2025 Set 1",
+      "totalQuestions": 20,
+      "durationMinutes": 25,
+      "marksPerQuestion": 2,
+      "negativeMarks": 0.66
+    }
+  ],
+  "notes": [
+    "Phase 0 baseline captures current behavior before security and persistence hardening.",
+    "Security risk flags being true here are expected pre-hardening and should flip in later phases."
+  ]
+}

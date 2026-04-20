@@ -1,0 +1,17 @@
+{
+  "paperId": "upsc-prelims-gs1-2025-set1",
+  "examId": "upsc-prelims",
+  "title": "UPSC Prelims GS Paper-I 2025 Set 1",
+  "totalQuestions": 20,
+  "durationMinutes": 30,
+  "marksPerQuestion": 2,
+  "maxScore": 40,
+  "negativeMarks": 0.66,
+  "sections": [
+    {
+      "sectionId": "gs",
+      "name": "General Studies",
+      "questionCount": 20
+    }
+  ]
+}

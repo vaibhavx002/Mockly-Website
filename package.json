@@ -1,0 +1,35 @@
+{
+  "name": "mockly-local-api",
+  "version": "1.0.0",
+  "private": true,
+  "description": "Mockly frontend with local API server for exams, recommendations, and mock launch",
+  "main": "backend/server.js",
+  "scripts": {
+    "start": "node backend/server.js",
+    "dev": "node backend/server.js",
+    "prisma:generate": "prisma generate",
+    "prisma:migrate:dev": "prisma migrate dev --name init",
+    "prisma:migrate:deploy": "prisma migrate deploy",
+    "smoke-test": "node backend/smoke-test.js",
+    "auth-integration-test": "node backend/auth-integration-test.js",
+    "phase0-baseline": "node backend/phase0-baseline.js",
+    "db:backup": "node backend/db-backup.js",
+    "db:restore": "node backend/db-restore.js",
+    "db:migrate:baseline-demo": "node backend/db-migrate-baseline-demo.js",
+    "db:migrate:sqlite-to-prisma": "node backend/db-migrate-sqlite-to-prisma.js",
+    "db:doctor": "node backend/db-doctor.js",
+    "validate-questions": "node backend/validate-questions.js"
+  },
+  "engines": {
+    "node": ">=18.0.0"
+  },
+  "dependencies": {
+    "@fortawesome/fontawesome-free": "^7.2.0",
+    "@prisma/client": "^5.22.0",
+    "dotenv": "^16.4.5",
+    "express": "^4.21.2"
+  },
+  "devDependencies": {
+    "prisma": "^5.22.0"
+  }
+}

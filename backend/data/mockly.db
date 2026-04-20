@@ -1,0 +1,70 @@
+{
+  "namespaces": {
+    "auth_users": {
+      "demo@mockly.in": {
+        "email": "demo@mockly.in",
+        "name": "Demo User",
+        "phone": "9999999999",
+        "passwordHash": "scrypt$a94e10f1e0fc4fa596e8648d51de40e4$adaf2069f902262838aefeb4b88c14d7e2f4459539b080fca969a06b0452faeaa15e55613b0fd563939d3ca2ccd14bfe45fa1ea3f139b32d06a4c64a09af3813",
+        "createdAt": "2026-04-18T08:45:10.006Z",
+        "lastLoginAt": "2026-04-19T05:11:59.903Z"
+      },
+      "auth-integration-1776575519615@mockly.in": {
+        "email": "auth-integration-1776575519615@mockly.in",
+        "name": "Auth Integration User",
+        "phone": "9876543210",
+        "passwordHash": "scrypt$612c8776447fc666c7a19c827dc5e2ed$5f189b12383f212f797a60a8e55304b44079ae7c2429653579db8d5649054e9fb75680429333d219658b2fcf3659008c3f685fa58c1518ad8bcf6f3ad692a6a0",
+        "createdAt": "2026-04-19T05:11:59.762Z",
+        "lastLoginAt": "2026-04-19T05:11:59.838Z"
+      }
+    },
+    "attempts": {
+      "demo@mockly.in": [
+        {
+          "attemptId": "da8d9c02ec8a",
+          "examId": "rrb-group-d",
+          "paperId": "rrb-group-d-cbt-2025-set1",
+          "score": 18,
+          "maxScore": 25,
+          "scorePercent": 72,
+          "correct": 18,
+          "wrong": 5,
+          "unanswered": 2,
+          "totalQuestions": 25,
+          "accuracyPercent": 78.26,
+          "durationMinutes": 30,
+          "timeTakenSeconds": 1200,
+          "launchMode": "dynamic",
+          "isAutoSubmitted": false,
+          "sectionStats": [],
+          "weakTopics": [],
+          "lowScoreWarnings": [],
+          "submittedAt": "2026-04-19T05:11:48.881Z"
+        }
+      ],
+      "auth-integration-1776575519615@mockly.in": [
+        {
+          "attemptId": "8b48d13ac25f",
+          "examId": "rrb-group-d",
+          "paperId": "rrb-group-d-cbt-2025-set1",
+          "score": 10,
+          "maxScore": 20,
+          "scorePercent": 50,
+          "correct": 10,
+          "wrong": 0,
+          "unanswered": 10,
+          "totalQuestions": 20,
+          "accuracyPercent": 100,
+          "durationMinutes": 20,
+          "timeTakenSeconds": 1000,
+          "launchMode": "dynamic",
+          "isAutoSubmitted": false,
+          "sectionStats": [],
+          "weakTopics": [],
+          "lowScoreWarnings": [],
+          "submittedAt": "2026-04-19T05:11:59.851Z"
+        }
+      ]
+    }
+  }
+}

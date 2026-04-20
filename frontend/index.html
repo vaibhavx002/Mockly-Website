@@ -1,0 +1,1028 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mockly | Crack SSC, RRB & UPSC</title>
+    <script>
+        (function () {
+            try {
+                var prefersReducedMotion = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+                var lowMemory = typeof navigator.deviceMemory === 'number' && navigator.deviceMemory <= 4;
+                var lowCpu = typeof navigator.hardwareConcurrency === 'number' && navigator.hardwareConcurrency <= 4;
+
+                if (prefersReducedMotion || lowMemory || lowCpu) {
+                    document.documentElement.classList.add('performance-lite');
+                }
+            } catch (error) {
+                // Ignore environment-specific feature detection issues.
+            }
+        })();
+    </script>
+    <link rel="preload" href="vendor/fontawesome/css/all.min.css" as="style">
+    <link href="vendor/fontawesome/css/all.min.css" rel="stylesheet">
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <!-- Navbar / Header -->
+    <header class="navbar">
+        <div class="nav-container">
+            <!-- Logo -->
+            <a href="#home" class="logo">
+                <div class="logo-icon">M</div>
+                <span class="logo-text">Mockly</span>
+            </a>
+            
+            <!-- Navigation Links -->
+            <nav class="nav-links">
+                <a href="#home" class="active">Home</a>
+                <a href="/all-exams">All Exams</a>
+                <a href="/test-series">Test Series</a>
+                <a href="/chapter-wise">Chapter Wise</a>
+                <a href="/pyq-questions">PYQ Questions</a>
+                <a href="#pass">Mockly Pass <span class="tag-pro">PRO</span></a>
+            </nav>
+
+            <!-- Actions (Dark Mode & Auth) -->
+            <div class="nav-actions">
+                <button class="dark-mode-toggle" id="theme-toggle" aria-label="Toggle theme">
+                    <div class="toggle-track">
+                        <div class="toggle-thumb">
+                            <i class="fa-solid fa-moon moon-icon"></i>
+                            <i class="fa-solid fa-sun sun-icon"></i>
+                        </div>
+                    </div>
+                </button>
+                <div class="auth-actions">
+                    <button id="nav-login-btn" class="btn-text">Log In</button>
+                    <button id="nav-signup-btn" class="btn-small-primary">Sign Up</button>
+                </div>
+            </div>
+
+            <!-- Mobile menu toggle -->
+            <button class="menu-toggle" aria-label="Toggle navigation menu" title="Menu">
+                <i class="fas fa-bars"></i>
+            </button>
+        </div>
+    </header>
+
+    <!-- Main Content Area -->
+    <main>
+        <!-- Hero Section -->
+        <section class="hero" id="home">
+            <div class="hero-slider" id="hero-slider">
+                <div class="hero-track">
+                    <article class="hero-slide active" data-slide="0" aria-hidden="false">
+                        <div class="hero-container">
+                            <div class="hero-content">
+                                <div class="badge animate-element delay-1"><i class="fa-solid fa-trophy" aria-hidden="true"></i> #1 Rated for SSC, RRB & UPSC</div>
+                                <h1 class="hero-title animate-element delay-2">Experience the Real Exam Before the <span class="text-gradient typing-text" data-text="Actual Output."></span><span class="typing-caret" aria-hidden="true"></span></h1>
+                                <p class="hero-subtitle animate-element delay-3" id="hero-slide1-subtitle">Stop guessing, start ranking. Get the exact TCS iON test interface, bilingual questions, and AI-powered All India Rank prediction with detailed step-by-step solutions.</p>
+
+                                <div class="hero-buttons animate-element delay-4">
+                                    <a href="#test" class="btn btn-primary btn-glow">Take a Free Mock <i class="fa-solid fa-arrow-right"></i></a>
+                                    <a href="/all-exams" class="btn btn-outline btn-hover-sweep">View Exam Syllabus</a>
+                                </div>
+
+                                <div class="hero-stats animate-element delay-5">
+                                    <div class="stat">
+                                        <span class="stat-num" id="hero-slide1-stat1-num">800k+</span>
+                                        <span class="stat-label" id="hero-slide1-stat1-label">Active Aspirants</span>
+                                    </div>
+                                    <div class="divider"></div>
+                                    <div class="stat">
+                                        <span class="stat-num" id="hero-slide1-stat2-num">12k+</span>
+                                        <span class="stat-label" id="hero-slide1-stat2-label">Verified Selections</span>
+                                    </div>
+                                    <div class="divider"></div>
+                                    <div class="stat">
+                                        <span class="stat-num" id="hero-slide1-stat3-num">4.9/5</span>
+                                        <span class="stat-label" id="hero-slide1-stat3-label">App Rating</span>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="hero-visual static-visual">
+                                <div class="glass-card interface-mockup exam-mockup">
+                                    <div class="mockup-header">
+                                        <div class="traffic-lights">
+                                            <span class="dot red"></span>
+                                            <span class="dot yellow"></span>
+                                            <span class="dot green"></span>
+                                        </div>
+                                        <span class="mockup-title">SSC CGL Tier-I • Quant Time: 04:32</span>
+                                    </div>
+                                    <div class="mockup-body">
+                                        <div class="question-block">
+                                            <span class="q-num">Q.14</span>
+                                            <p class="q-text">A sum of money at simple interest amounts to &#8377;1,012 in 2.5 years and to &#8377;1,067.20 in 4 years. What is the rate of interest per annum?</p>
+                                        </div>
+                                        <div class="options-block">
+                                            <label class="real-option">
+                                                <input type="radio" name="q14" disabled>
+                                                <span class="opt-text">A. 2.5%</span>
+                                            </label>
+                                            <label class="real-option active">
+                                                <input type="radio" name="q14" checked disabled>
+                                                <span class="opt-text">B. 4%</span>
+                                                <i class="fa-solid fa-check correct-icon"></i>
+                                            </label>
+                                            <label class="real-option">
+                                                <input type="radio" name="q14" disabled>
+                                                <span class="opt-text">C. 5%</span>
+                                            </label>
+                                            <label class="real-option">
+                                                <input type="radio" name="q14" disabled>
+                                                <span class="opt-text">D. 6%</span>
+                                            </label>
+                                        </div>
+                                        <div class="mockup-footer">
+                                            <div class="action-btn text-only">Mark for Review</div>
+                                            <div class="action-btn solid">Save & Next <i class="fa-solid fa-angle-right"></i></div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="exam-bottom-strip pop-in">
+                                    <div class="air-rank-chip">
+                                        <i class="fa-solid fa-chart-line" aria-hidden="true"></i>
+                                        <span>AIR Rank <strong>425 / 15,200</strong></span>
+                                    </div>
+                                    <!-- <div class="exam-inline-nav" aria-hidden="true">
+                                        <span class="exam-nav-circle"><i class="fa-solid fa-angle-left"></i></span>
+                                        <span class="exam-nav-circle"><i class="fa-solid fa-angle-right"></i></span>
+                                    </div> -->
+                                </div>
+                            </div>
+                        </div>
+                    </article>
+
+                    <article class="hero-slide" data-slide="1" aria-hidden="true">
+                        <div class="hero-container">
+                            <div class="hero-content">
+                                <div class="badge animate-element delay-1"><i class="fa-solid fa-chart-line" aria-hidden="true"></i> Data-Driven Strategy Builder</div>
+                                <h1 class="hero-title animate-element delay-2">Turn Weak Topics into <span class="text-gradient typing-text" data-text="Rank Boosters."></span><span class="typing-caret" aria-hidden="true"></span></h1>
+                                <p class="hero-subtitle animate-element delay-3" id="hero-slide2-subtitle">Get daily revision targets, chapter-wise diagnostics, and adaptive question practice to maximize your score every single week.</p>
+
+                                <div class="hero-buttons animate-element delay-4">
+                                    <a href="#test" class="btn btn-primary" id="hero-study-plan-btn">Create My Study Plan <i class="fa-solid fa-sparkles"></i></a>
+                                    <a href="#dashboard" class="btn btn-outline btn-hover-sweep">See Performance Analysis</a>
+                                </div>
+
+                                <div class="hero-stats animate-element delay-5">
+                                    <div class="stat">
+                                        <span class="stat-num" id="hero-slide2-stat1-num">92%</span>
+                                        <span class="stat-label" id="hero-slide2-stat1-label">Completion Consistency</span>
+                                    </div>
+                                    <div class="divider"></div>
+                                    <div class="stat">
+                                        <span class="stat-num" id="hero-slide2-stat2-num">3.2x</span>
+                                        <span class="stat-label" id="hero-slide2-stat2-label">Faster Revision Cycles</span>
+                                    </div>
+                                    <div class="divider"></div>
+                                    <div class="stat">
+                                        <span class="stat-num" id="hero-slide2-stat3-num">+47</span>
+                                        <span class="stat-label" id="hero-slide2-stat3-label">Avg Score Improvement</span>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="hero-visual">
+                                <div class="glass-card interface-mockup insight-mockup">
+                                    <div class="mockup-header">
+                                        <div class="traffic-lights">
+                                            <span class="dot red"></span>
+                                            <span class="dot yellow"></span>
+                                            <span class="dot green"></span>
+                                        </div>
+                                        <span class="mockup-title">Weekly Insight Dashboard • Live</span>
+                                    </div>
+                                    <div class="mockup-body">
+                                        <div class="insight-list" id="hero-slide2-insight-list">
+                                            <div class="insight-row"><span>Quant</span><strong>81%</strong></div>
+                                            <div class="insight-row"><span>Reasoning</span><strong>89%</strong></div>
+                                            <div class="insight-row"><span>English</span><strong>74%</strong></div>
+                                            <div class="insight-row"><span>GK</span><strong>68%</strong></div>
+                                        </div>
+                                        <div class="insight-progress">
+                                            <span id="hero-slide2-progress-label">Daily Target Completion</span>
+                                            <div class="progress-track"><div class="progress-fill" id="hero-slide2-progress-fill"></div></div>
+                                        </div>
+                                        <div class="mockup-footer">
+                                            <div class="action-btn text-only">Open Study Planner</div>
+                                            <div class="action-btn solid">View Smart Suggestions <i class="fa-solid fa-angle-right"></i></div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </article>
+                </div>
+
+                <div class="hero-slider-controls" aria-label="Hero slide controls">
+                    <button type="button" class="hero-nav-btn" id="hero-prev" aria-label="Previous hero slide" title="Previous slide">
+                        <i class="fa-solid fa-angle-left"></i>
+                    </button>
+                    <button type="button" class="hero-nav-btn" id="hero-next" aria-label="Next hero slide" title="Next slide">
+                        <i class="fa-solid fa-angle-right"></i>
+                    </button>
+                </div>
+
+                <div class="hero-dots" id="hero-dots" aria-label="Hero slide indicator">
+                    <button type="button" class="hero-dot active" data-slide="0" aria-label="Go to slide 1" title="Slide 1"></button>
+                    <button type="button" class="hero-dot" data-slide="1" aria-label="Go to slide 2" title="Slide 2"></button>
+                </div>
+            </div>
+        </section>
+
+        <section class="exam-hub" id="all-exams">
+            <div class="exam-hub-shell">
+                <div class="trust-strip">
+                    <div class="trust-item reveal-up">
+                        <i class="fa-solid fa-users"></i>
+                        <div>
+                            <strong><span id="trust-aspirants-value">800k+</span> Aspirants</strong>
+                            <span>Preparing daily with Mockly</span>
+                        </div>
+                    </div>
+                    <div class="trust-item reveal-up">
+                        <i class="fa-solid fa-trophy"></i>
+                        <div>
+                            <strong><span id="trust-selections-value">12k+</span> Selections</strong>
+                            <span>Verified outcomes across exams</span>
+                        </div>
+                    </div>
+                    <div class="trust-item reveal-up">
+                        <i class="fa-solid fa-star"></i>
+                        <div>
+                            <strong><span id="trust-rating-value">4.9</span> / 5 Rating</strong>
+                            <span>Loved by serious aspirants</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="exam-hub-head reveal-up">
+                    <span class="section-eyebrow">Find Your Best Path</span>
+                    <h2>Choose Your Exam Track</h2>
+                    <p>Start from the exact exam you are preparing for and unlock targeted mock tests, topic plans, and rank-focused analytics.</p>
+                </div>
+
+                <div class="exam-filter-chips" id="exam-filter-chips" aria-label="Exam category filters">
+                    <button type="button" class="chip-btn active" data-filter="all">All Exams</button>
+                    <button type="button" class="chip-btn" data-filter="ssc">SSC</button>
+                    <button type="button" class="chip-btn" data-filter="rrb">RRB</button>
+                    <button type="button" class="chip-btn" data-filter="upsc">UPSC</button>
+                    <button type="button" class="chip-btn" data-filter="beginner">Beginner Friendly</button>
+                    <button type="button" class="chip-btn" data-filter="advanced">Advanced Level</button>
+                    <button type="button" class="chip-btn" data-filter="bilingual">Bilingual</button>
+                    <button type="button" class="chip-btn" data-filter="popular">Most Popular</button>
+                </div>
+
+                <div class="exam-grid" id="exam-grid" aria-live="polite"></div>
+
+                <div class="assessment-row reveal-up">
+                    <p>Not sure where to begin? Take a 60-second assessment and get your personalized exam plan.</p>
+                    <button type="button" class="btn btn-primary" id="open-assessment-btn">Take Quick Assessment</button>
+                </div>
+            </div>
+        </section>
+
+        <section class="mock-launch" id="test">
+            <div class="mock-launch-shell reveal-up" id="mock-launch-shell">
+                <div class="mock-launch-head">
+                    <span class="section-eyebrow">Practice Smart</span>
+                    <h2>Start Your Exam-Specific Mock</h2>
+                    <p id="mock-launch-copy">Pick an exam card above. We will lock the right track and guide you into the mock flow instantly.</p>
+                </div>
+
+                <div class="mock-launch-grid">
+                    <div class="mock-stat">
+                        <span>Selected Exam</span>
+                        <strong id="selected-exam-title">No exam selected</strong>
+                    </div>
+                    <div class="mock-stat">
+                        <span>Recommended Duration</span>
+                        <strong id="selected-exam-duration">-</strong>
+                    </div>
+                    <div class="mock-stat">
+                        <span>Recommended Level</span>
+                        <strong id="selected-exam-level">-</strong>
+                    </div>
+                </div>
+
+                <div class="mock-launch-actions">
+                    <button type="button" class="btn btn-primary" id="start-selected-mock-btn" disabled>
+                        Continue with Selected Exam
+                    </button>
+                    <a href="#all-exams" class="btn btn-outline btn-hover-sweep">Choose Different Exam</a>
+                </div>
+                <div class="mock-resume-indicator" id="mock-resume-indicator" hidden>
+                    <span id="mock-resume-text">Incomplete mock found.</span>
+                    <button type="button" class="mock-resume-btn" id="mock-resume-btn">Resume</button>
+                </div>
+                <p class="mock-launch-status" id="mock-launch-status" aria-live="polite"></p>
+            </div>
+        </section>
+    </main>
+
+    <div class="assessment-modal-overlay" id="assessment-modal" aria-hidden="true">
+        <div class="assessment-modal-box" role="dialog" aria-modal="true" aria-labelledby="assessment-title">
+            <button type="button" class="assessment-close-btn" id="close-assessment-modal" aria-label="Close assessment" title="Close assessment">
+                <i class="fa-solid fa-xmark"></i>
+            </button>
+
+            <div class="assessment-progress">
+                <span id="assessment-progress-label">Step 1 of 4</span>
+                <div class="assessment-progress-track">
+                    <span class="assessment-progress-fill" id="assessment-progress-fill"></span>
+                </div>
+            </div>
+
+            <h3 id="assessment-title">60-Second Assessment</h3>
+            <p id="assessment-subtitle">Answer a few quick questions to get your best starting mock recommendation.</p>
+
+            <div id="assessment-question-wrap" class="assessment-question-wrap">
+                <h4 id="assessment-question-title"></h4>
+                <div class="assessment-options" id="assessment-options"></div>
+            </div>
+
+            <div class="assessment-result hidden" id="assessment-result">
+                <span class="assessment-result-label">Recommended Track</span>
+                <h4 id="assessment-recommended-title">-</h4>
+                <p id="assessment-recommended-reason"></p>
+                <div class="assessment-result-metrics">
+                    <div>
+                        <span>Duration</span>
+                        <strong id="assessment-recommended-duration">-</strong>
+                    </div>
+                    <div>
+                        <span>Level</span>
+                        <strong id="assessment-recommended-level">-</strong>
+                    </div>
+                </div>
+            </div>
+
+            <div class="assessment-controls">
+                <button type="button" class="btn btn-outline btn-hover-sweep" id="assessment-back-btn" disabled>Back</button>
+                <button type="button" class="btn btn-primary" id="assessment-next-btn" disabled>Next</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Features Section ("Why Mockly?") -->
+    <section class="features" id="features">
+        <div class="features-container">
+            <div class="section-header">
+                <span class="section-tag">WHY CHOOSE US</span>
+                <h2 class="section-title">Everything you need to <span class="text-gradient">succeed.</span></h2>
+                <p class="section-subtitle">We've built Mockly with a single focus: creating the most accurate, zero-error testing environment for serious aspirants.</p>
+            </div>
+
+            <div class="features-grid">
+                <!-- Feature 1 -->
+                <div class="feature-card">
+                    <div class="feature-icon-wrapper blue">
+                        <i class="fa-solid fa-desktop"></i>
+                    </div>
+                    <h3>Exact Exam Interface</h3>
+                    <p>Practice on a 1:1 replica of the TCS iON computer-based test interface. No surprises on the actual exam day.</p>
+                    <a href="#test" class="feature-link">View Interface <i class="fa-solid fa-arrow-right"></i></a>
+                </div>
+                
+                <!-- Feature 2 -->
+                <div class="feature-card">
+                    <div class="feature-icon-wrapper green">
+                        <i class="fa-solid fa-language"></i>
+                    </div>
+                    <h3>100% Bilingual & Verified</h3>
+                    <p>Toggle instantly between Hindi and English. Every question is proofread by subject matter experts to ensure zero translation errors.</p>
+                    <a href="#test-series" class="feature-link">Read our QA Process <i class="fa-solid fa-arrow-right"></i></a>
+                </div>
+
+                <!-- Feature 3 -->
+                <div class="feature-card">
+                    <div class="feature-icon-wrapper purple">
+                        <i class="fa-solid fa-chart-pie"></i>
+                    </div>
+                    <h3>AI-Driven Analytics</h3>
+                    <p>Discover topic-wise weaknesses, compare your time per question against toppers, and get highly accurate All India Rank predictions.</p>
+                    <a href="#dashboard" class="feature-link">See Sample Report <i class="fa-solid fa-arrow-right"></i></a>
+                </div>
+
+                <!-- Feature 4 -->
+                <div class="feature-card">
+                    <div class="feature-icon-wrapper orange">
+                        <i class="fa-solid fa-graduation-cap"></i>
+                    </div>
+                    <h3>Detailed Solutions</h3>
+                    <p>Stop memorizing. Understand concepts with our step-by-step solutions featuring short tricks and alternative methods.</p>
+                    <a href="#pyq" class="feature-link">Explore Solutions <i class="fa-solid fa-arrow-right"></i></a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Explore Exams Section -->
+    <section class="exams" id="exams">
+        <div class="exams-container">
+            <div class="section-header">
+                <span class="section-tag">TARGET EXAMS</span>
+                <h2 class="section-title">Ace your dream <span class="text-gradient">government job.</span></h2>
+                <p class="section-subtitle">Comprehensive test series designed precisely according to the latest syllabus and TCS exam patterns.</p>
+            </div>
+
+            <div class="exams-grid">
+                <!-- SSC Card -->
+                <div class="exam-card">
+                    <div class="exam-card-header">
+                        <div class="exam-icon-wrapper">
+                            <i class="fa-solid fa-building-columns"></i>
+                        </div>
+                        <span class="exam-badge blue">Popular</span>
+                    </div>
+                    <h3>SSC Exams</h3>
+                    <p class="exam-desc">CGL, CHSL, MTS, CPO, GD Constable</p>
+                    <div class="exam-stats">
+                        <span><i class="fa-solid fa-file-lines"></i> 500+ Tests</span>
+                        <span><i class="fa-solid fa-users"></i> 2.5L+ Users</span>
+                    </div>
+                    <button class="btn btn-outline full-width">Explore Mock Tests</button>
+                </div>
+
+                <!-- RRB Card -->
+                <div class="exam-card">
+                    <div class="exam-card-header">
+                        <div class="exam-icon-wrapper green">
+                            <i class="fa-solid fa-train"></i>
+                        </div>
+                        <span class="exam-badge green">Trending</span>
+                    </div>
+                    <h3>Railway (RRB)</h3>
+                    <p class="exam-desc">NTPC, Group D, ALP, JE</p>
+                    <div class="exam-stats">
+                        <span><i class="fa-solid fa-file-lines"></i> 350+ Tests</span>
+                        <span><i class="fa-solid fa-users"></i> 1.8L+ Users</span>
+                    </div>
+                    <button class="btn btn-outline full-width">Explore Mock Tests</button>
+                </div>
+
+                <!-- UPSC Card -->
+                <div class="exam-card">
+                    <div class="exam-card-header">
+                        <div class="exam-icon-wrapper purple">
+                            <i class="fa-solid fa-landmark-dome"></i>
+                        </div>
+                        <span class="exam-badge purple">Premium</span>
+                    </div>
+                    <h3>UPSC & State PSC</h3>
+                    <p class="exam-desc">Prelims (GS & CSAT), EPFO, PCS</p>
+                    <div class="exam-stats">
+                        <span><i class="fa-solid fa-file-lines"></i> 200+ Tests</span>
+                        <span><i class="fa-solid fa-users"></i> 80K+ Users</span>
+                    </div>
+                    <button class="btn btn-outline full-width">Explore Mock Tests</button>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="live-tests" id="test-series">
+        <div class="live-tests-container">
+            <div class="section-header">
+                <span class="section-tag">LIVE COMPETITIONS</span>
+                <h2 class="section-title">Join live tests before <span class="text-gradient">the timer ends.</span></h2>
+                <p class="section-subtitle">Compete with aspirants across India in real-time exam simulations and lock your AIR benchmarking instantly.</p>
+            </div>
+
+            <div class="live-tests-grid" id="live-tests-grid">
+                <article class="live-test-card" data-deadline="2026-04-18T20:00:00+05:30">
+                    <div class="live-test-top">
+                        <span class="live-pill">SSC CGL</span>
+                        <span class="live-label">Live Now</span>
+                    </div>
+                    <h3>All India Full Mock Challenge</h3>
+                    <p>Tier-I pattern test with rank predictor and percentile report.</p>
+                    <div class="countdown" aria-live="polite">
+                        <div><strong data-time="days">00</strong><span>Days</span></div>
+                        <div><strong data-time="hours">00</strong><span>Hours</span></div>
+                        <div><strong data-time="minutes">00</strong><span>Min</span></div>
+                        <div><strong data-time="seconds">00</strong><span>Sec</span></div>
+                    </div>
+                    <button type="button" class="btn btn-primary full-width">Join Competition</button>
+                </article>
+
+                <article class="live-test-card" data-deadline="2026-04-19T21:30:00+05:30">
+                    <div class="live-test-top">
+                        <span class="live-pill green">RRB NTPC</span>
+                        <span class="live-label">Starting Soon</span>
+                    </div>
+                    <h3>RRB Speed Booster Sprint</h3>
+                    <p>45-minute high-speed set focused on time management under pressure.</p>
+                    <div class="countdown" aria-live="polite">
+                        <div><strong data-time="days">00</strong><span>Days</span></div>
+                        <div><strong data-time="hours">00</strong><span>Hours</span></div>
+                        <div><strong data-time="minutes">00</strong><span>Min</span></div>
+                        <div><strong data-time="seconds">00</strong><span>Sec</span></div>
+                    </div>
+                    <button type="button" class="btn btn-primary full-width">Set Reminder</button>
+                </article>
+
+                <article class="live-test-card" data-deadline="2026-04-20T19:00:00+05:30">
+                    <div class="live-test-top">
+                        <span class="live-pill purple">UPSC Prelims</span>
+                        <span class="live-label">Registration Open</span>
+                    </div>
+                    <h3>GS + CSAT Mega Simulation</h3>
+                    <p>Dual-paper realistic simulation with negative-marking based scoring.</p>
+                    <div class="countdown" aria-live="polite">
+                        <div><strong data-time="days">00</strong><span>Days</span></div>
+                        <div><strong data-time="hours">00</strong><span>Hours</span></div>
+                        <div><strong data-time="minutes">00</strong><span>Min</span></div>
+                        <div><strong data-time="seconds">00</strong><span>Sec</span></div>
+                    </div>
+                    <button type="button" class="btn btn-primary full-width">Reserve Slot</button>
+                </article>
+            </div>
+        </div>
+    </section>
+
+    <section class="current-affairs" id="pyq">
+        <div class="current-affairs-container">
+            <div class="section-header">
+                <span class="section-tag">DAILY BOOSTER</span>
+                <h2 class="section-title">Current Affairs & Daily <span class="text-gradient">Quiz Carousel</span></h2>
+                <p class="section-subtitle">Stay consistent with short daily quizzes and rapid-revision capsules curated for SSC, RRB, and UPSC.</p>
+            </div>
+
+            <div class="carousel-shell">
+                <button type="button" class="carousel-nav" id="carousel-prev" aria-label="Previous quiz" title="Previous quiz">
+                    <i class="fa-solid fa-angle-left"></i>
+                </button>
+
+                <div class="carousel-viewport">
+                    <div class="carousel-track" id="quiz-carousel-track">
+                        <article class="quiz-card active" data-slide="0" aria-hidden="false">
+                            <span class="quiz-tag">SSC Daily Quiz</span>
+                            <h3>Indian Polity: President & Parliament</h3>
+                            <p>10 quick MCQs focused on constitutional articles frequently asked in SSC CGL/CHSL.</p>
+                            <a href="#test" class="feature-link" data-select-exam="ssc-cgl">Start 10-Question Quiz <i class="fa-solid fa-arrow-right"></i></a>
+                        </article>
+
+                        <article class="quiz-card" data-slide="1" aria-hidden="true">
+                            <span class="quiz-tag green">RRB Capsule</span>
+                            <h3>Railway Budget & Infrastructure Updates</h3>
+                            <p>High-probability current affairs capsule with one-page summary and practice drill.</p>
+                            <a href="#test" class="feature-link" data-select-exam="rrb-ntpc">Read Capsule <i class="fa-solid fa-arrow-right"></i></a>
+                        </article>
+
+                        <article class="quiz-card" data-slide="2" aria-hidden="true">
+                            <span class="quiz-tag purple">UPSC CA Revision</span>
+                            <h3>Environment & Biodiversity Weekly Pack</h3>
+                            <p>Prelims-focused map-based and factual revision set with previous-year relevance.</p>
+                            <a href="#test" class="feature-link" data-select-exam="upsc-prelims">Open Weekly Pack <i class="fa-solid fa-arrow-right"></i></a>
+                        </article>
+                    </div>
+                </div>
+
+                <button type="button" class="carousel-nav" id="carousel-next" aria-label="Next quiz" title="Next quiz">
+                    <i class="fa-solid fa-angle-right"></i>
+                </button>
+            </div>
+
+            <div class="carousel-dots" id="quiz-carousel-dots" aria-label="Quiz carousel indicator">
+                <button type="button" class="carousel-dot active" data-slide="0" aria-label="Go to quiz 1" title="Quiz 1"></button>
+                <button type="button" class="carousel-dot" data-slide="1" aria-label="Go to quiz 2" title="Quiz 2"></button>
+                <button type="button" class="carousel-dot" data-slide="2" aria-label="Go to quiz 3" title="Quiz 3"></button>
+            </div>
+        </div>
+    </section>
+
+    <!-- Authentication Modal (Popup) -->
+    <div class="modal-overlay" id="auth-modal" aria-hidden="true">
+        <div class="modal-box auth-shell" role="dialog" aria-modal="true" aria-labelledby="modal-title">
+            <aside class="auth-promo">
+                <div class="auth-promo-top">
+                    <div class="logo-icon">M</div>
+                    <span>Mockly Access</span>
+                </div>
+                <h3>Rank Smarter, Not Harder</h3>
+                <p>Log in or create your account to unlock personalized mocks, AI rank analysis, and exam-ready insights.</p>
+                <ul class="auth-promo-points">
+                    <li><i class="fa-solid fa-circle-check"></i> Personalized test recommendations</li>
+                    <li><i class="fa-solid fa-circle-check"></i> Detailed performance breakdowns</li>
+                    <li><i class="fa-solid fa-circle-check"></i> Real exam-like practice flow</li>
+                </ul>
+            </aside>
+
+            <section class="auth-panel">
+                <button class="close-modal" id="close-modal" aria-label="Close authentication modal" title="Close">
+                    <i class="fa-solid fa-xmark"></i>
+                </button>
+
+                <div class="modal-header">
+                    <h2 id="modal-title">Welcome Back</h2>
+                    <p id="modal-subtitle">Log in to continue your preparation.</p>
+                </div>
+
+                <div class="auth-mode-switch" role="tablist" aria-label="Authentication mode">
+                    <button type="button" class="mode-tab active" id="login-tab" data-mode="login" role="tab" aria-selected="true">Log In</button>
+                    <button type="button" class="mode-tab" id="signup-tab" data-mode="signup" role="tab" aria-selected="false">Sign Up</button>
+                </div>
+
+                <form class="auth-form" id="login-form" onsubmit="event.preventDefault();">
+                    <div class="input-group">
+                        <label for="login-email">Email Address</label>
+                        <div class="input-wrapper">
+                            <i class="fa-regular fa-envelope input-icon"></i>
+                            <input type="email" id="login-email" placeholder="you@example.com" required>
+                        </div>
+                    </div>
+
+                    <div class="input-group">
+                        <label for="login-password">Password</label>
+                        <div class="input-wrapper">
+                            <i class="fa-solid fa-lock input-icon"></i>
+                            <input type="password" id="login-password" placeholder="Enter password" required>
+                            <button type="button" class="toggle-password" data-target="login-password" aria-label="Show password" title="Show password">
+                                <i class="fa-regular fa-eye"></i>
+                            </button>
+                        </div>
+                    </div>
+
+                    <div class="form-options">
+                        <label class="remember-me">
+                            <input type="checkbox" checked>
+                            <span>Remember me</span>
+                        </label>
+                        <a href="mailto:support@mockly.in?subject=Password%20Reset%20Request" class="forgot-pwd">Forgot Password?</a>
+                    </div>
+
+                    <button type="submit" class="btn btn-primary full-width">Log In</button>
+                </form>
+
+                <form class="auth-form hidden" id="signup-form" onsubmit="event.preventDefault();">
+                    <div class="input-grid">
+                        <div class="input-group">
+                            <label for="signup-name">Full Name</label>
+                            <div class="input-wrapper">
+                                <i class="fa-regular fa-user input-icon"></i>
+                                <input type="text" id="signup-name" placeholder="Your full name" required>
+                            </div>
+                        </div>
+
+                        <div class="input-group">
+                            <label for="signup-phone">Phone Number</label>
+                            <div class="input-wrapper">
+                                <i class="fa-solid fa-phone input-icon"></i>
+                                <input type="tel" id="signup-phone" placeholder="10-digit number" required>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="input-group">
+                        <label for="signup-email">Email Address</label>
+                        <div class="input-wrapper">
+                            <i class="fa-regular fa-envelope input-icon"></i>
+                            <input type="email" id="signup-email" placeholder="you@example.com" required>
+                        </div>
+                    </div>
+
+                    <div class="input-grid">
+                        <div class="input-group">
+                            <label for="signup-password">Password</label>
+                            <div class="input-wrapper">
+                                <i class="fa-solid fa-lock input-icon"></i>
+                                <input type="password" id="signup-password" placeholder="Create password" required>
+                                <button type="button" class="toggle-password" data-target="signup-password" aria-label="Show password" title="Show password">
+                                    <i class="fa-regular fa-eye"></i>
+                                </button>
+                            </div>
+                        </div>
+
+                        <div class="input-group">
+                            <label for="signup-confirm-password">Confirm Password</label>
+                            <div class="input-wrapper">
+                                <i class="fa-solid fa-shield-halved input-icon"></i>
+                                <input type="password" id="signup-confirm-password" placeholder="Confirm password" required>
+                                <button type="button" class="toggle-password" data-target="signup-confirm-password" aria-label="Show password" title="Show password">
+                                    <i class="fa-regular fa-eye"></i>
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+
+                    <label class="terms-check">
+                        <input type="checkbox" required>
+                        <span>I agree to the Terms of Use and Privacy Policy</span>
+                    </label>
+
+                    <button type="submit" class="btn btn-primary full-width">Create Account</button>
+                </form>
+
+                <p class="auth-status" id="auth-status" aria-live="polite"></p>
+
+                <div class="auth-divider">
+                    <span>or continue with</span>
+                </div>
+
+                <div class="social-actions">
+                    <button type="button" class="btn btn-outline full-width google-btn">
+                        <i class="fa-brands fa-google" aria-hidden="true"></i>
+                        Google
+                    </button>
+                </div>
+
+                <div class="modal-footer">
+                    <p id="modal-footer-text">Don't have an account? <button type="button" class="text-link" id="toggle-auth-mode">Sign up for free</button></p>
+                </div>
+            </section>
+        </div>
+    </div>
+
+    <!-- User Dashboard Modal -->
+    <div class="modal-overlay dashboard-overlay" id="dashboard-modal" aria-hidden="true">
+        <div class="modal-box dashboard-shell" role="dialog" aria-modal="true" aria-labelledby="dashboard-title">
+            <button class="close-modal dashboard-close" id="close-dashboard-modal" aria-label="Close dashboard" title="Close dashboard">
+                <i class="fa-solid fa-xmark"></i>
+            </button>
+
+            <header class="dashboard-header">
+                <div class="dashboard-profile">
+                    <div class="dashboard-avatar" id="dashboard-avatar">U</div>
+                    <div>
+                        <h2 id="dashboard-title">My Dashboard</h2>
+                        <p id="dashboard-user-meta">Welcome back</p>
+                    </div>
+                </div>
+                <div class="dashboard-quick-actions">
+                    <button type="button" class="btn btn-outline" id="dashboard-continue-last-btn">Continue Incomplete Mock</button>
+                    <button type="button" class="btn btn-primary" id="dashboard-start-mock-btn">Start Mock</button>
+                    <button type="button" class="btn btn-outline" id="dashboard-logout-btn">Log Out</button>
+                </div>
+            </header>
+
+            <section class="dashboard-spotlight" id="dashboard-spotlight" aria-live="polite"></section>
+
+            <section class="dashboard-metrics" aria-live="polite">
+                <article class="dashboard-metric-card">
+                    <span>Total Mock Launches</span>
+                    <strong id="dashboard-metric-launches">0</strong>
+                </article>
+                <article class="dashboard-metric-card">
+                    <span>Total Attempts</span>
+                    <strong id="dashboard-metric-attempts">0</strong>
+                </article>
+                <article class="dashboard-metric-card">
+                    <span>Average Score</span>
+                    <strong id="dashboard-metric-avg-score">0%</strong>
+                </article>
+                <article class="dashboard-metric-card">
+                    <span>7-Day Attempts</span>
+                    <strong id="dashboard-metric-week-attempts">0</strong>
+                </article>
+            </section>
+
+            <section class="dashboard-tabs" aria-label="Dashboard sections">
+                <button type="button" class="dashboard-tab-btn active" data-dashboard-tab="performance" aria-pressed="true">Performance</button>
+                <button type="button" class="dashboard-tab-btn" data-dashboard-tab="plan" aria-pressed="false">Plan</button>
+                <button type="button" class="dashboard-tab-btn" data-dashboard-tab="activity" aria-pressed="false">Activity</button>
+                <button type="button" class="dashboard-tab-btn" data-dashboard-tab="preferences" aria-pressed="false">Preferences</button>
+            </section>
+
+            <section class="dashboard-main-grid">
+                <article class="dashboard-panel dashboard-panel-wide" data-dashboard-group="plan">
+                    <div class="dashboard-panel-head">
+                        <h3>Today&apos;s Focus Plan</h3>
+                        <span>Execution first</span>
+                    </div>
+                    <div id="dashboard-focus-plan" class="dashboard-list"></div>
+                </article>
+
+                <article class="dashboard-panel dashboard-panel-priority" data-dashboard-group="plan">
+                    <div class="dashboard-panel-head">
+                        <h3>Goal Thermometer & Deadline</h3>
+                        <span>Weekly and monthly</span>
+                    </div>
+                    <div id="dashboard-goal-thermometer" class="dashboard-list"></div>
+                </article>
+
+                <article class="dashboard-panel dashboard-panel-priority" data-dashboard-group="performance">
+                    <div class="dashboard-panel-head">
+                        <h3>Personal Rank Trajectory</h3>
+                        <span>Last 5-10 attempts</span>
+                    </div>
+                    <div id="dashboard-rank-trajectory" class="dashboard-list"></div>
+                </article>
+
+                <article class="dashboard-panel dashboard-panel-priority" data-dashboard-group="performance">
+                    <div class="dashboard-panel-head">
+                        <h3>Mistake Notebook</h3>
+                        <span>Recurring patterns</span>
+                    </div>
+                    <div id="dashboard-mistake-notebook" class="dashboard-list"></div>
+                </article>
+
+                <article class="dashboard-panel" data-dashboard-group="plan">
+                    <div class="dashboard-panel-head">
+                        <h3>Actionable Daily Routine</h3>
+                        <span>20 / 40 / 60 minutes</span>
+                    </div>
+                    <div id="dashboard-routine-plan" class="dashboard-list"></div>
+                </article>
+
+                <article class="dashboard-panel" data-dashboard-group="activity">
+                    <div class="dashboard-panel-head">
+                        <h3>Achievement Layer</h3>
+                        <span>Streaks and medals</span>
+                    </div>
+                    <div id="dashboard-achievement-layer" class="dashboard-list"></div>
+                </article>
+
+                <article class="dashboard-panel" data-dashboard-group="performance">
+                    <div class="dashboard-panel-head">
+                        <h3>Last Mock Summary</h3>
+                        <span>Latest attempt</span>
+                    </div>
+                    <div id="dashboard-last-summary" class="dashboard-list"></div>
+                </article>
+
+                <article class="dashboard-panel dashboard-panel-priority" data-dashboard-group="performance">
+                    <div class="dashboard-panel-head">
+                        <h3>Weak Topics & Warnings</h3>
+                        <span>Focus next</span>
+                    </div>
+                    <div id="dashboard-weak-topics" class="dashboard-list"></div>
+                </article>
+
+                <article class="dashboard-panel dashboard-panel-wide" data-dashboard-group="activity">
+                    <div class="dashboard-panel-head">
+                        <h3>Recent Activity</h3>
+                        <span id="dashboard-activity-count">0 attempts</span>
+                    </div>
+                    <div id="dashboard-recent-activity" class="dashboard-list"></div>
+                </article>
+
+                <article class="dashboard-panel dashboard-panel-priority" data-dashboard-group="performance">
+                    <div class="dashboard-panel-head">
+                        <h3>7-Day Trends</h3>
+                        <span>Score and accuracy</span>
+                    </div>
+                    <div id="dashboard-trend-charts" class="dashboard-trends-wrap"></div>
+                </article>
+
+                <article class="dashboard-panel dashboard-panel-compact" data-dashboard-group="plan">
+                    <div class="dashboard-panel-head">
+                        <h3>Next Recommended Test</h3>
+                        <span>Personalized</span>
+                    </div>
+                    <div id="dashboard-next-recommended" class="dashboard-list"></div>
+                </article>
+
+                <article class="dashboard-panel dashboard-panel-compact" data-dashboard-group="plan">
+                    <div class="dashboard-panel-head">
+                        <h3>Recommended Exams</h3>
+                        <span>Alternates</span>
+                    </div>
+                    <div id="dashboard-recommended-exams" class="dashboard-list"></div>
+                </article>
+
+                <article class="dashboard-panel dashboard-panel-wide" data-dashboard-group="activity">
+                    <div class="dashboard-panel-head">
+                        <h3>Quick Exam Shortcuts</h3>
+                        <span>Start instantly</span>
+                    </div>
+                    <div id="dashboard-exam-shortcuts" class="dashboard-shortcuts"></div>
+                </article>
+
+                <article class="dashboard-panel dashboard-panel-wide" data-dashboard-group="preferences">
+                    <div class="dashboard-panel-head">
+                        <h3>Preferences</h3>
+                        <span>Saved to your profile</span>
+                    </div>
+                    <form id="dashboard-preferences-form" class="dashboard-preferences-form">
+                        <label for="dashboard-pref-exam">Preferred Exam</label>
+                        <select id="dashboard-pref-exam"></select>
+
+                        <label for="dashboard-pref-language">Preferred Language</label>
+                        <select id="dashboard-pref-language">
+                            <option value="en">English</option>
+                            <option value="hi">Hindi</option>
+                        </select>
+
+                        <label for="dashboard-pref-weekly-target">Weekly Mock Target</label>
+                        <input id="dashboard-pref-weekly-target" type="number" min="1" max="50" step="1" value="5">
+
+                        <label for="dashboard-pref-focus">Focus Area</label>
+                        <select id="dashboard-pref-focus">
+                            <option value="balanced">Balanced</option>
+                            <option value="speed">Speed</option>
+                            <option value="accuracy">Accuracy</option>
+                            <option value="current-affairs">Current Affairs</option>
+                            <option value="aptitude">Aptitude</option>
+                        </select>
+
+                        <div class="dashboard-pref-actions">
+                            <button type="submit" class="btn btn-primary">Save Preferences</button>
+                            <span id="dashboard-pref-status" aria-live="polite"></span>
+                        </div>
+                    </form>
+                </article>
+            </section>
+        </div>
+    </div>
+
+    <footer class="site-footer" id="pass">
+        <div class="footer-top-cta">
+            <div>
+                <h3>Ready to improve your rank this week?</h3>
+                <p>Start with a free exam-accurate mock and get your topic-level performance report instantly.</p>
+            </div>
+            <a href="#test" class="btn btn-primary">Start Free Mock <i class="fa-solid fa-arrow-right"></i></a>
+        </div>
+
+        <div class="footer-container">
+            <div class="footer-brand">
+                <a href="#home" class="logo">
+                    <div class="logo-icon">M</div>
+                    <span class="logo-text">Mockly</span>
+                </a>
+                <p>Mockly helps aspirants preparing for SSC, RRB, and UPSC with exam-accurate interface, bilingual practice, and smart analytics designed for real selection outcomes.</p>
+
+                <div class="footer-trust-chips">
+                    <span><i class="fa-solid fa-users"></i> 800k+ Aspirants</span>
+                    <span><i class="fa-solid fa-trophy"></i> 12k+ Selections</span>
+                    <span><i class="fa-solid fa-star"></i> 4.9/5 Rating</span>
+                </div>
+
+                <div class="footer-contact">
+                    <a href="mailto:support@mockly.in"><i class="fa-regular fa-envelope"></i> support@mockly.in</a>
+                    <a href="tel:+919876543210"><i class="fa-solid fa-phone"></i> +91 98765 43210</a>
+                </div>
+
+
+            </div>
+
+            <div class="footer-links-grid">
+                <div>
+                    <h4>Exam Categories</h4>
+                    <a href="/all-exams?stream=ssc">SSC Mock Tests</a>
+                    <a href="/all-exams?stream=rrb">RRB Mock Tests</a>
+                    <a href="/all-exams?stream=upsc">UPSC Mock Tests</a>
+                    <a href="/all-exams">Previous Year Papers</a>
+                </div>
+                <div>
+                    <h4>Preparation Tools</h4>
+                    <a href="#test-series">Live Competitions</a>
+                    <a href="#pyq">Daily Quiz & Current Affairs</a>
+                    <a href="#features">Performance Analytics</a>
+                    <a href="#test">Quick Assessment</a>
+                </div>
+                <div>
+                    <h4>Company</h4>
+                    <a href="#home">About Mockly</a>
+                    <a href="mailto:support@mockly.in?subject=Partnership%20Query">Partner With Us</a>
+                    <a href="mailto:support@mockly.in?subject=Hiring%20Interest">Careers & Hiring</a>
+                </div>
+                <div>
+                    <h4>Legal & Help</h4>
+                    <a href="privacy.html">Privacy Policy</a>
+                    <a href="terms.html">Terms of Use</a>
+                    <a href="refund.html">Refund Policy</a>
+                    <a href="help.html">Help Center</a>
+                </div>
+            </div>
+
+            <aside class="footer-app-card">
+                <h4>Get Daily Updates</h4>
+                <p>Receive exam alerts, daily quizzes, and strategy tips directly in your inbox.</p>
+                <form class="footer-newsletter" onsubmit="event.preventDefault();">
+                    <label class="sr-only" for="footer-email">Email address</label>
+                    <input id="footer-email" type="email" placeholder="Enter your email" required>
+                    <button type="submit" class="btn btn-primary">Subscribe</button>
+                </form>
+                <div class="footer-app-badges">
+                    <a href="#dashboard"><i class="fa-solid fa-chart-column"></i> Open Dashboard</a>
+                    <a href="#test"><i class="fa-solid fa-file-pen"></i> Start Mock</a>
+                </div>
+            </aside>
+        </div>
+
+        <div class="footer-bottom">
+            <p>&copy; 2026 Mockly. Crafted for serious government exam aspirants.</p>
+            <div class="footer-bottom-links">
+                <a href="privacy.html">Privacy</a>
+                <a href="terms.html">Terms</a>
+                <a href="mailto:support@mockly.in">Contact</a>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        window.MOCKLY_ENABLE_API = true;
+        window.MOCKLY_API_BASE = '/api';
+    </script>
+
+    <!-- Custom JS -->
+    <script src="script.js"></script>
+</body>
+</html>

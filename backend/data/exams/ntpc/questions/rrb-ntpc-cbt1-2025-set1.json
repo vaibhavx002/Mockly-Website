@@ -1,0 +1,586 @@
+{
+  "examId": "rrb-ntpc",
+  "paperId": "rrb-ntpc-cbt1-2025-set1",
+  "questions": [
+    {
+      "questionId": "rrbntpc2025s1-q001",
+      "examId": "rrb-ntpc",
+      "paperId": "rrb-ntpc-cbt1-2025-set1",
+      "sectionId": "reasoning",
+      "content": {
+        "en": {
+          "questionText": "Select the Venn diagram that best represents: Teachers, Women, Mothers",
+          "options": [
+            "All three overlap partially",
+            "Women contains both Teachers and Mothers",
+            "No overlap",
+            "Teachers and Mothers have no overlap"
+          ]
+        }
+      },
+      "media": {
+        "questionImageUrl": null,
+        "optionImageUrls": [
+          null,
+          null,
+          null,
+          null
+        ]
+      },
+      "correctOptionIndex": 0,
+      "difficulty": "easy",
+      "sourceYear": "2025"
+    },
+    {
+      "questionId": "rrbntpc2025s1-q002",
+      "examId": "rrb-ntpc",
+      "paperId": "rrb-ntpc-cbt1-2025-set1",
+      "sectionId": "reasoning",
+      "content": {
+        "en": {
+          "questionText": "Which of the following cube cannot be formed by folding the given unfolded figure?",
+          "options": [
+            "Cube A",
+            "Cube B",
+            "Cube C",
+            "Cube D"
+          ]
+        }
+      },
+      "media": {
+        "questionImageUrl": null,
+        "optionImageUrls": [
+          null,
+          null,
+          null,
+          null
+        ]
+      },
+      "correctOptionIndex": 2,
+      "difficulty": "easy",
+      "sourceYear": "2025"
+    },
+    {
+      "questionId": "rrbntpc2025s1-q003",
+      "examId": "rrb-ntpc",
+      "paperId": "rrb-ntpc-cbt1-2025-set1",
+      "sectionId": "reasoning",
+      "content": {
+        "en": {
+          "questionText": "If ORANGE = 60, APPLE = 50, then MANGO = ?",
+          "options": [
+            "50",
+            "55",
+            "57",
+            "52"
+          ]
+        }
+      },
+      "media": {
+        "questionImageUrl": null,
+        "optionImageUrls": [
+          null,
+          null,
+          null,
+          null
+        ]
+      },
+      "correctOptionIndex": 1,
+      "difficulty": "easy",
+      "sourceYear": "2025"
+    },
+    {
+      "questionId": "rrbntpc2025s1-q004",
+      "examId": "rrb-ntpc",
+      "paperId": "rrb-ntpc-cbt1-2025-set1",
+      "sectionId": "reasoning",
+      "content": {
+        "en": {
+          "questionText": "Two statements are given followed by two conclusions. Statement I: All dogs are animals. Statement II: All animals are living beings. Conclusion I: All dogs are living beings. Conclusion II: All living beings are dogs.",
+          "options": [
+            "Only I follows",
+            "Only II follows",
+            "Both follow",
+            "Neither follows"
+          ]
+        }
+      },
+      "media": {
+        "questionImageUrl": null,
+        "optionImageUrls": [
+          null,
+          null,
+          null,
+          null
+        ]
+      },
+      "correctOptionIndex": 0,
+      "difficulty": "easy",
+      "sourceYear": "2025"
+    },
+    {
+      "questionId": "rrbntpc2025s1-q005",
+      "examId": "rrb-ntpc",
+      "paperId": "rrb-ntpc-cbt1-2025-set1",
+      "sectionId": "reasoning",
+      "content": {
+        "en": {
+          "questionText": "Complete the analogy: Book : Pages :: Tree : ?",
+          "options": [
+            "Roots",
+            "Leaves",
+            "Branches",
+            "Forest"
+          ]
+        }
+      },
+      "media": {
+        "questionImageUrl": null,
+        "optionImageUrls": [
+          null,
+          null,
+          null,
+          null
+        ]
+      },
+      "correctOptionIndex": 1,
+      "difficulty": "easy",
+      "sourceYear": "2025"
+    },
+    {
+      "questionId": "rrbntpc2025s1-q006",
+      "examId": "rrb-ntpc",
+      "paperId": "rrb-ntpc-cbt1-2025-set1",
+      "sectionId": "reasoning",
+      "content": {
+        "en": {
+          "questionText": "If 5th March, 2023 was a Sunday, what day of the week was 5th March, 2024?",
+          "options": [
+            "Monday",
+            "Tuesday",
+            "Wednesday",
+            "Thursday"
+          ]
+        }
+      },
+      "media": {
+        "questionImageUrl": null,
+        "optionImageUrls": [
+          null,
+          null,
+          null,
+          null
+        ]
+      },
+      "correctOptionIndex": 1,
+      "difficulty": "easy",
+      "sourceYear": "2025"
+    },
+    {
+      "questionId": "rrbntpc2025s1-q007",
+      "examId": "rrb-ntpc",
+      "paperId": "rrb-ntpc-cbt1-2025-set1",
+      "sectionId": "reasoning",
+      "content": {
+        "en": {
+          "questionText": "Find the missing term: A, C, F, J, O, ?",
+          "options": [
+            "U",
+            "T",
+            "S",
+            "V"
+          ]
+        }
+      },
+      "media": {
+        "questionImageUrl": null,
+        "optionImageUrls": [
+          null,
+          null,
+          null,
+          null
+        ]
+      },
+      "correctOptionIndex": 0,
+      "difficulty": "easy",
+      "sourceYear": "2025"
+    },
+    {
+      "questionId": "rrbntpc2025s1-q008",
+      "examId": "rrb-ntpc",
+      "paperId": "rrb-ntpc-cbt1-2025-set1",
+      "sectionId": "awareness",
+      "content": {
+        "en": {
+          "questionText": "The Battle of Plassey was fought in:",
+          "options": [
+            "1757",
+            "1764",
+            "1857",
+            "1767"
+          ]
+        }
+      },
+      "media": {
+        "questionImageUrl": null,
+        "optionImageUrls": [
+          null,
+          null,
+          null,
+          null
+        ]
+      },
+      "correctOptionIndex": 0,
+      "difficulty": "easy",
+      "sourceYear": "2025"
+    },
+    {
+      "questionId": "rrbntpc2025s1-q009",
+      "examId": "rrb-ntpc",
+      "paperId": "rrb-ntpc-cbt1-2025-set1",
+      "sectionId": "awareness",
+      "content": {
+        "en": {
+          "questionText": "Who wrote \"Discovery of India\"?",
+          "options": [
+            "Mahatma Gandhi",
+            "Jawaharlal Nehru",
+            "Rabindranath Tagore",
+            "Subhas Chandra Bose"
+          ]
+        }
+      },
+      "media": {
+        "questionImageUrl": null,
+        "optionImageUrls": [
+          null,
+          null,
+          null,
+          null
+        ]
+      },
+      "correctOptionIndex": 1,
+      "difficulty": "medium",
+      "sourceYear": "2025"
+    },
+    {
+      "questionId": "rrbntpc2025s1-q010",
+      "examId": "rrb-ntpc",
+      "paperId": "rrb-ntpc-cbt1-2025-set1",
+      "sectionId": "awareness",
+      "content": {
+        "en": {
+          "questionText": "The chemical formula of water is:",
+          "options": [
+            "H2O2",
+            "H2O",
+            "HO",
+            "H3O"
+          ]
+        }
+      },
+      "media": {
+        "questionImageUrl": null,
+        "optionImageUrls": [
+          null,
+          null,
+          null,
+          null
+        ]
+      },
+      "correctOptionIndex": 1,
+      "difficulty": "medium",
+      "sourceYear": "2025"
+    },
+    {
+      "questionId": "rrbntpc2025s1-q011",
+      "examId": "rrb-ntpc",
+      "paperId": "rrb-ntpc-cbt1-2025-set1",
+      "sectionId": "awareness",
+      "content": {
+        "en": {
+          "questionText": "Which organ in the human body produces insulin?",
+          "options": [
+            "Liver",
+            "Kidney",
+            "Pancreas",
+            "Heart"
+          ]
+        }
+      },
+      "media": {
+        "questionImageUrl": null,
+        "optionImageUrls": [
+          null,
+          null,
+          null,
+          null
+        ]
+      },
+      "correctOptionIndex": 2,
+      "difficulty": "medium",
+      "sourceYear": "2025"
+    },
+    {
+      "questionId": "rrbntpc2025s1-q012",
+      "examId": "rrb-ntpc",
+      "paperId": "rrb-ntpc-cbt1-2025-set1",
+      "sectionId": "awareness",
+      "content": {
+        "en": {
+          "questionText": "The \"Chipko Movement\" is related to:",
+          "options": [
+            "Water conservation",
+            "Forest conservation",
+            "Soil erosion",
+            "Air pollution"
+          ]
+        }
+      },
+      "media": {
+        "questionImageUrl": null,
+        "optionImageUrls": [
+          null,
+          null,
+          null,
+          null
+        ]
+      },
+      "correctOptionIndex": 1,
+      "difficulty": "medium",
+      "sourceYear": "2025"
+    },
+    {
+      "questionId": "rrbntpc2025s1-q013",
+      "examId": "rrb-ntpc",
+      "paperId": "rrb-ntpc-cbt1-2025-set1",
+      "sectionId": "awareness",
+      "content": {
+        "en": {
+          "questionText": "Who was the first President of India?",
+          "options": [
+            "Dr. Rajendra Prasad",
+            "Dr. S. Radhakrishnan",
+            "Zakir Hussain",
+            "V.V. Giri"
+          ]
+        }
+      },
+      "media": {
+        "questionImageUrl": null,
+        "optionImageUrls": [
+          null,
+          null,
+          null,
+          null
+        ]
+      },
+      "correctOptionIndex": 0,
+      "difficulty": "medium",
+      "sourceYear": "2025"
+    },
+    {
+      "questionId": "rrbntpc2025s1-q014",
+      "examId": "rrb-ntpc",
+      "paperId": "rrb-ntpc-cbt1-2025-set1",
+      "sectionId": "awareness",
+      "content": {
+        "en": {
+          "questionText": "The SI unit of force is:",
+          "options": [
+            "Joule",
+            "Watt",
+            "Newton",
+            "Pascal"
+          ]
+        }
+      },
+      "media": {
+        "questionImageUrl": null,
+        "optionImageUrls": [
+          null,
+          null,
+          null,
+          null
+        ]
+      },
+      "correctOptionIndex": 2,
+      "difficulty": "medium",
+      "sourceYear": "2025"
+    },
+    {
+      "questionId": "rrbntpc2025s1-q015",
+      "examId": "rrb-ntpc",
+      "paperId": "rrb-ntpc-cbt1-2025-set1",
+      "sectionId": "math",
+      "content": {
+        "en": {
+          "questionText": "The area of a circle with radius 7 cm is: (π = 22/7)",
+          "options": [
+            "154 cm²",
+            "144 cm²",
+            "148 cm²",
+            "156 cm²"
+          ]
+        }
+      },
+      "media": {
+        "questionImageUrl": null,
+        "optionImageUrls": [
+          null,
+          null,
+          null,
+          null
+        ]
+      },
+      "correctOptionIndex": 0,
+      "difficulty": "medium",
+      "sourceYear": "2025"
+    },
+    {
+      "questionId": "rrbntpc2025s1-q016",
+      "examId": "rrb-ntpc",
+      "paperId": "rrb-ntpc-cbt1-2025-set1",
+      "sectionId": "math",
+      "content": {
+        "en": {
+          "questionText": "A shopkeeper sells an article at a loss of 10%. If he had sold it for Rs. 56 more, he would have gained 4%. The cost price is:",
+          "options": [
+            "Rs. 400",
+            "Rs. 350",
+            "Rs. 450",
+            "Rs. 500"
+          ]
+        }
+      },
+      "media": {
+        "questionImageUrl": null,
+        "optionImageUrls": [
+          null,
+          null,
+          null,
+          null
+        ]
+      },
+      "correctOptionIndex": 0,
+      "difficulty": "medium",
+      "sourceYear": "2025"
+    },
+    {
+      "questionId": "rrbntpc2025s1-q017",
+      "examId": "rrb-ntpc",
+      "paperId": "rrb-ntpc-cbt1-2025-set1",
+      "sectionId": "math",
+      "content": {
+        "en": {
+          "questionText": "√(0.0016) = ?",
+          "options": [
+            "0.04",
+            "0.4",
+            "0.004",
+            "4"
+          ]
+        }
+      },
+      "media": {
+        "questionImageUrl": null,
+        "optionImageUrls": [
+          null,
+          null,
+          null,
+          null
+        ]
+      },
+      "correctOptionIndex": 0,
+      "difficulty": "medium",
+      "sourceYear": "2025"
+    },
+    {
+      "questionId": "rrbntpc2025s1-q018",
+      "examId": "rrb-ntpc",
+      "paperId": "rrb-ntpc-cbt1-2025-set1",
+      "sectionId": "math",
+      "content": {
+        "en": {
+          "questionText": "The perimeter of a rectangle is 40 cm. If the length is 12 cm, the breadth is:",
+          "options": [
+            "6 cm",
+            "8 cm",
+            "10 cm",
+            "14 cm"
+          ]
+        }
+      },
+      "media": {
+        "questionImageUrl": null,
+        "optionImageUrls": [
+          null,
+          null,
+          null,
+          null
+        ]
+      },
+      "correctOptionIndex": 1,
+      "difficulty": "medium",
+      "sourceYear": "2025"
+    },
+    {
+      "questionId": "rrbntpc2025s1-q019",
+      "examId": "rrb-ntpc",
+      "paperId": "rrb-ntpc-cbt1-2025-set1",
+      "sectionId": "math",
+      "content": {
+        "en": {
+          "questionText": "If x + 1/x = 5, then x² + 1/x² = ?",
+          "options": [
+            "23",
+            "25",
+            "27",
+            "21"
+          ]
+        }
+      },
+      "media": {
+        "questionImageUrl": null,
+        "optionImageUrls": [
+          null,
+          null,
+          null,
+          null
+        ]
+      },
+      "correctOptionIndex": 0,
+      "difficulty": "medium",
+      "sourceYear": "2025"
+    },
+    {
+      "questionId": "rrbntpc2025s1-q020",
+      "examId": "rrb-ntpc",
+      "paperId": "rrb-ntpc-cbt1-2025-set1",
+      "sectionId": "math",
+      "content": {
+        "en": {
+          "questionText": "The simple interest on Rs. 8000 at 5% per annum for 3 years is:",
+          "options": [
+            "Rs. 1000",
+            "Rs. 1200",
+            "Rs. 1500",
+            "Rs. 800"
+          ]
+        }
+      },
+      "media": {
+        "questionImageUrl": null,
+        "optionImageUrls": [
+          null,
+          null,
+          null,
+          null
+        ]
+      },
+      "correctOptionIndex": 1,
+      "difficulty": "medium",
+      "sourceYear": "2025"
+    }
+  ]
+}

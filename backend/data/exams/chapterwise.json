@@ -1,0 +1,1712 @@
+{
+  "version": "1.0.0",
+  "generatedAt": "2026-04-19T12:11:09.890Z",
+  "exams": {
+    "ssc-cgl": {
+      "examId": "ssc-cgl",
+      "stream": "SSC",
+      "bodyId": "ssc",
+      "subjects": [
+        {
+          "subjectId": "quant",
+          "name": "Quantitative Aptitude",
+          "chapters": [
+            {
+              "chapterId": "arithmetic",
+              "name": "Arithmetic",
+              "questionCount": 25,
+              "estimatedWeightage": "6%",
+              "topics": [
+                {
+                  "topicId": "arithmetic-1",
+                  "name": "Ratio",
+                  "difficultyBand": "Medium"
+                },
+                {
+                  "topicId": "arithmetic-2",
+                  "name": "Average",
+                  "difficultyBand": "Easy"
+                },
+                {
+                  "topicId": "arithmetic-3",
+                  "name": "Time & Work",
+                  "difficultyBand": "Hard"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "subjectId": "reasoning",
+          "name": "General Intelligence",
+          "chapters": [
+            {
+              "chapterId": "logical",
+              "name": "Logical Reasoning",
+              "questionCount": 25,
+              "estimatedWeightage": "8%",
+              "topics": [
+                {
+                  "topicId": "logical-1",
+                  "name": "Coding-Decoding",
+                  "difficultyBand": "Hard"
+                },
+                {
+                  "topicId": "logical-2",
+                  "name": "Blood Relations",
+                  "difficultyBand": "Easy"
+                },
+                {
+                  "topicId": "logical-3",
+                  "name": "Syllogism",
+                  "difficultyBand": "Hard"
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    "ssc-chsl": {
+      "examId": "ssc-chsl",
+      "stream": "SSC",
+      "bodyId": "ssc",
+      "subjects": [
+        {
+          "subjectId": "quant",
+          "name": "Quantitative Aptitude",
+          "chapters": [
+            {
+              "chapterId": "arithmetic",
+              "name": "Arithmetic",
+              "estimatedWeightage": "10%",
+              "topics": [
+                {
+                  "topicId": "arithmetic-1",
+                  "name": "Ratio",
+                  "difficultyBand": "Medium"
+                },
+                {
+                  "topicId": "arithmetic-2",
+                  "name": "Average",
+                  "difficultyBand": "Easy"
+                },
+                {
+                  "topicId": "arithmetic-3",
+                  "name": "Time & Work",
+                  "difficultyBand": "Medium"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "subjectId": "reasoning",
+          "name": "General Intelligence",
+          "chapters": [
+            {
+              "chapterId": "logical",
+              "name": "Logical Reasoning",
+              "estimatedWeightage": "9%",
+              "topics": [
+                {
+                  "topicId": "logical-1",
+                  "name": "Coding-Decoding",
+                  "difficultyBand": "Medium"
+                },
+                {
+                  "topicId": "logical-2",
+                  "name": "Blood Relations",
+                  "difficultyBand": "Easy"
+                },
+                {
+                  "topicId": "logical-3",
+                  "name": "Syllogism",
+                  "difficultyBand": "Hard"
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    "rrb-ntpc": {
+      "examId": "rrb-ntpc",
+      "stream": "RRB",
+      "bodyId": "rrb",
+      "subjects": [
+        {
+          "subjectId": "quant",
+          "name": "Quantitative Aptitude",
+          "chapters": [
+            {
+              "chapterId": "arithmetic",
+              "name": "Arithmetic",
+              "estimatedWeightage": "9%",
+              "topics": [
+                {
+                  "topicId": "arithmetic-1",
+                  "name": "Ratio",
+                  "difficultyBand": "Hard"
+                },
+                {
+                  "topicId": "arithmetic-2",
+                  "name": "Average",
+                  "difficultyBand": "Medium"
+                },
+                {
+                  "topicId": "arithmetic-3",
+                  "name": "Time & Work",
+                  "difficultyBand": "Hard"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "subjectId": "reasoning",
+          "name": "General Intelligence",
+          "chapters": [
+            {
+              "chapterId": "logical",
+              "name": "Logical Reasoning",
+              "estimatedWeightage": "7%",
+              "topics": [
+                {
+                  "topicId": "logical-1",
+                  "name": "Coding-Decoding",
+                  "difficultyBand": "Hard"
+                },
+                {
+                  "topicId": "logical-2",
+                  "name": "Blood Relations",
+                  "difficultyBand": "Easy"
+                },
+                {
+                  "topicId": "logical-3",
+                  "name": "Syllogism",
+                  "difficultyBand": "Easy"
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    "rrb-group-d": {
+      "examId": "rrb-group-d",
+      "stream": "RRB",
+      "bodyId": "rrb",
+      "subjects": [
+        {
+          "subjectId": "quant",
+          "name": "Quantitative Aptitude",
+          "chapters": [
+            {
+              "chapterId": "arithmetic",
+              "name": "Arithmetic",
+              "estimatedWeightage": "15%",
+              "topics": [
+                {
+                  "topicId": "arithmetic-1",
+                  "name": "Ratio",
+                  "difficultyBand": "Medium"
+                },
+                {
+                  "topicId": "arithmetic-2",
+                  "name": "Average",
+                  "difficultyBand": "Easy"
+                },
+                {
+                  "topicId": "arithmetic-3",
+                  "name": "Time & Work",
+                  "difficultyBand": "Easy"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "subjectId": "reasoning",
+          "name": "General Intelligence",
+          "chapters": [
+            {
+              "chapterId": "logical",
+              "name": "Logical Reasoning",
+              "estimatedWeightage": "12%",
+              "topics": [
+                {
+                  "topicId": "logical-1",
+                  "name": "Coding-Decoding",
+                  "difficultyBand": "Medium"
+                },
+                {
+                  "topicId": "logical-2",
+                  "name": "Blood Relations",
+                  "difficultyBand": "Hard"
+                },
+                {
+                  "topicId": "logical-3",
+                  "name": "Syllogism",
+                  "difficultyBand": "Easy"
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    "upsc-prelims": {
+      "examId": "upsc-prelims",
+      "stream": "UPSC",
+      "bodyId": "upsc",
+      "subjects": [
+        {
+          "subjectId": "history",
+          "name": "History of India",
+          "chapters": [
+            {
+              "chapterId": "ancient",
+              "name": "Ancient History",
+              "estimatedWeightage": "18%",
+              "topics": [
+                {
+                  "topicId": "ancient-1",
+                  "name": "Indus Valley",
+                  "difficultyBand": "Hard"
+                },
+                {
+                  "topicId": "ancient-2",
+                  "name": "Vedic Age",
+                  "difficultyBand": "Medium"
+                },
+                {
+                  "topicId": "ancient-3",
+                  "name": "Buddhism & Jainism",
+                  "difficultyBand": "Hard"
+                }
+              ]
+            },
+            {
+              "chapterId": "modern",
+              "name": "Indian National Movement",
+              "estimatedWeightage": "8%",
+              "topics": [
+                {
+                  "topicId": "modern-1",
+                  "name": "1857 Revolt",
+                  "difficultyBand": "Easy"
+                },
+                {
+                  "topicId": "modern-2",
+                  "name": "Gandhian Era",
+                  "difficultyBand": "Easy"
+                },
+                {
+                  "topicId": "modern-3",
+                  "name": "Constitutional Reforms",
+                  "difficultyBand": "Medium"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "subjectId": "polity",
+          "name": "Indian Polity & Governance",
+          "chapters": [
+            {
+              "chapterId": "constitution",
+              "name": "Constitution",
+              "estimatedWeightage": "15%",
+              "topics": [
+                {
+                  "topicId": "constitution-1",
+                  "name": "Preamble",
+                  "difficultyBand": "Medium"
+                },
+                {
+                  "topicId": "constitution-2",
+                  "name": "Fundamental Rights",
+                  "difficultyBand": "Hard"
+                },
+                {
+                  "topicId": "constitution-3",
+                  "name": "DPSP",
+                  "difficultyBand": "Easy"
+                }
+              ]
+            },
+            {
+              "chapterId": "legislature",
+              "name": "State & Union Legislature",
+              "estimatedWeightage": "18%",
+              "topics": [
+                {
+                  "topicId": "legislature-1",
+                  "name": "Parliament",
+                  "difficultyBand": "Medium"
+                },
+                {
+                  "topicId": "legislature-2",
+                  "name": "State Assembly",
+                  "difficultyBand": "Hard"
+                },
+                {
+                  "topicId": "legislature-3",
+                  "name": "Judiciary",
+                  "difficultyBand": "Medium"
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    "upsc-csat": {
+      "examId": "upsc-csat",
+      "stream": "UPSC",
+      "bodyId": "upsc",
+      "subjects": [
+        {
+          "subjectId": "aptitude",
+          "name": "Quantitative Aptitude",
+          "chapters": [
+            {
+              "chapterId": "num-sys",
+              "name": "Number System",
+              "estimatedWeightage": "5%",
+              "topics": [
+                {
+                  "topicId": "num-sys-1",
+                  "name": "HCF & LCM",
+                  "difficultyBand": "Easy"
+                },
+                {
+                  "topicId": "num-sys-2",
+                  "name": "Divisibility Rules",
+                  "difficultyBand": "Easy"
+                },
+                {
+                  "topicId": "num-sys-3",
+                  "name": "Remainders",
+                  "difficultyBand": "Easy"
+                }
+              ]
+            },
+            {
+              "chapterId": "arithmetic",
+              "name": "Basic Arithmetic",
+              "estimatedWeightage": "6%",
+              "topics": [
+                {
+                  "topicId": "arithmetic-1",
+                  "name": "Percentage",
+                  "difficultyBand": "Medium"
+                },
+                {
+                  "topicId": "arithmetic-2",
+                  "name": "Profit & Loss",
+                  "difficultyBand": "Hard"
+                },
+                {
+                  "topicId": "arithmetic-3",
+                  "name": "Ratio",
+                  "difficultyBand": "Medium"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "subjectId": "comprehension",
+          "name": "Reading Comprehension",
+          "chapters": [
+            {
+              "chapterId": "rc-eng",
+              "name": "English Comprehension",
+              "estimatedWeightage": "7%",
+              "topics": [
+                {
+                  "topicId": "rc-eng-1",
+                  "name": "Inference",
+                  "difficultyBand": "Easy"
+                },
+                {
+                  "topicId": "rc-eng-2",
+                  "name": "Central Theme",
+                  "difficultyBand": "Easy"
+                },
+                {
+                  "topicId": "rc-eng-3",
+                  "name": "Vocabulary",
+                  "difficultyBand": "Medium"
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    "ssc-cpo": {
+      "examId": "ssc-cpo",
+      "stream": "SSC",
+      "bodyId": "ssc",
+      "subjects": [
+        {
+          "subjectId": "quant",
+          "name": "Quantitative Aptitude",
+          "chapters": [
+            {
+              "chapterId": "arithmetic",
+              "name": "Arithmetic",
+              "estimatedWeightage": "17%",
+              "topics": [
+                {
+                  "topicId": "arithmetic-1",
+                  "name": "Ratio",
+                  "difficultyBand": "Easy"
+                },
+                {
+                  "topicId": "arithmetic-2",
+                  "name": "Average",
+                  "difficultyBand": "Medium"
+                },
+                {
+                  "topicId": "arithmetic-3",
+                  "name": "Time & Work",
+                  "difficultyBand": "Easy"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "subjectId": "reasoning",
+          "name": "General Intelligence",
+          "chapters": [
+            {
+              "chapterId": "logical",
+              "name": "Logical Reasoning",
+              "estimatedWeightage": "18%",
+              "topics": [
+                {
+                  "topicId": "logical-1",
+                  "name": "Coding-Decoding",
+                  "difficultyBand": "Medium"
+                },
+                {
+                  "topicId": "logical-2",
+                  "name": "Blood Relations",
+                  "difficultyBand": "Hard"
+                },
+                {
+                  "topicId": "logical-3",
+                  "name": "Syllogism",
+                  "difficultyBand": "Medium"
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    "ssc-gd": {
+      "examId": "ssc-gd",
+      "stream": "SSC",
+      "bodyId": "ssc",
+      "subjects": [
+        {
+          "subjectId": "quant",
+          "name": "Quantitative Aptitude",
+          "chapters": [
+            {
+              "chapterId": "arithmetic",
+              "name": "Arithmetic",
+              "estimatedWeightage": "17%",
+              "topics": [
+                {
+                  "topicId": "arithmetic-1",
+                  "name": "Ratio",
+                  "difficultyBand": "Medium"
+                },
+                {
+                  "topicId": "arithmetic-2",
+                  "name": "Average",
+                  "difficultyBand": "Easy"
+                },
+                {
+                  "topicId": "arithmetic-3",
+                  "name": "Time & Work",
+                  "difficultyBand": "Medium"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "subjectId": "reasoning",
+          "name": "General Intelligence",
+          "chapters": [
+            {
+              "chapterId": "logical",
+              "name": "Logical Reasoning",
+              "estimatedWeightage": "17%",
+              "topics": [
+                {
+                  "topicId": "logical-1",
+                  "name": "Coding-Decoding",
+                  "difficultyBand": "Easy"
+                },
+                {
+                  "topicId": "logical-2",
+                  "name": "Blood Relations",
+                  "difficultyBand": "Easy"
+                },
+                {
+                  "topicId": "logical-3",
+                  "name": "Syllogism",
+                  "difficultyBand": "Easy"
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    "ssc-mts": {
+      "examId": "ssc-mts",
+      "stream": "SSC",
+      "bodyId": "ssc",
+      "subjects": [
+        {
+          "subjectId": "quant",
+          "name": "Quantitative Aptitude",
+          "chapters": [
+            {
+              "chapterId": "arithmetic",
+              "name": "Arithmetic",
+              "estimatedWeightage": "10%",
+              "topics": [
+                {
+                  "topicId": "arithmetic-1",
+                  "name": "Ratio",
+                  "difficultyBand": "Easy"
+                },
+                {
+                  "topicId": "arithmetic-2",
+                  "name": "Average",
+                  "difficultyBand": "Easy"
+                },
+                {
+                  "topicId": "arithmetic-3",
+                  "name": "Time & Work",
+                  "difficultyBand": "Medium"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "subjectId": "reasoning",
+          "name": "General Intelligence",
+          "chapters": [
+            {
+              "chapterId": "logical",
+              "name": "Logical Reasoning",
+              "estimatedWeightage": "9%",
+              "topics": [
+                {
+                  "topicId": "logical-1",
+                  "name": "Coding-Decoding",
+                  "difficultyBand": "Hard"
+                },
+                {
+                  "topicId": "logical-2",
+                  "name": "Blood Relations",
+                  "difficultyBand": "Easy"
+                },
+                {
+                  "topicId": "logical-3",
+                  "name": "Syllogism",
+                  "difficultyBand": "Medium"
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    "ssc-je": {
+      "examId": "ssc-je",
+      "stream": "SSC",
+      "bodyId": "ssc",
+      "subjects": [
+        {
+          "subjectId": "quant",
+          "name": "Quantitative Aptitude",
+          "chapters": [
+            {
+              "chapterId": "arithmetic",
+              "name": "Arithmetic",
+              "estimatedWeightage": "16%",
+              "topics": [
+                {
+                  "topicId": "arithmetic-1",
+                  "name": "Ratio",
+                  "difficultyBand": "Medium"
+                },
+                {
+                  "topicId": "arithmetic-2",
+                  "name": "Average",
+                  "difficultyBand": "Hard"
+                },
+                {
+                  "topicId": "arithmetic-3",
+                  "name": "Time & Work",
+                  "difficultyBand": "Hard"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "subjectId": "reasoning",
+          "name": "General Intelligence",
+          "chapters": [
+            {
+              "chapterId": "logical",
+              "name": "Logical Reasoning",
+              "estimatedWeightage": "12%",
+              "topics": [
+                {
+                  "topicId": "logical-1",
+                  "name": "Coding-Decoding",
+                  "difficultyBand": "Medium"
+                },
+                {
+                  "topicId": "logical-2",
+                  "name": "Blood Relations",
+                  "difficultyBand": "Medium"
+                },
+                {
+                  "topicId": "logical-3",
+                  "name": "Syllogism",
+                  "difficultyBand": "Hard"
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    "ssc-stenographer": {
+      "examId": "ssc-stenographer",
+      "stream": "SSC",
+      "bodyId": "ssc",
+      "subjects": [
+        {
+          "subjectId": "quant",
+          "name": "Quantitative Aptitude",
+          "chapters": [
+            {
+              "chapterId": "arithmetic",
+              "name": "Arithmetic",
+              "estimatedWeightage": "12%",
+              "topics": [
+                {
+                  "topicId": "arithmetic-1",
+                  "name": "Ratio",
+                  "difficultyBand": "Hard"
+                },
+                {
+                  "topicId": "arithmetic-2",
+                  "name": "Average",
+                  "difficultyBand": "Hard"
+                },
+                {
+                  "topicId": "arithmetic-3",
+                  "name": "Time & Work",
+                  "difficultyBand": "Medium"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "subjectId": "reasoning",
+          "name": "General Intelligence",
+          "chapters": [
+            {
+              "chapterId": "logical",
+              "name": "Logical Reasoning",
+              "estimatedWeightage": "8%",
+              "topics": [
+                {
+                  "topicId": "logical-1",
+                  "name": "Coding-Decoding",
+                  "difficultyBand": "Medium"
+                },
+                {
+                  "topicId": "logical-2",
+                  "name": "Blood Relations",
+                  "difficultyBand": "Medium"
+                },
+                {
+                  "topicId": "logical-3",
+                  "name": "Syllogism",
+                  "difficultyBand": "Medium"
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    "ssc-jht": {
+      "examId": "ssc-jht",
+      "stream": "SSC",
+      "bodyId": "ssc",
+      "subjects": [
+        {
+          "subjectId": "quant",
+          "name": "Quantitative Aptitude",
+          "chapters": [
+            {
+              "chapterId": "arithmetic",
+              "name": "Arithmetic",
+              "estimatedWeightage": "17%",
+              "topics": [
+                {
+                  "topicId": "arithmetic-1",
+                  "name": "Ratio",
+                  "difficultyBand": "Easy"
+                },
+                {
+                  "topicId": "arithmetic-2",
+                  "name": "Average",
+                  "difficultyBand": "Medium"
+                },
+                {
+                  "topicId": "arithmetic-3",
+                  "name": "Time & Work",
+                  "difficultyBand": "Easy"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "subjectId": "reasoning",
+          "name": "General Intelligence",
+          "chapters": [
+            {
+              "chapterId": "logical",
+              "name": "Logical Reasoning",
+              "estimatedWeightage": "5%",
+              "topics": [
+                {
+                  "topicId": "logical-1",
+                  "name": "Coding-Decoding",
+                  "difficultyBand": "Easy"
+                },
+                {
+                  "topicId": "logical-2",
+                  "name": "Blood Relations",
+                  "difficultyBand": "Easy"
+                },
+                {
+                  "topicId": "logical-3",
+                  "name": "Syllogism",
+                  "difficultyBand": "Medium"
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    "ssc-selection-post": {
+      "examId": "ssc-selection-post",
+      "stream": "SSC",
+      "bodyId": "ssc",
+      "subjects": [
+        {
+          "subjectId": "quant",
+          "name": "Quantitative Aptitude",
+          "chapters": [
+            {
+              "chapterId": "arithmetic",
+              "name": "Arithmetic",
+              "estimatedWeightage": "19%",
+              "topics": [
+                {
+                  "topicId": "arithmetic-1",
+                  "name": "Ratio",
+                  "difficultyBand": "Easy"
+                },
+                {
+                  "topicId": "arithmetic-2",
+                  "name": "Average",
+                  "difficultyBand": "Medium"
+                },
+                {
+                  "topicId": "arithmetic-3",
+                  "name": "Time & Work",
+                  "difficultyBand": "Medium"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "subjectId": "reasoning",
+          "name": "General Intelligence",
+          "chapters": [
+            {
+              "chapterId": "logical",
+              "name": "Logical Reasoning",
+              "estimatedWeightage": "5%",
+              "topics": [
+                {
+                  "topicId": "logical-1",
+                  "name": "Coding-Decoding",
+                  "difficultyBand": "Hard"
+                },
+                {
+                  "topicId": "logical-2",
+                  "name": "Blood Relations",
+                  "difficultyBand": "Medium"
+                },
+                {
+                  "topicId": "logical-3",
+                  "name": "Syllogism",
+                  "difficultyBand": "Hard"
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    "delhi-police-constable": {
+      "examId": "delhi-police-constable",
+      "stream": "SSC",
+      "bodyId": "ssc",
+      "subjects": [
+        {
+          "subjectId": "quant",
+          "name": "Quantitative Aptitude",
+          "chapters": [
+            {
+              "chapterId": "arithmetic",
+              "name": "Arithmetic",
+              "estimatedWeightage": "16%",
+              "topics": [
+                {
+                  "topicId": "arithmetic-1",
+                  "name": "Ratio",
+                  "difficultyBand": "Easy"
+                },
+                {
+                  "topicId": "arithmetic-2",
+                  "name": "Average",
+                  "difficultyBand": "Easy"
+                },
+                {
+                  "topicId": "arithmetic-3",
+                  "name": "Time & Work",
+                  "difficultyBand": "Hard"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "subjectId": "reasoning",
+          "name": "General Intelligence",
+          "chapters": [
+            {
+              "chapterId": "logical",
+              "name": "Logical Reasoning",
+              "estimatedWeightage": "12%",
+              "topics": [
+                {
+                  "topicId": "logical-1",
+                  "name": "Coding-Decoding",
+                  "difficultyBand": "Medium"
+                },
+                {
+                  "topicId": "logical-2",
+                  "name": "Blood Relations",
+                  "difficultyBand": "Medium"
+                },
+                {
+                  "topicId": "logical-3",
+                  "name": "Syllogism",
+                  "difficultyBand": "Easy"
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    "delhi-police-si": {
+      "examId": "delhi-police-si",
+      "stream": "SSC",
+      "bodyId": "ssc",
+      "subjects": [
+        {
+          "subjectId": "quant",
+          "name": "Quantitative Aptitude",
+          "chapters": [
+            {
+              "chapterId": "arithmetic",
+              "name": "Arithmetic",
+              "estimatedWeightage": "14%",
+              "topics": [
+                {
+                  "topicId": "arithmetic-1",
+                  "name": "Ratio",
+                  "difficultyBand": "Medium"
+                },
+                {
+                  "topicId": "arithmetic-2",
+                  "name": "Average",
+                  "difficultyBand": "Easy"
+                },
+                {
+                  "topicId": "arithmetic-3",
+                  "name": "Time & Work",
+                  "difficultyBand": "Easy"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "subjectId": "reasoning",
+          "name": "General Intelligence",
+          "chapters": [
+            {
+              "chapterId": "logical",
+              "name": "Logical Reasoning",
+              "estimatedWeightage": "19%",
+              "topics": [
+                {
+                  "topicId": "logical-1",
+                  "name": "Coding-Decoding",
+                  "difficultyBand": "Easy"
+                },
+                {
+                  "topicId": "logical-2",
+                  "name": "Blood Relations",
+                  "difficultyBand": "Medium"
+                },
+                {
+                  "topicId": "logical-3",
+                  "name": "Syllogism",
+                  "difficultyBand": "Medium"
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    "rrb-alp-technician": {
+      "examId": "rrb-alp-technician",
+      "stream": "RRB",
+      "bodyId": "rrb",
+      "subjects": [
+        {
+          "subjectId": "quant",
+          "name": "Quantitative Aptitude",
+          "chapters": [
+            {
+              "chapterId": "arithmetic",
+              "name": "Arithmetic",
+              "estimatedWeightage": "17%",
+              "topics": [
+                {
+                  "topicId": "arithmetic-1",
+                  "name": "Ratio",
+                  "difficultyBand": "Easy"
+                },
+                {
+                  "topicId": "arithmetic-2",
+                  "name": "Average",
+                  "difficultyBand": "Easy"
+                },
+                {
+                  "topicId": "arithmetic-3",
+                  "name": "Time & Work",
+                  "difficultyBand": "Hard"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "subjectId": "reasoning",
+          "name": "General Intelligence",
+          "chapters": [
+            {
+              "chapterId": "logical",
+              "name": "Logical Reasoning",
+              "estimatedWeightage": "14%",
+              "topics": [
+                {
+                  "topicId": "logical-1",
+                  "name": "Coding-Decoding",
+                  "difficultyBand": "Easy"
+                },
+                {
+                  "topicId": "logical-2",
+                  "name": "Blood Relations",
+                  "difficultyBand": "Easy"
+                },
+                {
+                  "topicId": "logical-3",
+                  "name": "Syllogism",
+                  "difficultyBand": "Hard"
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    "rrb-je": {
+      "examId": "rrb-je",
+      "stream": "RRB",
+      "bodyId": "rrb",
+      "subjects": [
+        {
+          "subjectId": "quant",
+          "name": "Quantitative Aptitude",
+          "chapters": [
+            {
+              "chapterId": "arithmetic",
+              "name": "Arithmetic",
+              "estimatedWeightage": "19%",
+              "topics": [
+                {
+                  "topicId": "arithmetic-1",
+                  "name": "Ratio",
+                  "difficultyBand": "Easy"
+                },
+                {
+                  "topicId": "arithmetic-2",
+                  "name": "Average",
+                  "difficultyBand": "Easy"
+                },
+                {
+                  "topicId": "arithmetic-3",
+                  "name": "Time & Work",
+                  "difficultyBand": "Easy"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "subjectId": "reasoning",
+          "name": "General Intelligence",
+          "chapters": [
+            {
+              "chapterId": "logical",
+              "name": "Logical Reasoning",
+              "estimatedWeightage": "17%",
+              "topics": [
+                {
+                  "topicId": "logical-1",
+                  "name": "Coding-Decoding",
+                  "difficultyBand": "Hard"
+                },
+                {
+                  "topicId": "logical-2",
+                  "name": "Blood Relations",
+                  "difficultyBand": "Easy"
+                },
+                {
+                  "topicId": "logical-3",
+                  "name": "Syllogism",
+                  "difficultyBand": "Hard"
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    "rrb-paramedical": {
+      "examId": "rrb-paramedical",
+      "stream": "RRB",
+      "bodyId": "rrb",
+      "subjects": [
+        {
+          "subjectId": "quant",
+          "name": "Quantitative Aptitude",
+          "chapters": [
+            {
+              "chapterId": "arithmetic",
+              "name": "Arithmetic",
+              "estimatedWeightage": "7%",
+              "topics": [
+                {
+                  "topicId": "arithmetic-1",
+                  "name": "Ratio",
+                  "difficultyBand": "Easy"
+                },
+                {
+                  "topicId": "arithmetic-2",
+                  "name": "Average",
+                  "difficultyBand": "Easy"
+                },
+                {
+                  "topicId": "arithmetic-3",
+                  "name": "Time & Work",
+                  "difficultyBand": "Medium"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "subjectId": "reasoning",
+          "name": "General Intelligence",
+          "chapters": [
+            {
+              "chapterId": "logical",
+              "name": "Logical Reasoning",
+              "estimatedWeightage": "9%",
+              "topics": [
+                {
+                  "topicId": "logical-1",
+                  "name": "Coding-Decoding",
+                  "difficultyBand": "Hard"
+                },
+                {
+                  "topicId": "logical-2",
+                  "name": "Blood Relations",
+                  "difficultyBand": "Easy"
+                },
+                {
+                  "topicId": "logical-3",
+                  "name": "Syllogism",
+                  "difficultyBand": "Hard"
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    "rrb-ministerial-isolated": {
+      "examId": "rrb-ministerial-isolated",
+      "stream": "RRB",
+      "bodyId": "rrb",
+      "subjects": [
+        {
+          "subjectId": "quant",
+          "name": "Quantitative Aptitude",
+          "chapters": [
+            {
+              "chapterId": "arithmetic",
+              "name": "Arithmetic",
+              "estimatedWeightage": "13%",
+              "topics": [
+                {
+                  "topicId": "arithmetic-1",
+                  "name": "Ratio",
+                  "difficultyBand": "Easy"
+                },
+                {
+                  "topicId": "arithmetic-2",
+                  "name": "Average",
+                  "difficultyBand": "Medium"
+                },
+                {
+                  "topicId": "arithmetic-3",
+                  "name": "Time & Work",
+                  "difficultyBand": "Easy"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "subjectId": "reasoning",
+          "name": "General Intelligence",
+          "chapters": [
+            {
+              "chapterId": "logical",
+              "name": "Logical Reasoning",
+              "estimatedWeightage": "6%",
+              "topics": [
+                {
+                  "topicId": "logical-1",
+                  "name": "Coding-Decoding",
+                  "difficultyBand": "Medium"
+                },
+                {
+                  "topicId": "logical-2",
+                  "name": "Blood Relations",
+                  "difficultyBand": "Hard"
+                },
+                {
+                  "topicId": "logical-3",
+                  "name": "Syllogism",
+                  "difficultyBand": "Easy"
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    "rrb-rpf-si-constable": {
+      "examId": "rrb-rpf-si-constable",
+      "stream": "RRB",
+      "bodyId": "rrb",
+      "subjects": [
+        {
+          "subjectId": "quant",
+          "name": "Quantitative Aptitude",
+          "chapters": [
+            {
+              "chapterId": "arithmetic",
+              "name": "Arithmetic",
+              "estimatedWeightage": "15%",
+              "topics": [
+                {
+                  "topicId": "arithmetic-1",
+                  "name": "Ratio",
+                  "difficultyBand": "Medium"
+                },
+                {
+                  "topicId": "arithmetic-2",
+                  "name": "Average",
+                  "difficultyBand": "Medium"
+                },
+                {
+                  "topicId": "arithmetic-3",
+                  "name": "Time & Work",
+                  "difficultyBand": "Hard"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "subjectId": "reasoning",
+          "name": "General Intelligence",
+          "chapters": [
+            {
+              "chapterId": "logical",
+              "name": "Logical Reasoning",
+              "estimatedWeightage": "16%",
+              "topics": [
+                {
+                  "topicId": "logical-1",
+                  "name": "Coding-Decoding",
+                  "difficultyBand": "Medium"
+                },
+                {
+                  "topicId": "logical-2",
+                  "name": "Blood Relations",
+                  "difficultyBand": "Hard"
+                },
+                {
+                  "topicId": "logical-3",
+                  "name": "Syllogism",
+                  "difficultyBand": "Hard"
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    "upsc-cds": {
+      "examId": "upsc-cds",
+      "stream": "UPSC",
+      "bodyId": "upsc",
+      "subjects": [
+        {
+          "subjectId": "quant",
+          "name": "Quantitative Aptitude",
+          "chapters": [
+            {
+              "chapterId": "arithmetic",
+              "name": "Arithmetic",
+              "estimatedWeightage": "8%",
+              "topics": [
+                {
+                  "topicId": "arithmetic-1",
+                  "name": "Ratio",
+                  "difficultyBand": "Medium"
+                },
+                {
+                  "topicId": "arithmetic-2",
+                  "name": "Average",
+                  "difficultyBand": "Easy"
+                },
+                {
+                  "topicId": "arithmetic-3",
+                  "name": "Time & Work",
+                  "difficultyBand": "Easy"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "subjectId": "reasoning",
+          "name": "General Intelligence",
+          "chapters": [
+            {
+              "chapterId": "logical",
+              "name": "Logical Reasoning",
+              "estimatedWeightage": "9%",
+              "topics": [
+                {
+                  "topicId": "logical-1",
+                  "name": "Coding-Decoding",
+                  "difficultyBand": "Easy"
+                },
+                {
+                  "topicId": "logical-2",
+                  "name": "Blood Relations",
+                  "difficultyBand": "Easy"
+                },
+                {
+                  "topicId": "logical-3",
+                  "name": "Syllogism",
+                  "difficultyBand": "Easy"
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    "upsc-nda-na": {
+      "examId": "upsc-nda-na",
+      "stream": "UPSC",
+      "bodyId": "upsc",
+      "subjects": [
+        {
+          "subjectId": "quant",
+          "name": "Quantitative Aptitude",
+          "chapters": [
+            {
+              "chapterId": "arithmetic",
+              "name": "Arithmetic",
+              "estimatedWeightage": "18%",
+              "topics": [
+                {
+                  "topicId": "arithmetic-1",
+                  "name": "Ratio",
+                  "difficultyBand": "Hard"
+                },
+                {
+                  "topicId": "arithmetic-2",
+                  "name": "Average",
+                  "difficultyBand": "Hard"
+                },
+                {
+                  "topicId": "arithmetic-3",
+                  "name": "Time & Work",
+                  "difficultyBand": "Easy"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "subjectId": "reasoning",
+          "name": "General Intelligence",
+          "chapters": [
+            {
+              "chapterId": "logical",
+              "name": "Logical Reasoning",
+              "estimatedWeightage": "10%",
+              "topics": [
+                {
+                  "topicId": "logical-1",
+                  "name": "Coding-Decoding",
+                  "difficultyBand": "Easy"
+                },
+                {
+                  "topicId": "logical-2",
+                  "name": "Blood Relations",
+                  "difficultyBand": "Easy"
+                },
+                {
+                  "topicId": "logical-3",
+                  "name": "Syllogism",
+                  "difficultyBand": "Easy"
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    "upsc-capf-ac": {
+      "examId": "upsc-capf-ac",
+      "stream": "UPSC",
+      "bodyId": "upsc",
+      "subjects": [
+        {
+          "subjectId": "quant",
+          "name": "Quantitative Aptitude",
+          "chapters": [
+            {
+              "chapterId": "arithmetic",
+              "name": "Arithmetic",
+              "estimatedWeightage": "15%",
+              "topics": [
+                {
+                  "topicId": "arithmetic-1",
+                  "name": "Ratio",
+                  "difficultyBand": "Easy"
+                },
+                {
+                  "topicId": "arithmetic-2",
+                  "name": "Average",
+                  "difficultyBand": "Hard"
+                },
+                {
+                  "topicId": "arithmetic-3",
+                  "name": "Time & Work",
+                  "difficultyBand": "Hard"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "subjectId": "reasoning",
+          "name": "General Intelligence",
+          "chapters": [
+            {
+              "chapterId": "logical",
+              "name": "Logical Reasoning",
+              "estimatedWeightage": "6%",
+              "topics": [
+                {
+                  "topicId": "logical-1",
+                  "name": "Coding-Decoding",
+                  "difficultyBand": "Medium"
+                },
+                {
+                  "topicId": "logical-2",
+                  "name": "Blood Relations",
+                  "difficultyBand": "Hard"
+                },
+                {
+                  "topicId": "logical-3",
+                  "name": "Syllogism",
+                  "difficultyBand": "Easy"
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    "upsc-ese": {
+      "examId": "upsc-ese",
+      "stream": "UPSC",
+      "bodyId": "upsc",
+      "subjects": [
+        {
+          "subjectId": "quant",
+          "name": "Quantitative Aptitude",
+          "chapters": [
+            {
+              "chapterId": "arithmetic",
+              "name": "Arithmetic",
+              "estimatedWeightage": "16%",
+              "topics": [
+                {
+                  "topicId": "arithmetic-1",
+                  "name": "Ratio",
+                  "difficultyBand": "Medium"
+                },
+                {
+                  "topicId": "arithmetic-2",
+                  "name": "Average",
+                  "difficultyBand": "Easy"
+                },
+                {
+                  "topicId": "arithmetic-3",
+                  "name": "Time & Work",
+                  "difficultyBand": "Medium"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "subjectId": "reasoning",
+          "name": "General Intelligence",
+          "chapters": [
+            {
+              "chapterId": "logical",
+              "name": "Logical Reasoning",
+              "estimatedWeightage": "7%",
+              "topics": [
+                {
+                  "topicId": "logical-1",
+                  "name": "Coding-Decoding",
+                  "difficultyBand": "Easy"
+                },
+                {
+                  "topicId": "logical-2",
+                  "name": "Blood Relations",
+                  "difficultyBand": "Hard"
+                },
+                {
+                  "topicId": "logical-3",
+                  "name": "Syllogism",
+                  "difficultyBand": "Hard"
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    "upsc-cms": {
+      "examId": "upsc-cms",
+      "stream": "UPSC",
+      "bodyId": "upsc",
+      "subjects": [
+        {
+          "subjectId": "quant",
+          "name": "Quantitative Aptitude",
+          "chapters": [
+            {
+              "chapterId": "arithmetic",
+              "name": "Arithmetic",
+              "estimatedWeightage": "11%",
+              "topics": [
+                {
+                  "topicId": "arithmetic-1",
+                  "name": "Ratio",
+                  "difficultyBand": "Medium"
+                },
+                {
+                  "topicId": "arithmetic-2",
+                  "name": "Average",
+                  "difficultyBand": "Medium"
+                },
+                {
+                  "topicId": "arithmetic-3",
+                  "name": "Time & Work",
+                  "difficultyBand": "Hard"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "subjectId": "reasoning",
+          "name": "General Intelligence",
+          "chapters": [
+            {
+              "chapterId": "logical",
+              "name": "Logical Reasoning",
+              "estimatedWeightage": "19%",
+              "topics": [
+                {
+                  "topicId": "logical-1",
+                  "name": "Coding-Decoding",
+                  "difficultyBand": "Medium"
+                },
+                {
+                  "topicId": "logical-2",
+                  "name": "Blood Relations",
+                  "difficultyBand": "Medium"
+                },
+                {
+                  "topicId": "logical-3",
+                  "name": "Syllogism",
+                  "difficultyBand": "Hard"
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    "upsc-ifs": {
+      "examId": "upsc-ifs",
+      "stream": "UPSC",
+      "bodyId": "upsc",
+      "subjects": [
+        {
+          "subjectId": "quant",
+          "name": "Quantitative Aptitude",
+          "chapters": [
+            {
+              "chapterId": "arithmetic",
+              "name": "Arithmetic",
+              "estimatedWeightage": "5%",
+              "topics": [
+                {
+                  "topicId": "arithmetic-1",
+                  "name": "Ratio",
+                  "difficultyBand": "Hard"
+                },
+                {
+                  "topicId": "arithmetic-2",
+                  "name": "Average",
+                  "difficultyBand": "Hard"
+                },
+                {
+                  "topicId": "arithmetic-3",
+                  "name": "Time & Work",
+                  "difficultyBand": "Medium"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "subjectId": "reasoning",
+          "name": "General Intelligence",
+          "chapters": [
+            {
+              "chapterId": "logical",
+              "name": "Logical Reasoning",
+              "estimatedWeightage": "17%",
+              "topics": [
+                {
+                  "topicId": "logical-1",
+                  "name": "Coding-Decoding",
+                  "difficultyBand": "Medium"
+                },
+                {
+                  "topicId": "logical-2",
+                  "name": "Blood Relations",
+                  "difficultyBand": "Medium"
+                },
+                {
+                  "topicId": "logical-3",
+                  "name": "Syllogism",
+                  "difficultyBand": "Easy"
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    }
+  }
+}

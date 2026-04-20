@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Terms of Use | Mockly</title>
+    <link href="vendor/fontawesome/css/all.min.css" rel="stylesheet">
+    <style>
+        :root { --bg:#f8fafc; --ink:#0f172a; --muted:#475569; --line:#d9e4f2; --card:#fff; --accent:#4f46e5; }
+        * { box-sizing: border-box; }
+        body { margin:0; font-family:"Segoe UI","Noto Sans",sans-serif; color:var(--ink); background:var(--bg); }
+        .page { max-width: 1000px; margin: 0 auto; padding: 20px 16px 36px; }
+        .top { display:flex; justify-content:space-between; gap:12px; flex-wrap:wrap; align-items:center; border:1px solid var(--line); border-radius:14px; background:#fff; padding:11px 14px; }
+        .top a { text-decoration:none; color:var(--muted); font-weight:700; font-size:13px; }
+        .auth-links { margin-left:auto; display:inline-flex; gap:10px; align-items:center; }
+        .auth-links a {
+            border: 1px solid var(--line);
+            border-radius: 999px;
+            padding: 6px 12px;
+            background: #fff;
+        }
+        .hero { margin-top:14px; border-radius:18px; padding:18px; color:#fff; background:linear-gradient(135deg,#1e1b4b,#334155 55%,#0f766e); }
+        .hero h1 { margin:0 0 6px; }
+        .hero p { margin:0; color:rgba(255,255,255,.86); }
+        .chip { display:inline-block; margin-top:10px; border-radius:999px; padding:5px 9px; font-size:12px; font-weight:700; background:rgba(255,255,255,.18); }
+        .cards { display:grid; grid-template-columns:repeat(2,minmax(0,1fr)); gap:12px; margin-top:12px; }
+        .card { border:1px solid var(--line); border-radius:14px; background:var(--card); padding:14px; }
+        .card h2 { margin:0 0 8px; font-size:1rem; }
+        .card p, .card li { margin:0; color:var(--muted); line-height:1.65; }
+        .card ul { margin:0; padding-left:18px; display:grid; gap:6px; }
+        .full { grid-column:1 / -1; }
+        .cta { display:flex; flex-wrap:wrap; gap:10px; margin-top:10px; }
+        .cta a { text-decoration:none; font-size:13px; font-weight:700; color:var(--ink); border:1px solid var(--line); border-radius:10px; padding:8px 12px; background:#fff; }
+        .foot { margin-top:18px; color:var(--muted); font-size:13px; display:flex; flex-wrap:wrap; justify-content:space-between; gap:10px; }
+        .foot a { color:var(--accent); text-decoration:none; font-weight:700; }
+        @media (max-width: 760px) { .cards { grid-template-columns:1fr; } }
+    </style>
+</head>
+<body>
+    <main class="page">
+        <header class="top">
+            <a href="/"><strong>Mockly</strong> Home</a>
+            <a href="/#dashboard">Dashboard</a>
+            <a href="/help.html">Help Center</a>
+            <a href="/privacy.html">Privacy</a>
+            <a href="/refund.html">Refund</a>
+            <span class="auth-links">
+                <a id="nav-login-link" href="/#login">Log In</a>
+                <a id="nav-signup-link" href="/#signup">Sign Up</a>
+            </span>
+        </header>
+
+        <section class="hero">
+            <h1>Terms of Use</h1>
+            <p>These terms define responsible usage of Mockly test content, analytics, and account features.</p>
+            <span class="chip"><i class="fa-regular fa-calendar"></i> Last updated: April 17, 2026</span>
+        </section>
+
+        <section class="cards">
+            <article class="card">
+                <h2>Acceptable Use</h2>
+                <ul>
+                    <li>Mockly is for preparation and self-assessment.</li>
+                    <li>Keep account credentials secure and private.</li>
+                    <li>Do not misuse or republish platform content without permission.</li>
+                </ul>
+            </article>
+
+            <article class="card">
+                <h2>Scoring & Insights</h2>
+                <ul>
+                    <li>Scores are generated from configured answer keys.</li>
+                    <li>Weak-topic and warning cards are guidance, not official exam ranks.</li>
+                    <li>Use dashboard trends for revision planning, not final eligibility decisions.</li>
+                </ul>
+            </article>
+
+            <article class="card full">
+                <h2>Support and Escalation</h2>
+                <p>For account, legal, or content concerns, contact support with exam id and session details to speed up resolution.</p>
+                <div class="cta">
+                    <a href="mailto:support@mockly.in">support@mockly.in</a>
+                    <a href="/help.html">Open Help Center</a>
+                    <a href="/privacy.html">Read Privacy Policy</a>
+                </div>
+            </article>
+        </section>
+
+        <footer class="foot">
+            <span>Mockly candidate trust policies</span>
+            <span><a href="/privacy.html">Privacy</a> • <a href="/refund.html">Refund Policy</a></span>
+        </footer>
+    </main>
+    <script>
+        window.MOCKLY_API_BASE = '/api';
+    </script>
+    <script src="nav-auth.js" defer></script>
+</body>
+</html>

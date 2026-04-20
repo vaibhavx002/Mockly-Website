@@ -1,0 +1,50 @@
+{
+  "type": "QuestionRecord",
+  "required": [
+    "questionId",
+    "examId",
+    "paperId",
+    "sectionId",
+    "content",
+    "correctOptionIndex",
+    "content.en.questionText",
+    "content.en.options",
+    "explanation",
+    "explanation.en"
+  ],
+  "notes": {
+    "optionsLength": 4,
+    "correctOptionIndexRange": "0 to 3",
+    "languageFallback": "Default fallback is English when Hindi content is missing, except SSC CGL non-English sections where Hindi is mandatory.",
+    "sscCglLanguageRule": "SSC CGL requires content.en for every section. For non-English sections, content.hi is required. English section may remain English-only.",
+    "media": "questionImageUrl and optionImageUrls are optional",
+    "hindiExplanation": "If exam languageSupport includes hi, explanation.hi is strongly recommended."
+  },
+  "example": {
+    "questionId": "rrbgd-2025-s1-q001",
+    "examId": "rrb-group-d",
+    "paperId": "rrb-group-d-cbt-2025-set1",
+    "sectionId": "math",
+    "content": {
+      "en": {
+        "questionText": "What is 18 + 27?",
+        "options": ["43", "44", "45", "46"]
+      },
+      "hi": {
+        "questionText": "18 + 27 kitna hai?",
+        "options": ["43", "44", "45", "46"]
+      }
+    },
+    "media": {
+      "questionImageUrl": null,
+      "optionImageUrls": [null, null, null, null]
+    },
+    "correctOptionIndex": 2,
+    "difficulty": "easy",
+    "sourceYear": "2025",
+    "explanation": {
+      "en": "18 + 27 equals 45. Add ones place then tens place.",
+      "hi": "18 + 27 ka yog 45 hota hai. Pehle ones place, phir tens place jodiye."
+    }
+  }
+}

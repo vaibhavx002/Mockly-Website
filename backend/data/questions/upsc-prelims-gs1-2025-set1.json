@@ -1,0 +1,586 @@
+{
+  "examId": "upsc-prelims",
+  "paperId": "upsc-prelims-gs1-2025-set1",
+  "questions": [
+    {
+      "questionId": "upscgs12025s1-q001",
+      "examId": "upsc-prelims",
+      "paperId": "upsc-prelims-gs1-2025-set1",
+      "sectionId": "gs",
+      "content": {
+        "en": {
+          "questionText": "Which article of the Indian Constitution deals with the Right to Education?",
+          "options": [
+            "Article 19",
+            "Article 21A",
+            "Article 32",
+            "Article 45"
+          ]
+        }
+      },
+      "media": {
+        "questionImageUrl": null,
+        "optionImageUrls": [
+          null,
+          null,
+          null,
+          null
+        ]
+      },
+      "correctOptionIndex": 1,
+      "difficulty": "easy",
+      "sourceYear": "2025"
+    },
+    {
+      "questionId": "upscgs12025s1-q002",
+      "examId": "upsc-prelims",
+      "paperId": "upsc-prelims-gs1-2025-set1",
+      "sectionId": "gs",
+      "content": {
+        "en": {
+          "questionText": "The \"Jallianwala Bagh Massacre\" took place in which year?",
+          "options": [
+            "1917",
+            "1919",
+            "1921",
+            "1929"
+          ]
+        }
+      },
+      "media": {
+        "questionImageUrl": null,
+        "optionImageUrls": [
+          null,
+          null,
+          null,
+          null
+        ]
+      },
+      "correctOptionIndex": 1,
+      "difficulty": "easy",
+      "sourceYear": "2025"
+    },
+    {
+      "questionId": "upscgs12025s1-q003",
+      "examId": "upsc-prelims",
+      "paperId": "upsc-prelims-gs1-2025-set1",
+      "sectionId": "gs",
+      "content": {
+        "en": {
+          "questionText": "Which is the longest river in India?",
+          "options": [
+            "Yamuna",
+            "Brahmaputra",
+            "Ganga",
+            "Godavari"
+          ]
+        }
+      },
+      "media": {
+        "questionImageUrl": null,
+        "optionImageUrls": [
+          null,
+          null,
+          null,
+          null
+        ]
+      },
+      "correctOptionIndex": 2,
+      "difficulty": "easy",
+      "sourceYear": "2025"
+    },
+    {
+      "questionId": "upscgs12025s1-q004",
+      "examId": "upsc-prelims",
+      "paperId": "upsc-prelims-gs1-2025-set1",
+      "sectionId": "gs",
+      "content": {
+        "en": {
+          "questionText": "Who is known as the \"Father of the Indian Constitution\"?",
+          "options": [
+            "Mahatma Gandhi",
+            "Jawaharlal Nehru",
+            "B.R. Ambedkar",
+            "Sardar Patel"
+          ]
+        }
+      },
+      "media": {
+        "questionImageUrl": null,
+        "optionImageUrls": [
+          null,
+          null,
+          null,
+          null
+        ]
+      },
+      "correctOptionIndex": 2,
+      "difficulty": "easy",
+      "sourceYear": "2025"
+    },
+    {
+      "questionId": "upscgs12025s1-q005",
+      "examId": "upsc-prelims",
+      "paperId": "upsc-prelims-gs1-2025-set1",
+      "sectionId": "gs",
+      "content": {
+        "en": {
+          "questionText": "The \"Quit India Movement\" was launched in which year?",
+          "options": [
+            "1940",
+            "1942",
+            "1944",
+            "1946"
+          ]
+        }
+      },
+      "media": {
+        "questionImageUrl": null,
+        "optionImageUrls": [
+          null,
+          null,
+          null,
+          null
+        ]
+      },
+      "correctOptionIndex": 1,
+      "difficulty": "easy",
+      "sourceYear": "2025"
+    },
+    {
+      "questionId": "upscgs12025s1-q006",
+      "examId": "upsc-prelims",
+      "paperId": "upsc-prelims-gs1-2025-set1",
+      "sectionId": "gs",
+      "content": {
+        "en": {
+          "questionText": "Which planet is known as the \"Red Planet\"?",
+          "options": [
+            "Venus",
+            "Mars",
+            "Jupiter",
+            "Saturn"
+          ]
+        }
+      },
+      "media": {
+        "questionImageUrl": null,
+        "optionImageUrls": [
+          null,
+          null,
+          null,
+          null
+        ]
+      },
+      "correctOptionIndex": 1,
+      "difficulty": "easy",
+      "sourceYear": "2025"
+    },
+    {
+      "questionId": "upscgs12025s1-q007",
+      "examId": "upsc-prelims",
+      "paperId": "upsc-prelims-gs1-2025-set1",
+      "sectionId": "gs",
+      "content": {
+        "en": {
+          "questionText": "The currency of Japan is:",
+          "options": [
+            "Yuan",
+            "Won",
+            "Yen",
+            "Ringgit"
+          ]
+        }
+      },
+      "media": {
+        "questionImageUrl": null,
+        "optionImageUrls": [
+          null,
+          null,
+          null,
+          null
+        ]
+      },
+      "correctOptionIndex": 2,
+      "difficulty": "easy",
+      "sourceYear": "2025"
+    },
+    {
+      "questionId": "upscgs12025s1-q008",
+      "examId": "upsc-prelims",
+      "paperId": "upsc-prelims-gs1-2025-set1",
+      "sectionId": "gs",
+      "content": {
+        "en": {
+          "questionText": "Which vitamin is also known as ascorbic acid?",
+          "options": [
+            "Vitamin A",
+            "Vitamin B",
+            "Vitamin C",
+            "Vitamin D"
+          ]
+        }
+      },
+      "media": {
+        "questionImageUrl": null,
+        "optionImageUrls": [
+          null,
+          null,
+          null,
+          null
+        ]
+      },
+      "correctOptionIndex": 2,
+      "difficulty": "easy",
+      "sourceYear": "2025"
+    },
+    {
+      "questionId": "upscgs12025s1-q009",
+      "examId": "upsc-prelims",
+      "paperId": "upsc-prelims-gs1-2025-set1",
+      "sectionId": "gs",
+      "content": {
+        "en": {
+          "questionText": "The \"Panchayati Raj System\" was introduced in India in:",
+          "options": [
+            "1959",
+            "1965",
+            "1971",
+            "1975"
+          ]
+        }
+      },
+      "media": {
+        "questionImageUrl": null,
+        "optionImageUrls": [
+          null,
+          null,
+          null,
+          null
+        ]
+      },
+      "correctOptionIndex": 0,
+      "difficulty": "medium",
+      "sourceYear": "2025"
+    },
+    {
+      "questionId": "upscgs12025s1-q010",
+      "examId": "upsc-prelims",
+      "paperId": "upsc-prelims-gs1-2025-set1",
+      "sectionId": "gs",
+      "content": {
+        "en": {
+          "questionText": "Which gas is most abundant in the Earth's atmosphere?",
+          "options": [
+            "Oxygen",
+            "Carbon Dioxide",
+            "Nitrogen",
+            "Hydrogen"
+          ]
+        }
+      },
+      "media": {
+        "questionImageUrl": null,
+        "optionImageUrls": [
+          null,
+          null,
+          null,
+          null
+        ]
+      },
+      "correctOptionIndex": 2,
+      "difficulty": "medium",
+      "sourceYear": "2025"
+    },
+    {
+      "questionId": "upscgs12025s1-q011",
+      "examId": "upsc-prelims",
+      "paperId": "upsc-prelims-gs1-2025-set1",
+      "sectionId": "gs",
+      "content": {
+        "en": {
+          "questionText": "The Battle of Plassey was fought in:",
+          "options": [
+            "1757",
+            "1764",
+            "1857",
+            "1767"
+          ]
+        }
+      },
+      "media": {
+        "questionImageUrl": null,
+        "optionImageUrls": [
+          null,
+          null,
+          null,
+          null
+        ]
+      },
+      "correctOptionIndex": 0,
+      "difficulty": "medium",
+      "sourceYear": "2025"
+    },
+    {
+      "questionId": "upscgs12025s1-q012",
+      "examId": "upsc-prelims",
+      "paperId": "upsc-prelims-gs1-2025-set1",
+      "sectionId": "gs",
+      "content": {
+        "en": {
+          "questionText": "Who wrote \"Discovery of India\"?",
+          "options": [
+            "Mahatma Gandhi",
+            "Jawaharlal Nehru",
+            "Rabindranath Tagore",
+            "Subhas Chandra Bose"
+          ]
+        }
+      },
+      "media": {
+        "questionImageUrl": null,
+        "optionImageUrls": [
+          null,
+          null,
+          null,
+          null
+        ]
+      },
+      "correctOptionIndex": 1,
+      "difficulty": "medium",
+      "sourceYear": "2025"
+    },
+    {
+      "questionId": "upscgs12025s1-q013",
+      "examId": "upsc-prelims",
+      "paperId": "upsc-prelims-gs1-2025-set1",
+      "sectionId": "gs",
+      "content": {
+        "en": {
+          "questionText": "The chemical formula of water is:",
+          "options": [
+            "H2O2",
+            "H2O",
+            "HO",
+            "H3O"
+          ]
+        }
+      },
+      "media": {
+        "questionImageUrl": null,
+        "optionImageUrls": [
+          null,
+          null,
+          null,
+          null
+        ]
+      },
+      "correctOptionIndex": 1,
+      "difficulty": "medium",
+      "sourceYear": "2025"
+    },
+    {
+      "questionId": "upscgs12025s1-q014",
+      "examId": "upsc-prelims",
+      "paperId": "upsc-prelims-gs1-2025-set1",
+      "sectionId": "gs",
+      "content": {
+        "en": {
+          "questionText": "Which organ in the human body produces insulin?",
+          "options": [
+            "Liver",
+            "Kidney",
+            "Pancreas",
+            "Heart"
+          ]
+        }
+      },
+      "media": {
+        "questionImageUrl": null,
+        "optionImageUrls": [
+          null,
+          null,
+          null,
+          null
+        ]
+      },
+      "correctOptionIndex": 2,
+      "difficulty": "medium",
+      "sourceYear": "2025"
+    },
+    {
+      "questionId": "upscgs12025s1-q015",
+      "examId": "upsc-prelims",
+      "paperId": "upsc-prelims-gs1-2025-set1",
+      "sectionId": "gs",
+      "content": {
+        "en": {
+          "questionText": "The \"Chipko Movement\" is related to:",
+          "options": [
+            "Water conservation",
+            "Forest conservation",
+            "Soil erosion",
+            "Air pollution"
+          ]
+        }
+      },
+      "media": {
+        "questionImageUrl": null,
+        "optionImageUrls": [
+          null,
+          null,
+          null,
+          null
+        ]
+      },
+      "correctOptionIndex": 1,
+      "difficulty": "medium",
+      "sourceYear": "2025"
+    },
+    {
+      "questionId": "upscgs12025s1-q016",
+      "examId": "upsc-prelims",
+      "paperId": "upsc-prelims-gs1-2025-set1",
+      "sectionId": "gs",
+      "content": {
+        "en": {
+          "questionText": "Who was the first President of India?",
+          "options": [
+            "Dr. Rajendra Prasad",
+            "Dr. S. Radhakrishnan",
+            "Zakir Hussain",
+            "V.V. Giri"
+          ]
+        }
+      },
+      "media": {
+        "questionImageUrl": null,
+        "optionImageUrls": [
+          null,
+          null,
+          null,
+          null
+        ]
+      },
+      "correctOptionIndex": 0,
+      "difficulty": "medium",
+      "sourceYear": "2025"
+    },
+    {
+      "questionId": "upscgs12025s1-q017",
+      "examId": "upsc-prelims",
+      "paperId": "upsc-prelims-gs1-2025-set1",
+      "sectionId": "gs",
+      "content": {
+        "en": {
+          "questionText": "The SI unit of force is:",
+          "options": [
+            "Joule",
+            "Watt",
+            "Newton",
+            "Pascal"
+          ]
+        }
+      },
+      "media": {
+        "questionImageUrl": null,
+        "optionImageUrls": [
+          null,
+          null,
+          null,
+          null
+        ]
+      },
+      "correctOptionIndex": 2,
+      "difficulty": "medium",
+      "sourceYear": "2025"
+    },
+    {
+      "questionId": "upscgs12025s1-q018",
+      "examId": "upsc-prelims",
+      "paperId": "upsc-prelims-gs1-2025-set1",
+      "sectionId": "gs",
+      "content": {
+        "en": {
+          "questionText": "Which Indian state has the longest coastline?",
+          "options": [
+            "Maharashtra",
+            "Gujarat",
+            "Tamil Nadu",
+            "Andhra Pradesh"
+          ]
+        }
+      },
+      "media": {
+        "questionImageUrl": null,
+        "optionImageUrls": [
+          null,
+          null,
+          null,
+          null
+        ]
+      },
+      "correctOptionIndex": 1,
+      "difficulty": "medium",
+      "sourceYear": "2025"
+    },
+    {
+      "questionId": "upscgs12025s1-q019",
+      "examId": "upsc-prelims",
+      "paperId": "upsc-prelims-gs1-2025-set1",
+      "sectionId": "gs",
+      "content": {
+        "en": {
+          "questionText": "The \"Treaty of Versailles\" ended which war?",
+          "options": [
+            "World War I",
+            "World War II",
+            "Napoleonic Wars",
+            "Crimean War"
+          ]
+        }
+      },
+      "media": {
+        "questionImageUrl": null,
+        "optionImageUrls": [
+          null,
+          null,
+          null,
+          null
+        ]
+      },
+      "correctOptionIndex": 0,
+      "difficulty": "medium",
+      "sourceYear": "2025"
+    },
+    {
+      "questionId": "upscgs12025s1-q020",
+      "examId": "upsc-prelims",
+      "paperId": "upsc-prelims-gs1-2025-set1",
+      "sectionId": "gs",
+      "content": {
+        "en": {
+          "questionText": "Which mineral is known as \"Black Gold\"?",
+          "options": [
+            "Coal",
+            "Iron",
+            "Petroleum",
+            "Gold"
+          ]
+        }
+      },
+      "media": {
+        "questionImageUrl": null,
+        "optionImageUrls": [
+          null,
+          null,
+          null,
+          null
+        ]
+      },
+      "correctOptionIndex": 2,
+      "difficulty": "medium",
+      "sourceYear": "2025"
+    }
+  ]
+}

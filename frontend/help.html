@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Help Center | Mockly</title>
+    <link href="vendor/fontawesome/css/all.min.css" rel="stylesheet">
+    <style>
+        :root { --bg:#f8fafc; --ink:#0f172a; --muted:#475569; --line:#d9e4f2; --panel:#fff; --accent:#4f46e5; }
+        * { box-sizing: border-box; }
+        body {
+            margin: 0;
+            font-family: "Segoe UI", "Noto Sans", sans-serif;
+            color: var(--ink);
+            background:
+                radial-gradient(circle at 90% 0, rgba(79, 70, 229, 0.12), transparent 34%),
+                radial-gradient(circle at 8% 96%, rgba(13, 148, 136, 0.14), transparent 38%),
+                var(--bg);
+        }
+        .page { max-width: 1080px; margin: 0 auto; padding: 20px 16px 36px; }
+        .nav { display:flex; gap:12px; flex-wrap:wrap; align-items:center; border:1px solid var(--line); border-radius:14px; background:#fff; padding:11px 13px; }
+        .nav a { text-decoration:none; color:var(--muted); font-size:13px; font-weight:700; }
+        .auth-links { margin-left:auto; display:inline-flex; gap:10px; align-items:center; }
+        .auth-links a {
+            border: 1px solid var(--line);
+            border-radius: 999px;
+            padding: 6px 12px;
+            background: #fff;
+        }
+        .hero { margin-top:14px; border-radius:18px; padding:20px; color:#fff; background:linear-gradient(130deg,#1e1b4b,#334155 45%,#0d9488); }
+        .hero h1 { margin:0 0 8px; font-size:1.9rem; }
+        .hero p { margin:0; color:rgba(255,255,255,.88); max-width:65ch; }
+        .chips { margin-top:10px; display:flex; flex-wrap:wrap; gap:8px; }
+        .chip { border-radius:999px; padding:5px 10px; font-size:12px; font-weight:700; background:rgba(255,255,255,.18); }
+        .grid { margin-top:12px; display:grid; grid-template-columns: repeat(2,minmax(0,1fr)); gap:12px; }
+        .card { border:1px solid var(--line); border-radius:14px; background:var(--panel); padding:14px; }
+        .card h2 { margin:0 0 8px; font-size:1.02rem; }
+        .card p, .card li { margin:0; line-height:1.65; color:var(--muted); }
+        .card ul { margin:0; padding-left:18px; display:grid; gap:6px; }
+        .actions { display:flex; flex-wrap:wrap; gap:10px; margin-top:10px; }
+        .actions a { text-decoration:none; font-size:13px; font-weight:700; color:var(--ink); border:1px solid var(--line); border-radius:10px; padding:8px 12px; background:#fff; }
+        .faq { margin-top:12px; border:1px solid var(--line); border-radius:14px; background:#fff; padding:14px; }
+        .faq h2 { margin:0 0 8px; font-size:1.02rem; }
+        .faq-item { border-top:1px solid #e5edf7; padding-top:9px; margin-top:9px; }
+        .faq-item:first-of-type { border-top:0; padding-top:0; margin-top:0; }
+        .faq-item h3 { margin:0 0 4px; font-size:0.95rem; }
+        .faq-item p { margin:0; color:var(--muted); line-height:1.6; }
+        .foot { margin-top:16px; display:flex; justify-content:space-between; gap:10px; flex-wrap:wrap; color:var(--muted); font-size:13px; }
+        .foot a { color:var(--accent); text-decoration:none; font-weight:700; }
+        @media (max-width: 840px) { .grid { grid-template-columns:1fr; } .hero h1 { font-size:1.55rem; } }
+    </style>
+</head>
+<body>
+    <main class="page">
+        <nav class="nav" aria-label="Top navigation">
+            <a href="/"><strong>Mockly</strong></a>
+            <a href="/#dashboard">Dashboard</a>
+            <a href="/privacy.html">Privacy</a>
+            <a href="/terms.html">Terms</a>
+            <a href="/refund.html">Refund</a>
+            <span class="auth-links">
+                <a id="nav-login-link" href="/#login">Log In</a>
+                <a id="nav-signup-link" href="/#signup">Sign Up</a>
+            </span>
+        </nav>
+
+        <section class="hero">
+            <h1>Help Center</h1>
+            <p>Fast support for login issues, mock launch errors, incomplete resume problems, and result analytics questions.</p>
+            <div class="chips">
+                <span class="chip">Session-aware support</span>
+                <span class="chip">Exam and paper diagnostics</span>
+                <span class="chip">Dashboard troubleshooting</span>
+            </div>
+        </section>
+
+        <section class="grid">
+            <article class="card">
+                <h2>Quick Resolution Steps</h2>
+                <ul>
+                    <li>Refresh login via your registered email account.</li>
+                    <li>Relaunch mocks from dashboard shortcuts when a launch fails.</li>
+                    <li>Use Continue Incomplete Mock for interrupted attempts.</li>
+                    <li>Share exam id, paper id, and session id when reporting issues.</li>
+                </ul>
+            </article>
+
+            <article class="card">
+                <h2>Reach the Support Team</h2>
+                <p>Most queries are resolved within one working day when core details are included.</p>
+                <div class="actions">
+                    <a href="mailto:support@mockly.in"><i class="fa-regular fa-envelope"></i> support@mockly.in</a>
+                    <a href="tel:+919876543210"><i class="fa-solid fa-phone"></i> +91 98765 43210</a>
+                    <a href="/#dashboard"><i class="fa-solid fa-chart-line"></i> Open Dashboard</a>
+                </div>
+            </article>
+        </section>
+
+        <section class="faq">
+            <h2>Frequently Asked Questions</h2>
+            <article class="faq-item">
+                <h3>Why is my timer auto-submitting at 00:00?</h3>
+                <p>Auto-submit is part of exam realism. Once the timer ends, responses are locked and submitted automatically.</p>
+            </article>
+            <article class="faq-item">
+                <h3>How do I continue an incomplete mock?</h3>
+                <p>Open dashboard and use Continue Incomplete Mock. The system restores your saved progress and remaining time.</p>
+            </article>
+            <article class="faq-item">
+                <h3>Why do weak-topic insights change between attempts?</h3>
+                <p>Insights are recalculated from the latest section-wise accuracy and attempt patterns after each submitted mock.</p>
+            </article>
+        </section>
+
+        <footer class="foot">
+            <span>Mockly support for SSC, RRB, and UPSC aspirants</span>
+            <span><a href="/privacy.html">Privacy</a> • <a href="/terms.html">Terms</a> • <a href="/refund.html">Refund</a></span>
+        </footer>
+    </main>
+    <script>
+        window.MOCKLY_API_BASE = '/api';
+    </script>
+    <script src="nav-auth.js" defer></script>
+</body>
+</html>

@@ -1,0 +1,219 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Privacy Policy | Mockly</title>
+    <link href="vendor/fontawesome/css/all.min.css" rel="stylesheet">
+    <style>
+        :root {
+            --bg: #f8fafc;
+            --panel: #ffffff;
+            --ink: #0f172a;
+            --muted: #475569;
+            --accent: #4f46e5;
+            --accent-2: #0d9488;
+            --line: #dbe5f1;
+        }
+        * { box-sizing: border-box; }
+        body {
+            margin: 0;
+            font-family: "Segoe UI", "Noto Sans", sans-serif;
+            color: var(--ink);
+            background:
+                radial-gradient(circle at 10% 10%, rgba(79, 70, 229, 0.14), transparent 35%),
+                radial-gradient(circle at 80% 95%, rgba(13, 148, 136, 0.16), transparent 42%),
+                var(--bg);
+        }
+        .page {
+            max-width: 1060px;
+            margin: 0 auto;
+            padding: 20px 16px 36px;
+        }
+        .topbar {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            gap: 12px;
+            border: 1px solid var(--line);
+            border-radius: 16px;
+            background: rgba(255, 255, 255, 0.92);
+            padding: 12px 14px;
+        }
+        .brand {
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            font-weight: 800;
+            color: var(--ink);
+            text-decoration: none;
+        }
+        .brand-mark {
+            width: 34px;
+            height: 34px;
+            border-radius: 10px;
+            background: linear-gradient(140deg, var(--accent), var(--accent-2));
+            color: #fff;
+            display: grid;
+            place-items: center;
+        }
+        .links {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 12px;
+        }
+        .auth-links {
+            margin-left: auto;
+            display: inline-flex;
+            gap: 10px;
+            align-items: center;
+        }
+        .links a {
+            text-decoration: none;
+            color: var(--muted);
+            font-size: 13px;
+            font-weight: 700;
+        }
+        .auth-links a {
+            text-decoration: none;
+            color: var(--muted);
+            font-size: 13px;
+            font-weight: 700;
+            border: 1px solid var(--line);
+            border-radius: 999px;
+            padding: 6px 12px;
+            background: #fff;
+        }
+        .hero {
+            margin-top: 16px;
+            border-radius: 20px;
+            padding: 20px;
+            color: #fff;
+            background: linear-gradient(135deg, #1e1b4b, #334155 45%, #0f766e);
+        }
+        .hero h1 { margin: 0 0 8px; font-size: 1.8rem; }
+        .hero p { margin: 0; color: rgba(255, 255, 255, 0.86); }
+        .chip {
+            display: inline-block;
+            margin-top: 12px;
+            border-radius: 999px;
+            padding: 5px 10px;
+            font-size: 12px;
+            font-weight: 700;
+            background: rgba(255, 255, 255, 0.18);
+        }
+        .grid {
+            display: grid;
+            gap: 12px;
+            grid-template-columns: repeat(2, minmax(0, 1fr));
+            margin-top: 12px;
+        }
+        .card {
+            border: 1px solid var(--line);
+            border-radius: 16px;
+            background: var(--panel);
+            padding: 16px;
+        }
+        .card h2 { margin: 0 0 8px; font-size: 1.05rem; }
+        .card p, .card li { margin: 0; line-height: 1.65; color: var(--muted); }
+        .card ul { margin: 0; padding-left: 18px; display: grid; gap: 6px; }
+        .full { grid-column: 1 / -1; }
+        .quick-actions {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+            margin-top: 10px;
+        }
+        .quick-actions a {
+            text-decoration: none;
+            font-size: 13px;
+            font-weight: 700;
+            padding: 8px 12px;
+            border-radius: 10px;
+            border: 1px solid var(--line);
+            color: var(--ink);
+            background: #fff;
+        }
+        .footer {
+            margin-top: 18px;
+            display: flex;
+            justify-content: space-between;
+            gap: 12px;
+            flex-wrap: wrap;
+            color: var(--muted);
+            font-size: 13px;
+        }
+        .footer a { color: var(--accent); text-decoration: none; font-weight: 700; }
+        @media (max-width: 820px) {
+            .grid { grid-template-columns: 1fr; }
+            .hero h1 { font-size: 1.5rem; }
+        }
+    </style>
+</head>
+<body>
+    <main class="page">
+        <header class="topbar">
+            <a class="brand" href="/">
+                <span class="brand-mark">M</span>
+                Mockly
+            </a>
+            <nav class="links" aria-label="Policy navigation">
+                <a href="/">Home</a>
+                <a href="/#dashboard">Dashboard</a>
+                <a href="/help.html">Help Center</a>
+                <a href="/terms.html">Terms</a>
+                <a href="/refund.html">Refund</a>
+            </nav>
+            <div class="auth-links" aria-label="Auth actions">
+                <a id="nav-login-link" href="/#login">Log In</a>
+                <a id="nav-signup-link" href="/#signup">Sign Up</a>
+            </div>
+        </header>
+
+        <section class="hero">
+            <h1>Privacy Policy</h1>
+            <p>Your preparation data is used to improve test relevance, score feedback, and dashboard insights.</p>
+            <span class="chip"><i class="fa-regular fa-calendar"></i> Last updated: April 17, 2026</span>
+        </section>
+
+        <section class="grid">
+            <article class="card">
+                <h2>Data We Collect</h2>
+                <ul>
+                    <li>Profile basics: name, email, phone.</li>
+                    <li>Mock usage: selected exams, launches, attempts.</li>
+                    <li>Preferences: language, weekly target, focus area.</li>
+                </ul>
+            </article>
+
+            <article class="card">
+                <h2>Why We Collect It</h2>
+                <ul>
+                    <li>Generate weak-topic analysis and score trends.</li>
+                    <li>Recommend the next most useful mock.</li>
+                    <li>Support resume flows for incomplete attempts.</li>
+                </ul>
+            </article>
+
+            <article class="card full">
+                <h2>Your Controls</h2>
+                <p>You can update preferences from the dashboard and request account-data support from our team. We do not use your data for unrelated advertising workflows.</p>
+                <div class="quick-actions">
+                    <a href="/#dashboard">Open Dashboard</a>
+                    <a href="/help.html">Contact Support</a>
+                    <a href="mailto:support@mockly.in">support@mockly.in</a>
+                </div>
+            </article>
+        </section>
+
+        <footer class="footer">
+            <span>Mockly student trust center</span>
+            <span><a href="/terms.html">Terms</a> • <a href="/refund.html">Refund Policy</a></span>
+        </footer>
+    </main>
+    <script>
+        window.MOCKLY_API_BASE = '/api';
+    </script>
+    <script src="nav-auth.js" defer></script>
+</body>
+</html>

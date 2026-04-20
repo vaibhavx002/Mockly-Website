@@ -1,0 +1,37 @@
+{
+  "questionId": "replace-with-unique-id",
+  "examId": "ssc-cgl",
+  "paperId": "ssc-cgl-tier1-2026-set1",
+  "sectionId": "quant",
+  "content": {
+    "en": {
+      "questionText": "Sample English question text.",
+      "options": [
+        "Option A",
+        "Option B",
+        "Option C",
+        "Option D"
+      ]
+    },
+    "hi": {
+      "questionText": "Sample Hindi question text.",
+      "options": [
+        "Vikalp A",
+        "Vikalp B",
+        "Vikalp C",
+        "Vikalp D"
+      ]
+    }
+  },
+  "media": {
+    "questionImageUrl": null,
+    "optionImageUrls": [null, null, null, null]
+  },
+  "correctOptionIndex": 0,
+  "difficulty": "easy",
+  "sourceYear": "2026",
+  "explanation": {
+    "en": "Explain why option 1 is correct and why others are not.",
+    "hi": "Batayein ki vikalp 1 kyon sahi hai aur anya vikalp kyon galat hain."
+  }
+}

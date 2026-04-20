@@ -1,0 +1,40 @@
+{
+  "papers": [
+    {
+      "examId": "rrb-group-d",
+      "paperId": "rrb-group-d-cbt-2025-set1",
+      "metadataFile": "rrb-group-d-cbt-2025-set1.json",
+      "questionFile": "../questions/rrb-group-d-cbt-2025-set1.json"
+    },
+    {
+      "examId": "rrb-ntpc",
+      "paperId": "rrb-ntpc-cbt1-2025-set1",
+      "metadataFile": "rrb-ntpc-cbt1-2025-set1.json",
+      "questionFile": "../questions/rrb-ntpc-cbt1-2025-set1.json"
+    },
+    {
+      "examId": "ssc-cgl",
+      "paperId": "ssc-cgl-tier1-2025-set1",
+      "metadataFile": "ssc-cgl-tier1-2025-set1.json",
+      "questionFile": "../questions/ssc-cgl-tier1-2025-set1.json"
+    },
+    {
+      "examId": "ssc-chsl",
+      "paperId": "ssc-chsl-tier1-2025-set1",
+      "metadataFile": "ssc-chsl-tier1-2025-set1.json",
+      "questionFile": "../questions/ssc-chsl-tier1-2025-set1.json"
+    },
+    {
+      "examId": "upsc-csat",
+      "paperId": "upsc-csat-2025-set1",
+      "metadataFile": "upsc-csat-2025-set1.json",
+      "questionFile": "../questions/upsc-csat-2025-set1.json"
+    },
+    {
+      "examId": "upsc-prelims",
+      "paperId": "upsc-prelims-gs1-2025-set1",
+      "metadataFile": "upsc-prelims-gs1-2025-set1.json",
+      "questionFile": "../questions/upsc-prelims-gs1-2025-set1.json"
+    }
+  ]
+}

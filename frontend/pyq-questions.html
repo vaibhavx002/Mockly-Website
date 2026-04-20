@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>PYQ Questions | Mockly</title>
+    <link rel="preload" href="vendor/fontawesome/css/all.min.css" as="style">
+    <link href="vendor/fontawesome/css/all.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="pyq-questions.css">
+</head>
+<body>
+    <header class="navbar">
+        <div class="nav-container">
+            <a href="/#home" class="logo">
+                <div class="logo-icon">M</div>
+                <span class="logo-text">Mockly</span>
+            </a>
+
+            <nav class="nav-links">
+                <a href="/#home">Home</a>
+                <a href="/all-exams">All Exams</a>
+                <a href="/test-series">Test Series</a>
+                <a href="/chapter-wise">Chapter Wise</a>
+                <a href="/pyq-questions" class="active" aria-current="page">PYQ Questions</a>
+                <a href="/#pass">Mockly Pass <span class="tag-pro">PRO</span></a>
+            </nav>
+
+            <div class="nav-actions">
+                <button class="dark-mode-toggle" id="theme-toggle" aria-label="Toggle theme">
+                    <div class="toggle-track">
+                        <div class="toggle-thumb">
+                            <i class="fa-solid fa-moon moon-icon"></i>
+                            <i class="fa-solid fa-sun sun-icon"></i>
+                        </div>
+                    </div>
+                </button>
+                <div class="auth-actions">
+                    <button id="nav-login-btn" class="btn-text" type="button">Log In</button>
+                    <button id="nav-signup-btn" class="btn-small-primary" type="button">Sign Up</button>
+                </div>
+            </div>
+
+            <button class="menu-toggle" aria-label="Toggle navigation menu" aria-expanded="false" title="Menu">
+                <i class="fas fa-bars"></i>
+            </button>
+        </div>
+    </header>
+
+    <main class="pyq-page">
+        <section class="pyq-hero">
+            <div class="pyq-hero-shell">
+                <div>
+                    <span class="badge"><i class="fa-solid fa-file-lines" aria-hidden="true"></i> Previous year question sets</span>
+                    <h1>Open PYQ papers exam-wise from one dedicated page.</h1>
+                    <p>Choose your exam and directly launch the available PYQ papers in the mock interface.</p>
+                </div>
+
+                <form class="pyq-filters" id="pyq-filter-form">
+                    <label class="sr-only" for="pyq-exam">Select exam</label>
+                    <select id="pyq-exam" aria-label="Select exam"></select>
+                </form>
+            </div>
+        </section>
+
+        <section class="pyq-catalog">
+            <div class="pyq-catalog-shell">
+                <p id="pyq-status" class="pyq-status" aria-live="polite">Select an exam to view PYQ papers.</p>
+                <div id="pyq-grid" class="pyq-grid" aria-live="polite"></div>
+                <div id="pyq-empty" class="pyq-empty" hidden>No PYQ papers found for this exam right now.</div>
+            </div>
+        </section>
+    </main>
+
+    <script src="page-shell.js"></script>
+    <script src="pyq-questions.js"></script>
+</body>
+</html>

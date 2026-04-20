@@ -1,0 +1,22 @@
+{
+  "paperId": "upsc-csat-2025-set1",
+  "examId": "upsc-csat",
+  "title": "UPSC CSAT 2025 Set 1",
+  "totalQuestions": 20,
+  "durationMinutes": 25,
+  "marksPerQuestion": 2,
+  "maxScore": 40,
+  "negativeMarks": 0.66,
+  "sections": [
+    {
+      "sectionId": "reasoning",
+      "name": "Logical Reasoning",
+      "questionCount": 10
+    },
+    {
+      "sectionId": "aptitude",
+      "name": "Quantitative Aptitude",
+      "questionCount": 10
+    }
+  ]
+}

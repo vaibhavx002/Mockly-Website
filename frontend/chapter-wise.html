@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Chapter Wise Practice | Mockly</title>
+    <link rel="preload" href="vendor/fontawesome/css/all.min.css" as="style">
+    <link href="vendor/fontawesome/css/all.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="chapter-wise.css">
+</head>
+<body>
+    <header class="navbar">
+        <div class="nav-container">
+            <a href="/#home" class="logo">
+                <div class="logo-icon">M</div>
+                <span class="logo-text">Mockly</span>
+            </a>
+
+            <nav class="nav-links">
+                <a href="/#home">Home</a>
+                <a href="/all-exams">All Exams</a>
+                <a href="/test-series">Test Series</a>
+                <a href="/chapter-wise" class="active" aria-current="page">Chapter Wise</a>
+                <a href="/pyq-questions">PYQ Questions</a>
+                <a href="/#pass">Mockly Pass <span class="tag-pro">PRO</span></a>
+            </nav>
+
+            <div class="nav-actions">
+                <button class="dark-mode-toggle" id="theme-toggle" aria-label="Toggle theme">
+                    <div class="toggle-track">
+                        <div class="toggle-thumb">
+                            <i class="fa-solid fa-moon moon-icon"></i>
+                            <i class="fa-solid fa-sun sun-icon"></i>
+                        </div>
+                    </div>
+                </button>
+                <div class="auth-actions">
+                    <button id="nav-login-btn" class="btn-text" type="button">Log In</button>
+                    <button id="nav-signup-btn" class="btn-small-primary" type="button">Sign Up</button>
+                </div>
+            </div>
+
+            <button class="menu-toggle" aria-label="Toggle navigation menu" aria-expanded="false" title="Menu">
+                <i class="fas fa-bars"></i>
+            </button>
+        </div>
+    </header>
+
+    <main class="chapter-page">
+        <section class="chapter-hero">
+            <div class="chapter-hero-shell">
+                <div>
+                    <span class="badge"><i class="fa-solid fa-book-open-reader" aria-hidden="true"></i> Chapter-focused flow</span>
+                    <h1>Pick exam, subject, chapter, and start focused practice.</h1>
+                    <p>Use this page to drill exactly what you want. Every chapter and topic links directly to filtered mock tests.</p>
+                </div>
+
+                <form class="chapter-filters" id="chapter-filter-form">
+                    <label class="sr-only" for="chapter-exam">Select exam</label>
+                    <select id="chapter-exam" aria-label="Select exam"></select>
+
+                    <label class="sr-only" for="chapter-subject">Select subject</label>
+                    <select id="chapter-subject" aria-label="Select subject" disabled>
+                        <option value="">Subject: All</option>
+                    </select>
+
+                    <label class="sr-only" for="chapter-chapter">Select chapter</label>
+                    <select id="chapter-chapter" aria-label="Select chapter" disabled>
+                        <option value="">Chapter: All</option>
+                    </select>
+
+                    <label class="sr-only" for="chapter-topic">Select topic</label>
+                    <select id="chapter-topic" aria-label="Select topic" disabled>
+                        <option value="">Topic: All</option>
+                    </select>
+                </form>
+            </div>
+        </section>
+
+        <section class="chapter-catalog">
+            <div class="chapter-catalog-shell">
+                <p id="chapter-status" class="chapter-status" aria-live="polite">Choose an exam to view chapter-wise practice.</p>
+                <div id="chapter-grid" class="chapter-grid" aria-live="polite"></div>
+                <div id="chapter-empty" class="chapter-empty" hidden>No chapter data found for this filter. Try changing subject or chapter.</div>
+            </div>
+        </section>
+
+        <section class="chapter-tests" id="chapter-tests-section">
+            <div class="chapter-tests-shell">
+                <div class="chapter-tests-head">
+                    <h2>Chapter Tests</h2>
+                    <p id="chapter-tests-status" aria-live="polite">Pick a chapter and click Open Chapter Tests.</p>
+                </div>
+                <div id="chapter-tests-grid" class="chapter-tests-grid" aria-live="polite"></div>
+                <div id="chapter-tests-empty" class="chapter-empty">No tests loaded yet. Use Open Chapter Tests to load tests here.</div>
+            </div>
+        </section>
+    </main>
+
+    <script src="page-shell.js"></script>
+    <script src="chapter-wise.js"></script>
+</body>
+</html>

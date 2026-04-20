@@ -1,0 +1,34 @@
+{
+  "questionSets": [
+    {
+      "examId": "rrb-group-d",
+      "paperId": "rrb-group-d-cbt-2025-set1",
+      "file": "rrb-group-d-cbt-2025-set1.json"
+    },
+    {
+      "examId": "rrb-ntpc",
+      "paperId": "rrb-ntpc-cbt1-2025-set1",
+      "file": "rrb-ntpc-cbt1-2025-set1.json"
+    },
+    {
+      "examId": "ssc-cgl",
+      "paperId": "ssc-cgl-tier1-2025-set1",
+      "file": "ssc-cgl-tier1-2025-set1.json"
+    },
+    {
+      "examId": "ssc-chsl",
+      "paperId": "ssc-chsl-tier1-2025-set1",
+      "file": "ssc-chsl-tier1-2025-set1.json"
+    },
+    {
+      "examId": "upsc-csat",
+      "paperId": "upsc-csat-2025-set1",
+      "file": "upsc-csat-2025-set1.json"
+    },
+    {
+      "examId": "upsc-prelims",
+      "paperId": "upsc-prelims-gs1-2025-set1",
+      "file": "upsc-prelims-gs1-2025-set1.json"
+    }
+  ]
+}

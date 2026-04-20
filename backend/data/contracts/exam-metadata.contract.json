@@ -1,0 +1,34 @@
+{
+  "type": "ExamMetadata",
+  "required": [
+    "id",
+    "stream",
+    "title",
+    "description",
+    "iconClass",
+    "tags",
+    "recommendedDuration",
+    "recommendedLevel",
+    "paperConfig"
+  ],
+  "paperConfigRequired": [
+    "defaultPaperId",
+    "availablePaperIds",
+    "languageSupport"
+  ],
+  "example": {
+    "id": "rrb-group-d",
+    "stream": "RRB",
+    "title": "RRB Group D",
+    "description": "Daily sectional boosters and memory-friendly revision loops for stronger retention.",
+    "iconClass": "fa-solid fa-route",
+    "tags": ["beginner", "bilingual", "rrb"],
+    "recommendedDuration": "20 mins",
+    "recommendedLevel": "Beginner",
+    "paperConfig": {
+      "defaultPaperId": "rrb-group-d-cbt-2025-set1",
+      "availablePaperIds": ["rrb-group-d-cbt-2025-set1"],
+      "languageSupport": ["en", "hi"]
+    }
+  }
+}

@@ -1,0 +1,27 @@
+{
+  "paperId": "rrb-ntpc-cbt1-2025-set1",
+  "examId": "rrb-ntpc",
+  "title": "RRB NTPC CBT-1 2025 Set 1",
+  "totalQuestions": 20,
+  "durationMinutes": 25,
+  "marksPerQuestion": 1,
+  "maxScore": 20,
+  "negativeMarks": 0.33,
+  "sections": [
+    {
+      "sectionId": "reasoning",
+      "name": "General Intelligence and Reasoning",
+      "questionCount": 7
+    },
+    {
+      "sectionId": "awareness",
+      "name": "General Awareness",
+      "questionCount": 7
+    },
+    {
+      "sectionId": "math",
+      "name": "Mathematics",
+      "questionCount": 6
+    }
+  ]
+}

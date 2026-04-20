@@ -1,0 +1,3206 @@
+{
+  "examId": "ssc-chsl",
+  "paperId": "ssc-chsl-tier1-2025-set1",
+  "questions": [
+    {
+      "questionId": "sscchsl2025s1-q001",
+      "examId": "ssc-chsl",
+      "paperId": "ssc-chsl-tier1-2025-set1",
+      "sectionId": "reasoning",
+      "content": {
+        "en": {
+          "questionText": "If each letter in TRAIN is shifted forward by 1, what is the new code?",
+          "options": [
+            "USBJO",
+            "VTCKP",
+            "TRAIN",
+            "OJBSU"
+          ]
+        }
+      },
+      "media": {
+        "questionImageUrl": null,
+        "optionImageUrls": [
+          null,
+          null,
+          null,
+          null
+        ]
+      },
+      "correctOptionIndex": 0,
+      "difficulty": "easy",
+      "sourceYear": "2025",
+      "explanation": {
+        "en": "Shift each letter in TRAIN by 1 positions to get USBJO."
+      }
+    },
+    {
+      "questionId": "sscchsl2025s1-q002",
+      "examId": "ssc-chsl",
+      "paperId": "ssc-chsl-tier1-2025-set1",
+      "sectionId": "reasoning",
+      "content": {
+        "en": {
+          "questionText": "Find the next term in the series: 4, 8, 14, 22, 32.",
+          "options": [
+            "46",
+            "44",
+            "42",
+            "50"
+          ]
+        }
+      },
+      "media": {
+        "questionImageUrl": null,
+        "optionImageUrls": [
+          null,
+          null,
+          null,
+          null
+        ]
+      },
+      "correctOptionIndex": 1,
+      "difficulty": "moderate",
+      "sourceYear": "2025",
+      "explanation": {
+        "en": "The differences are +4, +6, +8, +10, so the next difference is +12."
+      }
+    },
+    {
+      "questionId": "sscchsl2025s1-q003",
+      "examId": "ssc-chsl",
+      "paperId": "ssc-chsl-tier1-2025-set1",
+      "sectionId": "reasoning",
+      "content": {
+        "en": {
+          "questionText": "K is son of M. M is wife of N. N is brother of T. How is T related to K?",
+          "options": [
+            "Brother",
+            "Father",
+            "Uncle",
+            "Grandfather"
+          ]
+        }
+      },
+      "media": {
+        "questionImageUrl": null,
+        "optionImageUrls": [
+          null,
+          null,
+          null,
+          null
+        ]
+      },
+      "correctOptionIndex": 2,
+      "difficulty": "hard",
+      "sourceYear": "2025",
+      "explanation": {
+        "en": "Tracing the family links shows the correct relation is Uncle."
+      }
+    },
+    {
+      "questionId": "sscchsl2025s1-q004",
+      "examId": "ssc-chsl",
+      "paperId": "ssc-chsl-tier1-2025-set1",
+      "sectionId": "reasoning",
+      "content": {
+        "en": {
+          "questionText": "A person walks 35 m north, then 42 m east, then 35 m south. How far is the person from the starting point?",
+          "options": [
+            "47 m",
+            "37 m",
+            "35 m",
+            "42 m"
+          ]
+        }
+      },
+      "media": {
+        "questionImageUrl": null,
+        "optionImageUrls": [
+          null,
+          null,
+          null,
+          null
+        ]
+      },
+      "correctOptionIndex": 3,
+      "difficulty": "easy",
+      "sourceYear": "2025",
+      "explanation": {
+        "en": "North and south movements cancel out, so only eastward displacement remains."
+      }
+    },
+    {
+      "questionId": "sscchsl2025s1-q005",
+      "examId": "ssc-chsl",
+      "paperId": "ssc-chsl-tier1-2025-set1",
+      "sectionId": "reasoning",
+      "content": {
+        "en": {
+          "questionText": "Choose the correct analogy: Puppy : Dog :: Kitten : ?",
+          "options": [
+            "Cat",
+            "Lion",
+            "Cow",
+            "Horse"
+          ]
+        }
+      },
+      "media": {
+        "questionImageUrl": null,
+        "optionImageUrls": [
+          null,
+          null,
+          null,
+          null
+        ]
+      },
+      "correctOptionIndex": 0,
+      "difficulty": "moderate",
+      "sourceYear": "2025",
+      "explanation": {
+        "en": "The relation pattern is preserved by Cat."
+      }
+    },
+    {
+      "questionId": "sscchsl2025s1-q006",
+      "examId": "ssc-chsl",
+      "paperId": "ssc-chsl-tier1-2025-set1",
+      "sectionId": "reasoning",
+      "content": {
+        "en": {
+          "questionText": "If each letter in TRAIN is shifted forward by 3, what is the new code?",
+          "options": [
+            "XVEMR",
+            "WUDLQ",
+            "VTCKP",
+            "QLDUW"
+          ]
+        }
+      },
+      "media": {
+        "questionImageUrl": null,
+        "optionImageUrls": [
+          null,
+          null,
+          null,
+          null
+        ]
+      },
+      "correctOptionIndex": 1,
+      "difficulty": "hard",
+      "sourceYear": "2025",
+      "explanation": {
+        "en": "Shift each letter in TRAIN by 3 positions to get WUDLQ."
+      }
+    },
+    {
+      "questionId": "sscchsl2025s1-q007",
+      "examId": "ssc-chsl",
+      "paperId": "ssc-chsl-tier1-2025-set1",
+      "sectionId": "reasoning",
+      "content": {
+        "en": {
+          "questionText": "Find the next term in the series: 5, 9, 15, 23, 33.",
+          "options": [
+            "47",
+            "43",
+            "45",
+            "51"
+          ]
+        }
+      },
+      "media": {
+        "questionImageUrl": null,
+        "optionImageUrls": [
+          null,
+          null,
+          null,
+          null
+        ]
+      },
+      "correctOptionIndex": 2,
+      "difficulty": "easy",
+      "sourceYear": "2025",
+      "explanation": {
+        "en": "The differences are +4, +6, +8, +10, so the next difference is +12."
+      }
+    },
+    {
+      "questionId": "sscchsl2025s1-q008",
+      "examId": "ssc-chsl",
+      "paperId": "ssc-chsl-tier1-2025-set1",
+      "sectionId": "reasoning",
+      "content": {
+        "en": {
+          "questionText": "P is mother of Q. Q is brother of R. R is daughter of S. How is P related to R?",
+          "options": [
+            "Aunt",
+            "Sister",
+            "Mother in law",
+            "Grandmother"
+          ]
+        }
+      },
+      "media": {
+        "questionImageUrl": null,
+        "optionImageUrls": [
+          null,
+          null,
+          null,
+          null
+        ]
+      },
+      "correctOptionIndex": 3,
+      "difficulty": "moderate",
+      "sourceYear": "2025",
+      "explanation": {
+        "en": "Tracing the family links shows the correct relation is Grandmother."
+      }
+    },
+    {
+      "questionId": "sscchsl2025s1-q009",
+      "examId": "ssc-chsl",
+      "paperId": "ssc-chsl-tier1-2025-set1",
+      "sectionId": "reasoning",
+      "content": {
+        "en": {
+          "questionText": "A person walks 30 m north, then 42 m east, then 30 m south. How far is the person from the starting point?",
+          "options": [
+            "42 m",
+            "47 m",
+            "37 m",
+            "30 m"
+          ]
+        }
+      },
+      "media": {
+        "questionImageUrl": null,
+        "optionImageUrls": [
+          null,
+          null,
+          null,
+          null
+        ]
+      },
+      "correctOptionIndex": 0,
+      "difficulty": "hard",
+      "sourceYear": "2025",
+      "explanation": {
+        "en": "North and south movements cancel out, so only eastward displacement remains."
+      }
+    },
+    {
+      "questionId": "sscchsl2025s1-q010",
+      "examId": "ssc-chsl",
+      "paperId": "ssc-chsl-tier1-2025-set1",
+      "sectionId": "reasoning",
+      "content": {
+        "en": {
+          "questionText": "Choose the correct analogy: Puppy : Dog :: Kitten : ?",
+          "options": [
+            "Lion",
+            "Cat",
+            "Cow",
+            "Horse"
+          ]
+        }
+      },
+      "media": {
+        "questionImageUrl": null,
+        "optionImageUrls": [
+          null,
+          null,
+          null,
+          null
+        ]
+      },
+      "correctOptionIndex": 1,
+      "difficulty": "easy",
+      "sourceYear": "2025",
+      "explanation": {
+        "en": "The relation pattern is preserved by Cat."
+      }
+    },
+    {
+      "questionId": "sscchsl2025s1-q011",
+      "examId": "ssc-chsl",
+      "paperId": "ssc-chsl-tier1-2025-set1",
+      "sectionId": "reasoning",
+      "content": {
+        "en": {
+          "questionText": "If each letter in TRAIN is shifted forward by 2, what is the new code?",
+          "options": [
+            "WUDLQ",
+            "USBJO",
+            "VTCKP",
+            "PKCTV"
+          ]
+        }
+      },
+      "media": {
+        "questionImageUrl": null,
+        "optionImageUrls": [
+          null,
+          null,
+          null,
+          null
+        ]
+      },
+      "correctOptionIndex": 2,
+      "difficulty": "moderate",
+      "sourceYear": "2025",
+      "explanation": {
+        "en": "Shift each letter in TRAIN by 2 positions to get VTCKP."
+      }
+    },
+    {
+      "questionId": "sscchsl2025s1-q012",
+      "examId": "ssc-chsl",
+      "paperId": "ssc-chsl-tier1-2025-set1",
+      "sectionId": "reasoning",
+      "content": {
+        "en": {
+          "questionText": "Find the next term in the series: 6, 10, 16, 24, 34.",
+          "options": [
+            "48",
+            "44",
+            "52",
+            "46"
+          ]
+        }
+      },
+      "media": {
+        "questionImageUrl": null,
+        "optionImageUrls": [
+          null,
+          null,
+          null,
+          null
+        ]
+      },
+      "correctOptionIndex": 3,
+      "difficulty": "hard",
+      "sourceYear": "2025",
+      "explanation": {
+        "en": "The differences are +4, +6, +8, +10, so the next difference is +12."
+      }
+    },
+    {
+      "questionId": "sscchsl2025s1-q013",
+      "examId": "ssc-chsl",
+      "paperId": "ssc-chsl-tier1-2025-set1",
+      "sectionId": "reasoning",
+      "content": {
+        "en": {
+          "questionText": "A is brother of B. B is sister of C. C is father of D. How is D related to A?",
+          "options": [
+            "Niece or Nephew",
+            "Sister",
+            "Father",
+            "Mother"
+          ]
+        }
+      },
+      "media": {
+        "questionImageUrl": null,
+        "optionImageUrls": [
+          null,
+          null,
+          null,
+          null
+        ]
+      },
+      "correctOptionIndex": 0,
+      "difficulty": "easy",
+      "sourceYear": "2025",
+      "explanation": {
+        "en": "Tracing the family links shows the correct relation is Niece or Nephew."
+      }
+    },
+    {
+      "questionId": "sscchsl2025s1-q014",
+      "examId": "ssc-chsl",
+      "paperId": "ssc-chsl-tier1-2025-set1",
+      "sectionId": "reasoning",
+      "content": {
+        "en": {
+          "questionText": "A person walks 25 m north, then 42 m east, then 25 m south. How far is the person from the starting point?",
+          "options": [
+            "47 m",
+            "42 m",
+            "37 m",
+            "25 m"
+          ]
+        }
+      },
+      "media": {
+        "questionImageUrl": null,
+        "optionImageUrls": [
+          null,
+          null,
+          null,
+          null
+        ]
+      },
+      "correctOptionIndex": 1,
+      "difficulty": "moderate",
+      "sourceYear": "2025",
+      "explanation": {
+        "en": "North and south movements cancel out, so only eastward displacement remains."
+      }
+    },
+    {
+      "questionId": "sscchsl2025s1-q015",
+      "examId": "ssc-chsl",
+      "paperId": "ssc-chsl-tier1-2025-set1",
+      "sectionId": "reasoning",
+      "content": {
+        "en": {
+          "questionText": "Choose the correct analogy: Puppy : Dog :: Kitten : ?",
+          "options": [
+            "Lion",
+            "Cow",
+            "Cat",
+            "Horse"
+          ]
+        }
+      },
+      "media": {
+        "questionImageUrl": null,
+        "optionImageUrls": [
+          null,
+          null,
+          null,
+          null
+        ]
+      },
+      "correctOptionIndex": 2,
+      "difficulty": "hard",
+      "sourceYear": "2025",
+      "explanation": {
+        "en": "The relation pattern is preserved by Cat."
+      }
+    },
+    {
+      "questionId": "sscchsl2025s1-q016",
+      "examId": "ssc-chsl",
+      "paperId": "ssc-chsl-tier1-2025-set1",
+      "sectionId": "reasoning",
+      "content": {
+        "en": {
+          "questionText": "If each letter in TRAIN is shifted forward by 1, what is the new code?",
+          "options": [
+            "VTCKP",
+            "TRAIN",
+            "OJBSU",
+            "USBJO"
+          ]
+        }
+      },
+      "media": {
+        "questionImageUrl": null,
+        "optionImageUrls": [
+          null,
+          null,
+          null,
+          null
+        ]
+      },
+      "correctOptionIndex": 3,
+      "difficulty": "easy",
+      "sourceYear": "2025",
+      "explanation": {
+        "en": "Shift each letter in TRAIN by 1 positions to get USBJO."
+      }
+    },
+    {
+      "questionId": "sscchsl2025s1-q017",
+      "examId": "ssc-chsl",
+      "paperId": "ssc-chsl-tier1-2025-set1",
+      "sectionId": "reasoning",
+      "content": {
+        "en": {
+          "questionText": "Find the next term in the series: 3, 7, 13, 21, 31.",
+          "options": [
+            "43",
+            "45",
+            "41",
+            "49"
+          ]
+        }
+      },
+      "media": {
+        "questionImageUrl": null,
+        "optionImageUrls": [
+          null,
+          null,
+          null,
+          null
+        ]
+      },
+      "correctOptionIndex": 0,
+      "difficulty": "moderate",
+      "sourceYear": "2025",
+      "explanation": {
+        "en": "The differences are +4, +6, +8, +10, so the next difference is +12."
+      }
+    },
+    {
+      "questionId": "sscchsl2025s1-q018",
+      "examId": "ssc-chsl",
+      "paperId": "ssc-chsl-tier1-2025-set1",
+      "sectionId": "reasoning",
+      "content": {
+        "en": {
+          "questionText": "K is son of M. M is wife of N. N is brother of T. How is T related to K?",
+          "options": [
+            "Brother",
+            "Uncle",
+            "Father",
+            "Grandfather"
+          ]
+        }
+      },
+      "media": {
+        "questionImageUrl": null,
+        "optionImageUrls": [
+          null,
+          null,
+          null,
+          null
+        ]
+      },
+      "correctOptionIndex": 1,
+      "difficulty": "hard",
+      "sourceYear": "2025",
+      "explanation": {
+        "en": "Tracing the family links shows the correct relation is Uncle."
+      }
+    },
+    {
+      "questionId": "sscchsl2025s1-q019",
+      "examId": "ssc-chsl",
+      "paperId": "ssc-chsl-tier1-2025-set1",
+      "sectionId": "reasoning",
+      "content": {
+        "en": {
+          "questionText": "A person walks 20 m north, then 42 m east, then 20 m south. How far is the person from the starting point?",
+          "options": [
+            "47 m",
+            "37 m",
+            "42 m",
+            "20 m"
+          ]
+        }
+      },
+      "media": {
+        "questionImageUrl": null,
+        "optionImageUrls": [
+          null,
+          null,
+          null,
+          null
+        ]
+      },
+      "correctOptionIndex": 2,
+      "difficulty": "easy",
+      "sourceYear": "2025",
+      "explanation": {
+        "en": "North and south movements cancel out, so only eastward displacement remains."
+      }
+    },
+    {
+      "questionId": "sscchsl2025s1-q020",
+      "examId": "ssc-chsl",
+      "paperId": "ssc-chsl-tier1-2025-set1",
+      "sectionId": "reasoning",
+      "content": {
+        "en": {
+          "questionText": "Choose the correct analogy: Puppy : Dog :: Kitten : ?",
+          "options": [
+            "Lion",
+            "Cow",
+            "Horse",
+            "Cat"
+          ]
+        }
+      },
+      "media": {
+        "questionImageUrl": null,
+        "optionImageUrls": [
+          null,
+          null,
+          null,
+          null
+        ]
+      },
+      "correctOptionIndex": 3,
+      "difficulty": "moderate",
+      "sourceYear": "2025",
+      "explanation": {
+        "en": "The relation pattern is preserved by Cat."
+      }
+    },
+    {
+      "questionId": "sscchsl2025s1-q021",
+      "examId": "ssc-chsl",
+      "paperId": "ssc-chsl-tier1-2025-set1",
+      "sectionId": "reasoning",
+      "content": {
+        "en": {
+          "questionText": "If each letter in TRAIN is shifted forward by 3, what is the new code?",
+          "options": [
+            "WUDLQ",
+            "XVEMR",
+            "VTCKP",
+            "QLDUW"
+          ]
+        }
+      },
+      "media": {
+        "questionImageUrl": null,
+        "optionImageUrls": [
+          null,
+          null,
+          null,
+          null
+        ]
+      },
+      "correctOptionIndex": 0,
+      "difficulty": "hard",
+      "sourceYear": "2025",
+      "explanation": {
+        "en": "Shift each letter in TRAIN by 3 positions to get WUDLQ."
+      }
+    },
+    {
+      "questionId": "sscchsl2025s1-q022",
+      "examId": "ssc-chsl",
+      "paperId": "ssc-chsl-tier1-2025-set1",
+      "sectionId": "reasoning",
+      "content": {
+        "en": {
+          "questionText": "Find the next term in the series: 4, 8, 14, 22, 32.",
+          "options": [
+            "46",
+            "44",
+            "42",
+            "50"
+          ]
+        }
+      },
+      "media": {
+        "questionImageUrl": null,
+        "optionImageUrls": [
+          null,
+          null,
+          null,
+          null
+        ]
+      },
+      "correctOptionIndex": 1,
+      "difficulty": "easy",
+      "sourceYear": "2025",
+      "explanation": {
+        "en": "The differences are +4, +6, +8, +10, so the next difference is +12."
+      }
+    },
+    {
+      "questionId": "sscchsl2025s1-q023",
+      "examId": "ssc-chsl",
+      "paperId": "ssc-chsl-tier1-2025-set1",
+      "sectionId": "reasoning",
+      "content": {
+        "en": {
+          "questionText": "P is mother of Q. Q is brother of R. R is daughter of S. How is P related to R?",
+          "options": [
+            "Aunt",
+            "Sister",
+            "Grandmother",
+            "Mother in law"
+          ]
+        }
+      },
+      "media": {
+        "questionImageUrl": null,
+        "optionImageUrls": [
+          null,
+          null,
+          null,
+          null
+        ]
+      },
+      "correctOptionIndex": 2,
+      "difficulty": "moderate",
+      "sourceYear": "2025",
+      "explanation": {
+        "en": "Tracing the family links shows the correct relation is Grandmother."
+      }
+    },
+    {
+      "questionId": "sscchsl2025s1-q024",
+      "examId": "ssc-chsl",
+      "paperId": "ssc-chsl-tier1-2025-set1",
+      "sectionId": "reasoning",
+      "content": {
+        "en": {
+          "questionText": "A person walks 45 m north, then 42 m east, then 45 m south. How far is the person from the starting point?",
+          "options": [
+            "47 m",
+            "37 m",
+            "45 m",
+            "42 m"
+          ]
+        }
+      },
+      "media": {
+        "questionImageUrl": null,
+        "optionImageUrls": [
+          null,
+          null,
+          null,
+          null
+        ]
+      },
+      "correctOptionIndex": 3,
+      "difficulty": "hard",
+      "sourceYear": "2025",
+      "explanation": {
+        "en": "North and south movements cancel out, so only eastward displacement remains."
+      }
+    },
+    {
+      "questionId": "sscchsl2025s1-q025",
+      "examId": "ssc-chsl",
+      "paperId": "ssc-chsl-tier1-2025-set1",
+      "sectionId": "reasoning",
+      "content": {
+        "en": {
+          "questionText": "Choose the correct analogy: Puppy : Dog :: Kitten : ?",
+          "options": [
+            "Cat",
+            "Lion",
+            "Cow",
+            "Horse"
+          ]
+        }
+      },
+      "media": {
+        "questionImageUrl": null,
+        "optionImageUrls": [
+          null,
+          null,
+          null,
+          null
+        ]
+      },
+      "correctOptionIndex": 0,
+      "difficulty": "easy",
+      "sourceYear": "2025",
+      "explanation": {
+        "en": "The relation pattern is preserved by Cat."
+      }
+    },
+    {
+      "questionId": "sscchsl2025s1-q026",
+      "examId": "ssc-chsl",
+      "paperId": "ssc-chsl-tier1-2025-set1",
+      "sectionId": "awareness",
+      "content": {
+        "en": {
+          "questionText": "Who was the first President of India?",
+          "options": [
+            "Dr Rajendra Prasad",
+            "Jawaharlal Nehru",
+            "S Radhakrishnan",
+            "V V Giri"
+          ]
+        }
+      },
+      "media": {
+        "questionImageUrl": null,
+        "optionImageUrls": [
+          null,
+          null,
+          null,
+          null
+        ]
+      },
+      "correctOptionIndex": 0,
+      "difficulty": "moderate",
+      "sourceYear": "2025",
+      "explanation": {
+        "en": "Dr Rajendra Prasad became the first President in 1950."
+      }
+    },
+    {
+      "questionId": "sscchsl2025s1-q027",
+      "examId": "ssc-chsl",
+      "paperId": "ssc-chsl-tier1-2025-set1",
+      "sectionId": "awareness",
+      "content": {
+        "en": {
+          "questionText": "The Battle of Plassey took place in which year?",
+          "options": [
+            "1761",
+            "1757",
+            "1764",
+            "1782"
+          ]
+        }
+      },
+      "media": {
+        "questionImageUrl": null,
+        "optionImageUrls": [
+          null,
+          null,
+          null,
+          null
+        ]
+      },
+      "correctOptionIndex": 1,
+      "difficulty": "hard",
+      "sourceYear": "2025",
+      "explanation": {
+        "en": "The Battle of Plassey was fought in 1757."
+      }
+    },
+    {
+      "questionId": "sscchsl2025s1-q028",
+      "examId": "ssc-chsl",
+      "paperId": "ssc-chsl-tier1-2025-set1",
+      "sectionId": "awareness",
+      "content": {
+        "en": {
+          "questionText": "Which planet is known as the Red Planet?",
+          "options": [
+            "Venus",
+            "Jupiter",
+            "Mars",
+            "Mercury"
+          ]
+        }
+      },
+      "media": {
+        "questionImageUrl": null,
+        "optionImageUrls": [
+          null,
+          null,
+          null,
+          null
+        ]
+      },
+      "correctOptionIndex": 2,
+      "difficulty": "easy",
+      "sourceYear": "2025",
+      "explanation": {
+        "en": "Mars appears reddish due to iron oxide on its surface."
+      }
+    },
+    {
+      "questionId": "sscchsl2025s1-q029",
+      "examId": "ssc-chsl",
+      "paperId": "ssc-chsl-tier1-2025-set1",
+      "sectionId": "awareness",
+      "content": {
+        "en": {
+          "questionText": "Who wrote the national song Vande Mataram?",
+          "options": [
+            "Rabindranath Tagore",
+            "Sarojini Naidu",
+            "Subramania Bharati",
+            "Bankim Chandra Chattopadhyay"
+          ]
+        }
+      },
+      "media": {
+        "questionImageUrl": null,
+        "optionImageUrls": [
+          null,
+          null,
+          null,
+          null
+        ]
+      },
+      "correctOptionIndex": 3,
+      "difficulty": "moderate",
+      "sourceYear": "2025",
+      "explanation": {
+        "en": "Vande Mataram was written by Bankim Chandra Chattopadhyay."
+      }
+    },
+    {
+      "questionId": "sscchsl2025s1-q030",
+      "examId": "ssc-chsl",
+      "paperId": "ssc-chsl-tier1-2025-set1",
+      "sectionId": "awareness",
+      "content": {
+        "en": {
+          "questionText": "What is the SI unit of force?",
+          "options": [
+            "Newton",
+            "Joule",
+            "Pascal",
+            "Watt"
+          ]
+        }
+      },
+      "media": {
+        "questionImageUrl": null,
+        "optionImageUrls": [
+          null,
+          null,
+          null,
+          null
+        ]
+      },
+      "correctOptionIndex": 0,
+      "difficulty": "hard",
+      "sourceYear": "2025",
+      "explanation": {
+        "en": "Force is measured in Newton."
+      }
+    },
+    {
+      "questionId": "sscchsl2025s1-q031",
+      "examId": "ssc-chsl",
+      "paperId": "ssc-chsl-tier1-2025-set1",
+      "sectionId": "awareness",
+      "content": {
+        "en": {
+          "questionText": "Which Article of the Indian Constitution guarantees Equality before Law?",
+          "options": [
+            "Article 19",
+            "Article 14",
+            "Article 21",
+            "Article 32"
+          ]
+        }
+      },
+      "media": {
+        "questionImageUrl": null,
+        "optionImageUrls": [
+          null,
+          null,
+          null,
+          null
+        ]
+      },
+      "correctOptionIndex": 1,
+      "difficulty": "easy",
+      "sourceYear": "2025",
+      "explanation": {
+        "en": "Article 14 guarantees equality before law."
+      }
+    },
+    {
+      "questionId": "sscchsl2025s1-q032",
+      "examId": "ssc-chsl",
+      "paperId": "ssc-chsl-tier1-2025-set1",
+      "sectionId": "awareness",
+      "content": {
+        "en": {
+          "questionText": "Who is known as the Father of the Indian Constitution?",
+          "options": [
+            "Mahatma Gandhi",
+            "Sardar Patel",
+            "B R Ambedkar",
+            "Jawaharlal Nehru"
+          ]
+        }
+      },
+      "media": {
+        "questionImageUrl": null,
+        "optionImageUrls": [
+          null,
+          null,
+          null,
+          null
+        ]
+      },
+      "correctOptionIndex": 2,
+      "difficulty": "moderate",
+      "sourceYear": "2025",
+      "explanation": {
+        "en": "Dr B R Ambedkar chaired the Drafting Committee."
+      }
+    },
+    {
+      "questionId": "sscchsl2025s1-q033",
+      "examId": "ssc-chsl",
+      "paperId": "ssc-chsl-tier1-2025-set1",
+      "sectionId": "awareness",
+      "content": {
+        "en": {
+          "questionText": "Which river is called the Sorrow of Bihar?",
+          "options": [
+            "Gandak",
+            "Son",
+            "Ghaghara",
+            "Kosi"
+          ]
+        }
+      },
+      "media": {
+        "questionImageUrl": null,
+        "optionImageUrls": [
+          null,
+          null,
+          null,
+          null
+        ]
+      },
+      "correctOptionIndex": 3,
+      "difficulty": "hard",
+      "sourceYear": "2025",
+      "explanation": {
+        "en": "Kosi is called the Sorrow of Bihar because of frequent flooding."
+      }
+    },
+    {
+      "questionId": "sscchsl2025s1-q034",
+      "examId": "ssc-chsl",
+      "paperId": "ssc-chsl-tier1-2025-set1",
+      "sectionId": "awareness",
+      "content": {
+        "en": {
+          "questionText": "What is the capital city of Australia?",
+          "options": [
+            "Canberra",
+            "Sydney",
+            "Melbourne",
+            "Perth"
+          ]
+        }
+      },
+      "media": {
+        "questionImageUrl": null,
+        "optionImageUrls": [
+          null,
+          null,
+          null,
+          null
+        ]
+      },
+      "correctOptionIndex": 0,
+      "difficulty": "easy",
+      "sourceYear": "2025",
+      "explanation": {
+        "en": "Canberra is the capital of Australia."
+      }
+    },
+    {
+      "questionId": "sscchsl2025s1-q035",
+      "examId": "ssc-chsl",
+      "paperId": "ssc-chsl-tier1-2025-set1",
+      "sectionId": "awareness",
+      "content": {
+        "en": {
+          "questionText": "Which gas is most abundant in Earth atmosphere?",
+          "options": [
+            "Oxygen",
+            "Nitrogen",
+            "Carbon dioxide",
+            "Argon"
+          ]
+        }
+      },
+      "media": {
+        "questionImageUrl": null,
+        "optionImageUrls": [
+          null,
+          null,
+          null,
+          null
+        ]
+      },
+      "correctOptionIndex": 1,
+      "difficulty": "moderate",
+      "sourceYear": "2025",
+      "explanation": {
+        "en": "Nitrogen makes up about 78 percent of the atmosphere."
+      }
+    },
+    {
+      "questionId": "sscchsl2025s1-q036",
+      "examId": "ssc-chsl",
+      "paperId": "ssc-chsl-tier1-2025-set1",
+      "sectionId": "awareness",
+      "content": {
+        "en": {
+          "questionText": "Who discovered penicillin?",
+          "options": [
+            "Louis Pasteur",
+            "Robert Koch",
+            "Alexander Fleming",
+            "Edward Jenner"
+          ]
+        }
+      },
+      "media": {
+        "questionImageUrl": null,
+        "optionImageUrls": [
+          null,
+          null,
+          null,
+          null
+        ]
+      },
+      "correctOptionIndex": 2,
+      "difficulty": "hard",
+      "sourceYear": "2025",
+      "explanation": {
+        "en": "Penicillin was discovered by Alexander Fleming."
+      }
+    },
+    {
+      "questionId": "sscchsl2025s1-q037",
+      "examId": "ssc-chsl",
+      "paperId": "ssc-chsl-tier1-2025-set1",
+      "sectionId": "awareness",
+      "content": {
+        "en": {
+          "questionText": "The Lok Sabha is also known as what?",
+          "options": [
+            "Council of States",
+            "Upper House",
+            "Federal Chamber",
+            "House of the People"
+          ]
+        }
+      },
+      "media": {
+        "questionImageUrl": null,
+        "optionImageUrls": [
+          null,
+          null,
+          null,
+          null
+        ]
+      },
+      "correctOptionIndex": 3,
+      "difficulty": "easy",
+      "sourceYear": "2025",
+      "explanation": {
+        "en": "Lok Sabha is called the House of the People."
+      }
+    },
+    {
+      "questionId": "sscchsl2025s1-q038",
+      "examId": "ssc-chsl",
+      "paperId": "ssc-chsl-tier1-2025-set1",
+      "sectionId": "awareness",
+      "content": {
+        "en": {
+          "questionText": "Which Mughal ruler built the Buland Darwaza?",
+          "options": [
+            "Akbar",
+            "Shah Jahan",
+            "Humayun",
+            "Aurangzeb"
+          ]
+        }
+      },
+      "media": {
+        "questionImageUrl": null,
+        "optionImageUrls": [
+          null,
+          null,
+          null,
+          null
+        ]
+      },
+      "correctOptionIndex": 0,
+      "difficulty": "moderate",
+      "sourceYear": "2025",
+      "explanation": {
+        "en": "Akbar built Buland Darwaza in Fatehpur Sikri."
+      }
+    },
+    {
+      "questionId": "sscchsl2025s1-q039",
+      "examId": "ssc-chsl",
+      "paperId": "ssc-chsl-tier1-2025-set1",
+      "sectionId": "awareness",
+      "content": {
+        "en": {
+          "questionText": "Which vitamin is synthesized in the skin in sunlight?",
+          "options": [
+            "Vitamin A",
+            "Vitamin D",
+            "Vitamin B12",
+            "Vitamin C"
+          ]
+        }
+      },
+      "media": {
+        "questionImageUrl": null,
+        "optionImageUrls": [
+          null,
+          null,
+          null,
+          null
+        ]
+      },
+      "correctOptionIndex": 1,
+      "difficulty": "hard",
+      "sourceYear": "2025",
+      "explanation": {
+        "en": "Sunlight helps the body synthesize Vitamin D."
+      }
+    },
+    {
+      "questionId": "sscchsl2025s1-q040",
+      "examId": "ssc-chsl",
+      "paperId": "ssc-chsl-tier1-2025-set1",
+      "sectionId": "awareness",
+      "content": {
+        "en": {
+          "questionText": "The Green Revolution in India is mainly associated with which crop?",
+          "options": [
+            "Cotton",
+            "Tea",
+            "Wheat",
+            "Jute"
+          ]
+        }
+      },
+      "media": {
+        "questionImageUrl": null,
+        "optionImageUrls": [
+          null,
+          null,
+          null,
+          null
+        ]
+      },
+      "correctOptionIndex": 2,
+      "difficulty": "easy",
+      "sourceYear": "2025",
+      "explanation": {
+        "en": "The Green Revolution first significantly improved wheat output."
+      }
+    },
+    {
+      "questionId": "sscchsl2025s1-q041",
+      "examId": "ssc-chsl",
+      "paperId": "ssc-chsl-tier1-2025-set1",
+      "sectionId": "awareness",
+      "content": {
+        "en": {
+          "questionText": "Who was the first Indian to win a Nobel Prize?",
+          "options": [
+            "C V Raman",
+            "Amartya Sen",
+            "Mother Teresa",
+            "Rabindranath Tagore"
+          ]
+        }
+      },
+      "media": {
+        "questionImageUrl": null,
+        "optionImageUrls": [
+          null,
+          null,
+          null,
+          null
+        ]
+      },
+      "correctOptionIndex": 3,
+      "difficulty": "moderate",
+      "sourceYear": "2025",
+      "explanation": {
+        "en": "Rabindranath Tagore won the Nobel Prize in Literature in 1913."
+      }
+    },
+    {
+      "questionId": "sscchsl2025s1-q042",
+      "examId": "ssc-chsl",
+      "paperId": "ssc-chsl-tier1-2025-set1",
+      "sectionId": "awareness",
+      "content": {
+        "en": {
+          "questionText": "What is the chemical symbol of Sodium?",
+          "options": [
+            "Na",
+            "S",
+            "So",
+            "Sd"
+          ]
+        }
+      },
+      "media": {
+        "questionImageUrl": null,
+        "optionImageUrls": [
+          null,
+          null,
+          null,
+          null
+        ]
+      },
+      "correctOptionIndex": 0,
+      "difficulty": "hard",
+      "sourceYear": "2025",
+      "explanation": {
+        "en": "The symbol of Sodium is Na."
+      }
+    },
+    {
+      "questionId": "sscchsl2025s1-q043",
+      "examId": "ssc-chsl",
+      "paperId": "ssc-chsl-tier1-2025-set1",
+      "sectionId": "awareness",
+      "content": {
+        "en": {
+          "questionText": "Which state has the largest coastline in India?",
+          "options": [
+            "Tamil Nadu",
+            "Gujarat",
+            "Andhra Pradesh",
+            "Maharashtra"
+          ]
+        }
+      },
+      "media": {
+        "questionImageUrl": null,
+        "optionImageUrls": [
+          null,
+          null,
+          null,
+          null
+        ]
+      },
+      "correctOptionIndex": 1,
+      "difficulty": "easy",
+      "sourceYear": "2025",
+      "explanation": {
+        "en": "Gujarat has the longest coastline among Indian states."
+      }
+    },
+    {
+      "questionId": "sscchsl2025s1-q044",
+      "examId": "ssc-chsl",
+      "paperId": "ssc-chsl-tier1-2025-set1",
+      "sectionId": "awareness",
+      "content": {
+        "en": {
+          "questionText": "Who founded the Maurya Empire?",
+          "options": [
+            "Ashoka",
+            "Bindusara",
+            "Chandragupta Maurya",
+            "Bimbisara"
+          ]
+        }
+      },
+      "media": {
+        "questionImageUrl": null,
+        "optionImageUrls": [
+          null,
+          null,
+          null,
+          null
+        ]
+      },
+      "correctOptionIndex": 2,
+      "difficulty": "moderate",
+      "sourceYear": "2025",
+      "explanation": {
+        "en": "Chandragupta Maurya founded the Maurya Empire."
+      }
+    },
+    {
+      "questionId": "sscchsl2025s1-q045",
+      "examId": "ssc-chsl",
+      "paperId": "ssc-chsl-tier1-2025-set1",
+      "sectionId": "awareness",
+      "content": {
+        "en": {
+          "questionText": "Which instrument is used to measure atmospheric pressure?",
+          "options": [
+            "Thermometer",
+            "Hygrometer",
+            "Anemometer",
+            "Barometer"
+          ]
+        }
+      },
+      "media": {
+        "questionImageUrl": null,
+        "optionImageUrls": [
+          null,
+          null,
+          null,
+          null
+        ]
+      },
+      "correctOptionIndex": 3,
+      "difficulty": "hard",
+      "sourceYear": "2025",
+      "explanation": {
+        "en": "Atmospheric pressure is measured by a barometer."
+      }
+    },
+    {
+      "questionId": "sscchsl2025s1-q046",
+      "examId": "ssc-chsl",
+      "paperId": "ssc-chsl-tier1-2025-set1",
+      "sectionId": "awareness",
+      "content": {
+        "en": {
+          "questionText": "In which year did India become a Republic?",
+          "options": [
+            "1950",
+            "1947",
+            "1949",
+            "1952"
+          ]
+        }
+      },
+      "media": {
+        "questionImageUrl": null,
+        "optionImageUrls": [
+          null,
+          null,
+          null,
+          null
+        ]
+      },
+      "correctOptionIndex": 0,
+      "difficulty": "easy",
+      "sourceYear": "2025",
+      "explanation": {
+        "en": "India became a Republic on 26 January 1950."
+      }
+    },
+    {
+      "questionId": "sscchsl2025s1-q047",
+      "examId": "ssc-chsl",
+      "paperId": "ssc-chsl-tier1-2025-set1",
+      "sectionId": "awareness",
+      "content": {
+        "en": {
+          "questionText": "The headquarters of UNESCO is in which city?",
+          "options": [
+            "Geneva",
+            "Paris",
+            "New York",
+            "London"
+          ]
+        }
+      },
+      "media": {
+        "questionImageUrl": null,
+        "optionImageUrls": [
+          null,
+          null,
+          null,
+          null
+        ]
+      },
+      "correctOptionIndex": 1,
+      "difficulty": "moderate",
+      "sourceYear": "2025",
+      "explanation": {
+        "en": "UNESCO is headquartered in Paris."
+      }
+    },
+    {
+      "questionId": "sscchsl2025s1-q048",
+      "examId": "ssc-chsl",
+      "paperId": "ssc-chsl-tier1-2025-set1",
+      "sectionId": "awareness",
+      "content": {
+        "en": {
+          "questionText": "What is the largest gland in the human body?",
+          "options": [
+            "Pancreas",
+            "Thyroid",
+            "Liver",
+            "Pituitary"
+          ]
+        }
+      },
+      "media": {
+        "questionImageUrl": null,
+        "optionImageUrls": [
+          null,
+          null,
+          null,
+          null
+        ]
+      },
+      "correctOptionIndex": 2,
+      "difficulty": "hard",
+      "sourceYear": "2025",
+      "explanation": {
+        "en": "The liver is the largest gland in the human body."
+      }
+    },
+    {
+      "questionId": "sscchsl2025s1-q049",
+      "examId": "ssc-chsl",
+      "paperId": "ssc-chsl-tier1-2025-set1",
+      "sectionId": "awareness",
+      "content": {
+        "en": {
+          "questionText": "Which Indian mission sent Chandrayaan 3 to the Moon?",
+          "options": [
+            "DRDO",
+            "BARC",
+            "HAL",
+            "ISRO"
+          ]
+        }
+      },
+      "media": {
+        "questionImageUrl": null,
+        "optionImageUrls": [
+          null,
+          null,
+          null,
+          null
+        ]
+      },
+      "correctOptionIndex": 3,
+      "difficulty": "easy",
+      "sourceYear": "2025",
+      "explanation": {
+        "en": "Chandrayaan 3 was launched by ISRO."
+      }
+    },
+    {
+      "questionId": "sscchsl2025s1-q050",
+      "examId": "ssc-chsl",
+      "paperId": "ssc-chsl-tier1-2025-set1",
+      "sectionId": "awareness",
+      "content": {
+        "en": {
+          "questionText": "Which freedom fighter gave the slogan Jai Hind?",
+          "options": [
+            "Subhas Chandra Bose",
+            "Bhagat Singh",
+            "Bal Gangadhar Tilak",
+            "Lala Lajpat Rai"
+          ]
+        }
+      },
+      "media": {
+        "questionImageUrl": null,
+        "optionImageUrls": [
+          null,
+          null,
+          null,
+          null
+        ]
+      },
+      "correctOptionIndex": 0,
+      "difficulty": "moderate",
+      "sourceYear": "2025",
+      "explanation": {
+        "en": "Subhas Chandra Bose popularized the slogan Jai Hind."
+      }
+    },
+    {
+      "questionId": "sscchsl2025s1-q051",
+      "examId": "ssc-chsl",
+      "paperId": "ssc-chsl-tier1-2025-set1",
+      "sectionId": "quant",
+      "content": {
+        "en": {
+          "questionText": "What is 20% of 120?",
+          "options": [
+            "24",
+            "29",
+            "19",
+            "34"
+          ]
+        }
+      },
+      "media": {
+        "questionImageUrl": null,
+        "optionImageUrls": [
+          null,
+          null,
+          null,
+          null
+        ]
+      },
+      "correctOptionIndex": 0,
+      "difficulty": "hard",
+      "sourceYear": "2025",
+      "explanation": {
+        "en": "Compute (20/100) x 120 = 24."
+      }
+    },
+    {
+      "questionId": "sscchsl2025s1-q052",
+      "examId": "ssc-chsl",
+      "paperId": "ssc-chsl-tier1-2025-set1",
+      "sectionId": "quant",
+      "content": {
+        "en": {
+          "questionText": "If the ratio of boys to girls is 9:4, what is an equivalent ratio?",
+          "options": [
+            "9:4",
+            "18:8",
+            "27:8",
+            "18:12"
+          ]
+        }
+      },
+      "media": {
+        "questionImageUrl": null,
+        "optionImageUrls": [
+          null,
+          null,
+          null,
+          null
+        ]
+      },
+      "correctOptionIndex": 1,
+      "difficulty": "easy",
+      "sourceYear": "2025",
+      "explanation": {
+        "en": "Multiplying both terms by 2 gives 18:8."
+      }
+    },
+    {
+      "questionId": "sscchsl2025s1-q053",
+      "examId": "ssc-chsl",
+      "paperId": "ssc-chsl-tier1-2025-set1",
+      "sectionId": "quant",
+      "content": {
+        "en": {
+          "questionText": "Find the simple interest on Rs 3000 at 7% per annum for 4 years.",
+          "options": [
+            "940",
+            "740",
+            "840",
+            "1040"
+          ]
+        }
+      },
+      "media": {
+        "questionImageUrl": null,
+        "optionImageUrls": [
+          null,
+          null,
+          null,
+          null
+        ]
+      },
+      "correctOptionIndex": 2,
+      "difficulty": "moderate",
+      "sourceYear": "2025",
+      "explanation": {
+        "en": "Simple interest = (P x R x T)/100 = 840."
+      }
+    },
+    {
+      "questionId": "sscchsl2025s1-q054",
+      "examId": "ssc-chsl",
+      "paperId": "ssc-chsl-tier1-2025-set1",
+      "sectionId": "quant",
+      "content": {
+        "en": {
+          "questionText": "Find the average of 15, 21, 27, 33, 39.",
+          "options": [
+            "28",
+            "26",
+            "29",
+            "27"
+          ]
+        }
+      },
+      "media": {
+        "questionImageUrl": null,
+        "optionImageUrls": [
+          null,
+          null,
+          null,
+          null
+        ]
+      },
+      "correctOptionIndex": 3,
+      "difficulty": "hard",
+      "sourceYear": "2025",
+      "explanation": {
+        "en": "Average = total 135 divided by 5 = 27."
+      }
+    },
+    {
+      "questionId": "sscchsl2025s1-q055",
+      "examId": "ssc-chsl",
+      "paperId": "ssc-chsl-tier1-2025-set1",
+      "sectionId": "quant",
+      "content": {
+        "en": {
+          "questionText": "A shopkeeper buys an item for Rs 600 and gains 10%. What is the selling price?",
+          "options": [
+            "660",
+            "680",
+            "640",
+            "600"
+          ]
+        }
+      },
+      "media": {
+        "questionImageUrl": null,
+        "optionImageUrls": [
+          null,
+          null,
+          null,
+          null
+        ]
+      },
+      "correctOptionIndex": 0,
+      "difficulty": "easy",
+      "sourceYear": "2025",
+      "explanation": {
+        "en": "Selling price = cost price x (100 + gain%)/100 = 660."
+      }
+    },
+    {
+      "questionId": "sscchsl2025s1-q056",
+      "examId": "ssc-chsl",
+      "paperId": "ssc-chsl-tier1-2025-set1",
+      "sectionId": "quant",
+      "content": {
+        "en": {
+          "questionText": "What is 25% of 170?",
+          "options": [
+            "47.5",
+            "42.5",
+            "37.5",
+            "52.5"
+          ]
+        }
+      },
+      "media": {
+        "questionImageUrl": null,
+        "optionImageUrls": [
+          null,
+          null,
+          null,
+          null
+        ]
+      },
+      "correctOptionIndex": 1,
+      "difficulty": "moderate",
+      "sourceYear": "2025",
+      "explanation": {
+        "en": "Compute (25/100) x 170 = 42.5."
+      }
+    },
+    {
+      "questionId": "sscchsl2025s1-q057",
+      "examId": "ssc-chsl",
+      "paperId": "ssc-chsl-tier1-2025-set1",
+      "sectionId": "quant",
+      "content": {
+        "en": {
+          "questionText": "If the ratio of boys to girls is 8:5, what is an equivalent ratio?",
+          "options": [
+            "8:5",
+            "24:10",
+            "16:10",
+            "16:15"
+          ]
+        }
+      },
+      "media": {
+        "questionImageUrl": null,
+        "optionImageUrls": [
+          null,
+          null,
+          null,
+          null
+        ]
+      },
+      "correctOptionIndex": 2,
+      "difficulty": "hard",
+      "sourceYear": "2025",
+      "explanation": {
+        "en": "Multiplying both terms by 2 gives 16:10."
+      }
+    },
+    {
+      "questionId": "sscchsl2025s1-q058",
+      "examId": "ssc-chsl",
+      "paperId": "ssc-chsl-tier1-2025-set1",
+      "sectionId": "quant",
+      "content": {
+        "en": {
+          "questionText": "Find the simple interest on Rs 5500 at 7% per annum for 3 years.",
+          "options": [
+            "1255",
+            "1055",
+            "1355",
+            "1155"
+          ]
+        }
+      },
+      "media": {
+        "questionImageUrl": null,
+        "optionImageUrls": [
+          null,
+          null,
+          null,
+          null
+        ]
+      },
+      "correctOptionIndex": 3,
+      "difficulty": "easy",
+      "sourceYear": "2025",
+      "explanation": {
+        "en": "Simple interest = (P x R x T)/100 = 1155."
+      }
+    },
+    {
+      "questionId": "sscchsl2025s1-q059",
+      "examId": "ssc-chsl",
+      "paperId": "ssc-chsl-tier1-2025-set1",
+      "sectionId": "quant",
+      "content": {
+        "en": {
+          "questionText": "Find the average of 15, 21, 27, 33, 39.",
+          "options": [
+            "27",
+            "28",
+            "26",
+            "29"
+          ]
+        }
+      },
+      "media": {
+        "questionImageUrl": null,
+        "optionImageUrls": [
+          null,
+          null,
+          null,
+          null
+        ]
+      },
+      "correctOptionIndex": 0,
+      "difficulty": "moderate",
+      "sourceYear": "2025",
+      "explanation": {
+        "en": "Average = total 135 divided by 5 = 27."
+      }
+    },
+    {
+      "questionId": "sscchsl2025s1-q060",
+      "examId": "ssc-chsl",
+      "paperId": "ssc-chsl-tier1-2025-set1",
+      "sectionId": "quant",
+      "content": {
+        "en": {
+          "questionText": "A shopkeeper buys an item for Rs 450 and gains 15%. What is the selling price?",
+          "options": [
+            "538",
+            "518",
+            "498",
+            "450"
+          ]
+        }
+      },
+      "media": {
+        "questionImageUrl": null,
+        "optionImageUrls": [
+          null,
+          null,
+          null,
+          null
+        ]
+      },
+      "correctOptionIndex": 1,
+      "difficulty": "hard",
+      "sourceYear": "2025",
+      "explanation": {
+        "en": "Selling price = cost price x (100 + gain%)/100 = 518."
+      }
+    },
+    {
+      "questionId": "sscchsl2025s1-q061",
+      "examId": "ssc-chsl",
+      "paperId": "ssc-chsl-tier1-2025-set1",
+      "sectionId": "quant",
+      "content": {
+        "en": {
+          "questionText": "What is 30% of 120?",
+          "options": [
+            "41",
+            "31",
+            "36",
+            "46"
+          ]
+        }
+      },
+      "media": {
+        "questionImageUrl": null,
+        "optionImageUrls": [
+          null,
+          null,
+          null,
+          null
+        ]
+      },
+      "correctOptionIndex": 2,
+      "difficulty": "easy",
+      "sourceYear": "2025",
+      "explanation": {
+        "en": "Compute (30/100) x 120 = 36."
+      }
+    },
+    {
+      "questionId": "sscchsl2025s1-q062",
+      "examId": "ssc-chsl",
+      "paperId": "ssc-chsl-tier1-2025-set1",
+      "sectionId": "quant",
+      "content": {
+        "en": {
+          "questionText": "If the ratio of boys to girls is 13:6, what is an equivalent ratio?",
+          "options": [
+            "13:6",
+            "39:12",
+            "26:18",
+            "26:12"
+          ]
+        }
+      },
+      "media": {
+        "questionImageUrl": null,
+        "optionImageUrls": [
+          null,
+          null,
+          null,
+          null
+        ]
+      },
+      "correctOptionIndex": 3,
+      "difficulty": "moderate",
+      "sourceYear": "2025",
+      "explanation": {
+        "en": "Multiplying both terms by 2 gives 26:12."
+      }
+    },
+    {
+      "questionId": "sscchsl2025s1-q063",
+      "examId": "ssc-chsl",
+      "paperId": "ssc-chsl-tier1-2025-set1",
+      "sectionId": "quant",
+      "content": {
+        "en": {
+          "questionText": "Find the simple interest on Rs 4000 at 7% per annum for 2 years.",
+          "options": [
+            "560",
+            "660",
+            "460",
+            "760"
+          ]
+        }
+      },
+      "media": {
+        "questionImageUrl": null,
+        "optionImageUrls": [
+          null,
+          null,
+          null,
+          null
+        ]
+      },
+      "correctOptionIndex": 0,
+      "difficulty": "hard",
+      "sourceYear": "2025",
+      "explanation": {
+        "en": "Simple interest = (P x R x T)/100 = 560."
+      }
+    },
+    {
+      "questionId": "sscchsl2025s1-q064",
+      "examId": "ssc-chsl",
+      "paperId": "ssc-chsl-tier1-2025-set1",
+      "sectionId": "quant",
+      "content": {
+        "en": {
+          "questionText": "Find the average of 15, 21, 27, 33, 39.",
+          "options": [
+            "28",
+            "27",
+            "26",
+            "29"
+          ]
+        }
+      },
+      "media": {
+        "questionImageUrl": null,
+        "optionImageUrls": [
+          null,
+          null,
+          null,
+          null
+        ]
+      },
+      "correctOptionIndex": 1,
+      "difficulty": "easy",
+      "sourceYear": "2025",
+      "explanation": {
+        "en": "Average = total 135 divided by 5 = 27."
+      }
+    },
+    {
+      "questionId": "sscchsl2025s1-q065",
+      "examId": "ssc-chsl",
+      "paperId": "ssc-chsl-tier1-2025-set1",
+      "sectionId": "quant",
+      "content": {
+        "en": {
+          "questionText": "A shopkeeper buys an item for Rs 700 and gains 20%. What is the selling price?",
+          "options": [
+            "860",
+            "820",
+            "840",
+            "700"
+          ]
+        }
+      },
+      "media": {
+        "questionImageUrl": null,
+        "optionImageUrls": [
+          null,
+          null,
+          null,
+          null
+        ]
+      },
+      "correctOptionIndex": 2,
+      "difficulty": "moderate",
+      "sourceYear": "2025",
+      "explanation": {
+        "en": "Selling price = cost price x (100 + gain%)/100 = 840."
+      }
+    },
+    {
+      "questionId": "sscchsl2025s1-q066",
+      "examId": "ssc-chsl",
+      "paperId": "ssc-chsl-tier1-2025-set1",
+      "sectionId": "quant",
+      "content": {
+        "en": {
+          "questionText": "What is 35% of 170?",
+          "options": [
+            "64.5",
+            "54.5",
+            "69.5",
+            "59.5"
+          ]
+        }
+      },
+      "media": {
+        "questionImageUrl": null,
+        "optionImageUrls": [
+          null,
+          null,
+          null,
+          null
+        ]
+      },
+      "correctOptionIndex": 3,
+      "difficulty": "hard",
+      "sourceYear": "2025",
+      "explanation": {
+        "en": "Compute (35/100) x 170 = 59.5."
+      }
+    },
+    {
+      "questionId": "sscchsl2025s1-q067",
+      "examId": "ssc-chsl",
+      "paperId": "ssc-chsl-tier1-2025-set1",
+      "sectionId": "quant",
+      "content": {
+        "en": {
+          "questionText": "If the ratio of boys to girls is 12:3, what is an equivalent ratio?",
+          "options": [
+            "24:6",
+            "12:3",
+            "36:6",
+            "24:9"
+          ]
+        }
+      },
+      "media": {
+        "questionImageUrl": null,
+        "optionImageUrls": [
+          null,
+          null,
+          null,
+          null
+        ]
+      },
+      "correctOptionIndex": 0,
+      "difficulty": "easy",
+      "sourceYear": "2025",
+      "explanation": {
+        "en": "Multiplying both terms by 2 gives 24:6."
+      }
+    },
+    {
+      "questionId": "sscchsl2025s1-q068",
+      "examId": "ssc-chsl",
+      "paperId": "ssc-chsl-tier1-2025-set1",
+      "sectionId": "quant",
+      "content": {
+        "en": {
+          "questionText": "Find the simple interest on Rs 2500 at 7% per annum for 4 years.",
+          "options": [
+            "800",
+            "700",
+            "600",
+            "900"
+          ]
+        }
+      },
+      "media": {
+        "questionImageUrl": null,
+        "optionImageUrls": [
+          null,
+          null,
+          null,
+          null
+        ]
+      },
+      "correctOptionIndex": 1,
+      "difficulty": "moderate",
+      "sourceYear": "2025",
+      "explanation": {
+        "en": "Simple interest = (P x R x T)/100 = 700."
+      }
+    },
+    {
+      "questionId": "sscchsl2025s1-q069",
+      "examId": "ssc-chsl",
+      "paperId": "ssc-chsl-tier1-2025-set1",
+      "sectionId": "quant",
+      "content": {
+        "en": {
+          "questionText": "Find the average of 15, 21, 27, 33, 39.",
+          "options": [
+            "28",
+            "26",
+            "27",
+            "29"
+          ]
+        }
+      },
+      "media": {
+        "questionImageUrl": null,
+        "optionImageUrls": [
+          null,
+          null,
+          null,
+          null
+        ]
+      },
+      "correctOptionIndex": 2,
+      "difficulty": "hard",
+      "sourceYear": "2025",
+      "explanation": {
+        "en": "Average = total 135 divided by 5 = 27."
+      }
+    },
+    {
+      "questionId": "sscchsl2025s1-q070",
+      "examId": "ssc-chsl",
+      "paperId": "ssc-chsl-tier1-2025-set1",
+      "sectionId": "quant",
+      "content": {
+        "en": {
+          "questionText": "A shopkeeper buys an item for Rs 550 and gains 25%. What is the selling price?",
+          "options": [
+            "708",
+            "668",
+            "550",
+            "688"
+          ]
+        }
+      },
+      "media": {
+        "questionImageUrl": null,
+        "optionImageUrls": [
+          null,
+          null,
+          null,
+          null
+        ]
+      },
+      "correctOptionIndex": 3,
+      "difficulty": "easy",
+      "sourceYear": "2025",
+      "explanation": {
+        "en": "Selling price = cost price x (100 + gain%)/100 = 688."
+      }
+    },
+    {
+      "questionId": "sscchsl2025s1-q071",
+      "examId": "ssc-chsl",
+      "paperId": "ssc-chsl-tier1-2025-set1",
+      "sectionId": "quant",
+      "content": {
+        "en": {
+          "questionText": "What is 20% of 120?",
+          "options": [
+            "24",
+            "29",
+            "19",
+            "34"
+          ]
+        }
+      },
+      "media": {
+        "questionImageUrl": null,
+        "optionImageUrls": [
+          null,
+          null,
+          null,
+          null
+        ]
+      },
+      "correctOptionIndex": 0,
+      "difficulty": "moderate",
+      "sourceYear": "2025",
+      "explanation": {
+        "en": "Compute (20/100) x 120 = 24."
+      }
+    },
+    {
+      "questionId": "sscchsl2025s1-q072",
+      "examId": "ssc-chsl",
+      "paperId": "ssc-chsl-tier1-2025-set1",
+      "sectionId": "quant",
+      "content": {
+        "en": {
+          "questionText": "If the ratio of boys to girls is 11:4, what is an equivalent ratio?",
+          "options": [
+            "11:4",
+            "22:8",
+            "33:8",
+            "22:12"
+          ]
+        }
+      },
+      "media": {
+        "questionImageUrl": null,
+        "optionImageUrls": [
+          null,
+          null,
+          null,
+          null
+        ]
+      },
+      "correctOptionIndex": 1,
+      "difficulty": "hard",
+      "sourceYear": "2025",
+      "explanation": {
+        "en": "Multiplying both terms by 2 gives 22:8."
+      }
+    },
+    {
+      "questionId": "sscchsl2025s1-q073",
+      "examId": "ssc-chsl",
+      "paperId": "ssc-chsl-tier1-2025-set1",
+      "sectionId": "quant",
+      "content": {
+        "en": {
+          "questionText": "Find the simple interest on Rs 5000 at 7% per annum for 3 years.",
+          "options": [
+            "1150",
+            "950",
+            "1050",
+            "1250"
+          ]
+        }
+      },
+      "media": {
+        "questionImageUrl": null,
+        "optionImageUrls": [
+          null,
+          null,
+          null,
+          null
+        ]
+      },
+      "correctOptionIndex": 2,
+      "difficulty": "easy",
+      "sourceYear": "2025",
+      "explanation": {
+        "en": "Simple interest = (P x R x T)/100 = 1050."
+      }
+    },
+    {
+      "questionId": "sscchsl2025s1-q074",
+      "examId": "ssc-chsl",
+      "paperId": "ssc-chsl-tier1-2025-set1",
+      "sectionId": "quant",
+      "content": {
+        "en": {
+          "questionText": "Find the average of 15, 21, 27, 33, 39.",
+          "options": [
+            "28",
+            "26",
+            "29",
+            "27"
+          ]
+        }
+      },
+      "media": {
+        "questionImageUrl": null,
+        "optionImageUrls": [
+          null,
+          null,
+          null,
+          null
+        ]
+      },
+      "correctOptionIndex": 3,
+      "difficulty": "moderate",
+      "sourceYear": "2025",
+      "explanation": {
+        "en": "Average = total 135 divided by 5 = 27."
+      }
+    },
+    {
+      "questionId": "sscchsl2025s1-q075",
+      "examId": "ssc-chsl",
+      "paperId": "ssc-chsl-tier1-2025-set1",
+      "sectionId": "quant",
+      "content": {
+        "en": {
+          "questionText": "A shopkeeper buys an item for Rs 400 and gains 10%. What is the selling price?",
+          "options": [
+            "440",
+            "460",
+            "420",
+            "400"
+          ]
+        }
+      },
+      "media": {
+        "questionImageUrl": null,
+        "optionImageUrls": [
+          null,
+          null,
+          null,
+          null
+        ]
+      },
+      "correctOptionIndex": 0,
+      "difficulty": "hard",
+      "sourceYear": "2025",
+      "explanation": {
+        "en": "Selling price = cost price x (100 + gain%)/100 = 440."
+      }
+    },
+    {
+      "questionId": "sscchsl2025s1-q076",
+      "examId": "ssc-chsl",
+      "paperId": "ssc-chsl-tier1-2025-set1",
+      "sectionId": "english",
+      "content": {
+        "en": {
+          "questionText": "Choose the synonym of ABANDON.",
+          "options": [
+            "Forsake",
+            "Preserve",
+            "Protect",
+            "Support"
+          ]
+        }
+      },
+      "media": {
+        "questionImageUrl": null,
+        "optionImageUrls": [
+          null,
+          null,
+          null,
+          null
+        ]
+      },
+      "correctOptionIndex": 0,
+      "difficulty": "easy",
+      "sourceYear": "2025",
+      "explanation": {
+        "en": "Forsake means to leave or abandon."
+      }
+    },
+    {
+      "questionId": "sscchsl2025s1-q077",
+      "examId": "ssc-chsl",
+      "paperId": "ssc-chsl-tier1-2025-set1",
+      "sectionId": "english",
+      "content": {
+        "en": {
+          "questionText": "Choose the antonym of ANCIENT.",
+          "options": [
+            "Historic",
+            "Modern",
+            "Old",
+            "Traditional"
+          ]
+        }
+      },
+      "media": {
+        "questionImageUrl": null,
+        "optionImageUrls": [
+          null,
+          null,
+          null,
+          null
+        ]
+      },
+      "correctOptionIndex": 1,
+      "difficulty": "moderate",
+      "sourceYear": "2025",
+      "explanation": {
+        "en": "Modern is opposite in meaning to ancient."
+      }
+    },
+    {
+      "questionId": "sscchsl2025s1-q078",
+      "examId": "ssc-chsl",
+      "paperId": "ssc-chsl-tier1-2025-set1",
+      "sectionId": "english",
+      "content": {
+        "en": {
+          "questionText": "Pick the correctly spelled word.",
+          "options": [
+            "Neccessary",
+            "Necesary",
+            "Necessary",
+            "Nessessary"
+          ]
+        }
+      },
+      "media": {
+        "questionImageUrl": null,
+        "optionImageUrls": [
+          null,
+          null,
+          null,
+          null
+        ]
+      },
+      "correctOptionIndex": 2,
+      "difficulty": "hard",
+      "sourceYear": "2025",
+      "explanation": {
+        "en": "Necessary is the correct spelling."
+      }
+    },
+    {
+      "questionId": "sscchsl2025s1-q079",
+      "examId": "ssc-chsl",
+      "paperId": "ssc-chsl-tier1-2025-set1",
+      "sectionId": "english",
+      "content": {
+        "en": {
+          "questionText": "Fill in the blank: She is good ___ mathematics.",
+          "options": [
+            "in",
+            "on",
+            "for",
+            "at"
+          ]
+        }
+      },
+      "media": {
+        "questionImageUrl": null,
+        "optionImageUrls": [
+          null,
+          null,
+          null,
+          null
+        ]
+      },
+      "correctOptionIndex": 3,
+      "difficulty": "easy",
+      "sourceYear": "2025",
+      "explanation": {
+        "en": "The idiomatic usage is good at."
+      }
+    },
+    {
+      "questionId": "sscchsl2025s1-q080",
+      "examId": "ssc-chsl",
+      "paperId": "ssc-chsl-tier1-2025-set1",
+      "sectionId": "english",
+      "content": {
+        "en": {
+          "questionText": "Choose the correctly punctuated sentence.",
+          "options": [
+            "It is a beautiful day, isnt it?",
+            "Its a beautiful day, isnt it?",
+            "Its a beautiful day isnt it.",
+            "It is a beautiful day, is not it?"
+          ]
+        }
+      },
+      "media": {
+        "questionImageUrl": null,
+        "optionImageUrls": [
+          null,
+          null,
+          null,
+          null
+        ]
+      },
+      "correctOptionIndex": 0,
+      "difficulty": "moderate",
+      "sourceYear": "2025",
+      "explanation": {
+        "en": "It is a beautiful day, isnt it? is correctly punctuated in this option set."
+      }
+    },
+    {
+      "questionId": "sscchsl2025s1-q081",
+      "examId": "ssc-chsl",
+      "paperId": "ssc-chsl-tier1-2025-set1",
+      "sectionId": "english",
+      "content": {
+        "en": {
+          "questionText": "Select the one-word substitution for one who writes dictionaries.",
+          "options": [
+            "Bibliophile",
+            "Lexicographer",
+            "Editor",
+            "Translator"
+          ]
+        }
+      },
+      "media": {
+        "questionImageUrl": null,
+        "optionImageUrls": [
+          null,
+          null,
+          null,
+          null
+        ]
+      },
+      "correctOptionIndex": 1,
+      "difficulty": "hard",
+      "sourceYear": "2025",
+      "explanation": {
+        "en": "A lexicographer compiles dictionaries."
+      }
+    },
+    {
+      "questionId": "sscchsl2025s1-q082",
+      "examId": "ssc-chsl",
+      "paperId": "ssc-chsl-tier1-2025-set1",
+      "sectionId": "english",
+      "content": {
+        "en": {
+          "questionText": "Choose the active voice: The work was completed by Riya.",
+          "options": [
+            "Riya was completed by the work.",
+            "The work completed Riya.",
+            "Riya completed the work.",
+            "Riya has been completed by work."
+          ]
+        }
+      },
+      "media": {
+        "questionImageUrl": null,
+        "optionImageUrls": [
+          null,
+          null,
+          null,
+          null
+        ]
+      },
+      "correctOptionIndex": 2,
+      "difficulty": "easy",
+      "sourceYear": "2025",
+      "explanation": {
+        "en": "Riya completed the work is the active form."
+      }
+    },
+    {
+      "questionId": "sscchsl2025s1-q083",
+      "examId": "ssc-chsl",
+      "paperId": "ssc-chsl-tier1-2025-set1",
+      "sectionId": "english",
+      "content": {
+        "en": {
+          "questionText": "Identify the error: He do not know the answer.",
+          "options": [
+            "He",
+            "know",
+            "the answer",
+            "do not"
+          ]
+        }
+      },
+      "media": {
+        "questionImageUrl": null,
+        "optionImageUrls": [
+          null,
+          null,
+          null,
+          null
+        ]
+      },
+      "correctOptionIndex": 3,
+      "difficulty": "moderate",
+      "sourceYear": "2025",
+      "explanation": {
+        "en": "With He, the correct form is does not."
+      }
+    },
+    {
+      "questionId": "sscchsl2025s1-q084",
+      "examId": "ssc-chsl",
+      "paperId": "ssc-chsl-tier1-2025-set1",
+      "sectionId": "english",
+      "content": {
+        "en": {
+          "questionText": "Choose the correct indirect speech: He said, I am tired.",
+          "options": [
+            "He said that he was tired.",
+            "He said that I am tired.",
+            "He said that he is tired.",
+            "He says that he was tired."
+          ]
+        }
+      },
+      "media": {
+        "questionImageUrl": null,
+        "optionImageUrls": [
+          null,
+          null,
+          null,
+          null
+        ]
+      },
+      "correctOptionIndex": 0,
+      "difficulty": "hard",
+      "sourceYear": "2025",
+      "explanation": {
+        "en": "Pronoun and tense shift produce he was tired."
+      }
+    },
+    {
+      "questionId": "sscchsl2025s1-q085",
+      "examId": "ssc-chsl",
+      "paperId": "ssc-chsl-tier1-2025-set1",
+      "sectionId": "english",
+      "content": {
+        "en": {
+          "questionText": "Select the idiom meaning to stop working permanently.",
+          "options": [
+            "Break the ice",
+            "Call it a day",
+            "Hit the sack",
+            "Spill the beans"
+          ]
+        }
+      },
+      "media": {
+        "questionImageUrl": null,
+        "optionImageUrls": [
+          null,
+          null,
+          null,
+          null
+        ]
+      },
+      "correctOptionIndex": 1,
+      "difficulty": "easy",
+      "sourceYear": "2025",
+      "explanation": {
+        "en": "Call it a day means stop working for the day or permanently in context."
+      }
+    },
+    {
+      "questionId": "sscchsl2025s1-q086",
+      "examId": "ssc-chsl",
+      "paperId": "ssc-chsl-tier1-2025-set1",
+      "sectionId": "english",
+      "content": {
+        "en": {
+          "questionText": "Fill in the blank: Neither the boys nor the teacher ___ present.",
+          "options": [
+            "were",
+            "are",
+            "was",
+            "have"
+          ]
+        }
+      },
+      "media": {
+        "questionImageUrl": null,
+        "optionImageUrls": [
+          null,
+          null,
+          null,
+          null
+        ]
+      },
+      "correctOptionIndex": 2,
+      "difficulty": "moderate",
+      "sourceYear": "2025",
+      "explanation": {
+        "en": "Verb agrees with the nearer subject teacher, so was is correct."
+      }
+    },
+    {
+      "questionId": "sscchsl2025s1-q087",
+      "examId": "ssc-chsl",
+      "paperId": "ssc-chsl-tier1-2025-set1",
+      "sectionId": "english",
+      "content": {
+        "en": {
+          "questionText": "Choose the correct passive: People speak English worldwide.",
+          "options": [
+            "English was spoke worldwide.",
+            "English speaks worldwide.",
+            "English has speaking worldwide.",
+            "English is spoken worldwide."
+          ]
+        }
+      },
+      "media": {
+        "questionImageUrl": null,
+        "optionImageUrls": [
+          null,
+          null,
+          null,
+          null
+        ]
+      },
+      "correctOptionIndex": 3,
+      "difficulty": "hard",
+      "sourceYear": "2025",
+      "explanation": {
+        "en": "English is spoken worldwide is correct passive voice."
+      }
+    },
+    {
+      "questionId": "sscchsl2025s1-q088",
+      "examId": "ssc-chsl",
+      "paperId": "ssc-chsl-tier1-2025-set1",
+      "sectionId": "english",
+      "content": {
+        "en": {
+          "questionText": "Choose the meaning of the word CANDID.",
+          "options": [
+            "Frank",
+            "Reserved",
+            "Hostile",
+            "Indirect"
+          ]
+        }
+      },
+      "media": {
+        "questionImageUrl": null,
+        "optionImageUrls": [
+          null,
+          null,
+          null,
+          null
+        ]
+      },
+      "correctOptionIndex": 0,
+      "difficulty": "easy",
+      "sourceYear": "2025",
+      "explanation": {
+        "en": "Candid means frank and straightforward."
+      }
+    },
+    {
+      "questionId": "sscchsl2025s1-q089",
+      "examId": "ssc-chsl",
+      "paperId": "ssc-chsl-tier1-2025-set1",
+      "sectionId": "english",
+      "content": {
+        "en": {
+          "questionText": "Select the antonym of GENEROUS.",
+          "options": [
+            "Helpful",
+            "Stingy",
+            "Kind",
+            "Liberal"
+          ]
+        }
+      },
+      "media": {
+        "questionImageUrl": null,
+        "optionImageUrls": [
+          null,
+          null,
+          null,
+          null
+        ]
+      },
+      "correctOptionIndex": 1,
+      "difficulty": "moderate",
+      "sourceYear": "2025",
+      "explanation": {
+        "en": "Stingy is opposite in meaning to generous."
+      }
+    },
+    {
+      "questionId": "sscchsl2025s1-q090",
+      "examId": "ssc-chsl",
+      "paperId": "ssc-chsl-tier1-2025-set1",
+      "sectionId": "english",
+      "content": {
+        "en": {
+          "questionText": "Fill in the blank: She insisted ___ paying the bill.",
+          "options": [
+            "for",
+            "in",
+            "on",
+            "at"
+          ]
+        }
+      },
+      "media": {
+        "questionImageUrl": null,
+        "optionImageUrls": [
+          null,
+          null,
+          null,
+          null
+        ]
+      },
+      "correctOptionIndex": 2,
+      "difficulty": "hard",
+      "sourceYear": "2025",
+      "explanation": {
+        "en": "Insist on is the correct collocation."
+      }
+    },
+    {
+      "questionId": "sscchsl2025s1-q091",
+      "examId": "ssc-chsl",
+      "paperId": "ssc-chsl-tier1-2025-set1",
+      "sectionId": "english",
+      "content": {
+        "en": {
+          "questionText": "Choose the correctly spelt word.",
+          "options": [
+            "Acommodation",
+            "Accomodation",
+            "Acomodation",
+            "Accommodation"
+          ]
+        }
+      },
+      "media": {
+        "questionImageUrl": null,
+        "optionImageUrls": [
+          null,
+          null,
+          null,
+          null
+        ]
+      },
+      "correctOptionIndex": 3,
+      "difficulty": "easy",
+      "sourceYear": "2025",
+      "explanation": {
+        "en": "Accommodation has double c and double m."
+      }
+    },
+    {
+      "questionId": "sscchsl2025s1-q092",
+      "examId": "ssc-chsl",
+      "paperId": "ssc-chsl-tier1-2025-set1",
+      "sectionId": "english",
+      "content": {
+        "en": {
+          "questionText": "Identify the noun in the sentence: Wisdom is better than strength.",
+          "options": [
+            "Wisdom",
+            "better",
+            "than",
+            "strength"
+          ]
+        }
+      },
+      "media": {
+        "questionImageUrl": null,
+        "optionImageUrls": [
+          null,
+          null,
+          null,
+          null
+        ]
+      },
+      "correctOptionIndex": 0,
+      "difficulty": "moderate",
+      "sourceYear": "2025",
+      "explanation": {
+        "en": "Wisdom is used as an abstract noun here."
+      }
+    },
+    {
+      "questionId": "sscchsl2025s1-q093",
+      "examId": "ssc-chsl",
+      "paperId": "ssc-chsl-tier1-2025-set1",
+      "sectionId": "english",
+      "content": {
+        "en": {
+          "questionText": "Choose the correct article: He is ___ honest man.",
+          "options": [
+            "a",
+            "an",
+            "the",
+            "no article"
+          ]
+        }
+      },
+      "media": {
+        "questionImageUrl": null,
+        "optionImageUrls": [
+          null,
+          null,
+          null,
+          null
+        ]
+      },
+      "correctOptionIndex": 1,
+      "difficulty": "hard",
+      "sourceYear": "2025",
+      "explanation": {
+        "en": "Honest starts with a vowel sound, so an is used."
+      }
+    },
+    {
+      "questionId": "sscchsl2025s1-q094",
+      "examId": "ssc-chsl",
+      "paperId": "ssc-chsl-tier1-2025-set1",
+      "sectionId": "english",
+      "content": {
+        "en": {
+          "questionText": "Select the correct preposition: The train arrived ___ time.",
+          "options": [
+            "at",
+            "in",
+            "on",
+            "for"
+          ]
+        }
+      },
+      "media": {
+        "questionImageUrl": null,
+        "optionImageUrls": [
+          null,
+          null,
+          null,
+          null
+        ]
+      },
+      "correctOptionIndex": 2,
+      "difficulty": "easy",
+      "sourceYear": "2025",
+      "explanation": {
+        "en": "On time is the standard expression."
+      }
+    },
+    {
+      "questionId": "sscchsl2025s1-q095",
+      "examId": "ssc-chsl",
+      "paperId": "ssc-chsl-tier1-2025-set1",
+      "sectionId": "english",
+      "content": {
+        "en": {
+          "questionText": "Choose the one-word substitution for unable to read and write.",
+          "options": [
+            "Innocent",
+            "Ineligible",
+            "Inevitable",
+            "Illiterate"
+          ]
+        }
+      },
+      "media": {
+        "questionImageUrl": null,
+        "optionImageUrls": [
+          null,
+          null,
+          null,
+          null
+        ]
+      },
+      "correctOptionIndex": 3,
+      "difficulty": "moderate",
+      "sourceYear": "2025",
+      "explanation": {
+        "en": "Illiterate means unable to read and write."
+      }
+    },
+    {
+      "questionId": "sscchsl2025s1-q096",
+      "examId": "ssc-chsl",
+      "paperId": "ssc-chsl-tier1-2025-set1",
+      "sectionId": "english",
+      "content": {
+        "en": {
+          "questionText": "Pick the sentence with correct subject-verb agreement.",
+          "options": [
+            "Each of the players is ready.",
+            "Each of the players are ready.",
+            "Each of players are ready.",
+            "Each players is ready."
+          ]
+        }
+      },
+      "media": {
+        "questionImageUrl": null,
+        "optionImageUrls": [
+          null,
+          null,
+          null,
+          null
+        ]
+      },
+      "correctOptionIndex": 0,
+      "difficulty": "hard",
+      "sourceYear": "2025",
+      "explanation": {
+        "en": "Each takes a singular verb, is."
+      }
+    },
+    {
+      "questionId": "sscchsl2025s1-q097",
+      "examId": "ssc-chsl",
+      "paperId": "ssc-chsl-tier1-2025-set1",
+      "sectionId": "english",
+      "content": {
+        "en": {
+          "questionText": "Choose the synonym of BRIEF.",
+          "options": [
+            "Lengthy",
+            "Short",
+            "Extensive",
+            "Wide"
+          ]
+        }
+      },
+      "media": {
+        "questionImageUrl": null,
+        "optionImageUrls": [
+          null,
+          null,
+          null,
+          null
+        ]
+      },
+      "correctOptionIndex": 1,
+      "difficulty": "easy",
+      "sourceYear": "2025",
+      "explanation": {
+        "en": "Brief means short."
+      }
+    },
+    {
+      "questionId": "sscchsl2025s1-q098",
+      "examId": "ssc-chsl",
+      "paperId": "ssc-chsl-tier1-2025-set1",
+      "sectionId": "english",
+      "content": {
+        "en": {
+          "questionText": "Fill in the blank: I prefer tea ___ coffee.",
+          "options": [
+            "than",
+            "over",
+            "to",
+            "with"
+          ]
+        }
+      },
+      "media": {
+        "questionImageUrl": null,
+        "optionImageUrls": [
+          null,
+          null,
+          null,
+          null
+        ]
+      },
+      "correctOptionIndex": 2,
+      "difficulty": "moderate",
+      "sourceYear": "2025",
+      "explanation": {
+        "en": "Prefer A to B is the correct structure."
+      }
+    },
+    {
+      "questionId": "sscchsl2025s1-q099",
+      "examId": "ssc-chsl",
+      "paperId": "ssc-chsl-tier1-2025-set1",
+      "sectionId": "english",
+      "content": {
+        "en": {
+          "questionText": "Choose the correctly reported speech: She said, I have finished my homework.",
+          "options": [
+            "She said that she has finished her homework.",
+            "She said that I had finished my homework.",
+            "She says that she had finished homework.",
+            "She said that she had finished her homework."
+          ]
+        }
+      },
+      "media": {
+        "questionImageUrl": null,
+        "optionImageUrls": [
+          null,
+          null,
+          null,
+          null
+        ]
+      },
+      "correctOptionIndex": 3,
+      "difficulty": "hard",
+      "sourceYear": "2025",
+      "explanation": {
+        "en": "Present perfect shifts to past perfect in reported speech."
+      }
+    },
+    {
+      "questionId": "sscchsl2025s1-q100",
+      "examId": "ssc-chsl",
+      "paperId": "ssc-chsl-tier1-2025-set1",
+      "sectionId": "english",
+      "content": {
+        "en": {
+          "questionText": "Select the idiom meaning reveal a secret.",
+          "options": [
+            "Spill the beans",
+            "Bite the bullet",
+            "Face the music",
+            "Hit the books"
+          ]
+        }
+      },
+      "media": {
+        "questionImageUrl": null,
+        "optionImageUrls": [
+          null,
+          null,
+          null,
+          null
+        ]
+      },
+      "correctOptionIndex": 0,
+      "difficulty": "easy",
+      "sourceYear": "2025",
+      "explanation": {
+        "en": "Spill the beans means reveal a secret."
+      }
+    }
+  ]
+}

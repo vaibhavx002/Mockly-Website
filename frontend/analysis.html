@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mock Analysis | Mockly</title>
+    <link rel="preload" href="vendor/fontawesome/css/all.min.css" as="style">
+    <link href="vendor/fontawesome/css/all.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="analysis.css">
+</head>
+<body>
+    <header class="navbar">
+        <div class="nav-container">
+            <a href="/#home" class="logo">
+                <div class="logo-icon">M</div>
+                <span class="logo-text">Mockly</span>
+            </a>
+
+            <nav class="nav-links">
+                <a href="/#home">Home</a>
+                <a href="/all-exams">All Exams</a>
+                <a href="/test-series">Test Series</a>
+                <a href="/chapter-wise">Chapter Wise</a>
+                <a href="/pyq-questions">PYQ Questions</a>
+                <a href="/analysis" class="active" aria-current="page">Analysis</a>
+            </nav>
+
+            <div class="nav-actions">
+                <button class="dark-mode-toggle" id="theme-toggle" aria-label="Toggle theme">
+                    <div class="toggle-track">
+                        <div class="toggle-thumb">
+                            <i class="fa-solid fa-moon moon-icon"></i>
+                            <i class="fa-solid fa-sun sun-icon"></i>
+                        </div>
+                    </div>
+                </button>
+                <div class="auth-actions">
+                    <button id="nav-login-btn" class="btn-text" type="button">Log In</button>
+                    <button id="nav-signup-btn" class="btn-small-primary" type="button">Sign Up</button>
+                </div>
+            </div>
+
+            <button class="menu-toggle" aria-label="Toggle navigation menu" aria-expanded="false" title="Menu">
+                <i class="fas fa-bars"></i>
+            </button>
+        </div>
+    </header>
+
+    <main class="analysis-page">
+        <section class="analysis-hero">
+            <div class="analysis-hero-shell">
+                <div class="analysis-title-wrap">
+                    <span class="badge"><i class="fa-solid fa-chart-line" aria-hidden="true"></i> Shareable Report</span>
+                    <h1 id="analysis-title">Mock Analysis</h1>
+                    <p id="analysis-meta">Loading test metadata...</p>
+                </div>
+
+                <div class="analysis-actions">
+                    <a id="analysis-start-link" class="btn btn-primary" href="/#test">Start Mock</a>
+                    <button id="analysis-copy-link" class="btn btn-outline" type="button">Copy Link</button>
+                </div>
+            </div>
+        </section>
+
+        <section class="analysis-content">
+            <div class="analysis-content-shell">
+                <p id="analysis-status" class="analysis-status" aria-live="polite">Preparing analysis...</p>
+
+                <div id="analysis-summary" class="analysis-grid" hidden></div>
+
+                <section class="analysis-section" id="analysis-insights-section" hidden>
+                    <h2>Brief Analysis</h2>
+                    <ul id="analysis-insights" class="analysis-insights"></ul>
+                </section>
+
+                <section class="analysis-section" id="analysis-table-section" hidden>
+                    <h2>Question Time vs Average</h2>
+                    <div class="analysis-table-wrap">
+                        <table class="analysis-table">
+                            <thead>
+                                <tr>
+                                    <th>Q No.</th>
+                                    <th>Status</th>
+                                    <th>Your Time</th>
+                                    <th>Avg Time</th>
+                                    <th>Topper Avg</th>
+                                    <th>Delta vs Avg</th>
+                                </tr>
+                            </thead>
+                            <tbody id="analysis-table-body"></tbody>
+                        </table>
+                    </div>
+                </section>
+            </div>
+        </section>
+    </main>
+
+    <script src="page-shell.js"></script>
+    <script src="analysis.js"></script>
+</body>
+</html>

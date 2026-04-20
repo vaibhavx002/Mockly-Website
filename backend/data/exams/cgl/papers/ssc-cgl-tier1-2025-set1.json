@@ -7,6 +7,42 @@
   "marksPerQuestion": 2,
   "maxScore": 200,
   "negativeMarks": 0.5,
+  "topicMappings": {
+    "bySection": {
+      "reasoning": {
+        "subjectId": "reasoning",
+        "subjectName": "General Intelligence",
+        "chapterId": "logical",
+        "chapterName": "Logical Reasoning",
+        "topicId": "logical-1",
+        "topicName": "Coding-Decoding"
+      },
+      "awareness": {
+        "subjectId": "awareness",
+        "subjectName": "General Awareness",
+        "chapterId": "general-awareness",
+        "chapterName": "General Awareness",
+        "topicId": "current-affairs",
+        "topicName": "Current Affairs"
+      },
+      "quant": {
+        "subjectId": "quant",
+        "subjectName": "Quantitative Aptitude",
+        "chapterId": "arithmetic",
+        "chapterName": "Arithmetic",
+        "topicId": "arithmetic-1",
+        "topicName": "Ratio"
+      },
+      "english": {
+        "subjectId": "english",
+        "subjectName": "English Comprehension",
+        "chapterId": "grammar",
+        "chapterName": "Grammar",
+        "topicId": "error-spotting",
+        "topicName": "Error Spotting"
+      }
+    }
+  },
   "sections": [
     {
       "sectionId": "reasoning",

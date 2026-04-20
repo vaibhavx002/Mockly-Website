@@ -1235,6 +1235,13 @@
             margin-top: 10px;
         }
 
+        .result-subtext {
+            margin: 8px 0 0;
+            color: #475569;
+            font-size: 13px;
+            font-weight: 600;
+        }
+
         .result-action-btn {
             background: linear-gradient(135deg, #1f3b68, #1e293b);
             color: #fff;
@@ -1715,6 +1722,9 @@
     let resumeSnapshot = null;
     let resumeSyncInterval = null;
     let lastResumeSyncAt = 0;
+    let latestSubmitPersistPromise = Promise.resolve();
+    let latestSubmitAnalysisUrl = '';
+    let isOpeningPostSubmitAnalysis = false;
 
     let qState = [];
 
@@ -1821,6 +1831,24 @@
 
     function getSessionStartUrl() {
         return `/mock/${encodeURIComponent(examRouteId)}?paperId=${encodeURIComponent(resolvedPaperId)}${launchSessionId ? `&session=${encodeURIComponent(launchSessionId)}` : ''}`;
+    }
+
+    function getAnalysisUrl(options = {}) {
+        const params = new URLSearchParams();
+        params.set('examId', String(examRouteId || '').trim().toLowerCase());
+        params.set('paperId', String(resolvedPaperId || '').trim().toLowerCase());
+
+        const source = String(options?.source || '').trim().toLowerCase();
+        if (source) {
+            params.set('source', source);
+        }
+
+        const title = String(options?.title || paperMetaFromApi?.title || '').trim();
+        if (title) {
+            params.set('title', title);
+        }
+
+        return `/analysis?${params.toString()}`;
     }
 
     function addResumeFlag(url) {
@@ -2339,6 +2367,12 @@
             opts: options,
             ans: correctOptionIndex,
             sectionId: String(question?.sectionId || '').trim().toLowerCase(),
+            subjectId: String(question?.subjectId || '').trim().toLowerCase(),
+            subjectName: String(question?.subjectName || '').trim(),
+            chapterId: String(question?.chapterId || '').trim().toLowerCase(),
+            chapterName: String(question?.chapterName || '').trim(),
+            topicId: String(question?.topicId || '').trim().toLowerCase(),
+            topicName: String(question?.topicName || '').trim(),
             availableLanguages: Array.isArray(question?.availableLanguages)
                 ? question.availableLanguages.map((lang) => String(lang || '').trim().toLowerCase())
                 : [],
@@ -3067,9 +3101,11 @@
 
     function persistAttemptForDashboard(attempt) {
         const userEmail = String(candidateEmail || resolveCandidateEmail() || '').trim().toLowerCase();
-        if (!userEmail) return;
+        if (!userEmail) {
+            return Promise.resolve({ skipped: true });
+        }
 
-        fetch(USER_ATTEMPTS_API_ENDPOINT, {
+        return fetch(USER_ATTEMPTS_API_ENDPOINT, {
             method: 'POST',
             headers: withCsrfHeader({
                 'Content-Type': 'application/json'
@@ -3078,7 +3114,29 @@
                 attempt
             }),
             credentials: 'same-origin'
-        }).catch(() => null);
+        }).then(() => ({ ok: true })).catch(() => ({ ok: false }));
+    }
+
+    async function openPostSubmitAnalysis() {
+        if (isOpeningPostSubmitAnalysis) return;
+        isOpeningPostSubmitAnalysis = true;
+
+        const targetUrl = latestSubmitAnalysisUrl || getAnalysisUrl({ source: 'submitted' });
+        const statusNode = document.getElementById('resultAnalysisStatus');
+        if (statusNode) {
+            statusNode.textContent = 'Preparing detailed analysis...';
+        }
+
+        try {
+            await Promise.race([
+                latestSubmitPersistPromise,
+                new Promise((resolve) => window.setTimeout(resolve, 1600))
+            ]);
+        } catch (error) {
+            // Continue with navigation even if persistence took too long.
+        }
+
+        window.location.href = targetUrl;
     }
 
     function getSectionInsightHint(sectionId) {
@@ -3305,7 +3363,7 @@
             insights.push('Balanced performance. Keep practising full mocks to improve consistency under time pressure.');
         }
 
-        persistAttemptForDashboard({
+        const attemptPayload = {
             examId: examRouteId,
             paperId: resolvedPaperId,
             score,
@@ -3321,7 +3379,12 @@
             weakTopics: weakTopicInsights,
             lowScoreWarnings,
             submittedAt: new Date().toISOString()
+        };
+
+        latestSubmitAnalysisUrl = getAnalysisUrl({
+            source: autoSubmitted || autoSubmitTriggered ? 'auto-submitted' : 'submitted'
         });
+        latestSubmitPersistPromise = persistAttemptForDashboard(attemptPayload);
 
         const sectionRowsHtml = sectionStats.map((section) => `
             <tr>
@@ -3491,14 +3554,25 @@
                         </section>
 
                         <div class="result-actions">
+                            <button class="result-action-btn" onclick="openPostSubmitAnalysis()">Open Full Analysis</button>
                             <button class="result-action-btn secondary" onclick="printResultLayout()">Print / Save PDF</button>
                             <button class="result-action-btn" onclick="location.reload()">Retake Test</button>
                             <button class="result-action-btn secondary" onclick="window.location.href='/'">Back to Dashboard</button>
                         </div>
+                        <p id="resultAnalysisStatus" class="result-subtext">Detailed analysis includes cutoff gap, topper comparison, and time intelligence.</p>
                     </div>
                 </div>
             `;
         }
+
+        const postSubmitStatusNode = document.getElementById('resultAnalysisStatus');
+        if (postSubmitStatusNode) {
+            postSubmitStatusNode.textContent = 'Opening complete analysis...';
+        }
+
+        window.setTimeout(() => {
+            void openPostSubmitAnalysis();
+        }, 700);
 
         isSubmissionInProgress = false;
     }

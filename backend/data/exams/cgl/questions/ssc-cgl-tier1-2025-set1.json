@@ -9,21 +9,21 @@
       "sectionId": "reasoning",
       "content": {
         "en": {
-          "questionText": "If each letter in TRAIN is shifted forward by 1, what is the new code?",
+          "questionText": "In the following question, select the related word from the given alternatives. Watt: Power :: Pascal: ?",
           "options": [
-            "USBJO",
-            "VTCKP",
-            "TRAIN",
-            "OJBSU"
+            "Energy",
+            "Temperature",
+            "Pressure",
+            "Force"
           ]
         },
         "hi": {
-          "questionText": "यदि TRAIN के प्रत्येक अक्षर को 1 स्थान आगे खिसकाया जाए, तो नया कोड क्या होगा?",
+          "questionText": "निम्नलिखित प्रश्न में दिए गए विकल्पों में से संबंधित शब्द का चयन कीजिए। वाट : शक्ति :: पास्कल : ?",
           "options": [
-            "USBJO",
-            "VTCKP",
-            "TRAIN",
-            "OJBSU"
+            "ऊर्जा",
+            "तापमान",
+            "दबाव",
+            "बल"
           ]
         }
       },
@@ -36,13 +36,21 @@
           null
         ]
       },
-      "correctOptionIndex": 0,
+      "correctOptionIndex": 2,
       "difficulty": "easy",
       "sourceYear": "2025",
-      "explanation": {
-        "en": "Shift each letter in TRAIN by 1 positions to get USBJO.",
-        "hi": "TRAIN के प्रत्येक अक्षर को 1 स्थान आगे बढ़ाने पर USBJO प्राप्त होता है।"
-      }
+      "en": {
+      "Energy": "Incorrect because its unit is Joule.",
+      "Temperature": "Incorrect because its unit is Kelvin.",
+      "Pressure": "Correct because Pascal is the unit of pressure.",
+      "Force": "Incorrect because its unit is Newton."
+    },
+    "hi": {
+      "Energy": "गलत क्योंकि इसकी इकाई जूल होती है।",
+      "Temperature": "गलत क्योंकि इसकी इकाई केल्विन होती है।",
+      "Pressure": "सही क्योंकि पास्कल दाब की इकाई है।",
+      "Force": "गलत क्योंकि इसकी इकाई न्यूटन होती है।"
+    }
     },
     {
       "questionId": "ssccgl2025s1-q002",

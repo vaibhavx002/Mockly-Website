@@ -42,6 +42,7 @@ const QUESTION_DATA_DIR = path.join(__dirname, 'data', 'questions');
 const EXAM_DATA_DIR = path.join(__dirname, 'data', 'exams');
 const EXAM_CATALOG_FILE = path.join(EXAM_DATA_DIR, 'catalog.json');
 const EXAM_CHAPTERWISE_FILE = path.join(EXAM_DATA_DIR, 'chapterwise.json');
+const EXAM_TOPICS_FILE_NAME = 'topics.json';
 const ASSET_DATA_DIR = path.join(__dirname, 'data', 'assets');
 
 app.disable('x-powered-by');
@@ -1513,6 +1514,304 @@ const getQuestionFilePath = (paperId, examId) => {
     return path.join(QUESTION_DATA_DIR, `${safePaperId}.json`);
 };
 
+const examTopicsMappingCache = new Map();
+
+const getExamTopicsFilePath = (examId) => {
+    const examFolderPath = getExamDataFolderPath(examId);
+    return examFolderPath ? path.join(examFolderPath, EXAM_TOPICS_FILE_NAME) : '';
+};
+
+const loadExamTopicsMapping = (examId) => {
+    const safeExamId = toSafeString(examId).toLowerCase();
+    const filePath = getExamTopicsFilePath(safeExamId);
+    if (!filePath) return null;
+
+    const payload = readJsonFileSafe(filePath);
+    if (!isPlainObject(payload)) return null;
+
+    return payload;
+};
+
+const getExamTopicsMapping = (examId) => {
+    const safeExamId = toSafeString(examId).toLowerCase();
+    if (!safeExamId) return null;
+
+    if (examTopicsMappingCache.has(safeExamId)) {
+        return examTopicsMappingCache.get(safeExamId);
+    }
+
+    const mapping = loadExamTopicsMapping(safeExamId);
+    examTopicsMappingCache.set(safeExamId, mapping || null);
+    return mapping || null;
+};
+
+const normalizeTaxonomyEntry = (source, fallback = {}) => {
+    const raw = source && typeof source === 'object' ? source : null;
+    if (!raw) return null;
+
+    const subjectId = toSafeIdentifier(raw.subjectId || raw.subject?.subjectId || raw.subject?.id || fallback.subjectId);
+    const chapterId = toSafeIdentifier(raw.chapterId || raw.chapter?.chapterId || raw.chapter?.id || fallback.chapterId);
+    const topicId = toSafeIdentifier(raw.topicId || raw.topic?.topicId || raw.topic?.id || fallback.topicId);
+
+    if (!subjectId || !chapterId || !topicId) {
+        return null;
+    }
+
+    const subjectName = toSafeString(raw.subjectName || raw.subject?.name || raw.subject?.title || fallback.subjectName)
+        || toTitleWords(subjectId);
+    const chapterName = toSafeString(raw.chapterName || raw.chapter?.name || raw.chapter?.title || fallback.chapterName)
+        || toTitleWords(chapterId);
+    const topicName = toSafeString(raw.topicName || raw.topic?.name || raw.topic?.title || fallback.topicName)
+        || toTitleWords(topicId);
+
+    return {
+        subjectId,
+        subjectName,
+        chapterId,
+        chapterName,
+        topicId,
+        topicName
+    };
+};
+
+const getInlinePaperTopicsConfig = (paperMetadata) => {
+    if (!isPlainObject(paperMetadata)) return null;
+
+    const inlineConfig = isPlainObject(paperMetadata?.topicMappings)
+        ? paperMetadata.topicMappings
+        : (isPlainObject(paperMetadata?.topics) ? paperMetadata.topics : null);
+
+    const sectionMappings = {};
+    const sections = Array.isArray(paperMetadata?.sections) ? paperMetadata.sections : [];
+    sections.forEach((section) => {
+        const sectionId = toSafeIdentifier(section?.sectionId);
+        if (!sectionId) return;
+
+        const normalized = normalizeTaxonomyEntry(section, {
+            subjectId: sectionId,
+            subjectName: toTitleWords(sectionId || 'subject')
+        });
+        if (normalized) {
+            sectionMappings[sectionId] = normalized;
+        }
+    });
+
+    if (!inlineConfig && !Object.keys(sectionMappings).length) {
+        return null;
+    }
+
+    const mergedBySection = {
+        ...(isPlainObject(inlineConfig?.bySection) ? inlineConfig.bySection : {}),
+        ...sectionMappings
+    };
+
+    return {
+        ...(inlineConfig || {}),
+        bySection: mergedBySection
+    };
+};
+
+const getPaperTopicsConfig = (examId, paperId, paperMetadata) => {
+    const mapping = getExamTopicsMapping(examId);
+    const filePaperMappings = mapping && typeof mapping === 'object'
+        ? (isPlainObject(mapping?.paperMappings)
+            ? mapping.paperMappings
+            : (isPlainObject(mapping?.papers) ? mapping.papers : {}))
+        : {};
+
+    const safePaperId = toSafeString(paperId).toLowerCase();
+    const fileConfig = filePaperMappings && typeof filePaperMappings === 'object'
+        ? filePaperMappings[safePaperId]
+        : null;
+    const inlineConfig = getInlinePaperTopicsConfig(paperMetadata);
+
+    const mergedConfig = {
+        byQuestionId: {
+            ...(isPlainObject(fileConfig?.byQuestionId) ? fileConfig.byQuestionId : {}),
+            ...(isPlainObject(inlineConfig?.byQuestionId) ? inlineConfig.byQuestionId : {})
+        },
+        byQuestionNumber: {
+            ...(isPlainObject(fileConfig?.byQuestionNumber) ? fileConfig.byQuestionNumber : {}),
+            ...(isPlainObject(inlineConfig?.byQuestionNumber) ? inlineConfig.byQuestionNumber : {})
+        },
+        bySection: {
+            ...(isPlainObject(fileConfig?.bySection) ? fileConfig.bySection : {}),
+            ...(isPlainObject(inlineConfig?.bySection) ? inlineConfig.bySection : {})
+        },
+        ranges: [
+            ...(Array.isArray(inlineConfig?.ranges) ? inlineConfig.ranges : []),
+            ...(Array.isArray(fileConfig?.ranges) ? fileConfig.ranges : [])
+        ]
+    };
+
+    const hasMappings = Object.keys(mergedConfig.byQuestionId).length
+        || Object.keys(mergedConfig.byQuestionNumber).length
+        || Object.keys(mergedConfig.bySection).length
+        || mergedConfig.ranges.length;
+
+    return hasMappings ? mergedConfig : null;
+};
+
+const buildSubjectTopicPool = (subject) => {
+    const pool = [];
+    const chapters = Array.isArray(subject?.chapters) ? subject.chapters : [];
+
+    chapters.forEach((chapter) => {
+        const chapterId = toSafeIdentifier(chapter?.chapterId);
+        const chapterName = toSafeString(chapter?.name) || toTitleWords(chapterId || 'chapter');
+        const topics = Array.isArray(chapter?.topics) ? chapter.topics : [];
+
+        topics.forEach((topic) => {
+            const topicId = toSafeIdentifier(topic?.topicId);
+            const topicName = toSafeString(topic?.name) || toTitleWords(topicId || 'topic');
+            if (!chapterId || !topicId) return;
+
+            pool.push({
+                chapterId,
+                chapterName,
+                topicId,
+                topicName
+            });
+        });
+    });
+
+    return pool;
+};
+
+const buildQuestionTaxonomyResolver = (examId, paperId, paperMetadata) => {
+    const safeExamId = toSafeString(examId).toLowerCase();
+    const safePaperId = toSafeString(paperId).toLowerCase();
+    const paperConfig = getPaperTopicsConfig(safeExamId, safePaperId, paperMetadata);
+
+    const byQuestionId = new Map();
+    const byQuestionNumber = new Map();
+    const bySection = new Map();
+    const ranges = [];
+
+    if (paperConfig) {
+        const questionIdConfig = isPlainObject(paperConfig?.byQuestionId) ? paperConfig.byQuestionId : {};
+        Object.entries(questionIdConfig).forEach(([questionIdRaw, value]) => {
+            const questionId = toSafeString(questionIdRaw);
+            const normalized = normalizeTaxonomyEntry(value);
+            if (questionId && normalized) {
+                byQuestionId.set(questionId, normalized);
+            }
+        });
+
+        const questionNumberConfig = isPlainObject(paperConfig?.byQuestionNumber) ? paperConfig.byQuestionNumber : {};
+        Object.entries(questionNumberConfig).forEach(([questionNumberRaw, value]) => {
+            const questionNumber = Number.parseInt(String(questionNumberRaw || ''), 10);
+            const normalized = normalizeTaxonomyEntry(value);
+            if (Number.isInteger(questionNumber) && questionNumber > 0 && normalized) {
+                byQuestionNumber.set(questionNumber, normalized);
+            }
+        });
+
+        const sectionConfig = isPlainObject(paperConfig?.bySection) ? paperConfig.bySection : {};
+        Object.entries(sectionConfig).forEach(([sectionIdRaw, value]) => {
+            const sectionId = toSafeIdentifier(sectionIdRaw);
+            const normalized = normalizeTaxonomyEntry(value, {
+                subjectId: sectionId,
+                subjectName: toTitleWords(sectionId || 'subject')
+            });
+            if (sectionId && normalized) {
+                bySection.set(sectionId, normalized);
+            }
+        });
+
+        const rangeConfig = Array.isArray(paperConfig?.ranges) ? paperConfig.ranges : [];
+        rangeConfig.forEach((range) => {
+            const start = Number.parseInt(String(range?.start || ''), 10);
+            const end = Number.parseInt(String(range?.end || ''), 10);
+            const normalized = normalizeTaxonomyEntry(range);
+            if (!Number.isInteger(start) || !Number.isInteger(end) || start <= 0 || end < start || !normalized) return;
+
+            ranges.push({ start, end, taxonomy: normalized });
+        });
+    }
+
+    const chapterwisePayload = getChapterwiseForExam(safeExamId);
+    const chapterwiseSubjects = Array.isArray(chapterwisePayload?.subjects) ? chapterwisePayload.subjects : [];
+    const sectionSubjectLookup = new Map();
+
+    chapterwiseSubjects.forEach((subject) => {
+        const subjectId = toSafeIdentifier(subject?.subjectId);
+        const subjectName = toSafeString(subject?.name).toLowerCase();
+        if (subjectId) {
+            sectionSubjectLookup.set(subjectId, subject);
+        }
+        if (subjectName) {
+            sectionSubjectLookup.set(subjectName, subject);
+        }
+    });
+
+    return ({ question, questionId, questionNumber, sectionId }) => {
+        const explicit = normalizeTaxonomyEntry(question, {
+            subjectId: sectionId,
+            subjectName: toTitleWords(sectionId || 'subject')
+        });
+        if (explicit) {
+            return explicit;
+        }
+
+        const safeQuestionId = toSafeString(questionId);
+        if (safeQuestionId && byQuestionId.has(safeQuestionId)) {
+            return byQuestionId.get(safeQuestionId);
+        }
+
+        if (byQuestionNumber.has(questionNumber)) {
+            return byQuestionNumber.get(questionNumber);
+        }
+
+        const rangeMatch = ranges.find((range) => questionNumber >= range.start && questionNumber <= range.end);
+        if (rangeMatch) {
+            return rangeMatch.taxonomy;
+        }
+
+        const safeSectionId = toSafeIdentifier(sectionId);
+        if (safeSectionId && bySection.has(safeSectionId)) {
+            return bySection.get(safeSectionId);
+        }
+
+        const sectionNameKey = toSafeString(sectionId).toLowerCase();
+        const chapterwiseSubject = sectionSubjectLookup.get(safeSectionId)
+            || sectionSubjectLookup.get(sectionNameKey)
+            || chapterwiseSubjects.find((subject) => {
+                const subjectName = toSafeString(subject?.name).toLowerCase();
+                return safeSectionId && subjectName && (subjectName.includes(safeSectionId) || safeSectionId.includes(subjectName));
+            });
+
+        if (chapterwiseSubject) {
+            const subjectId = toSafeIdentifier(chapterwiseSubject?.subjectId || safeSectionId || 'general');
+            const subjectName = toSafeString(chapterwiseSubject?.name) || toTitleWords(subjectId);
+            const topicPool = buildSubjectTopicPool(chapterwiseSubject);
+
+            if (topicPool.length) {
+                const selected = topicPool[(Math.max(1, questionNumber) - 1) % topicPool.length];
+                return {
+                    subjectId,
+                    subjectName,
+                    chapterId: selected.chapterId,
+                    chapterName: selected.chapterName,
+                    topicId: selected.topicId,
+                    topicName: selected.topicName
+                };
+            }
+        }
+
+        const fallbackSubjectId = safeSectionId || 'general';
+        const fallbackSubjectName = toTitleWords(fallbackSubjectId);
+        return {
+            subjectId: fallbackSubjectId,
+            subjectName: fallbackSubjectName,
+            chapterId: `${fallbackSubjectId}-mixed`,
+            chapterName: `${fallbackSubjectName} Mixed Concepts`,
+            topicId: `${fallbackSubjectId}-core`,
+            topicName: `${fallbackSubjectName} Core`
+        };
+    };
+};
+
 const validatePaperMetadata = (paper, examId, paperId) => {
     if (!isPlainObject(paper)) {
         return { ok: false, message: 'Paper metadata must be a JSON object.' };
@@ -1685,6 +1984,14 @@ const resolveQuestionContentByLanguage = (question, requestedLanguage) => {
 const normalizeQuestionMedia = (question) => {
     const media = isPlainObject(question?.media) ? question.media : {};
     const questionImageUrl = toSafeString(media.questionImageUrl || question?.questionImageUrl || question?.imageUrl) || null;
+    const explanationImageUrl = toSafeString(
+        media.explanationImageUrl
+        || media.explanationImage
+        || question?.explanationImageUrl
+        || question?.explanationImage
+        || question?.solutionImageUrl
+        || question?.solutionImage
+    ) || null;
 
     const rawOptionImageUrls = Array.isArray(media.optionImageUrls)
         ? media.optionImageUrls
@@ -1697,7 +2004,8 @@ const normalizeQuestionMedia = (question) => {
 
     return {
         questionImageUrl,
-        optionImageUrls
+        optionImageUrls,
+        explanationImageUrl
     };
 };
 
@@ -1707,19 +2015,136 @@ const resolveQuestionExplanation = (question, options = {}) => {
     const correctOptionIndex = Number(options.correctOptionIndex);
     const optionLabels = Array.isArray(options.optionLabels) ? options.optionLabels : [];
 
-    const fromString = toSafeString(question?.explanation);
-    if (fromString) {
-        return fromString;
+    const getInlineText = (value) => {
+        if (typeof value === 'string' || typeof value === 'number' || typeof value === 'boolean') {
+            return toSafeString(value);
+        }
+
+        if (Array.isArray(value)) {
+            const lines = value
+                .map((entry) => getInlineText(entry))
+                .filter((entry) => Boolean(entry));
+            return lines.join('\n');
+        }
+
+        return '';
+    };
+
+    const isReasonMap = (value) => {
+        if (!isPlainObject(value)) return false;
+        const keys = Object.keys(value);
+        if (!keys.length) return false;
+        if (keys.includes('questionText') || keys.includes('options')) return false;
+
+        return keys.some((key) => {
+            const direct = getInlineText(value[key]);
+            if (direct) return true;
+            if (isPlainObject(value[key])) {
+                return Object.values(value[key]).some((entry) => Boolean(getInlineText(entry)));
+            }
+            return false;
+        });
+    };
+
+    const formatReasonMap = (reasonMap) => {
+        if (!isReasonMap(reasonMap)) return '';
+
+        const lines = [];
+        const usedKeys = new Set();
+
+        optionLabels.forEach((optionLabel, index) => {
+            const safeOptionLabel = toSafeString(optionLabel);
+            if (!safeOptionLabel) return;
+
+            const candidateKeys = [
+                safeOptionLabel,
+                safeOptionLabel.toLowerCase(),
+                `option${index + 1}`,
+                `opt${index + 1}`,
+                String(index + 1),
+                ['a', 'b', 'c', 'd'][index]
+            ];
+
+            let reason = '';
+            let matchedKey = '';
+            for (const candidateKey of candidateKeys) {
+                if (!candidateKey) continue;
+                const direct = getInlineText(reasonMap[candidateKey]);
+                if (direct) {
+                    reason = direct;
+                    matchedKey = candidateKey;
+                    break;
+                }
+
+                const keyMatch = Object.keys(reasonMap).find((key) => toSafeString(key).toLowerCase() === candidateKey.toLowerCase());
+                if (keyMatch) {
+                    const fuzzy = getInlineText(reasonMap[keyMatch]);
+                    if (fuzzy) {
+                        reason = fuzzy;
+                        matchedKey = keyMatch;
+                        break;
+                    }
+                }
+            }
+
+            if (!reason) return;
+
+            usedKeys.add(toSafeString(matchedKey).toLowerCase());
+            lines.push(`Option ${index + 1} (${safeOptionLabel}): ${reason}`);
+        });
+
+        Object.entries(reasonMap).forEach(([key, value]) => {
+            const safeKey = toSafeString(key).toLowerCase();
+            const safeValue = getInlineText(value);
+            if (!safeValue || usedKeys.has(safeKey)) return;
+            lines.push(`${toSafeString(key)}: ${safeValue}`);
+        });
+
+        return lines.join('\n');
+    };
+
+    const fromInlineExplanation = getInlineText(question?.explanation);
+    if (fromInlineExplanation && !isPlainObject(question?.explanation)) {
+        return fromInlineExplanation;
     }
 
     const explanationObject = isPlainObject(question?.explanation) ? question.explanation : null;
     if (explanationObject) {
-        const explanationKeys = [requestedLanguage, resolvedLanguage, 'en', 'hi'];
+        const explanationKeys = [requestedLanguage, resolvedLanguage, 'en', 'hi', 'text', 'summary', 'detail', 'solution'];
         for (const key of explanationKeys) {
-            const candidate = toSafeString(explanationObject?.[key]);
+            const value = explanationObject?.[key];
+            const candidate = getInlineText(value);
             if (candidate) {
                 return candidate;
             }
+
+            const nested = formatReasonMap(value);
+            if (nested) {
+                return nested;
+            }
+        }
+
+        const reasonMapText = formatReasonMap(explanationObject);
+        if (reasonMapText) {
+            return reasonMapText;
+        }
+    }
+
+    const languageReasonMapCandidates = [
+        question?.[requestedLanguage],
+        question?.[resolvedLanguage],
+        question?.en,
+        question?.hi
+    ];
+    for (const candidateMap of languageReasonMapCandidates) {
+        const direct = getInlineText(candidateMap);
+        if (direct && !isPlainObject(candidateMap)) {
+            return direct;
+        }
+
+        const text = formatReasonMap(candidateMap);
+        if (text) {
+            return text;
         }
     }
 
@@ -1735,7 +2160,7 @@ const resolveQuestionExplanation = (question, options = {}) => {
     return 'Review this question with the official key and concept notes before the next mock.';
 };
 
-const validateAndNormalizeQuestionPayload = (questionPayload, examId, paperId, requestedLanguage) => {
+const validateAndNormalizeQuestionPayload = (questionPayload, examId, paperId, requestedLanguage, taxonomyResolver) => {
     const sourceQuestions = Array.isArray(questionPayload)
         ? questionPayload
         : (Array.isArray(questionPayload?.questions) ? questionPayload.questions : null);
@@ -1830,15 +2255,42 @@ const validateAndNormalizeQuestionPayload = (questionPayload, examId, paperId, r
             correctOptionIndex,
             optionLabels: resolvedContent.options
         });
+        const questionNumber = index + 1;
+        const taxonomy = typeof taxonomyResolver === 'function'
+            ? taxonomyResolver({
+                question,
+                questionId,
+                questionNumber,
+                sectionId
+            })
+            : null;
+
+        const normalizedTaxonomy = taxonomy && typeof taxonomy === 'object'
+            ? taxonomy
+            : {
+                subjectId: sectionId || 'general',
+                subjectName: toTitleWords(sectionId || 'General'),
+                chapterId: `${sectionId || 'general'}-mixed`,
+                chapterName: `${toTitleWords(sectionId || 'General')} Mixed Concepts`,
+                topicId: `${sectionId || 'general'}-core`,
+                topicName: `${toTitleWords(sectionId || 'General')} Core`
+            };
 
         normalizedQuestions.push({
             questionId,
             examId,
             paperId,
             sectionId,
+            subjectId: toSafeIdentifier(normalizedTaxonomy.subjectId),
+            subjectName: toSafeString(normalizedTaxonomy.subjectName),
+            chapterId: toSafeIdentifier(normalizedTaxonomy.chapterId),
+            chapterName: toSafeString(normalizedTaxonomy.chapterName),
+            topicId: toSafeIdentifier(normalizedTaxonomy.topicId),
+            topicName: toSafeString(normalizedTaxonomy.topicName),
             questionText: resolvedContent.questionText,
             options: resolvedContent.options,
             media,
+            explanationImageUrl: media.explanationImageUrl,
             availableLanguages: resolvedContent.availableLanguages,
             language: resolvedContent.resolvedLanguage,
             explanation,
@@ -1916,7 +2368,14 @@ const getValidatedPaperPayload = (examId, paperId, requestedLanguage = 'en') => 
     }
 
     const questionPayload = readJsonFileSafe(getQuestionFilePath(safePaperId, safeExamId));
-    const questionsValidation = validateAndNormalizeQuestionPayload(questionPayload, safeExamId, safePaperId, safeLanguage);
+    const taxonomyResolver = buildQuestionTaxonomyResolver(safeExamId, safePaperId, paper);
+    const questionsValidation = validateAndNormalizeQuestionPayload(
+        questionPayload,
+        safeExamId,
+        safePaperId,
+        safeLanguage,
+        taxonomyResolver
+    );
     if (!questionsValidation.ok) {
         return { ok: false, message: questionsValidation.message };
     }

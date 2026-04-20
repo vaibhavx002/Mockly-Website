@@ -17,8 +17,9 @@
     "correctOptionIndexRange": "0 to 3",
     "languageFallback": "Default fallback is English when Hindi content is missing, except SSC CGL non-English sections where Hindi is mandatory.",
     "sscCglLanguageRule": "SSC CGL requires content.en for every section. For non-English sections, content.hi is required. English section may remain English-only.",
-    "media": "questionImageUrl and optionImageUrls are optional",
-    "hindiExplanation": "If exam languageSupport includes hi, explanation.hi is strongly recommended."
+    "media": "questionImageUrl, optionImageUrls, and explanationImageUrl are optional",
+    "hindiExplanation": "If exam languageSupport includes hi, explanation.hi is strongly recommended.",
+    "taxonomyFields": "Optional per-question overrides: subjectId/subjectName/chapterId/chapterName/topicId/topicName. If missing, backend can resolve via <family>/topics.json or chapterwise fallback."
   },
   "example": {
     "questionId": "rrbgd-2025-s1-q001",
@@ -37,7 +38,8 @@
     },
     "media": {
       "questionImageUrl": null,
-      "optionImageUrls": [null, null, null, null]
+      "optionImageUrls": [null, null, null, null],
+      "explanationImageUrl": null
     },
     "correctOptionIndex": 2,
     "difficulty": "easy",

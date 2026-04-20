@@ -1,0 +1,122 @@
+{
+  "examId": "ssc-cgl",
+  "version": "1.0.0",
+  "paperMappings": {
+    "ssc-cgl-tier1-2025-set1": {
+      "bySection": {
+        "reasoning": {
+          "subjectId": "reasoning",
+          "subjectName": "General Intelligence",
+          "chapterId": "logical",
+          "chapterName": "Logical Reasoning",
+          "topicId": "logical-1",
+          "topicName": "Coding-Decoding"
+        },
+        "awareness": {
+          "subjectId": "awareness",
+          "subjectName": "General Awareness",
+          "chapterId": "general-awareness",
+          "chapterName": "General Awareness",
+          "topicId": "current-affairs",
+          "topicName": "Current Affairs"
+        },
+        "quant": {
+          "subjectId": "quant",
+          "subjectName": "Quantitative Aptitude",
+          "chapterId": "arithmetic",
+          "chapterName": "Arithmetic",
+          "topicId": "arithmetic-1",
+          "topicName": "Ratio"
+        },
+        "english": {
+          "subjectId": "english",
+          "subjectName": "English Comprehension",
+          "chapterId": "grammar",
+          "chapterName": "Grammar",
+          "topicId": "error-spotting",
+          "topicName": "Error Spotting"
+        }
+      },
+      "ranges": [
+        {
+          "start": 1,
+          "end": 8,
+          "subjectId": "reasoning",
+          "subjectName": "General Intelligence",
+          "chapterId": "logical",
+          "chapterName": "Logical Reasoning",
+          "topicId": "logical-1",
+          "topicName": "Coding-Decoding"
+        },
+        {
+          "start": 9,
+          "end": 16,
+          "subjectId": "reasoning",
+          "subjectName": "General Intelligence",
+          "chapterId": "logical",
+          "chapterName": "Logical Reasoning",
+          "topicId": "logical-2",
+          "topicName": "Blood Relations"
+        },
+        {
+          "start": 17,
+          "end": 25,
+          "subjectId": "reasoning",
+          "subjectName": "General Intelligence",
+          "chapterId": "logical",
+          "chapterName": "Logical Reasoning",
+          "topicId": "logical-3",
+          "topicName": "Syllogism"
+        },
+        {
+          "start": 51,
+          "end": 60,
+          "subjectId": "quant",
+          "subjectName": "Quantitative Aptitude",
+          "chapterId": "arithmetic",
+          "chapterName": "Arithmetic",
+          "topicId": "arithmetic-1",
+          "topicName": "Ratio"
+        },
+        {
+          "start": 61,
+          "end": 68,
+          "subjectId": "quant",
+          "subjectName": "Quantitative Aptitude",
+          "chapterId": "arithmetic",
+          "chapterName": "Arithmetic",
+          "topicId": "arithmetic-2",
+          "topicName": "Average"
+        },
+        {
+          "start": 69,
+          "end": 75,
+          "subjectId": "quant",
+          "subjectName": "Quantitative Aptitude",
+          "chapterId": "arithmetic",
+          "chapterName": "Arithmetic",
+          "topicId": "arithmetic-3",
+          "topicName": "Time & Work"
+        }
+      ],
+      "byQuestionNumber": {
+        "26": {
+          "subjectId": "awareness",
+          "subjectName": "General Awareness",
+          "chapterId": "history",
+          "chapterName": "History",
+          "topicId": "modern-history",
+          "topicName": "Modern History"
+        },
+        "76": {
+          "subjectId": "english",
+          "subjectName": "English Comprehension",
+          "chapterId": "vocabulary",
+          "chapterName": "Vocabulary",
+          "topicId": "synonyms-antonyms",
+          "topicName": "Synonyms and Antonyms"
+        }
+      }
+    }
+  }
+}

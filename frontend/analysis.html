@@ -57,7 +57,7 @@
                 </div>
 
                 <div class="analysis-actions">
-                    <a id="analysis-start-link" class="btn btn-primary" href="/#test">Start Mock</a>
+                    <a id="analysis-start-link" class="btn btn-primary" href="/#test">Reattempt Questions</a>
                     <button id="analysis-copy-link" class="btn btn-outline" type="button">Copy Link</button>
                 </div>
             </div>
@@ -66,30 +66,86 @@
         <section class="analysis-content">
             <div class="analysis-content-shell">
                 <p id="analysis-status" class="analysis-status" aria-live="polite">Preparing analysis...</p>
+                <div id="analysis-status-actions" class="analysis-status-actions" hidden>
+                    <a id="analysis-reattempt-link" class="btn btn-outline" href="/#test">Reattempt Questions</a>
+                    <a class="btn btn-primary" href="/all-exams">Explore Mock Tests</a>
+                </div>
 
                 <div id="analysis-summary" class="analysis-grid" hidden></div>
+
+                <section class="analysis-section" id="analysis-compare-section" hidden>
+                    <h2>Score Comparison</h2>
+                    <div id="analysis-compare-bars" class="analysis-compare-bars"></div>
+                </section>
+
+                <section class="analysis-section" id="analysis-sections-section" hidden>
+                    <h2>Section Diagnostics</h2>
+                    <div class="analysis-table-wrap">
+                        <table class="analysis-table">
+                            <thead>
+                                <tr>
+                                    <th>Section</th>
+                                    <th>Score</th>
+                                    <th>Accuracy</th>
+                                    <th>Attempt</th>
+                                    <th>Time Used</th>
+                                    <th>Signal</th>
+                                </tr>
+                            </thead>
+                            <tbody id="analysis-sections-body"></tbody>
+                        </table>
+                    </div>
+                </section>
 
                 <section class="analysis-section" id="analysis-insights-section" hidden>
                     <h2>Brief Analysis</h2>
                     <ul id="analysis-insights" class="analysis-insights"></ul>
                 </section>
 
-                <section class="analysis-section" id="analysis-table-section" hidden>
-                    <h2>Question Time vs Average</h2>
-                    <div class="analysis-table-wrap">
-                        <table class="analysis-table">
-                            <thead>
-                                <tr>
-                                    <th>Q No.</th>
-                                    <th>Status</th>
-                                    <th>Your Time</th>
-                                    <th>Avg Time</th>
-                                    <th>Topper Avg</th>
-                                    <th>Delta vs Avg</th>
-                                </tr>
-                            </thead>
-                            <tbody id="analysis-table-body"></tbody>
-                        </table>
+                <section class="analysis-section" id="analysis-action-plan-section" hidden>
+                    <h2>Next Mock Action Plan</h2>
+                    <ul id="analysis-action-plan" class="analysis-insights"></ul>
+                </section>
+
+                <section class="analysis-section" id="analysis-review-section" hidden>
+                    <h2>Section-wise Complete Explanations</h2>
+                    <div id="analysis-section-buttons" class="analysis-section-buttons"></div>
+                    <div class="analysis-review-filters">
+                        <label>
+                            Language
+                            <select id="analysis-filter-language">
+                                <option value="en">English</option>
+                                <option value="hi">Hindi</option>
+                            </select>
+                        </label>
+                        <label>
+                            Chapter
+                            <select id="analysis-filter-chapter">
+                                <option value="">All Chapters</option>
+                            </select>
+                        </label>
+                        <label>
+                            Topic
+                            <select id="analysis-filter-topic">
+                                <option value="">All Topics</option>
+                            </select>
+                        </label>
+                    </div>
+                    <div class="analysis-review-layout">
+                        <div id="analysis-review-groups" class="analysis-review-groups"></div>
+                        <article id="analysis-question-detail" class="analysis-question-detail">
+                            <h3 id="analysis-question-detail-title">Select a question</h3>
+                            <p id="analysis-question-detail-meta" class="analysis-question-detail-meta">Click any question button to view complete answer and explanation.</p>
+                            <p id="analysis-question-detail-text" class="analysis-question-detail-text">Question details will appear here.</p>
+                            <ul id="analysis-question-detail-options" class="analysis-question-detail-options"></ul>
+                            <div id="analysis-question-detail-answers" class="analysis-review-answer-row"></div>
+                            <div id="analysis-question-detail-time" class="analysis-question-time-row"></div>
+                            <p id="analysis-question-detail-explanation" class="analysis-review-explanation"><strong>Explanation:</strong> Complete explanation will appear here.</p>
+                            <figure id="analysis-question-detail-image-wrap" class="analysis-question-explanation-media" hidden>
+                                <img id="analysis-question-detail-image" alt="Explanation reference" loading="lazy">
+                                <figcaption id="analysis-question-detail-image-caption">Explanation image</figcaption>
+                            </figure>
+                        </article>
                     </div>
                 </section>
             </div>

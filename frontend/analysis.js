@@ -20,6 +20,7 @@
     const reviewSection = document.getElementById('analysis-review-section');
     const sectionButtonsNode = document.getElementById('analysis-section-buttons');
     const reviewGroupsNode = document.getElementById('analysis-review-groups');
+    const languageToggleNode = document.getElementById('analysis-language-toggle');
     const filterLanguageNode = document.getElementById('analysis-filter-language');
     const filterChapterNode = document.getElementById('analysis-filter-chapter');
     const filterTopicNode = document.getElementById('analysis-filter-topic');
@@ -157,8 +158,13 @@
     };
 
     const syncLanguageFilterControl = () => {
-        if (!filterLanguageNode) return;
-        filterLanguageNode.value = normalizeLanguage(currentLanguage);
+        const safeLanguage = normalizeLanguage(currentLanguage);
+        if (filterLanguageNode) {
+            filterLanguageNode.value = safeLanguage;
+        }
+        if (languageToggleNode) {
+            languageToggleNode.value = safeLanguage;
+        }
     };
 
     const updateLanguageInUrl = (language) => {
@@ -1044,57 +1050,17 @@
     };
 
     const ensureFilterBinding = () => {
+        if (languageToggleNode && languageToggleNode.dataset.bound !== '1') {
+            languageToggleNode.dataset.bound = '1';
+            languageToggleNode.addEventListener('change', async () => {
+                await applyQuestionLanguage(languageToggleNode.value);
+            });
+        }
+
         if (filterLanguageNode && filterLanguageNode.dataset.bound !== '1') {
             filterLanguageNode.dataset.bound = '1';
             filterLanguageNode.addEventListener('change', async () => {
-                const nextLanguage = normalizeLanguage(filterLanguageNode.value);
-                if (nextLanguage === currentLanguage) return;
-
-                const requestId = ++languageRequestId;
-                const previousLanguage = currentLanguage;
-                currentLanguage = nextLanguage;
-                updateLanguageInUrl(currentLanguage);
-
-                if (!currentQuery?.examId || !currentQuery?.paperId || !latestAnalysisPayload) {
-                    return;
-                }
-
-                setStatus('Switching question language...', {
-                    tone: 'info',
-                    showActions: false
-                });
-
-                try {
-                    const questionPayload = await loadQuestions({
-                        examId: currentQuery.examId,
-                        paperId: currentQuery.paperId,
-                        language: currentLanguage
-                    });
-
-                    if (requestId !== languageRequestId) return;
-
-                    const questionReviewItems = buildQuestionReviewItems(
-                        latestAnalysisPayload,
-                        questionPayload,
-                        latestChapterwisePayload
-                    );
-                    renderQuestionReview(questionReviewItems);
-
-                    setStatus('Language updated for question review.', {
-                        tone: 'success',
-                        showActions: false
-                    });
-                } catch (error) {
-                    if (requestId !== languageRequestId) return;
-
-                    currentLanguage = previousLanguage;
-                    syncLanguageFilterControl();
-                    updateLanguageInUrl(currentLanguage);
-                    setStatus('Unable to switch language right now. Keeping previous language.', {
-                        tone: 'warning',
-                        showActions: false
-                    });
-                }
+                await applyQuestionLanguage(filterLanguageNode.value);
             });
         }
 
@@ -1250,6 +1216,58 @@
     };
 
     const getOptionLabel = (index) => ['A', 'B', 'C', 'D'][index] || '?';
+
+    const applyQuestionLanguage = async (nextLanguageRaw) => {
+        const nextLanguage = normalizeLanguage(nextLanguageRaw);
+        if (nextLanguage === currentLanguage) return;
+
+        const requestId = ++languageRequestId;
+        const previousLanguage = currentLanguage;
+        currentLanguage = nextLanguage;
+        syncLanguageFilterControl();
+        updateLanguageInUrl(currentLanguage);
+
+        if (!currentQuery?.examId || !currentQuery?.paperId || !latestAnalysisPayload) {
+            return;
+        }
+
+        setStatus('Switching question language...', {
+            tone: 'info',
+            showActions: false
+        });
+
+        try {
+            const questionPayload = await loadQuestions({
+                examId: currentQuery.examId,
+                paperId: currentQuery.paperId,
+                language: currentLanguage
+            });
+
+            if (requestId !== languageRequestId) return;
+
+            const questionReviewItems = buildQuestionReviewItems(
+                latestAnalysisPayload,
+                questionPayload,
+                latestChapterwisePayload
+            );
+            renderQuestionReview(questionReviewItems);
+
+            setStatus('Language updated for question review.', {
+                tone: 'success',
+                showActions: false
+            });
+        } catch (error) {
+            if (requestId !== languageRequestId) return;
+
+            currentLanguage = previousLanguage;
+            syncLanguageFilterControl();
+            updateLanguageInUrl(currentLanguage);
+            setStatus('Unable to switch language right now. Keeping previous language.', {
+                tone: 'warning',
+                showActions: false
+            });
+        }
+    };
 
     const renderQuestionReview = (incomingItems) => {
         if (Array.isArray(incomingItems)) {

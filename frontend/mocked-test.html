@@ -1368,6 +1368,261 @@
             }
         }
 
+        @media (max-width: 900px) {
+            body {
+                display: flex;
+                flex-direction: column;
+                overflow: hidden;
+            }
+
+            .exam-header,
+            .section-bar,
+            .toolbar,
+            .bottom-bar {
+                flex-shrink: 0;
+            }
+
+            .exam-header {
+                height: auto;
+                min-height: 52px;
+                padding: 8px 10px;
+                gap: 8px;
+            }
+
+            .exam-header .logo-area {
+                min-width: 0;
+                gap: 8px;
+            }
+
+            .exam-header .logo-area .logo-icon {
+                width: 32px;
+                height: 32px;
+                font-size: 10px;
+            }
+
+            .exam-header .logo-area .exam-title {
+                font-size: 13px;
+                line-height: 1.25;
+            }
+
+            .exam-header .logo-area .exam-subtitle {
+                font-size: 10px;
+            }
+
+            .exam-header .candidate-info {
+                font-size: 11px;
+                text-align: right;
+            }
+
+            .exam-header .candidate-info .roll {
+                display: none;
+            }
+
+            .section-bar {
+                overflow-x: auto;
+                overflow-y: hidden;
+                white-space: nowrap;
+                padding: 0 6px;
+                gap: 6px;
+            }
+
+            .section-tab {
+                flex-shrink: 0;
+                padding: 0 12px;
+                font-size: 12px;
+            }
+
+            .toolbar {
+                height: auto;
+                padding: 6px 8px;
+                flex-direction: column;
+                align-items: stretch;
+                gap: 6px;
+            }
+
+            .toolbar-left,
+            .toolbar-right {
+                width: 100%;
+                overflow-x: auto;
+                overflow-y: hidden;
+                white-space: nowrap;
+                gap: 6px;
+                padding-bottom: 2px;
+            }
+
+            .toolbar-right {
+                justify-content: space-between;
+            }
+
+            .btn {
+                padding: 7px 10px;
+                font-size: 11px;
+            }
+
+            .toolbar-separator {
+                display: none;
+            }
+
+            .main-content {
+                flex: 1;
+                min-height: 0;
+                height: auto;
+                flex-direction: column;
+            }
+
+            .question-panel {
+                border-right: none;
+                border-bottom: 1px solid #d0d5dd;
+                min-height: 0;
+            }
+
+            .question-lang-bar {
+                padding: 8px 12px;
+            }
+
+            .question-body {
+                padding: 14px 12px 18px;
+            }
+
+            .option-item {
+                padding: 10px 12px;
+                gap: 8px;
+            }
+
+            .palette-panel {
+                width: 100%;
+                min-width: 0;
+                height: 240px;
+                max-height: 42vh;
+                border-left: none;
+                border-top: 1px solid #d0d5dd;
+            }
+
+            .palette-header {
+                text-align: left;
+                padding: 8px 12px;
+                font-size: 12px;
+            }
+
+            .palette-legend {
+                grid-template-columns: 1fr 1fr;
+                padding: 8px 10px;
+            }
+
+            .legend-item {
+                font-size: 10px;
+            }
+
+            .palette-grid {
+                grid-template-columns: repeat(8, minmax(0, 1fr));
+                gap: 5px;
+            }
+
+            .answered-counter {
+                padding: 8px;
+            }
+
+            .counter-item .counter-val {
+                font-size: 16px;
+            }
+
+            .counter-item .counter-label {
+                font-size: 9px;
+            }
+
+            .bottom-bar {
+                height: 44px;
+                padding: 0 8px;
+                gap: 8px;
+            }
+
+            .btn-submit,
+            .btn-qpaper {
+                font-size: 11px;
+                padding: 7px 10px;
+            }
+        }
+
+        @media (max-width: 640px) {
+            .exam-header .candidate-info {
+                display: none;
+            }
+
+            .exam-header .logo-area .exam-subtitle {
+                display: none;
+            }
+
+            .section-tab {
+                font-size: 11px;
+                padding: 0 10px;
+            }
+
+            .section-tab .section-count {
+                margin-left: 5px;
+                font-size: 9px;
+                padding: 1px 5px;
+            }
+
+            .lang-btn {
+                padding: 3px 8px;
+                font-size: 10px;
+            }
+
+            .question-lang-bar .q-number {
+                font-size: 12px;
+            }
+
+            .question-text {
+                margin-bottom: 16px;
+            }
+
+            .zoom-label {
+                display: none;
+            }
+
+            .zoom-btn {
+                width: 26px;
+                height: 26px;
+                font-size: 13px;
+            }
+
+            .timer-box {
+                padding: 4px 8px;
+                gap: 6px;
+            }
+
+            .timer-box .timer-label {
+                font-size: 10px;
+            }
+
+            .timer-box .timer-value {
+                font-size: 14px;
+                letter-spacing: 1px;
+            }
+
+            .palette-panel {
+                height: 220px;
+            }
+
+            .palette-grid {
+                grid-template-columns: repeat(6, minmax(0, 1fr));
+            }
+
+            .palette-btn {
+                font-size: 11px;
+            }
+
+            .bottom-bar {
+                justify-content: stretch;
+            }
+
+            .btn-submit,
+            .btn-qpaper {
+                flex: 1;
+                text-align: center;
+            }
+        }
+
         /* SCROLLBAR */
         ::-webkit-scrollbar { width: 8px; }
         ::-webkit-scrollbar-track { background: #f0f0f0; }

@@ -1,3 +1,8 @@
+process.env.MOCKLY_ACCESS_TOKEN_SECRET = process.env.MOCKLY_ACCESS_TOKEN_SECRET || 'mockly-smoke-test-secret';
+process.env.MOCKLY_ENABLE_DEMO_BOOTSTRAP = process.env.MOCKLY_ENABLE_DEMO_BOOTSTRAP || 'true';
+process.env.MOCKLY_ADMIN_EMAILS = process.env.MOCKLY_ADMIN_EMAILS || 'demo@mockly.in';
+process.env.MOCKLY_PERSISTENCE_DRIVER = process.env.MOCKLY_PERSISTENCE_DRIVER || 'json-kv';
+
 const { app, EXAMS } = require('./server');
 
 const resolveSmokeExam = () => {
@@ -217,9 +222,9 @@ const run = async () => {
                 && homeHtml.includes('id="dashboard-recent-activity"')
                 && homeHtml.includes('id="dashboard-preferences-form"'),
             trustStripBindingsReady: homeResponse.ok
-                && homeHtml.includes('id="trust-aspirants-value"')
-                && homeHtml.includes('id="trust-selections-value"')
-                && homeHtml.includes('id="trust-rating-value"'),
+                && homeHtml.includes('id="hero-slide1-stat1-num"')
+                && homeHtml.includes('id="hero-slide1-stat2-num"')
+                && homeHtml.includes('id="hero-slide1-stat3-num"'),
             examTrackStreamFiltersReady: [
                 'data-filter="ssc"',
                 'data-filter="rrb"',

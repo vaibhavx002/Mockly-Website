@@ -2964,6 +2964,16 @@
             ? `<img class="question-image" src="${escapeHtml(data.questionImageUrl)}" alt="Question visual" onerror="this.style.display='none'">`
             : '';
 
+        // Analogy formatting: if question contains '\n', split and bold the second part
+        let formattedQuestionText = '';
+        if (questionText.includes('\n')) {
+            const [first, ...rest] = questionText.split('\n');
+            const second = rest.join('\n');
+            formattedQuestionText = `${escapeHtml(first)}<br><b>${escapeHtml(second)}</b>`;
+        } else {
+            formattedQuestionText = escapeHtml(questionText);
+        }
+
         let optionsHTML = '';
         options.forEach((opt, idx) => {
             const checked = qState[currentQ].selected === idx ? 'checked' : '';
@@ -2984,7 +2994,7 @@
         });
 
         document.getElementById('questionBody').innerHTML = `
-            <div class="question-text">${escapeHtml(questionText)}</div>
+            <div class="question-text">${formattedQuestionText}</div>
             ${questionImageHtml}
             <ul class="options-list">${optionsHTML}</ul>
         `;

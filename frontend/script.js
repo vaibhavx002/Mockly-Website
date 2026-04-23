@@ -223,9 +223,9 @@ document.addEventListener('DOMContentLoaded', async () => {
     // === Exam Hub Filters + Reveal ===
     const examFilterWrap = document.getElementById('exam-filter-chips');
     const examGrid = document.getElementById('exam-grid');
-    const trustAspirantsValue = document.getElementById('trust-aspirants-value');
-    const trustSelectionsValue = document.getElementById('trust-selections-value');
-    const trustRatingValue = document.getElementById('trust-rating-value');
+    const trustAspirantsValue = document.getElementById('trust-aspirants-value') || heroSlide1Stat1Num;
+    const trustSelectionsValue = document.getElementById('trust-selections-value') || heroSlide1Stat2Num;
+    const trustRatingValue = document.getElementById('trust-rating-value') || heroSlide1Stat3Num;
     const mockLaunchShell = document.getElementById('mock-launch-shell');
     const mockLaunchCopy = document.getElementById('mock-launch-copy');
     const selectedExamTitle = document.getElementById('selected-exam-title');
@@ -382,10 +382,15 @@ document.addEventListener('DOMContentLoaded', async () => {
     const PLATFORM_STATS_API_ENDPOINT = `${API_BASE_URL}/stats`;
     const AUTH_LOGIN_API_ENDPOINT = `${API_BASE_URL}/auth/login`;
     const AUTH_SIGNUP_API_ENDPOINT = `${API_BASE_URL}/auth/signup`;
+    const AUTH_SIGNUP_VERIFY_API_ENDPOINT = `${API_BASE_URL}/auth/signup/verify`;
+    const AUTH_RESEND_VERIFICATION_API_ENDPOINT = `${API_BASE_URL}/auth/verification/resend`;
+    const AUTH_FORGOT_PASSWORD_API_ENDPOINT = `${API_BASE_URL}/auth/forgot-password`;
+    const AUTH_RESET_PASSWORD_API_ENDPOINT = `${API_BASE_URL}/auth/reset-password`;
     const AUTH_SESSION_API_ENDPOINT = `${API_BASE_URL}/auth/session`;
     const AUTH_REFRESH_API_ENDPOINT = `${API_BASE_URL}/auth/refresh`;
     const AUTH_LOGOUT_API_ENDPOINT = `${API_BASE_URL}/auth/logout`;
     const API_TIMEOUT_MS = 5000;
+    const AUTH_API_TIMEOUT_MS = 15000;
 
     let examCatalog = [...fallbackExamCatalog];
     let examById = new Map(examCatalog.map((exam) => [exam.id, exam]));
@@ -676,10 +681,24 @@ document.addEventListener('DOMContentLoaded', async () => {
                 }
 
                 const message = payload?.message || `Request failed with status ${response.status}`;
-                throw new Error(message);
+                const requestError = new Error(message);
+                requestError.status = response.status;
+                requestError.payload = payload;
+                throw requestError;
             }
 
             return payload;
+        } catch (error) {
+            const errorName = String(error?.name || '').trim();
+            const errorMessage = String(error?.message || '').trim().toLowerCase();
+            if (errorName === 'AbortError' || errorMessage.includes('aborted')) {
+                const timeoutError = new Error('The request took too long. Please retry in a moment.');
+                timeoutError.code = 'REQUEST_TIMEOUT';
+                timeoutError.status = 408;
+                throw timeoutError;
+            }
+
+            throw error;
         } finally {
             clearTimeout(timeoutHandle);
         }
@@ -721,15 +740,62 @@ document.addEventListener('DOMContentLoaded', async () => {
         };
     };
 
+    const getExamArrangementMeta = (exam) => {
+        const tags = Array.isArray(exam?.tags) ? exam.tags : [];
+        const levelLabel = String(exam?.recommendedLevel || '').trim().toLowerCase();
+        const stream = String(exam?.stream || '').trim().toUpperCase();
+
+        let score = 0;
+        let spotlightLabel = 'Candidate Pick';
+
+        if (tags.includes('popular')) {
+            score += 40;
+            spotlightLabel = 'Most Chosen';
+        }
+
+        if (tags.includes('beginner')) {
+            score += 22;
+            if (spotlightLabel === 'Candidate Pick') {
+                spotlightLabel = 'Strong Starter';
+            }
+        }
+
+        if (levelLabel.includes('moderate')) {
+            score += 12;
+        } else if (levelLabel.includes('beginner')) {
+            score += 10;
+        } else if (levelLabel.includes('advanced')) {
+            score += 6;
+            if (spotlightLabel === 'Candidate Pick') {
+                spotlightLabel = 'Advanced Focus';
+            }
+        }
+
+        if (stream === 'SSC') {
+            score += 16;
+        } else if (stream === 'RRB') {
+            score += 12;
+        } else if (stream === 'UPSC') {
+            score += 8;
+        }
+
+        return {
+            score,
+            spotlightLabel
+        };
+    };
+
     const getPersonalizedCatalog = () => {
         const fallbackOrder = new Map(examCatalog.map((exam, index) => [exam.id, index]));
 
         return [...examCatalog].sort((leftExam, rightExam) => {
-            if (!authSession.isAuthenticated) {
-                return (fallbackOrder.get(leftExam.id) || 0) - (fallbackOrder.get(rightExam.id) || 0);
-            }
+            const leftArrangementScore = getExamArrangementMeta(leftExam).score;
+            const rightArrangementScore = getExamArrangementMeta(rightExam).score;
+            const leftPersonalizationScore = authSession.isAuthenticated ? getExamPersonalizationScore(leftExam.id) : 0;
+            const rightPersonalizationScore = authSession.isAuthenticated ? getExamPersonalizationScore(rightExam.id) : 0;
+            const scoreDelta = (rightArrangementScore + (rightPersonalizationScore * 10))
+                - (leftArrangementScore + (leftPersonalizationScore * 10));
 
-            const scoreDelta = getExamPersonalizationScore(rightExam.id) - getExamPersonalizationScore(leftExam.id);
             if (scoreDelta !== 0) return scoreDelta;
 
             return (fallbackOrder.get(leftExam.id) || 0) - (fallbackOrder.get(rightExam.id) || 0);
@@ -828,8 +894,175 @@ document.addEventListener('DOMContentLoaded', async () => {
             tags: tagsFromApi.length ? tagsFromApi : [normalizedStream.toLowerCase()],
             recommendedDuration: String(examItem?.recommendedDuration || '').trim() || '20 mins',
             recommendedLevel: String(examItem?.recommendedLevel || '').trim() || 'Moderate',
+            candidateFit: String(examItem?.candidateFit || '').trim(),
+            selectionNote: String(examItem?.selectionNote || '').trim(),
+            supportPoints: Array.isArray(examItem?.supportPoints)
+                ? examItem.supportPoints.map((item) => String(item || '').trim()).filter(Boolean).slice(0, 3)
+                : [],
             paperConfig: normalizePaperConfig(examItem?.paperConfig, examId),
             ctaHref: '#test'
+        };
+    };
+
+    const examCardProfilesById = {
+        'ssc-cgl': {
+            candidateFit: 'Graduates targeting a serious SSC selection path with tier-wise preparation.',
+            supportPoints: [
+                'Full-length mocks for stable speed and accuracy growth.',
+                'Tier-focused revision rhythm with PYQ-backed practice.',
+                'Useful when you want measurable score improvement every week.'
+            ],
+            selectionNote: 'Best pick if you want a balanced mock plan with stronger cutoff awareness.'
+        },
+        'ssc-chsl': {
+            candidateFit: 'Candidates building fundamentals before moving into tougher competition bands.',
+            supportPoints: [
+                'Simple mock flow for strengthening basics without pressure.',
+                'Chapter-wise practice support for daily consistency.',
+                'Helpful when you are rebuilding confidence in quant and reasoning.'
+            ],
+            selectionNote: 'A good starting track if you need comfort, repetition, and clean fundamentals first.'
+        },
+        'rrb-ntpc': {
+            candidateFit: 'Railway aspirants who need speed control, accuracy, and paper-pattern familiarity.',
+            supportPoints: [
+                'Timed mock practice designed for fast decision-making.',
+                'Good mix of question variety for real-paper rhythm.',
+                'Useful when you want strong score stability under time pressure.'
+            ],
+            selectionNote: 'Choose this if speed management is as important as score improvement for you.'
+        },
+        'rrb-group-d': {
+            candidateFit: 'Beginner-friendly railway preparation with a focus on repeat practice and retention.',
+            supportPoints: [
+                'Daily revision-friendly mock flow for steady progress.',
+                'Supports memory-based repetition across common weak zones.',
+                'Good when you want an easier entry point without losing exam relevance.'
+            ],
+            selectionNote: 'Strong option if you want a simpler preparation track with high repetition.'
+        },
+        'upsc-prelims': {
+            candidateFit: 'UPSC aspirants who already have base coverage and need sharper GS judgment.',
+            supportPoints: [
+                'Concept-heavy mocks with stronger elimination-based practice.',
+                'Better for candidates managing current affairs with static overlap.',
+                'Useful when you need depth, not just more questions.'
+            ],
+            selectionNote: 'Pick this when you are ready for tougher analysis and discipline-driven mock review.'
+        },
+        'upsc-csat': {
+            candidateFit: 'Candidates treating aptitude as a risk area and wanting timed CSAT control.',
+            supportPoints: [
+                'Focused practice for aptitude, comprehension, and decision speed.',
+                'Useful when qualifying CSAT feels uncertain or inconsistent.',
+                'Supports smarter solving under time pressure.'
+            ],
+            selectionNote: 'Best for aspirants who want a practical CSAT safety plan before the exam window.'
+        }
+    };
+
+    const getExamLanguageLabel = (paperConfig) => {
+        const languages = Array.isArray(paperConfig?.languageSupport)
+            ? paperConfig.languageSupport
+                .map((language) => String(language || '').trim().toLowerCase())
+                .filter(Boolean)
+            : [];
+
+        if (!languages.length) {
+            return 'English';
+        }
+
+        const uniqueLanguages = Array.from(new Set(languages));
+        const hasEnglish = uniqueLanguages.includes('en');
+        const hasHindi = uniqueLanguages.includes('hi');
+
+        if (hasEnglish && hasHindi) {
+            return 'English + Hindi';
+        }
+
+        if (hasEnglish) {
+            return uniqueLanguages.length > 1 ? 'English + Regional' : 'English';
+        }
+
+        if (hasHindi) {
+            return uniqueLanguages.length > 1 ? 'Hindi + Regional' : 'Hindi';
+        }
+
+        return uniqueLanguages.length > 1 ? 'Multi-language' : uniqueLanguages[0].toUpperCase();
+    };
+
+    const getDefaultExamCardProfile = (exam) => {
+        const tags = Array.isArray(exam?.tags) ? exam.tags : [];
+        const normalizedStream = String(exam?.stream || '').trim().toUpperCase();
+        const isBeginner = tags.includes('beginner');
+        const isAdvanced = tags.includes('advanced');
+        const isBilingual = tags.includes('bilingual');
+
+        let candidateFit = 'Candidates who want an exam-specific mock path with guided next steps.';
+        let supportPoints = [
+            'Exam-specific mocks designed to improve confidence with real practice.',
+            'Clear starting point if you want structure instead of random test hopping.',
+            'Helps convert daily effort into a more focused attempt plan.'
+        ];
+        let selectionNote = 'Choose this track if it matches the exam you want to practice seriously this week.';
+
+        if (normalizedStream === 'SSC') {
+            candidateFit = isBeginner
+                ? 'SSC aspirants building basics with a safer, more confidence-first preparation flow.'
+                : 'SSC candidates aiming to improve ranking through regular timed practice.';
+            supportPoints = [
+                'Structured mock rhythm for quant, reasoning, and general awareness.',
+                'Useful when you need better speed plus fewer avoidable mistakes.',
+                'Works well for aspirants who want consistent improvement tracking.'
+            ];
+            selectionNote = 'Strong fit if SSC is your main target and you want a cleaner mock routine.';
+        } else if (normalizedStream === 'RRB') {
+            candidateFit = isBeginner
+                ? 'Railway aspirants starting early and needing repeat-friendly preparation.'
+                : 'Railway candidates who want faster solving and stronger paper familiarity.';
+            supportPoints = [
+                'Timed practice that supports speed, accuracy, and question selection.',
+                'Good for candidates who want railway-focused mock discipline.',
+                'Helps turn revision into better performance under exam pressure.'
+            ];
+            selectionNote = 'Useful if your railway preparation needs more structure and real test rhythm.';
+        } else if (normalizedStream === 'UPSC') {
+            candidateFit = isAdvanced
+                ? 'UPSC aspirants who need deeper analysis, sharper judgment, and disciplined revision.'
+                : 'UPSC candidates looking for a guided practice path before full exam pressure.';
+            supportPoints = [
+                'Supports concept clarity alongside timed attempt control.',
+                'Useful when one weak area can affect your overall confidence.',
+                'Better for disciplined mock review than casual question practice.'
+            ];
+            selectionNote = 'Pick this when UPSC is your serious focus and you want more deliberate practice.';
+        }
+
+        if (isBilingual) {
+            supportPoints[2] = 'Language flexibility helps if you revise in both English and Hindi.';
+        }
+
+        return {
+            candidateFit,
+            supportPoints,
+            selectionNote
+        };
+    };
+
+    const getExamCardProfile = (exam) => {
+        const mappedProfile = examCardProfilesById[exam.id] || {};
+        const fallbackProfile = getDefaultExamCardProfile(exam);
+        const supportPoints = Array.isArray(exam?.supportPoints) && exam.supportPoints.length
+            ? exam.supportPoints
+            : (Array.isArray(mappedProfile.supportPoints) && mappedProfile.supportPoints.length
+                ? mappedProfile.supportPoints
+                : fallbackProfile.supportPoints);
+
+        return {
+            candidateFit: String(exam?.candidateFit || mappedProfile.candidateFit || fallbackProfile.candidateFit).trim(),
+            supportPoints: supportPoints.slice(0, 3),
+            selectionNote: String(exam?.selectionNote || mappedProfile.selectionNote || fallbackProfile.selectionNote).trim(),
+            languageLabel: getExamLanguageLabel(exam?.paperConfig)
         };
     };
 
@@ -920,7 +1153,7 @@ document.addEventListener('DOMContentLoaded', async () => {
                 trustRatingValue.textContent = rating.toFixed(1);
             }
         } catch (error) {
-            // Keep default trust-strip values when live stats API is unavailable.
+            // Keep default hero/trust stats when live stats API is unavailable.
         }
     };
 
@@ -1283,10 +1516,41 @@ document.addEventListener('DOMContentLoaded', async () => {
 
         const catalogForRender = getPersonalizedCatalog();
 
-        examGrid.innerHTML = catalogForRender.map((exam) => {
+        examGrid.innerHTML = catalogForRender.map((exam, index) => {
             const meta = getExamPersonalizationMeta(exam.id);
+            const cardProfile = getExamCardProfile(exam);
+            const arrangementMeta = getExamArrangementMeta(exam);
+            const isFeaturedCard = index === 0;
+            const supportPoints = isFeaturedCard
+                ? cardProfile.supportPoints.slice(0, 3)
+                : cardProfile.supportPoints.slice(0, 2);
             const badgeMarkup = meta.badgeText
                 ? `<span class="exam-personal-chip">${meta.badgeText}</span>`
+                : '';
+            const spotlightMarkup = isFeaturedCard
+                ? `<span class="exam-spotlight-chip">${arrangementMeta.spotlightLabel}</span>`
+                : '';
+            const detailMarkup = [
+                { iconClass: 'fa-regular fa-clock', label: exam.recommendedDuration },
+                { iconClass: 'fa-solid fa-signal', label: exam.recommendedLevel },
+                { iconClass: 'fa-solid fa-language', label: cardProfile.languageLabel }
+            ].map((detail) => `
+                <span class="exam-detail-chip">
+                    <i class="${detail.iconClass}" aria-hidden="true"></i>
+                    ${detail.label}
+                </span>
+            `).join('');
+            const supportMarkup = supportPoints.length
+                ? `
+                    <ul class="exam-card-benefits">
+                        ${supportPoints.map((point) => `
+                            <li>
+                                <i class="fa-solid fa-check" aria-hidden="true"></i>
+                                <span>${point}</span>
+                            </li>
+                        `).join('')}
+                    </ul>
+                `
                 : '';
             const progressMarkup = meta.launchCount > 0
                 ? `<p class="exam-progress-note">${meta.launchCount} mock${meta.launchCount > 1 ? 's' : ''} started${meta.recommendationCount > 0 ? ` • ${meta.recommendationCount} recommendation${meta.recommendationCount > 1 ? 's' : ''}` : ''}</p>`
@@ -1358,19 +1622,27 @@ document.addEventListener('DOMContentLoaded', async () => {
                 : '';
 
             return `
-            <article class="exam-card reveal-up in-view" data-tags="${exam.tags.join(' ')}" data-exam-id="${exam.id}" aria-current="false">
+            <article class="exam-card${isFeaturedCard ? ' featured' : ''} reveal-up in-view" data-tags="${exam.tags.join(' ')}" data-exam-id="${exam.id}" aria-current="false">
                 <div class="exam-card-top">
                     <span class="exam-icon"><i class="${exam.iconClass}"></i></span>
                     <div class="exam-card-meta">
+                        ${spotlightMarkup}
                         <span class="exam-pill">${exam.stream}</span>
                         ${badgeMarkup}
                     </div>
                 </div>
+                <div class="exam-card-fit">
+                    <span class="exam-card-fit-label">Best for</span>
+                    <strong>${cardProfile.candidateFit}</strong>
+                </div>
                 <h3>${exam.title}</h3>
-                <p>${exam.description}</p>
+                <p class="exam-card-copy">${exam.description}</p>
+                <div class="exam-card-highlights">${detailMarkup}</div>
+                ${supportMarkup}
                 ${progressMarkup}
                 ${scoreMarkup}
-                <a href="${exam.ctaHref}" class="exam-card-btn" data-exam-id="${exam.id}" aria-label="Start free mock for ${exam.title}">Start Free Mock</a>
+                <p class="exam-card-selection-note">${cardProfile.selectionNote}</p>
+                <a href="${exam.ctaHref}" class="exam-card-btn" data-exam-id="${exam.id}" aria-label="Choose ${exam.title} exam track">${isFeaturedCard ? 'Start with This Track' : 'Choose This Track'}</a>
             </article>
         `;
         }).join('');
@@ -2370,22 +2642,39 @@ document.addEventListener('DOMContentLoaded', async () => {
 
     const modalTitle = document.getElementById('modal-title');
     const modalSubtitle = document.getElementById('modal-subtitle');
+    const authStepChip = document.getElementById('auth-step-chip');
     const loginTab = document.getElementById('login-tab');
     const signupTab = document.getElementById('signup-tab');
     const loginForm = document.getElementById('login-form');
     const signupForm = document.getElementById('signup-form');
+    const verifyForm = document.getElementById('verify-form');
+    const forgotForm = document.getElementById('forgot-form');
+    const resetForm = document.getElementById('reset-form');
     const footerText = document.getElementById('modal-footer-text');
     const authStatus = document.getElementById('auth-status');
     const toggleAuthModeBtn = document.getElementById('toggle-auth-mode');
     const passwordToggles = document.querySelectorAll('.toggle-password');
     const loginEmailInput = document.getElementById('login-email');
     const loginPasswordInput = document.getElementById('login-password');
+    const forgotPasswordTrigger = document.getElementById('forgot-password-trigger');
+    const forgotEmailInput = document.getElementById('forgot-email');
     const signupNameInput = document.getElementById('signup-name');
     const signupPhoneInput = document.getElementById('signup-phone');
     const signupEmailInput = document.getElementById('signup-email');
     const signupPasswordInput = document.getElementById('signup-password');
     const signupConfirmPasswordInput = document.getElementById('signup-confirm-password');
     const signupTermsInput = signupForm ? signupForm.querySelector('.terms-check input[type="checkbox"]') : null;
+    const verifyOtpInput = document.getElementById('verify-otp');
+    const verifyEmailDisplay = document.getElementById('verify-email-display');
+    const resendVerificationBtn = document.getElementById('resend-verification-btn');
+    const backToSignupBtn = document.getElementById('back-to-signup-btn');
+    const backToLoginBtn = document.getElementById('back-to-login-btn');
+    const resetOtpInput = document.getElementById('reset-otp');
+    const resetPasswordInput = document.getElementById('reset-password');
+    const resetConfirmPasswordInput = document.getElementById('reset-confirm-password');
+    const resetEmailDisplay = document.getElementById('reset-email-display');
+    const resendResetBtn = document.getElementById('resend-reset-btn');
+    const resetBackToLoginBtn = document.getElementById('reset-back-to-login-btn');
 
     const dashboardModal = document.getElementById('dashboard-modal');
     const closeDashboardModalBtn = document.getElementById('close-dashboard-modal');
@@ -2429,7 +2718,11 @@ document.addEventListener('DOMContentLoaded', async () => {
     let activeDashboardTab = 'performance';
     let dashboardDataCache = null;
 
-    let isLoginMode = true;
+    let authView = 'login';
+    let authIntent = 'login';
+    let pendingVerificationEmail = '';
+    let pendingVerificationName = '';
+    let pendingResetEmail = '';
 
     const escapeHtml = (value) => String(value ?? '')
         .replace(/&/g, '&amp;')
@@ -2479,8 +2772,14 @@ document.addEventListener('DOMContentLoaded', async () => {
     const setAuthStatus = (message = '', type = 'info') => {
         if (!authStatus) return;
 
-        authStatus.textContent = String(message || '').trim();
-        authStatus.classList.remove('success', 'error');
+        const normalizedMessage = String(message || '').trim();
+        authStatus.textContent = normalizedMessage;
+        authStatus.classList.remove('success', 'error', 'is-empty');
+
+        if (!normalizedMessage) {
+            authStatus.classList.add('is-empty');
+            return;
+        }
 
         if (type === 'success') {
             authStatus.classList.add('success');
@@ -3864,44 +4163,133 @@ document.addEventListener('DOMContentLoaded', async () => {
     const applyPendingMockContext = () => {
         if (!pendingMockExam) return;
 
-        if (isLoginMode) {
-            modalSubtitle.textContent = `Log in to continue with ${pendingMockExam.title} mock.`;
-        } else {
-            modalSubtitle.textContent = `Create an account to start your ${pendingMockExam.title} mock.`;
+        if (authIntent === 'login') {
+            modalSubtitle.textContent = authView === 'forgot' || authView === 'reset'
+                ? `Recover access to continue with ${pendingMockExam.title} mock.`
+                : `Log in to continue with ${pendingMockExam.title} mock.`;
+            return;
+        }
+
+        modalSubtitle.textContent = authView === 'verify'
+            ? `Verify your email to start your ${pendingMockExam.title} mock.`
+            : `Create an account to start your ${pendingMockExam.title} mock.`;
+    };
+
+    const maskEmail = (emailValue) => {
+        const normalizedEmail = String(emailValue || '').trim();
+        const [localPart = '', domainPart = ''] = normalizedEmail.split('@');
+        if (!localPart || !domainPart) return normalizedEmail || 'your email';
+        const visiblePrefix = localPart.slice(0, Math.min(2, localPart.length));
+        const maskedLocal = `${visiblePrefix}${'*'.repeat(Math.max(1, localPart.length - visiblePrefix.length))}`;
+        return `${maskedLocal}@${domainPart}`;
+    };
+
+    const getAuthViewConfig = (view) => {
+        const configs = {
+            login: {
+                title: 'Welcome Back',
+                subtitle: 'Log in to continue your preparation.',
+                chip: 'Secure access',
+                footer: "Don't have an account? <button type=\"button\" class=\"text-link\" id=\"toggle-auth-mode\">Sign up for free</button>"
+            },
+            signup: {
+                title: 'Create Your Account',
+                subtitle: 'Set up your Mockly access in one short form, then verify by email OTP.',
+                chip: 'Quick signup',
+                footer: "Already have an account? <button type=\"button\" class=\"text-link\" id=\"toggle-auth-mode\">Log in here</button>"
+            },
+            verify: {
+                title: 'Verify Your Email',
+                subtitle: `Enter the OTP sent to ${maskEmail(pendingVerificationEmail)} to activate your account.`,
+                chip: 'OTP verification',
+                footer: "Entered the wrong email? <button type=\"button\" class=\"text-link\" id=\"toggle-auth-mode\">Edit signup details</button>"
+            },
+            forgot: {
+                title: 'Recover Your Account',
+                subtitle: 'Enter your email to receive a reset OTP or continue an unfinished signup.',
+                chip: 'Password help',
+                footer: "Remembered your password? <button type=\"button\" class=\"text-link\" id=\"toggle-auth-mode\">Back to login</button>"
+            },
+            reset: {
+                title: 'Set a New Password',
+                subtitle: `Use the reset OTP sent to ${maskEmail(pendingResetEmail)} and choose a new password.`,
+                chip: 'Password reset',
+                footer: "Need a different account? <button type=\"button\" class=\"text-link\" id=\"toggle-auth-mode\">Back to login</button>"
+            }
+        };
+
+        return configs[view] || configs.login;
+    };
+
+    const bindAuthFooterToggle = () => {
+        const nextToggle = document.getElementById('toggle-auth-mode');
+        if (!nextToggle) return;
+
+        nextToggle.addEventListener('click', () => {
+            if (authView === 'verify') {
+                setAuthView('signup');
+                return;
+            }
+
+            if (authView === 'forgot' || authView === 'reset') {
+                setAuthView('login');
+                return;
+            }
+
+            setAuthView(authIntent === 'login' ? 'signup' : 'login');
+        });
+    };
+
+    const updateAuthContextDisplays = () => {
+        const maskedVerificationEmail = maskEmail(pendingVerificationEmail);
+        const maskedResetEmail = maskEmail(pendingResetEmail);
+
+        if (verifyEmailDisplay) verifyEmailDisplay.textContent = maskedVerificationEmail;
+        if (resetEmailDisplay) resetEmailDisplay.textContent = maskedResetEmail;
+
+        if (forgotEmailInput && authView === 'forgot' && !forgotEmailInput.value && pendingResetEmail) {
+            forgotEmailInput.value = pendingResetEmail;
         }
     };
 
-    const setAuthMode = (mode) => {
-        isLoginMode = mode === 'login';
-
-        loginTab.classList.toggle('active', isLoginMode);
-        signupTab.classList.toggle('active', !isLoginMode);
-        loginTab.setAttribute('aria-selected', String(isLoginMode));
-        signupTab.setAttribute('aria-selected', String(!isLoginMode));
-
-        loginForm.classList.toggle('hidden', !isLoginMode);
-        signupForm.classList.toggle('hidden', isLoginMode);
-
-        if (isLoginMode) {
-            modalTitle.textContent = 'Welcome Back';
-            modalSubtitle.textContent = 'Log in to continue your preparation.';
-            footerText.innerHTML = "Don't have an account? <button type=\"button\" class=\"text-link\" id=\"toggle-auth-mode\">Sign up for free</button>";
-        } else {
-            modalTitle.textContent = 'Create Your Account';
-            modalSubtitle.textContent = 'Join Mockly and start improving your rank today.';
-            footerText.innerHTML = "Already have an account? <button type=\"button\" class=\"text-link\" id=\"toggle-auth-mode\">Log in here</button>";
+    const setAuthView = (view) => {
+        authView = view;
+        if (view === 'login' || view === 'forgot' || view === 'reset') {
+            authIntent = 'login';
         }
+        if (view === 'signup' || view === 'verify') {
+            authIntent = 'signup';
+        }
+
+        const showTabs = view === 'login' || view === 'signup';
+        if (loginTab) {
+            loginTab.classList.toggle('active', view === 'login');
+            loginTab.setAttribute('aria-selected', String(view === 'login'));
+            loginTab.classList.toggle('hidden', !showTabs);
+        }
+        if (signupTab) {
+            signupTab.classList.toggle('active', view === 'signup');
+            signupTab.setAttribute('aria-selected', String(view === 'signup'));
+            signupTab.classList.toggle('hidden', !showTabs);
+        }
+
+        if (loginForm) loginForm.classList.toggle('hidden', view !== 'login');
+        if (signupForm) signupForm.classList.toggle('hidden', view !== 'signup');
+        if (verifyForm) verifyForm.classList.toggle('hidden', view !== 'verify');
+        if (forgotForm) forgotForm.classList.toggle('hidden', view !== 'forgot');
+        if (resetForm) resetForm.classList.toggle('hidden', view !== 'reset');
+
+        updateAuthContextDisplays();
+
+        const viewConfig = getAuthViewConfig(view);
+        if (authStepChip) authStepChip.textContent = viewConfig.chip;
+        if (modalTitle) modalTitle.textContent = viewConfig.title;
+        if (modalSubtitle) modalSubtitle.textContent = viewConfig.subtitle;
+        if (footerText) footerText.innerHTML = viewConfig.footer;
 
         setAuthStatus('');
-
         applyPendingMockContext();
-
-        const nextToggle = document.getElementById('toggle-auth-mode');
-        if (nextToggle) {
-            nextToggle.addEventListener('click', () => {
-                setAuthMode(isLoginMode ? 'signup' : 'login');
-            });
-        }
+        bindAuthFooterToggle();
     };
 
     const openModal = (mode, options = {}) => {
@@ -3919,7 +4307,7 @@ document.addEventListener('DOMContentLoaded', async () => {
         authModal.setAttribute('aria-hidden', 'false');
         setAuthStatus('');
         syncPageScrollLock();
-        setAuthMode(mode);
+        setAuthView(mode);
     };
 
     const closeAuthModal = () => {
@@ -3955,6 +4343,9 @@ document.addEventListener('DOMContentLoaded', async () => {
         const examForLaunch = shouldLaunchAfterAuth ? pendingMockExam : null;
         shouldLaunchAfterAuth = false;
         pendingMockExam = null;
+        pendingVerificationEmail = '';
+        pendingVerificationName = '';
+        pendingResetEmail = '';
 
         closeAuthModal();
 
@@ -3994,7 +4385,7 @@ document.addEventListener('DOMContentLoaded', async () => {
                 'Content-Type': 'application/json'
             },
             body: JSON.stringify(payload)
-        });
+        }, AUTH_API_TIMEOUT_MS);
     };
 
     const getUserInitial = () => {
@@ -4108,13 +4499,17 @@ document.addEventListener('DOMContentLoaded', async () => {
     }
 
     if (closeModal) closeModal.addEventListener('click', closeAuthModal);
-    if (loginTab) loginTab.addEventListener('click', () => setAuthMode('login'));
-    if (signupTab) signupTab.addEventListener('click', () => setAuthMode('signup'));
+    if (loginTab) loginTab.addEventListener('click', () => setAuthView('login'));
+    if (signupTab) signupTab.addEventListener('click', () => setAuthView('signup'));
     if (toggleAuthModeBtn) {
         toggleAuthModeBtn.addEventListener('click', () => {
-            setAuthMode('signup');
+            setAuthView('signup');
         });
     }
+    if (forgotPasswordTrigger) forgotPasswordTrigger.addEventListener('click', () => setAuthView('forgot'));
+    if (backToSignupBtn) backToSignupBtn.addEventListener('click', () => setAuthView('signup'));
+    if (backToLoginBtn) backToLoginBtn.addEventListener('click', () => setAuthView('login'));
+    if (resetBackToLoginBtn) resetBackToLoginBtn.addEventListener('click', () => setAuthView('login'));
 
     if (closeDashboardModalBtn) {
         closeDashboardModalBtn.addEventListener('click', () => {
@@ -4428,6 +4823,12 @@ document.addEventListener('DOMContentLoaded', async () => {
                 }
             } catch (error) {
                 const message = String(error?.message || 'Login failed. Please try again.');
+                if (error?.payload?.requiresVerification) {
+                    pendingVerificationEmail = String(error?.payload?.email || emailValue).trim();
+                    pendingVerificationName = '';
+                    if (verifyOtpInput) verifyOtpInput.value = '';
+                    setAuthView('verify');
+                }
                 modalSubtitle.textContent = message;
                 setAuthStatus(message, 'error');
             } finally {
@@ -4505,11 +4906,16 @@ document.addEventListener('DOMContentLoaded', async () => {
                         password: passwordValue
                     });
 
-                    const userEmail = String(payload?.user?.email || '').trim() || emailValue;
-                    const userName = String(payload?.user?.name || '').trim() || nameValue;
-                    handleAuthSuccess(userEmail, userName);
+                    pendingVerificationEmail = String(payload?.email || emailValue).trim();
+                    pendingVerificationName = nameValue;
+                    if (verifyOtpInput) verifyOtpInput.value = '';
+                    setAuthView('verify');
+                    setAuthStatus(String(payload?.message || 'Verification OTP sent to your email.'), 'success');
                 } else {
-                    handleAuthSuccess(emailValue, nameValue);
+                    pendingVerificationEmail = emailValue;
+                    pendingVerificationName = nameValue;
+                    setAuthView('verify');
+                    setAuthStatus('Verification OTP sent to your email.', 'success');
                 }
             } catch (error) {
                 const message = String(error?.message || 'Signup failed. Please try again.');
@@ -4520,6 +4926,218 @@ document.addEventListener('DOMContentLoaded', async () => {
                     signupSubmitBtn.disabled = false;
                     signupSubmitBtn.textContent = defaultBtnText;
                 }
+            }
+        });
+    }
+
+    if (verifyForm) {
+        verifyForm.setAttribute('novalidate', 'true');
+        verifyForm.addEventListener('submit', async (event) => {
+            event.preventDefault();
+
+            const emailValue = String(pendingVerificationEmail || signupEmailInput?.value || loginEmailInput?.value || '').trim();
+            const otpValue = String(verifyOtpInput?.value || '').trim();
+            const verifySubmitBtn = verifyForm.querySelector('button[type="submit"]');
+            const defaultBtnText = verifySubmitBtn ? verifySubmitBtn.textContent : 'Verify Email & Continue';
+
+            if (!emailValue || !otpValue) {
+                setAuthStatus('Email and OTP are required for verification.', 'error');
+                return;
+            }
+
+            if (!/^\d{6}$/.test(otpValue)) {
+                setAuthStatus('Please enter the 6-digit verification OTP.', 'error');
+                return;
+            }
+
+            if (verifySubmitBtn) {
+                verifySubmitBtn.disabled = true;
+                verifySubmitBtn.textContent = 'Verifying...';
+            }
+
+            try {
+                if (API_ENABLED) {
+                    const payload = await submitAuthRequest(AUTH_SIGNUP_VERIFY_API_ENDPOINT, {
+                        email: emailValue,
+                        otp: otpValue
+                    });
+                    const userEmail = String(payload?.user?.email || '').trim() || emailValue;
+                    const userName = String(payload?.user?.name || '').trim() || pendingVerificationName;
+                    handleAuthSuccess(userEmail, userName);
+                } else {
+                    handleAuthSuccess(emailValue, pendingVerificationName);
+                }
+            } catch (error) {
+                const message = String(error?.message || 'Verification failed. Please try again.');
+                modalSubtitle.textContent = message;
+                setAuthStatus(message, 'error');
+            } finally {
+                if (verifySubmitBtn) {
+                    verifySubmitBtn.disabled = false;
+                    verifySubmitBtn.textContent = defaultBtnText;
+                }
+            }
+        });
+    }
+
+    if (forgotForm) {
+        forgotForm.setAttribute('novalidate', 'true');
+        forgotForm.addEventListener('submit', async (event) => {
+            event.preventDefault();
+
+            const emailValue = String(forgotEmailInput?.value || '').trim();
+            const forgotSubmitBtn = forgotForm.querySelector('button[type="submit"]');
+            const defaultBtnText = forgotSubmitBtn ? forgotSubmitBtn.textContent : 'Send Reset OTP';
+
+            if (!isValidEmail(emailValue)) {
+                setAuthStatus('Please enter a valid email address.', 'error');
+                return;
+            }
+
+            if (forgotSubmitBtn) {
+                forgotSubmitBtn.disabled = true;
+                forgotSubmitBtn.textContent = 'Sending OTP...';
+            }
+
+            try {
+                if (API_ENABLED) {
+                    const payload = await submitAuthRequest(AUTH_FORGOT_PASSWORD_API_ENDPOINT, {
+                        email: emailValue
+                    });
+                    if (payload?.pendingVerification) {
+                        pendingVerificationEmail = String(payload?.email || emailValue).trim();
+                        pendingResetEmail = '';
+                        if (verifyOtpInput) verifyOtpInput.value = '';
+                        setAuthView('verify');
+                        setAuthStatus(String(payload?.message || 'A fresh verification OTP has been sent to your email.'), 'success');
+                        return;
+                    }
+                    pendingResetEmail = String(payload?.email || emailValue).trim();
+                    if (resetOtpInput) resetOtpInput.value = '';
+                    if (resetPasswordInput) resetPasswordInput.value = '';
+                    if (resetConfirmPasswordInput) resetConfirmPasswordInput.value = '';
+                    setAuthView('reset');
+                    setAuthStatus(String(payload?.message || 'Reset OTP sent to your email.'), 'success');
+                } else {
+                    pendingResetEmail = emailValue;
+                    setAuthView('reset');
+                }
+            } catch (error) {
+                const message = String(error?.message || 'Could not send reset OTP. Please try again.');
+                modalSubtitle.textContent = message;
+                setAuthStatus(message, 'error');
+            } finally {
+                if (forgotSubmitBtn) {
+                    forgotSubmitBtn.disabled = false;
+                    forgotSubmitBtn.textContent = defaultBtnText;
+                }
+            }
+        });
+    }
+
+    if (resetForm) {
+        resetForm.setAttribute('novalidate', 'true');
+        resetForm.addEventListener('submit', async (event) => {
+            event.preventDefault();
+
+            const emailValue = String(pendingResetEmail || forgotEmailInput?.value || '').trim();
+            const otpValue = String(resetOtpInput?.value || '').trim();
+            const passwordValue = String(resetPasswordInput?.value || '').trim();
+            const confirmPasswordValue = String(resetConfirmPasswordInput?.value || '').trim();
+            const resetSubmitBtn = resetForm.querySelector('button[type="submit"]');
+            const defaultBtnText = resetSubmitBtn ? resetSubmitBtn.textContent : 'Reset Password';
+
+            if (!emailValue || !otpValue || !passwordValue || !confirmPasswordValue) {
+                setAuthStatus('Please complete the reset form to continue.', 'error');
+                return;
+            }
+
+            if (!/^\d{6}$/.test(otpValue)) {
+                setAuthStatus('Please enter the 6-digit reset OTP.', 'error');
+                return;
+            }
+
+            if (passwordValue.length < 6) {
+                setAuthStatus('Password should be at least 6 characters.', 'error');
+                return;
+            }
+
+            if (passwordValue !== confirmPasswordValue) {
+                setAuthStatus('Passwords do not match. Please re-check.', 'error');
+                return;
+            }
+
+            if (resetSubmitBtn) {
+                resetSubmitBtn.disabled = true;
+                resetSubmitBtn.textContent = 'Updating password...';
+            }
+
+            try {
+                if (API_ENABLED) {
+                    const payload = await submitAuthRequest(AUTH_RESET_PASSWORD_API_ENDPOINT, {
+                        email: emailValue,
+                        otp: otpValue,
+                        password: passwordValue
+                    });
+                    const userEmail = String(payload?.user?.email || '').trim() || emailValue;
+                    const userName = String(payload?.user?.name || '').trim();
+                    handleAuthSuccess(userEmail, userName);
+                } else {
+                    handleAuthSuccess(emailValue);
+                }
+            } catch (error) {
+                const message = String(error?.message || 'Password reset failed. Please try again.');
+                modalSubtitle.textContent = message;
+                setAuthStatus(message, 'error');
+            } finally {
+                if (resetSubmitBtn) {
+                    resetSubmitBtn.disabled = false;
+                    resetSubmitBtn.textContent = defaultBtnText;
+                }
+            }
+        });
+    }
+
+    if (resendVerificationBtn) {
+        resendVerificationBtn.addEventListener('click', async () => {
+            const emailValue = String(pendingVerificationEmail || signupEmailInput?.value || '').trim();
+            if (!isValidEmail(emailValue)) {
+                setAuthStatus('Add a valid email before resending the verification OTP.', 'error');
+                return;
+            }
+
+            try {
+                const payload = API_ENABLED
+                    ? await submitAuthRequest(AUTH_RESEND_VERIFICATION_API_ENDPOINT, { email: emailValue })
+                    : { message: 'Verification OTP sent again.' };
+                setAuthStatus(String(payload?.message || 'Verification OTP sent again.'), 'success');
+            } catch (error) {
+                setAuthStatus(String(error?.message || 'Could not resend verification OTP.'), 'error');
+            }
+        });
+    }
+
+    if (resendResetBtn) {
+        resendResetBtn.addEventListener('click', async () => {
+            const emailValue = String(pendingResetEmail || forgotEmailInput?.value || '').trim();
+            if (!isValidEmail(emailValue)) {
+                setAuthStatus('Add a valid email before resending the reset OTP.', 'error');
+                return;
+            }
+
+            try {
+                const payload = API_ENABLED
+                    ? await submitAuthRequest(AUTH_FORGOT_PASSWORD_API_ENDPOINT, { email: emailValue })
+                    : { message: 'Reset OTP sent again.' };
+                if (payload?.pendingVerification) {
+                    pendingVerificationEmail = String(payload?.email || emailValue).trim();
+                    pendingResetEmail = '';
+                    if (verifyOtpInput) verifyOtpInput.value = '';
+                    setAuthView('verify');
+                }
+                setAuthStatus(String(payload?.message || 'Reset OTP sent again.'), 'success');
+            } catch (error) {
+                setAuthStatus(String(error?.message || 'Could not resend reset OTP.'), 'error');
             }
         });
     }
@@ -4567,5 +5185,25 @@ document.addEventListener('DOMContentLoaded', async () => {
             toggleBtn.setAttribute('title', shouldShow ? 'Hide password' : 'Show password');
         });
     });
+
+    // === Footer Newsletter (prevent default, placeholder feedback) ===
+    const footerNewsletterForm = document.getElementById('footer-newsletter-form');
+    if (footerNewsletterForm) {
+        footerNewsletterForm.addEventListener('submit', (event) => {
+            event.preventDefault();
+            const emailInput = footerNewsletterForm.querySelector('input[type="email"]');
+            const submitBtn = footerNewsletterForm.querySelector('button[type="submit"]');
+            if (emailInput && submitBtn) {
+                const originalText = submitBtn.textContent;
+                submitBtn.textContent = 'Subscribed!';
+                submitBtn.disabled = true;
+                emailInput.value = '';
+                setTimeout(() => {
+                    submitBtn.textContent = originalText;
+                    submitBtn.disabled = false;
+                }, 3000);
+            }
+        });
+    }
 
 });

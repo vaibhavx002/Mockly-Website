@@ -1,7 +1,16 @@
+process.env.MOCKLY_ACCESS_TOKEN_SECRET = process.env.MOCKLY_ACCESS_TOKEN_SECRET || 'mockly-auth-integration-secret';
+process.env.MOCKLY_ENABLE_DEMO_BOOTSTRAP = process.env.MOCKLY_ENABLE_DEMO_BOOTSTRAP || 'true';
+process.env.MOCKLY_ADMIN_EMAILS = process.env.MOCKLY_ADMIN_EMAILS || 'demo@mockly.in';
+process.env.MOCKLY_PERSISTENCE_DRIVER = process.env.MOCKLY_PERSISTENCE_DRIVER || 'json-kv';
+process.env.MOCKLY_EMAIL_TRANSPORT = process.env.MOCKLY_EMAIL_TRANSPORT || 'stream';
+process.env.MOCKLY_EMAIL_FROM = process.env.MOCKLY_EMAIL_FROM || 'Mockly <noreply@mockly.in>';
+
 const { app } = require('./server');
+const { getLatestEmailPreview, clearEmailPreviews } = require('./auth-mailer');
 
 const TEST_EMAIL = `auth-integration-${Date.now()}@mockly.in`;
 const TEST_PASSWORD = 'authPass123';
+const RESET_PASSWORD = 'resetPass456';
 
 const getSetCookieArray = (response) => {
     if (!response || !response.headers) return [];
@@ -86,6 +95,16 @@ const assert = (condition, message) => {
     }
 };
 
+const extractOtpFromPreview = (recipient) => {
+    const preview = getLatestEmailPreview(recipient);
+    assert(preview, `Expected email preview for ${recipient}.`);
+
+    const match = String(preview.text || preview.html || '').match(/\b(\d{6})\b/);
+    assert(match, `Could not extract OTP from email preview for ${recipient}.`);
+
+    return match[1];
+};
+
 const run = async () => {
     const server = app.listen(0);
 
@@ -100,8 +119,8 @@ const run = async () => {
 
         const cookieJar = {};
         const results = {
-            signup: false,
-            login: false,
+            signupStartsVerification: false,
+            verifySignup: false,
             protectedDeniedWithoutAuth: false,
             protectedDeniedWithoutCsrf: false,
             protectedAllowedWithCsrf: false,
@@ -109,9 +128,14 @@ const run = async () => {
             dbHealthAllowedForAdmin: false,
             refresh: false,
             logout: false,
+            forgotPassword: false,
+            resetPassword: false,
+            loginWithResetPassword: false,
             deniedAfterLogout: false,
             bearerBypassCsrf: false
         };
+
+        clearEmailPreviews();
 
         const deniedWithoutAuth = await requestJson(baseUrl, {}, '/api/users/dashboard', { method: 'GET' });
         assert(deniedWithoutAuth.status === 401, 'Expected /api/users/dashboard to deny unauthenticated request.');
@@ -129,10 +153,25 @@ const run = async () => {
                 password: TEST_PASSWORD
             })
         });
-        assert(signup.status === 201, 'Signup failed.');
-        assert(Boolean(signup.payload?.authenticated), 'Signup response missing authenticated=true.');
-        assert(Boolean(getCsrfToken(cookieJar)), 'CSRF cookie missing after signup.');
-        results.signup = true;
+        assert(signup.status === 202, 'Signup should start verification flow.');
+        assert(Boolean(signup.payload?.pendingVerification), 'Signup response missing pendingVerification=true.');
+        results.signupStartsVerification = true;
+
+        const signupOtp = extractOtpFromPreview(TEST_EMAIL);
+        const verifySignup = await requestJson(baseUrl, cookieJar, '/api/auth/signup/verify', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({
+                email: TEST_EMAIL,
+                otp: signupOtp
+            })
+        });
+        assert(verifySignup.status === 201, 'Signup verification failed.');
+        assert(Boolean(verifySignup.payload?.authenticated), 'Verify signup response missing authenticated=true.');
+        assert(Boolean(getCsrfToken(cookieJar)), 'CSRF cookie missing after signup verification.');
+        results.verifySignup = true;
 
         const csrfToken = getCsrfToken(cookieJar);
         const protectedWithoutCsrf = await requestJson(baseUrl, cookieJar, '/api/users/incomplete-session', {
@@ -190,28 +229,11 @@ const run = async () => {
         assert(protectedWithCsrf.status === 200, 'Expected protected write success with CSRF token.');
         results.protectedAllowedWithCsrf = true;
 
-        const loginJar = {};
-        const login = await requestJson(baseUrl, loginJar, '/api/auth/login', {
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/json'
-            },
-            body: JSON.stringify({
-                email: TEST_EMAIL,
-                password: TEST_PASSWORD
-            })
-        });
-        assert(login.status === 200, 'Login failed.');
-        assert(Boolean(login.payload?.authenticated), 'Login response missing authenticated=true.');
-        assert(Boolean(login.payload?.accessToken), 'Login response missing accessToken.');
-        assert(Boolean(getCsrfToken(loginJar)), 'CSRF cookie missing after login.');
-        results.login = true;
-
         const bearerAttempt = await requestJson(baseUrl, {}, '/api/users/attempts', {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',
-                Authorization: `Bearer ${String(login.payload?.accessToken || '').trim()}`
+                Authorization: `Bearer ${String(verifySignup.payload?.accessToken || '').trim()}`
             },
             body: JSON.stringify({
                 attempt: {
@@ -234,7 +256,7 @@ const run = async () => {
         const dbHealthDenied = await requestJson(baseUrl, {}, '/api/db/health', {
             method: 'GET',
             headers: {
-                Authorization: `Bearer ${String(login.payload?.accessToken || '').trim()}`
+                Authorization: `Bearer ${String(verifySignup.payload?.accessToken || '').trim()}`
             }
         });
         assert(dbHealthDenied.status === 403, 'Expected /api/db/health to deny non-admin users.');
@@ -261,36 +283,83 @@ const run = async () => {
         assert(adminDbHealth.status === 200, 'Expected admin access to /api/db/health.');
         results.dbHealthAllowedForAdmin = true;
 
-        const loginCsrf = getCsrfToken(loginJar);
-        const refreshFailWithoutCsrf = await requestJson(baseUrl, loginJar, '/api/auth/refresh', {
+        const refreshFailWithoutCsrf = await requestJson(baseUrl, cookieJar, '/api/auth/refresh', {
             method: 'POST'
         });
         assert(refreshFailWithoutCsrf.status === 403, 'Refresh should fail without CSRF header.');
 
-        const refresh = await requestJson(baseUrl, loginJar, '/api/auth/refresh', {
+        const refresh = await requestJson(baseUrl, cookieJar, '/api/auth/refresh', {
             method: 'POST',
             headers: {
-                'x-csrf-token': loginCsrf
+                'x-csrf-token': csrfToken
             }
         });
         assert(refresh.status === 200, 'Refresh failed with valid CSRF header.');
         assert(Boolean(refresh.payload?.authenticated), 'Refresh response missing authenticated=true.');
         results.refresh = true;
 
-        const postLogoutDenied = await requestJson(baseUrl, {}, '/api/users/dashboard', { method: 'GET' });
-        assert(postLogoutDenied.status === 401, 'Expected unauthenticated denial in isolated check.');
-
-        const logoutCsrf = getCsrfToken(loginJar);
-        const logout = await requestJson(baseUrl, loginJar, '/api/auth/logout', {
+        const logout = await requestJson(baseUrl, cookieJar, '/api/auth/logout', {
             method: 'POST',
             headers: {
-                'x-csrf-token': logoutCsrf
+                'x-csrf-token': getCsrfToken(cookieJar)
             }
         });
         assert(logout.status === 200, 'Logout failed with valid CSRF header.');
         results.logout = true;
 
-        const deniedAfterLogout = await requestJson(baseUrl, loginJar, '/api/users/dashboard', { method: 'GET' });
+        clearEmailPreviews();
+        const forgotPassword = await requestJson(baseUrl, {}, '/api/auth/forgot-password', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({
+                email: TEST_EMAIL
+            })
+        });
+        assert(forgotPassword.status === 200, 'Forgot password should return success.');
+        results.forgotPassword = true;
+
+        const resetOtp = extractOtpFromPreview(TEST_EMAIL);
+        const resetPassword = await requestJson(baseUrl, cookieJar, '/api/auth/reset-password', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({
+                email: TEST_EMAIL,
+                otp: resetOtp,
+                password: RESET_PASSWORD
+            })
+        });
+        assert(resetPassword.status === 200, 'Reset password failed.');
+        assert(Boolean(resetPassword.payload?.authenticated), 'Reset password response missing authenticated=true.');
+        results.resetPassword = true;
+
+        const logoutAfterReset = await requestJson(baseUrl, cookieJar, '/api/auth/logout', {
+            method: 'POST',
+            headers: {
+                'x-csrf-token': getCsrfToken(cookieJar)
+            }
+        });
+        assert(logoutAfterReset.status === 200, 'Logout after reset failed.');
+
+        const loginJar = {};
+        const loginWithResetPassword = await requestJson(baseUrl, loginJar, '/api/auth/login', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({
+                email: TEST_EMAIL,
+                password: RESET_PASSWORD
+            })
+        });
+        assert(loginWithResetPassword.status === 200, 'Login with reset password failed.');
+        assert(Boolean(loginWithResetPassword.payload?.authenticated), 'Login with reset password missing authenticated=true.');
+        results.loginWithResetPassword = true;
+
+        const deniedAfterLogout = await requestJson(baseUrl, cookieJar, '/api/users/dashboard', { method: 'GET' });
         assert(deniedAfterLogout.status === 401, 'Expected protected route denial after logout.');
         results.deniedAfterLogout = true;
 
@@ -309,6 +378,7 @@ const run = async () => {
         }, null, 2));
         process.exitCode = 1;
     } finally {
+        clearEmailPreviews();
         await new Promise((resolve) => server.close(resolve));
     }
 };

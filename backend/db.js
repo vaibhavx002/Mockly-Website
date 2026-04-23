@@ -1,9 +1,12 @@
 const fs = require('fs');
 const path = require('path');
 
-const DB_PATH = path.join(__dirname, 'data', 'mockly.db');
+const DB_PATH = path.join(__dirname, 'data', 'mockly-store.json');
 const DB_BACKUP_DIR = path.join(__dirname, 'backups');
 const DEFAULT_BACKUP_KEEP = 14;
+const LEGACY_DB_PATH = path.join(__dirname, 'data', 'mockly.db');
+const LEGACY_DB_WAL_PATH = `${LEGACY_DB_PATH}-wal`;
+const LEGACY_DB_SHM_PATH = `${LEGACY_DB_PATH}-shm`;
 
 const isPlainObject = (value) => Boolean(value) && typeof value === 'object' && !Array.isArray(value);
 
@@ -22,6 +25,10 @@ const ensureDbFile = (dbPath) => {
     const targetDir = path.dirname(dbPath);
     if (!fs.existsSync(targetDir)) {
         fs.mkdirSync(targetDir, { recursive: true });
+    }
+
+    if (!fs.existsSync(dbPath) && fs.existsSync(LEGACY_DB_PATH)) {
+        fs.copyFileSync(LEGACY_DB_PATH, dbPath);
     }
 
     if (!fs.existsSync(dbPath)) {
@@ -217,7 +224,7 @@ const formatBackupFileName = () => {
     const hh = String(now.getHours()).padStart(2, '0');
     const mm = String(now.getMinutes()).padStart(2, '0');
     const ss = String(now.getSeconds()).padStart(2, '0');
-    return `mockly-${y}${m}${d}-${hh}${mm}${ss}.db`;
+    return `mockly-${y}${m}${d}-${hh}${mm}${ss}.json`;
 };
 
 const listBackupFiles = (options = {}) => {
@@ -225,7 +232,7 @@ const listBackupFiles = (options = {}) => {
     if (!fs.existsSync(backupDir)) return [];
 
     return fs.readdirSync(backupDir)
-        .filter((name) => /^mockly-.*\.db$/i.test(name))
+        .filter((name) => /^mockly-.*\.(json|db)$/i.test(name))
         .map((name) => {
             const fullPath = path.join(backupDir, name);
             const stats = fs.statSync(fullPath);
@@ -348,6 +355,9 @@ const createPersistentStores = () => {
         attemptStore: new PersistentNamespaceStore(db, 'attempts'),
         incompleteSessionStore: new PersistentNamespaceStore(db, 'incomplete_sessions'),
         authUserStore: new PersistentNamespaceStore(db, 'auth_users'),
+        authMetaStore: new PersistentNamespaceStore(db, 'auth_meta'),
+        pendingSignupStore: new PersistentNamespaceStore(db, 'pending_signups'),
+        authChallengeStore: new PersistentNamespaceStore(db, 'auth_challenges'),
         baselineRecordStore: new PersistentNamespaceStore(db, 'baseline_records'),
         getHealthSnapshot: () => getDatabaseHealthSnapshot(db, { dbPath: DB_PATH })
     };
@@ -357,6 +367,9 @@ module.exports = {
     DB_BACKUP_DIR,
     DB_PATH,
     DEFAULT_BACKUP_KEEP,
+    LEGACY_DB_PATH,
+    LEGACY_DB_SHM_PATH,
+    LEGACY_DB_WAL_PATH,
     createPersistentStores,
     getDatabaseFileSnapshot,
     getDatabaseHealthSnapshot,

@@ -4,6 +4,7 @@ const fs = require('fs');
 const crypto = require('crypto');
 const { promisify } = require('util');
 const express = require('express');
+const { STARTUP_CONFIG, validateStartupEnvironment } = require('./env');
 const {
     createPersistentStores,
     backupDatabaseWithRotation,
@@ -32,7 +33,16 @@ const {
     deleteIncompleteSession,
     getPrismaDiagnostics
 } = require('./prisma-persistence');
+const {
+    sendVerificationOtpEmail,
+    sendWelcomeEmail,
+    sendPasswordResetOtpEmail,
+    sendPasswordChangedEmail
+} = require('./auth-mailer');
 const { getExamPatternRule } = require('./exam-pattern-rules');
+const { registerSystemRoutes } = require('./register-system-routes');
+
+validateStartupEnvironment();
 
 const PORT = Number(process.env.PORT) || 3000;
 const app = express();
@@ -274,6 +284,9 @@ const {
     attemptStore,
     incompleteSessionStore,
     authUserStore,
+    authMetaStore,
+    pendingSignupStore,
+    authChallengeStore,
     baselineRecordStore,
     getHealthSnapshot
 } = createPersistentStores();
@@ -297,8 +310,12 @@ const PASSWORD_SCRYPT_COST = 16384;
 const PASSWORD_SCRYPT_BLOCK_SIZE = 8;
 const PASSWORD_SCRYPT_PARALLELIZATION = 1;
 const PASSWORD_SCRYPT_KEY_LENGTH = 64;
-const ACCESS_TOKEN_SECRET = String(process.env.MOCKLY_ACCESS_TOKEN_SECRET || '').trim()
-    || crypto.randomBytes(32).toString('hex');
+const AUTH_OTP_LENGTH = 6;
+const AUTH_OTP_TTL_MINUTES = 10;
+const AUTH_OTP_RESEND_COOLDOWN_SECONDS = 45;
+const AUTH_OTP_MAX_ATTEMPTS = 5;
+const PENDING_SIGNUP_TTL_HOURS = 24;
+const ACCESS_TOKEN_SECRET = STARTUP_CONFIG.accessTokenSecret;
 const NIGHTLY_BACKUP_ENABLED = String(process.env.MOCKLY_DB_NIGHTLY_BACKUP_ENABLED || 'true').trim().toLowerCase() !== 'false';
 const NIGHTLY_BACKUP_KEEP = Math.max(1, Math.min(365, Number.parseInt(String(process.env.MOCKLY_DB_BACKUP_KEEP || DEFAULT_BACKUP_KEEP), 10) || DEFAULT_BACKUP_KEEP));
 const NIGHTLY_BACKUP_HOUR = Math.max(0, Math.min(23, Number.parseInt(String(process.env.MOCKLY_DB_BACKUP_HOUR || '2'), 10) || 2));
@@ -719,8 +736,7 @@ const toSafeEmail = (value) => {
 };
 
 const ADMIN_EMAILS = new Set(
-    String(process.env.MOCKLY_ADMIN_EMAILS || 'demo@mockly.in')
-        .split(',')
+    STARTUP_CONFIG.adminEmails
         .map((item) => toSafeEmail(item))
         .filter(Boolean)
 );
@@ -776,6 +792,219 @@ const compareSafeText = (left, right) => {
     const rightBuffer = Buffer.from(String(right || ''));
     if (leftBuffer.length !== rightBuffer.length) return false;
     return crypto.timingSafeEqual(leftBuffer, rightBuffer);
+};
+
+const toSafeOtpCode = (value) => String(value || '').replace(/\D/g, '').slice(0, AUTH_OTP_LENGTH);
+
+const addSecondsToIso = (seconds) => new Date(Date.now() + (seconds * 1000)).toISOString();
+
+const addHoursToIso = (hours) => new Date(Date.now() + (hours * 60 * 60 * 1000)).toISOString();
+
+const hashOneTimeCode = (purpose, email, otp) => crypto
+    .createHmac('sha256', ACCESS_TOKEN_SECRET)
+    .update(`${toSafeString(purpose).toLowerCase()}:${toSafeEmail(email)}:${toSafeOtpCode(otp)}`)
+    .digest('hex');
+
+const buildAuthChallengeKey = (purpose, email) => `${toSafeString(purpose).toLowerCase()}:${toSafeEmail(email)}`;
+
+const generateOneTimeCode = () => String(crypto.randomInt(0, 10 ** AUTH_OTP_LENGTH)).padStart(AUTH_OTP_LENGTH, '0');
+
+const getAuthMetaRecord = (email) => {
+    const safeEmail = toSafeEmail(email);
+    if (!safeEmail) return null;
+    return authMetaStore.get(safeEmail) || null;
+};
+
+const saveAuthMetaRecord = (email, patch = {}) => {
+    const safeEmail = toSafeEmail(email);
+    if (!safeEmail) return null;
+
+    const previous = getAuthMetaRecord(safeEmail) || {};
+    const next = {
+        email: safeEmail,
+        emailVerifiedAt: toSafeString(patch.emailVerifiedAt ?? previous.emailVerifiedAt),
+        verificationSource: toSafeString(patch.verificationSource ?? previous.verificationSource),
+        lastVerificationSentAt: toSafeString(patch.lastVerificationSentAt ?? previous.lastVerificationSentAt),
+        lastPasswordResetSentAt: toSafeString(patch.lastPasswordResetSentAt ?? previous.lastPasswordResetSentAt),
+        updatedAt: new Date().toISOString()
+    };
+
+    authMetaStore.set(safeEmail, next);
+    return next;
+};
+
+const ensureVerifiedAuthMetaForLegacyUser = (userRecord) => {
+    const safeEmail = toSafeEmail(userRecord?.email);
+    if (!safeEmail) {
+        return { isVerified: false, meta: null };
+    }
+
+    const existingMeta = getAuthMetaRecord(safeEmail);
+    if (existingMeta) {
+        return {
+            isVerified: Boolean(toSafeString(existingMeta.emailVerifiedAt)),
+            meta: existingMeta
+        };
+    }
+
+    const verifiedAt = toSafeString(userRecord?.createdAt) || new Date().toISOString();
+    const nextMeta = saveAuthMetaRecord(safeEmail, {
+        emailVerifiedAt: verifiedAt,
+        verificationSource: 'legacy-backfill'
+    });
+
+    return {
+        isVerified: true,
+        meta: nextMeta
+    };
+};
+
+const getPendingSignupRecord = (email) => {
+    const safeEmail = toSafeEmail(email);
+    if (!safeEmail) return null;
+
+    const record = pendingSignupStore.get(safeEmail);
+    if (!record || typeof record !== 'object') return null;
+
+    const expiresAtMs = Date.parse(String(record.expiresAt || ''));
+    if (!Number.isFinite(expiresAtMs) || expiresAtMs <= Date.now()) {
+        pendingSignupStore.delete(safeEmail);
+        return null;
+    }
+
+    return record;
+};
+
+const savePendingSignupRecord = (pendingRecord) => {
+    const safeEmail = toSafeEmail(pendingRecord?.email);
+    if (!safeEmail) return null;
+
+    const nowIso = new Date().toISOString();
+    const nextRecord = {
+        email: safeEmail,
+        name: toSafeName(pendingRecord?.name) || 'Mockly User',
+        phone: toSafePhone(pendingRecord?.phone),
+        passwordHash: toSafeString(pendingRecord?.passwordHash),
+        createdAt: toSafeString(pendingRecord?.createdAt) || nowIso,
+        updatedAt: nowIso,
+        expiresAt: addHoursToIso(PENDING_SIGNUP_TTL_HOURS)
+    };
+
+    pendingSignupStore.set(safeEmail, nextRecord);
+    return nextRecord;
+};
+
+const clearPendingSignupRecord = (email) => {
+    const safeEmail = toSafeEmail(email);
+    if (!safeEmail) return false;
+    return pendingSignupStore.delete(safeEmail);
+};
+
+const getAuthChallengeRecord = (purpose, email) => {
+    const safeEmail = toSafeEmail(email);
+    const challengeKey = buildAuthChallengeKey(purpose, safeEmail);
+    const record = authChallengeStore.get(challengeKey);
+    if (!record || typeof record !== 'object') return null;
+
+    const expiresAtMs = Date.parse(String(record.expiresAt || ''));
+    if (!Number.isFinite(expiresAtMs) || expiresAtMs <= Date.now()) {
+        authChallengeStore.delete(challengeKey);
+        return null;
+    }
+
+    return record;
+};
+
+const saveAuthChallengeRecord = (purpose, email, otpCode) => {
+    const safePurpose = toSafeString(purpose).toLowerCase();
+    const safeEmail = toSafeEmail(email);
+    const safeOtp = toSafeOtpCode(otpCode);
+    if (!safePurpose || !safeEmail || !safeOtp) return null;
+
+    const nowIso = new Date().toISOString();
+    const challengeKey = buildAuthChallengeKey(safePurpose, safeEmail);
+    const nextRecord = {
+        email: safeEmail,
+        purpose: safePurpose,
+        codeHash: hashOneTimeCode(safePurpose, safeEmail, safeOtp),
+        attempts: 0,
+        createdAt: nowIso,
+        updatedAt: nowIso,
+        lastSentAt: nowIso,
+        resendAvailableAt: addSecondsToIso(AUTH_OTP_RESEND_COOLDOWN_SECONDS),
+        expiresAt: addSecondsToIso(AUTH_OTP_TTL_MINUTES * 60)
+    };
+
+    authChallengeStore.set(challengeKey, nextRecord);
+    return nextRecord;
+};
+
+const clearAuthChallengeRecord = (purpose, email) => {
+    const safeEmail = toSafeEmail(email);
+    if (!safeEmail) return false;
+    return authChallengeStore.delete(buildAuthChallengeKey(purpose, safeEmail));
+};
+
+const issueAuthChallenge = (purpose, email) => {
+    const safePurpose = toSafeString(purpose).toLowerCase();
+    const safeEmail = toSafeEmail(email);
+    if (!safePurpose || !safeEmail) {
+        const error = new Error('A valid email is required.');
+        error.statusCode = 400;
+        throw error;
+    }
+
+    const existingChallenge = getAuthChallengeRecord(safePurpose, safeEmail);
+    const resendAvailableAtMs = Date.parse(String(existingChallenge?.resendAvailableAt || ''));
+    if (Number.isFinite(resendAvailableAtMs) && resendAvailableAtMs > Date.now()) {
+        const retryAfterSeconds = Math.max(1, Math.ceil((resendAvailableAtMs - Date.now()) / 1000));
+        const error = new Error(`Please wait ${retryAfterSeconds}s before requesting another OTP.`);
+        error.statusCode = 429;
+        error.retryAfterSeconds = retryAfterSeconds;
+        throw error;
+    }
+
+    const otpCode = generateOneTimeCode();
+    saveAuthChallengeRecord(safePurpose, safeEmail, otpCode);
+    return otpCode;
+};
+
+const verifyAuthChallenge = (purpose, email, otpCode) => {
+    const safePurpose = toSafeString(purpose).toLowerCase();
+    const safeEmail = toSafeEmail(email);
+    const safeOtp = toSafeOtpCode(otpCode);
+    if (!safePurpose || !safeEmail || !safeOtp) {
+        return { ok: false, reason: 'invalid-payload' };
+    }
+
+    const challengeKey = buildAuthChallengeKey(safePurpose, safeEmail);
+    const existingChallenge = getAuthChallengeRecord(safePurpose, safeEmail);
+    if (!existingChallenge) {
+        return { ok: false, reason: 'missing-challenge' };
+    }
+
+    const candidateHash = hashOneTimeCode(safePurpose, safeEmail, safeOtp);
+    if (!compareSafeText(candidateHash, existingChallenge.codeHash)) {
+        const nextAttempts = Math.max(0, Number(existingChallenge.attempts || 0)) + 1;
+        if (nextAttempts >= AUTH_OTP_MAX_ATTEMPTS) {
+            authChallengeStore.delete(challengeKey);
+            return { ok: false, reason: 'max-attempts-reached' };
+        }
+
+        authChallengeStore.set(challengeKey, {
+            ...existingChallenge,
+            attempts: nextAttempts,
+            updatedAt: new Date().toISOString()
+        });
+        return {
+            ok: false,
+            reason: 'invalid-code',
+            remainingAttempts: AUTH_OTP_MAX_ATTEMPTS - nextAttempts
+        };
+    }
+
+    authChallengeStore.delete(challengeKey);
+    return { ok: true };
 };
 
 const verifyScryptPassword = async (value, storedHash) => {
@@ -871,6 +1100,52 @@ const saveAuthUserRecord = async (userRecord) => {
     return safeRecord;
 };
 
+const getAuthVerificationState = (userRecord) => {
+    if (!userRecord || !userRecord.email) {
+        return { isVerified: false, meta: null };
+    }
+
+    return ensureVerifiedAuthMetaForLegacyUser(userRecord);
+};
+
+const sendSignupVerificationOtp = async ({ email, name }) => {
+    const safeEmail = toSafeEmail(email);
+    const safeName = toSafeName(name) || 'Aspirant';
+    const otpCode = issueAuthChallenge('signup', safeEmail);
+
+    await sendVerificationOtpEmail({
+        to: safeEmail,
+        name: safeName,
+        otp: otpCode,
+        expiresInMinutes: AUTH_OTP_TTL_MINUTES
+    });
+
+    saveAuthMetaRecord(safeEmail, {
+        lastVerificationSentAt: new Date().toISOString()
+    });
+
+    return otpCode;
+};
+
+const sendPasswordResetOtp = async ({ email, name }) => {
+    const safeEmail = toSafeEmail(email);
+    const safeName = toSafeName(name) || 'Aspirant';
+    const otpCode = issueAuthChallenge('password-reset', safeEmail);
+
+    await sendPasswordResetOtpEmail({
+        to: safeEmail,
+        name: safeName,
+        otp: otpCode,
+        expiresInMinutes: AUTH_OTP_TTL_MINUTES
+    });
+
+    saveAuthMetaRecord(safeEmail, {
+        lastPasswordResetSentAt: new Date().toISOString()
+    });
+
+    return otpCode;
+};
+
 const getUserPersonalizationProfile = async (email) => {
     const safeEmail = toSafeEmail(email);
     if (!safeEmail) return null;
@@ -946,6 +1221,10 @@ const clearUserIncompleteSession = async (email) => {
 };
 
 const ensureDemoUserRecord = async () => {
+    if (!STARTUP_CONFIG.demoBootstrapEnabled) {
+        return null;
+    }
+
     if (demoUserReadyPromise) {
         return demoUserReadyPromise;
     }
@@ -1346,13 +1625,15 @@ const logStartupDiagnostics = () => {
     try {
         const snapshot = getHealthSnapshot();
         const backupCount = listBackupFiles().length;
-        const persistenceMode = USE_PRISMA_PERSISTENCE ? 'prisma' : 'sqlite-kv';
+        const persistenceMode = USE_PRISMA_PERSISTENCE ? 'prisma' : 'json-kv';
         // eslint-disable-next-line no-console
         console.log(`[db] path=${snapshot.dbPath} size=${snapshot.fileSizeBytes} rows=${snapshot.totalRows} quickCheck=${snapshot.quickCheck}`);
         // eslint-disable-next-line no-console
         console.log(`[db] backups=${backupCount} adminEmails=${Array.from(ADMIN_EMAILS).join(',') || 'none'}`);
         // eslint-disable-next-line no-console
         console.log(`[persistence] mode=${persistenceMode} initialized=${PRISMA_PERSISTENCE_STATE.initialized}`);
+        // eslint-disable-next-line no-console
+        console.log(`[auth] demoBootstrap=${STARTUP_CONFIG.demoBootstrapEnabled ? 'enabled' : 'disabled'}`);
         if (PRISMA_PERSISTENCE_STATE.error) {
             // eslint-disable-next-line no-console
             console.warn(`[persistence] prisma initialization warning: ${PRISMA_PERSISTENCE_STATE.error}`);
@@ -2416,10 +2697,12 @@ const defaultPersonalizationProfile = () => ({
     updatedAt: ''
 });
 
-ensureDemoUserRecord().catch((error) => {
-    // eslint-disable-next-line no-console
-    console.warn(`[auth] demo-user bootstrap failed: ${error.message || 'unknown-error'}`);
-});
+if (STARTUP_CONFIG.demoBootstrapEnabled) {
+    ensureDemoUserRecord().catch((error) => {
+        // eslint-disable-next-line no-console
+        console.warn(`[auth] demo-user bootstrap failed: ${error.message || 'unknown-error'}`);
+    });
+}
 
 const normalizeEventSourceKey = (value) => {
     const sourceKey = toSafeString(value)
@@ -3684,13 +3967,18 @@ const buildExamCatalogResponse = () => {
     };
 };
 
-app.get('/api/health', (req, res) => {
-    res.json({
-        ok: true,
-        service: 'mockly-local-api',
-        version: '1.0.0',
-        timestamp: new Date().toISOString()
-    });
+registerSystemRoutes({
+    app,
+    requireAuth,
+    requireAdmin,
+    getHealthSnapshot,
+    getPrismaDiagnostics,
+    usePrismaPersistence: USE_PRISMA_PERSISTENCE,
+    baselineRecordStore,
+    personalizationStore,
+    authUserStore,
+    attemptStore,
+    incompleteSessionStore
 });
 
 app.get('/api/exams', (req, res) => {
@@ -3993,8 +4281,6 @@ app.post('/api/assessment/recommend', (req, res) => {
 
 app.post('/api/auth/signup', async (req, res) => {
     try {
-        await ensureDemoUserRecord();
-
         const name = toSafeName(req.body?.name);
         const email = toSafeEmail(req.body?.email);
         const phone = toSafePhone(req.body?.phone);
@@ -4021,40 +4307,196 @@ app.post('/api/auth/signup', async (req, res) => {
         }
 
         const passwordHash = await hashPassword(password);
-        const nowIso = new Date().toISOString();
-
-        const userRecord = {
+        const pendingSignup = savePendingSignupRecord({
             email,
             name,
             phone,
             passwordHash,
-            createdAt: nowIso,
-            lastLoginAt: nowIso
-        };
+            createdAt: new Date().toISOString()
+        });
 
-        await saveAuthUserRecord(userRecord);
+        await sendSignupVerificationOtp({
+            email,
+            name
+        });
+
+        return res.status(202).json({
+            ok: true,
+            pendingVerification: true,
+            message: 'We sent a verification OTP to your email address.',
+            email,
+            expiresInSeconds: AUTH_OTP_TTL_MINUTES * 60,
+            pendingSignupExpiresAt: pendingSignup?.expiresAt || ''
+        });
+    } catch (error) {
+        if (error?.statusCode) {
+            return res.status(error.statusCode).json({
+                message: error.message || 'Please retry after a short wait.',
+                retryAfterSeconds: Number(error.retryAfterSeconds || 0) || undefined
+            });
+        }
+
+        const errorMessage = String(error?.message || '');
+        if (errorMessage.toLowerCase().includes('email delivery')) {
+            return res.status(503).json({ message: errorMessage });
+        }
+
+        return res.status(500).json({ message: 'Account creation failed. Please retry.' });
+    }
+});
+
+app.post('/api/auth/signup/verify', async (req, res) => {
+    try {
+        const email = toSafeEmail(req.body?.email);
+        const otp = toSafeOtpCode(req.body?.otp);
+
+        if (!email || !otp) {
+            return res.status(400).json({ message: 'Email and OTP are required.' });
+        }
+
+        const verificationResult = verifyAuthChallenge('signup', email, otp);
+        if (!verificationResult.ok) {
+            if (verificationResult.reason === 'max-attempts-reached') {
+                return res.status(429).json({ message: 'Too many invalid OTP attempts. Request a fresh OTP and try again.' });
+            }
+
+            if (verificationResult.reason === 'missing-challenge') {
+                return res.status(410).json({ message: 'This OTP has expired or is missing. Request a new verification OTP.' });
+            }
+
+            return res.status(400).json({ message: 'Please enter a valid verification OTP.' });
+        }
+
+        const pendingSignup = getPendingSignupRecord(email);
+        let userRecord = null;
+        const nowIso = new Date().toISOString();
+
+        if (pendingSignup) {
+            if (await hasAuthUserByEmail(email)) {
+                clearPendingSignupRecord(email);
+                return res.status(409).json({ message: 'This account already exists. Please log in instead.' });
+            }
+
+            userRecord = {
+                email,
+                name: toSafeName(pendingSignup.name) || 'Mockly User',
+                phone: toSafePhone(pendingSignup.phone),
+                passwordHash: toSafeString(pendingSignup.passwordHash),
+                createdAt: toSafeString(pendingSignup.createdAt) || nowIso,
+                lastLoginAt: nowIso
+            };
+
+            await saveAuthUserRecord(userRecord);
+            clearPendingSignupRecord(email);
+        } else {
+            userRecord = await getAuthUserByEmail(email);
+            if (!userRecord) {
+                return res.status(404).json({ message: 'No pending signup found for this email. Start signup again.' });
+            }
+        }
 
         await ensureUserPersonalizationProfile(email);
+        saveAuthMetaRecord(email, {
+            emailVerifiedAt: nowIso,
+            verificationSource: pendingSignup ? 'signup-otp' : 'verification-otp'
+        });
+
+        try {
+            await sendWelcomeEmail({
+                to: email,
+                name: userRecord.name
+            });
+        } catch (error) {
+            // Do not fail account activation if the welcome email cannot be delivered.
+        }
 
         const authToken = await issueAuthSession(res, email);
 
         return res.status(201).json({
             ok: true,
-            message: 'Account created successfully.',
+            message: 'Email verified successfully. Your account is ready.',
             authenticated: true,
             user: toSafeAuthUser(userRecord),
             accessToken: authToken.accessToken,
             accessTokenExpiresInSeconds: authToken.accessTokenExpiresInSeconds
         });
     } catch (error) {
-        return res.status(500).json({ message: 'Account creation failed. Please retry.' });
+        return res.status(500).json({ message: 'Verification failed. Please retry.' });
+    }
+});
+
+app.post('/api/auth/verification/resend', async (req, res) => {
+    try {
+        const email = toSafeEmail(req.body?.email);
+        if (!email) {
+            return res.status(400).json({ message: 'Please enter a valid email address.' });
+        }
+
+        const pendingSignup = getPendingSignupRecord(email);
+        if (pendingSignup) {
+            await sendSignupVerificationOtp({
+                email,
+                name: pendingSignup.name
+            });
+
+            return res.json({
+                ok: true,
+                pendingVerification: true,
+                message: 'A fresh verification OTP has been sent to your email.',
+                email,
+                expiresInSeconds: AUTH_OTP_TTL_MINUTES * 60
+            });
+        }
+
+        const existingUser = await getAuthUserByEmail(email);
+        if (!existingUser) {
+            return res.json({
+                ok: true,
+                pendingVerification: false,
+                message: 'If a verification step is pending for this email, a fresh OTP will arrive shortly.'
+            });
+        }
+
+        const verificationState = getAuthVerificationState(existingUser);
+        if (verificationState.isVerified) {
+            return res.json({
+                ok: true,
+                pendingVerification: false,
+                message: 'This account is already verified. Please log in.'
+            });
+        }
+
+        await sendSignupVerificationOtp({
+            email,
+            name: existingUser.name
+        });
+
+        return res.json({
+            ok: true,
+            pendingVerification: true,
+            message: 'A fresh verification OTP has been sent to your email.',
+            email,
+            expiresInSeconds: AUTH_OTP_TTL_MINUTES * 60
+        });
+    } catch (error) {
+        if (error?.statusCode) {
+            return res.status(error.statusCode).json({
+                message: error.message || 'Please retry after a short wait.',
+                retryAfterSeconds: Number(error.retryAfterSeconds || 0) || undefined
+            });
+        }
+
+        const errorMessage = String(error?.message || '');
+        if (errorMessage.toLowerCase().includes('email delivery')) {
+            return res.status(503).json({ message: errorMessage });
+        }
+
+        return res.status(500).json({ message: 'We could not resend the verification OTP. Please retry.' });
     }
 });
 
 app.post('/api/auth/login', async (req, res) => {
     try {
-        await ensureDemoUserRecord();
-
         const email = toSafeEmail(req.body?.email);
         const password = String(req.body?.password || '');
 
@@ -4077,6 +4519,15 @@ app.post('/api/auth/login', async (req, res) => {
         if (!passwordVerification.isValid) {
             registerFailedLogin(loginAttemptKey);
             return res.status(401).json({ message: 'Invalid email or password.' });
+        }
+
+        const verificationState = getAuthVerificationState(userRecord);
+        if (!verificationState.isVerified) {
+            return res.status(403).json({
+                message: 'Please verify your email before logging in.',
+                requiresVerification: true,
+                email
+            });
         }
 
         clearLoginAttemptRecord(loginAttemptKey);
@@ -4102,6 +4553,136 @@ app.post('/api/auth/login', async (req, res) => {
         });
     } catch (error) {
         return res.status(500).json({ message: 'Login failed. Please retry.' });
+    }
+});
+
+app.post('/api/auth/forgot-password', async (req, res) => {
+    try {
+        const email = toSafeEmail(req.body?.email);
+        if (!email) {
+            return res.status(400).json({ message: 'Please enter a valid email address.' });
+        }
+
+        const pendingSignup = getPendingSignupRecord(email);
+        if (pendingSignup) {
+            await sendSignupVerificationOtp({
+                email,
+                name: pendingSignup.name
+            });
+
+            return res.json({
+                ok: true,
+                pendingVerification: true,
+                message: 'This email is still waiting for signup verification. We sent a fresh verification OTP instead.',
+                email,
+                expiresInSeconds: AUTH_OTP_TTL_MINUTES * 60
+            });
+        }
+
+        const userRecord = await getAuthUserByEmail(email);
+        if (!userRecord) {
+            return res.json({
+                ok: true,
+                resetPending: true,
+                message: 'If an account exists for this email, a reset OTP has been sent.'
+            });
+        }
+
+        await sendPasswordResetOtp({
+            email,
+            name: userRecord.name
+        });
+
+        return res.json({
+            ok: true,
+            resetPending: true,
+            message: 'We sent a password reset OTP to your email address.',
+            email,
+            expiresInSeconds: AUTH_OTP_TTL_MINUTES * 60
+        });
+    } catch (error) {
+        if (error?.statusCode) {
+            return res.status(error.statusCode).json({
+                message: error.message || 'Please retry after a short wait.',
+                retryAfterSeconds: Number(error.retryAfterSeconds || 0) || undefined
+            });
+        }
+
+        const errorMessage = String(error?.message || '');
+        if (errorMessage.toLowerCase().includes('email delivery')) {
+            return res.status(503).json({ message: errorMessage });
+        }
+
+        return res.status(500).json({ message: 'We could not start the password reset flow. Please retry.' });
+    }
+});
+
+app.post('/api/auth/reset-password', async (req, res) => {
+    try {
+        const email = toSafeEmail(req.body?.email);
+        const otp = toSafeOtpCode(req.body?.otp);
+        const password = String(req.body?.password || '');
+
+        if (!email || !otp || !password) {
+            return res.status(400).json({ message: 'Email, OTP, and new password are required.' });
+        }
+
+        if (!isValidPassword(password)) {
+            return res.status(400).json({ message: 'Password must be between 6 and 72 characters.' });
+        }
+
+        const userRecord = await getAuthUserByEmail(email);
+        if (!userRecord) {
+            return res.status(404).json({ message: 'No account was found for this email address.' });
+        }
+
+        const verificationResult = verifyAuthChallenge('password-reset', email, otp);
+        if (!verificationResult.ok) {
+            if (verificationResult.reason === 'max-attempts-reached') {
+                return res.status(429).json({ message: 'Too many invalid OTP attempts. Request a fresh password reset OTP.' });
+            }
+
+            if (verificationResult.reason === 'missing-challenge') {
+                return res.status(410).json({ message: 'This password reset OTP has expired or is missing. Request a new one.' });
+            }
+
+            return res.status(400).json({ message: 'Please enter a valid password reset OTP.' });
+        }
+
+        userRecord.passwordHash = await hashPassword(password);
+        userRecord.lastLoginAt = new Date().toISOString();
+        await saveAuthUserRecord(userRecord);
+        await ensureUserPersonalizationProfile(email);
+
+        const verificationState = getAuthVerificationState(userRecord);
+        if (!verificationState.isVerified) {
+            saveAuthMetaRecord(email, {
+                emailVerifiedAt: userRecord.lastLoginAt,
+                verificationSource: 'password-reset-otp'
+            });
+        }
+
+        try {
+            await sendPasswordChangedEmail({
+                to: email,
+                name: userRecord.name
+            });
+        } catch (error) {
+            // Password reset should still succeed even if the follow-up email cannot be delivered.
+        }
+
+        const authToken = await issueAuthSession(res, email);
+
+        return res.json({
+            ok: true,
+            message: 'Password updated successfully.',
+            authenticated: true,
+            user: toSafeAuthUser(userRecord),
+            accessToken: authToken.accessToken,
+            accessTokenExpiresInSeconds: authToken.accessTokenExpiresInSeconds
+        });
+    } catch (error) {
+        return res.status(500).json({ message: 'Password reset failed. Please retry.' });
     }
 });
 
@@ -4171,6 +4752,16 @@ app.get('/api/auth/session', async (req, res) => {
     try {
         const auth = await resolveRequestAuth(req);
         if (!auth.ok) {
+            return res.json({
+                ok: true,
+                authenticated: false,
+                user: null
+            });
+        }
+
+        const verificationState = getAuthVerificationState(auth.user);
+        if (!verificationState.isVerified) {
+            clearAuthCookies(res);
             return res.json({
                 ok: true,
                 authenticated: false,
@@ -4445,48 +5036,6 @@ app.get('/api/users/dashboard', requireAuth, async (req, res) => {
     }
 });
 
-app.get('/api/db/health', requireAuth, requireAdmin, async (req, res) => {
-    try {
-        const snapshot = getHealthSnapshot();
-        let persistenceDiagnostics = {
-            driver: USE_PRISMA_PERSISTENCE ? 'prisma' : 'sqlite-kv'
-        };
-
-        if (USE_PRISMA_PERSISTENCE) {
-            persistenceDiagnostics = {
-                ...persistenceDiagnostics,
-                ...(await getPrismaDiagnostics())
-            };
-        }
-
-        return res.json({
-            ok: true,
-            database: snapshot,
-            diagnostics: {
-                baselineRecords: baselineRecordStore.size,
-                activeProfiles: USE_PRISMA_PERSISTENCE
-                    ? Number(persistenceDiagnostics.activeProfiles || 0)
-                    : personalizationStore.size,
-                activeUsers: USE_PRISMA_PERSISTENCE
-                    ? Number(persistenceDiagnostics.activeUsers || 0)
-                    : authUserStore.size,
-                attemptBuckets: USE_PRISMA_PERSISTENCE
-                    ? Number(persistenceDiagnostics.attemptBuckets || 0)
-                    : attemptStore.size,
-                incompleteSessions: USE_PRISMA_PERSISTENCE
-                    ? Number(persistenceDiagnostics.incompleteSessions || 0)
-                    : incompleteSessionStore.size,
-                persistence: persistenceDiagnostics
-            }
-        });
-    } catch (error) {
-        return res.status(500).json({
-            ok: false,
-            message: error.message || 'Database diagnostics unavailable.'
-        });
-    }
-});
-
 app.get('/mock/:examId', (req, res) => {
     const examId = toSafeString(req.params?.examId).toLowerCase();
     if (!examId || !examById.has(examId)) {
@@ -4523,17 +5072,26 @@ app.get('*', (req, res) => {
 });
 
 app.use((err, req, res, next) => {
-    const message = err && err.message ? err.message : 'Unexpected server error';
-    res.status(500).json({ message });
+    const statusCode = Number(err?.status || err?.statusCode || 500);
+    const safeStatusCode = statusCode >= 400 && statusCode < 600 ? statusCode : 500;
+    const safeMessage = safeStatusCode >= 500
+        ? 'Unexpected server error.'
+        : String(err?.publicMessage || err?.message || 'Request failed.');
+
+    // eslint-disable-next-line no-console
+    console.error(`[error] ${req.method} ${req.originalUrl} -> ${safeStatusCode}: ${err?.stack || err?.message || 'unknown-error'}`);
+    res.status(safeStatusCode).json({ message: safeMessage });
 });
 
 if (require.main === module) {
     app.listen(PORT, async () => {
-        try {
-            await ensureDemoUserRecord();
-        } catch (error) {
-            // eslint-disable-next-line no-console
-            console.warn(`[auth] demo-user bootstrap at startup failed: ${error.message || 'unknown-error'}`);
+        if (STARTUP_CONFIG.demoBootstrapEnabled) {
+            try {
+                await ensureDemoUserRecord();
+            } catch (error) {
+                // eslint-disable-next-line no-console
+                console.warn(`[auth] demo-user bootstrap at startup failed: ${error.message || 'unknown-error'}`);
+            }
         }
 
         logStartupDiagnostics();

@@ -187,6 +187,273 @@ const loadExamCatalogFromDisk = () => {
     }
 };
 
+const coerceString = (value) => String(value || '').trim();
+
+const coerceIdentifier = (value) => coerceString(value)
+    .toLowerCase()
+    .replace(/[^a-z0-9-_]+/g, '-')
+    .replace(/-+/g, '-')
+    .replace(/^-|-$/g, '');
+
+const coerceTitleWords = (value) => coerceString(value)
+    .split(/[-_\s]+/)
+    .filter(Boolean)
+    .map((token) => token.charAt(0).toUpperCase() + token.slice(1))
+    .join(' ');
+
+const sanitizeStringList = (values, normalizer = (value) => coerceString(value).toLowerCase()) => {
+    if (!Array.isArray(values)) return [];
+
+    const unique = new Set();
+    values.forEach((value) => {
+        const normalized = normalizer(value);
+        if (normalized) {
+            unique.add(normalized);
+        }
+    });
+
+    return Array.from(unique);
+};
+
+const sanitizePaperIdValues = (paperIds) => sanitizeStringList(paperIds, (paperId) => coerceString(paperId).toLowerCase());
+
+const sanitizeLanguageSupport = (values) => sanitizeStringList(values, (value) => {
+    const normalized = coerceString(value).toLowerCase();
+    if (!normalized) return '';
+    if (normalized === 'english') return 'en';
+    if (normalized === 'hindi') return 'hi';
+    return normalized;
+});
+
+const normalizeTestType = (value) => {
+    const normalized = coerceIdentifier(value);
+    if (!normalized) return '';
+
+    const aliases = new Map([
+        ['full-paper', 'full-paper'],
+        ['fullpaper', 'full-paper'],
+        ['full-mock', 'full-paper'],
+        ['fullmock', 'full-paper'],
+        ['mock-test', 'full-paper'],
+        ['mock', 'full-paper'],
+        ['previous-year-paper', 'previous-year-paper'],
+        ['previous-year', 'previous-year-paper'],
+        ['pyq', 'previous-year-paper'],
+        ['pyq-paper', 'previous-year-paper'],
+        ['section-test', 'section-test'],
+        ['sectional-test', 'section-test'],
+        ['sectional', 'section-test'],
+        ['subject-test', 'subject-test'],
+        ['chapter-test', 'chapter-test'],
+        ['chapterwise-test', 'chapter-test'],
+        ['topic-test', 'topic-test'],
+        ['topicwise-test', 'topic-test'],
+        ['custom-practice', 'custom-practice'],
+        ['practice-set', 'custom-practice']
+    ]);
+
+    return aliases.get(normalized) || normalized;
+};
+
+const sanitizeSupportedTestTypes = (values) => {
+    const normalized = sanitizeStringList(values, normalizeTestType);
+    return normalized.length
+        ? normalized
+        : ['full-paper', 'previous-year-paper', 'section-test', 'subject-test', 'chapter-test', 'topic-test'];
+};
+
+const inferStageIdFromValue = (value) => {
+    const normalized = coerceIdentifier(value);
+    if (!normalized) return '';
+
+    const numberedMatchers = [
+        { pattern: /(?:^|-)tier-?(\d+)(?:-|$)/, prefix: 'tier' },
+        { pattern: /(?:^|-)cbt-?(\d+)(?:-|$)/, prefix: 'cbt' },
+        { pattern: /(?:^|-)paper-?(\d+)(?:-|$)/, prefix: 'paper' },
+        { pattern: /(?:^|-)phase-?(\d+)(?:-|$)/, prefix: 'phase' },
+        { pattern: /(?:^|-)stage-?(\d+)(?:-|$)/, prefix: 'stage' },
+        { pattern: /(?:^|-)group-?([a-z0-9]+)(?:-|$)/, prefix: 'group' }
+    ];
+
+    for (const matcher of numberedMatchers) {
+        const match = normalized.match(matcher.pattern);
+        if (match && match[1]) {
+            return `${matcher.prefix}${match[1]}`;
+        }
+    }
+
+    const directStageIds = [
+        'prelims',
+        'mains',
+        'descriptive',
+        'typing',
+        'skill-test',
+        'pet',
+        'pst',
+        'interview',
+        'document-verification',
+        'medical',
+        'gs1',
+        'gs2',
+        'csat'
+    ];
+
+    const matchedStage = directStageIds.find((stageId) => normalized.includes(stageId));
+    return matchedStage || '';
+};
+
+const buildStageTitle = (stageId) => {
+    const safeStageId = coerceIdentifier(stageId);
+    if (!safeStageId) return 'Core Stage';
+
+    const predefinedTitles = new Map([
+        ['tier1', 'Tier 1'],
+        ['tier2', 'Tier 2'],
+        ['tier3', 'Tier 3'],
+        ['tier4', 'Tier 4'],
+        ['cbt', 'CBT'],
+        ['cbt1', 'CBT 1'],
+        ['cbt2', 'CBT 2'],
+        ['paper1', 'Paper 1'],
+        ['paper2', 'Paper 2'],
+        ['prelims', 'Prelims'],
+        ['mains', 'Mains'],
+        ['descriptive', 'Descriptive'],
+        ['typing', 'Typing Test'],
+        ['skill-test', 'Skill Test'],
+        ['pet', 'PET'],
+        ['pst', 'PST'],
+        ['interview', 'Interview'],
+        ['document-verification', 'Document Verification'],
+        ['medical', 'Medical'],
+        ['gs1', 'GS Paper 1'],
+        ['gs2', 'GS Paper 2'],
+        ['csat', 'CSAT']
+    ]);
+
+    return predefinedTitles.get(safeStageId) || coerceTitleWords(safeStageId);
+};
+
+const deriveStagesFromPaperIds = ({ defaultPaperId, availablePaperIds, languageSupport }) => {
+    const paperIds = sanitizePaperIdValues([defaultPaperId, ...(Array.isArray(availablePaperIds) ? availablePaperIds : [])]);
+    const grouped = new Map();
+
+    paperIds.forEach((paperId) => {
+        const stageId = inferStageIdFromValue(paperId) || 'default';
+        if (!grouped.has(stageId)) {
+            grouped.set(stageId, []);
+        }
+        grouped.get(stageId).push(paperId);
+    });
+
+    return Array.from(grouped.entries()).map(([stageId, stagePaperIds]) => ({
+        id: stageId,
+        title: buildStageTitle(stageId),
+        defaultPaperId: stagePaperIds.includes(coerceString(defaultPaperId).toLowerCase())
+            ? coerceString(defaultPaperId).toLowerCase()
+            : stagePaperIds[0],
+        availablePaperIds: stagePaperIds,
+        languageSupport,
+        supportedTestTypes: ['full-paper', 'previous-year-paper', 'section-test', 'subject-test', 'chapter-test', 'topic-test']
+    }));
+};
+
+const normalizeExamPaperConfig = (paperConfig) => {
+    const source = paperConfig && typeof paperConfig === 'object' ? paperConfig : {};
+    const defaultPaperId = coerceString(source.defaultPaperId).toLowerCase();
+    const availablePaperIds = sanitizePaperIdValues(source.availablePaperIds);
+    const languageSupport = sanitizeLanguageSupport(source.languageSupport);
+    const explicitStages = Array.isArray(source.stages)
+        ? source.stages
+            .map((stage) => {
+                const safeStage = stage && typeof stage === 'object' ? stage : {};
+                const id = coerceIdentifier(safeStage.id || safeStage.stageId || inferStageIdFromValue(safeStage.defaultPaperId || safeStage.availablePaperIds?.[0]));
+                if (!id) return null;
+
+                const stagePaperIds = sanitizePaperIdValues(safeStage.availablePaperIds);
+                const stageDefaultPaperId = coerceString(safeStage.defaultPaperId).toLowerCase();
+                const stageLanguageSupport = sanitizeLanguageSupport(safeStage.languageSupport);
+
+                return {
+                    id,
+                    title: coerceString(safeStage.title) || buildStageTitle(id),
+                    description: coerceString(safeStage.description),
+                    defaultPaperId: stageDefaultPaperId || stagePaperIds[0] || '',
+                    availablePaperIds: stagePaperIds,
+                    languageSupport: stageLanguageSupport.length ? stageLanguageSupport : languageSupport,
+                    supportedTestTypes: sanitizeSupportedTestTypes(safeStage.supportedTestTypes || safeStage.testTypes)
+                };
+            })
+            .filter(Boolean)
+        : [];
+
+    const derivedStages = deriveStagesFromPaperIds({
+        defaultPaperId,
+        availablePaperIds,
+        languageSupport
+    });
+
+    const stageMap = new Map();
+    [...derivedStages, ...explicitStages].forEach((stage) => {
+        if (!stage?.id) return;
+
+        const previous = stageMap.get(stage.id) || null;
+        const mergedPaperIds = sanitizePaperIdValues([
+            ...(previous?.availablePaperIds || []),
+            ...(stage.availablePaperIds || [])
+        ]);
+
+        stageMap.set(stage.id, {
+            id: stage.id,
+            title: stage.title || previous?.title || buildStageTitle(stage.id),
+            description: stage.description || previous?.description || '',
+            defaultPaperId: coerceString(stage.defaultPaperId || previous?.defaultPaperId).toLowerCase()
+                || mergedPaperIds[0]
+                || '',
+            availablePaperIds: mergedPaperIds,
+            languageSupport: (Array.isArray(stage.languageSupport) && stage.languageSupport.length)
+                ? stage.languageSupport
+                : (previous?.languageSupport || languageSupport),
+            supportedTestTypes: sanitizeSupportedTestTypes([
+                ...(previous?.supportedTestTypes || []),
+                ...(stage.supportedTestTypes || [])
+            ])
+        });
+    });
+
+    const stages = Array.from(stageMap.values());
+    const defaultStageId = coerceIdentifier(source.defaultStageId || source.stageId || inferStageIdFromValue(defaultPaperId) || stages[0]?.id || 'default');
+    const ensuredStages = stages.length
+        ? stages
+        : [{
+            id: defaultStageId,
+            title: buildStageTitle(defaultStageId),
+            description: '',
+            defaultPaperId: defaultPaperId || availablePaperIds[0] || '',
+            availablePaperIds,
+            languageSupport: languageSupport.length ? languageSupport : ['en'],
+            supportedTestTypes: ['full-paper', 'previous-year-paper', 'section-test', 'subject-test', 'chapter-test', 'topic-test']
+        }];
+
+    const defaultStage = ensuredStages.find((stage) => stage.id === defaultStageId) || ensuredStages[0];
+
+    return {
+        defaultPaperId: defaultPaperId || defaultStage?.defaultPaperId || availablePaperIds[0] || '',
+        availablePaperIds: availablePaperIds.length
+            ? availablePaperIds
+            : sanitizePaperIdValues(ensuredStages.flatMap((stage) => stage.availablePaperIds || [])),
+        languageSupport: languageSupport.length
+            ? languageSupport
+            : sanitizeLanguageSupport(ensuredStages.flatMap((stage) => stage.languageSupport || [])),
+        defaultStageId: defaultStage?.id || defaultStageId,
+        availableStageIds: ensuredStages.map((stage) => stage.id),
+        stages: ensuredStages.map((stage) => ({
+            ...stage,
+            isDefault: stage.id === (defaultStage?.id || defaultStageId)
+        }))
+    };
+};
+
 const normalizeExamForRuntime = (exam) => {
     const safeExam = exam && typeof exam === 'object' ? exam : {};
     const id = String(safeExam.id || '').trim().toLowerCase();
@@ -204,17 +471,7 @@ const normalizeExamForRuntime = (exam) => {
     const isLive = safeExam.isLive !== false;
     const bodyId = String(safeExam.bodyId || stream.toLowerCase()).trim().toLowerCase();
     const dataFolder = String(safeExam.dataFolder || id).trim().toLowerCase();
-    const paperConfig = safeExam.paperConfig && typeof safeExam.paperConfig === 'object'
-        ? safeExam.paperConfig
-        : {};
-
-    const defaultPaperId = String(paperConfig.defaultPaperId || '').trim().toLowerCase();
-    const availablePaperIds = Array.isArray(paperConfig.availablePaperIds)
-        ? Array.from(new Set(paperConfig.availablePaperIds.map((paperId) => String(paperId || '').trim().toLowerCase()).filter(Boolean)))
-        : [];
-    const languageSupport = Array.isArray(paperConfig.languageSupport)
-        ? Array.from(new Set(paperConfig.languageSupport.map((language) => String(language || '').trim().toLowerCase()).filter(Boolean)))
-        : ['en'];
+    const paperConfig = normalizeExamPaperConfig(safeExam.paperConfig);
 
     return {
         id,
@@ -228,11 +485,8 @@ const normalizeExamForRuntime = (exam) => {
         recommendedLevel,
         isLive,
         dataFolder,
-        paperConfig: {
-            defaultPaperId: defaultPaperId || availablePaperIds[0] || '',
-            availablePaperIds,
-            languageSupport
-        }
+        stages: Array.isArray(paperConfig.stages) ? paperConfig.stages : [],
+        paperConfig
     };
 };
 
@@ -588,33 +842,111 @@ const getExamPoolForTarget = (value) => {
     };
 };
 
-const buildGeneratedTestSeriesItem = (exam, sequence, chapterPool = []) => {
+const buildGeneratedTestScope = ({ fallbackRef = null, requestedSubjectId = '', requestedChapterId = '', requestedTopicId = '' }) => {
+    const scope = {
+        sectionId: '',
+        sectionName: '',
+        subjectId: '',
+        subjectName: '',
+        chapterId: '',
+        chapterName: '',
+        topicId: '',
+        topicName: '',
+        topicDifficultyBand: ''
+    };
+
+    const chapterRef = fallbackRef && typeof fallbackRef === 'object' ? fallbackRef : null;
+    if (chapterRef) {
+        scope.sectionId = toSafeIdentifier(chapterRef.sectionId || chapterRef.subjectId || '');
+        scope.sectionName = toSafeString(chapterRef.sectionName || chapterRef.subjectName || '');
+        scope.subjectId = toSafeIdentifier(chapterRef.subjectId);
+        scope.subjectName = toSafeString(chapterRef.subjectName);
+        scope.chapterId = toSafeIdentifier(chapterRef.chapterId);
+        scope.chapterName = toSafeString(chapterRef.chapterName);
+        scope.topicId = toSafeIdentifier(chapterRef.topicId);
+        scope.topicName = toSafeString(chapterRef.topicName);
+        scope.topicDifficultyBand = toSafeString(chapterRef.topicDifficultyBand);
+    }
+
+    if (requestedSubjectId) {
+        scope.subjectId = requestedSubjectId;
+        scope.sectionId = scope.sectionId || requestedSubjectId;
+    }
+    if (requestedChapterId) {
+        scope.chapterId = requestedChapterId;
+    }
+    if (requestedTopicId) {
+        scope.topicId = requestedTopicId;
+    }
+
+    return scope;
+};
+
+const buildGeneratedTestSeriesItem = (exam, sequence, chapterPool = [], options = {}) => {
     const safeSequence = Math.max(1, Number(sequence) || 1);
     const baseSeed = (safeSequence * 31) + (toSafeString(exam.id).length * 17);
-    const stageLabel = toSafeString(exam.stream) === 'UPSC'
-        ? (toSafeString(exam.id).includes('csat') ? 'CSAT' : 'Prelims')
-        : (toSafeString(exam.stream) === 'RRB' ? 'CBT' : 'Tier');
+    const requestedStageId = toSafeIdentifier(options.stageId);
+    const stageConfig = getExamStageConfig(exam, requestedStageId) || getExamStageConfig(exam, exam?.paperConfig?.defaultStageId);
+    const stageId = toSafeIdentifier(stageConfig?.id || exam?.paperConfig?.defaultStageId || inferStageIdFromValue(exam?.paperConfig?.defaultPaperId) || '');
+    const stageTitle = toSafeString(stageConfig?.title) || buildStageTitle(stageId || 'default');
     const difficultyOrder = ['easy', 'moderate', 'hard'];
     const difficulty = difficultyOrder[baseSeed % difficultyOrder.length];
     const attemptCount = 320 + ((baseSeed * 41) % 9000);
-    const questionCount = toSafeString(exam.stream) === 'UPSC'
-        ? 100
-        : (toSafeString(exam.id).includes('chsl') ? 100 : 100);
     const baseDuration = toSafeInteger(toSafeString(exam.recommendedDuration).replace(/[^\d]/g, ''), 20, 10, 180);
-    const durationMinutes = Math.max(10, baseDuration + ((baseSeed % 3) * 5));
-    const languageSupport = Array.isArray(exam?.paperConfig?.languageSupport)
-        ? exam.paperConfig.languageSupport.map((item) => String(item).toUpperCase())
-        : ['EN'];
-    const isBilingual = languageSupport.includes('HI');
-    const daysAgo = (baseSeed * 7) % 180;
-    const createdAt = new Date(Date.now() - (daysAgo * 24 * 60 * 60 * 1000) - ((baseSeed % 24) * 60 * 60 * 1000)).toISOString();
-    const paperId = toSafeString(exam?.paperConfig?.defaultPaperId).toLowerCase();
-    const id = `${exam.id}-mock-${safeSequence}`;
-    const isLive = exam?.isLive !== false;
-    const fallbackBrowseUrl = `/test-series?target=${encodeURIComponent(exam.id)}`;
+    const languageSupport = Array.isArray(stageConfig?.languageSupport) && stageConfig.languageSupport.length
+        ? stageConfig.languageSupport.map((item) => String(item).toUpperCase())
+        : (Array.isArray(exam?.paperConfig?.languageSupport)
+            ? exam.paperConfig.languageSupport.map((item) => String(item).toUpperCase())
+            : ['EN']);
+    const paperId = toSafeString(stageConfig?.defaultPaperId || getExamDefaultPaperId(exam, requestedStageId)).toLowerCase();
     const chapterRef = Array.isArray(chapterPool) && chapterPool.length
         ? chapterPool[baseSeed % chapterPool.length]
         : null;
+    const scope = buildGeneratedTestScope({
+        fallbackRef: chapterRef,
+        requestedSubjectId: toSafeIdentifier(options.subjectId),
+        requestedChapterId: toSafeIdentifier(options.chapterId),
+        requestedTopicId: toSafeIdentifier(options.topicId)
+    });
+    const hasTopicScope = Boolean(scope.topicId);
+    const hasChapterScope = Boolean(scope.chapterId);
+    const hasSubjectScope = Boolean(scope.subjectId || scope.sectionId);
+    const testType = hasTopicScope
+        ? 'topic-test'
+        : (hasChapterScope
+            ? 'chapter-test'
+            : (hasSubjectScope ? 'section-test' : 'full-paper'));
+    const questionCount = hasTopicScope
+        ? 12
+        : (hasChapterScope
+            ? 20
+            : (hasSubjectScope ? 25 : (toSafeString(exam.stream) === 'UPSC' ? 100 : 100)));
+    const durationMinutes = Math.max(10, hasTopicScope
+        ? Math.min(baseDuration, 15)
+        : (hasChapterScope
+            ? Math.max(15, Math.round(baseDuration * 0.5))
+            : (hasSubjectScope ? Math.max(15, Math.round(baseDuration * 0.6)) : baseDuration + ((baseSeed % 3) * 5))));
+    const supportedTestTypes = sanitizeSupportedTestTypes(stageConfig?.supportedTestTypes);
+    const effectiveTestType = supportedTestTypes.includes(testType)
+        ? testType
+        : (supportedTestTypes[0] || testType);
+    const stageLabel = stageTitle;
+    const title = effectiveTestType === 'topic-test' && scope.topicName
+        ? `${exam.title} ${stageLabel} ${scope.topicName} Topic Test ${safeSequence}`
+        : (effectiveTestType === 'chapter-test' && scope.chapterName
+            ? `${exam.title} ${stageLabel} ${scope.chapterName} Chapter Test ${safeSequence}`
+            : (effectiveTestType === 'section-test' && (scope.subjectName || scope.sectionName)
+                ? `${exam.title} ${stageLabel} ${(scope.subjectName || scope.sectionName)} Section Test ${safeSequence}`
+                : `${exam.title} ${stageLabel} Mock ${safeSequence}`));
+    const isLive = exam?.isLive !== false;
+    const fallbackBrowseUrl = `/test-series?target=${encodeURIComponent(exam.id)}`;
+    const launchUrl = isLive && paperId
+        ? `/mock/${encodeURIComponent(exam.id)}?paperId=${encodeURIComponent(paperId)}`
+        : '';
+    const isBilingual = languageSupport.includes('HI');
+    const daysAgo = (baseSeed * 7) % 180;
+    const createdAt = new Date(Date.now() - (daysAgo * 24 * 60 * 60 * 1000) - ((baseSeed % 24) * 60 * 60 * 1000)).toISOString();
+    const id = `${exam.id}-mock-${safeSequence}`;
 
     return {
         id,
@@ -622,8 +954,11 @@ const buildGeneratedTestSeriesItem = (exam, sequence, chapterPool = []) => {
         examTitle: exam.title,
         stream: exam.stream,
         bodyId: toSafeString(exam.bodyId).toLowerCase(),
-        title: `${exam.title} ${stageLabel} Mock ${safeSequence}`,
+        title,
         sequence: safeSequence,
+        stageId,
+        stageTitle: stageLabel,
+        testType: effectiveTestType,
         difficulty,
         attemptCount,
         questionCount,
@@ -632,23 +967,24 @@ const buildGeneratedTestSeriesItem = (exam, sequence, chapterPool = []) => {
         isBilingual,
         languageSupport,
         paperId,
-        subjectId: chapterRef?.subjectId || '',
-        subjectName: chapterRef?.subjectName || '',
-        chapterId: chapterRef?.chapterId || '',
-        chapterName: chapterRef?.chapterName || '',
-        topicId: chapterRef?.topicId || '',
-        topicName: chapterRef?.topicName || '',
-        topicDifficultyBand: chapterRef?.topicDifficultyBand || '',
+        scope,
+        sectionId: scope.sectionId || '',
+        sectionName: scope.sectionName || '',
+        subjectId: scope.subjectId || '',
+        subjectName: scope.subjectName || '',
+        chapterId: scope.chapterId || '',
+        chapterName: scope.chapterName || '',
+        topicId: scope.topicId || '',
+        topicName: scope.topicName || '',
+        topicDifficultyBand: scope.topicDifficultyBand || '',
         createdAt,
-        launchUrl: isLive && paperId
-            ? `/mock/${encodeURIComponent(exam.id)}?paperId=${encodeURIComponent(paperId)}`
-            : (isLive
-                ? `/mock/${encodeURIComponent(exam.id)}`
-                : fallbackBrowseUrl)
+        launchUrl: isLive
+            ? (launchUrl || `/mock/${encodeURIComponent(exam.id)}`)
+            : fallbackBrowseUrl
     };
 };
 
-const listGeneratedTestSeries = ({ target, sort, page, limit, subjectId, chapterId, topicId }) => {
+const listGeneratedTestSeries = ({ target, sort, page, limit, stageId, subjectId, chapterId, topicId }) => {
     const targetSelection = getExamPoolForTarget(target);
     if (!targetSelection.isValid) {
         return {
@@ -658,6 +994,7 @@ const listGeneratedTestSeries = ({ target, sort, page, limit, subjectId, chapter
     }
 
     const normalizedSort = normalizeTestSeriesSort(sort);
+    const normalizedStageId = toSafeIdentifier(stageId);
     const normalizedSubjectId = toSafeIdentifier(subjectId);
     const normalizedChapterId = toSafeIdentifier(chapterId);
     const normalizedTopicId = toSafeIdentifier(topicId);
@@ -666,9 +1003,17 @@ const listGeneratedTestSeries = ({ target, sort, page, limit, subjectId, chapter
     const generated = [];
 
     targetSelection.exams.forEach((exam) => {
+        if (normalizedStageId && !getExamStageConfig(exam, normalizedStageId)) {
+            return;
+        }
         const chapterPool = examChapterPoolById.get(exam.id) || [];
         for (let index = 1; index <= TEST_SERIES_PER_EXAM; index += 1) {
-            generated.push(buildGeneratedTestSeriesItem(exam, index, chapterPool));
+            generated.push(buildGeneratedTestSeriesItem(exam, index, chapterPool, {
+                stageId: normalizedStageId,
+                subjectId: normalizedSubjectId,
+                chapterId: normalizedChapterId,
+                topicId: normalizedTopicId
+            }));
         }
     });
 
@@ -690,17 +1035,8 @@ const listGeneratedTestSeries = ({ target, sort, page, limit, subjectId, chapter
     }
 
     const isChapterwiseScope = Boolean(normalizedSubjectId || normalizedChapterId || normalizedTopicId);
-    if (isChapterwiseScope) {
-        workingSet = workingSet.map((item) => {
-            if (toSafeString(item.examId).toLowerCase() !== 'ssc-cgl') {
-                return item;
-            }
-
-            return {
-                ...item,
-                questionCount: 25
-            };
-        });
+    if (normalizedStageId) {
+        workingSet = workingSet.filter((item) => toSafeIdentifier(item.stageId) === normalizedStageId);
     }
 
     if (normalizedSort === 'newly-added') {
@@ -718,6 +1054,7 @@ const listGeneratedTestSeries = ({ target, sort, page, limit, subjectId, chapter
         ok: true,
         target: targetSelection.normalizedTarget,
         sort: normalizedSort,
+        stageId: normalizedStageId,
         subjectId: normalizedSubjectId,
         chapterId: normalizedChapterId,
         topicId: normalizedTopicId,
@@ -1702,18 +2039,114 @@ const normalizeLanguageKey = (value) => {
     return normalized;
 };
 
-const sanitizePaperIdList = (paperIds) => {
-    if (!Array.isArray(paperIds)) return [];
+const sanitizePaperIdList = (paperIds) => sanitizePaperIdValues(paperIds);
 
-    const unique = new Set();
-    paperIds.forEach((paperId) => {
-        const safePaperId = toSafeString(paperId).toLowerCase();
-        if (safePaperId) {
-            unique.add(safePaperId);
+const getExamStageList = (exam) => {
+    const stages = Array.isArray(exam?.paperConfig?.stages)
+        ? exam.paperConfig.stages
+        : (Array.isArray(exam?.stages) ? exam.stages : []);
+
+    return stages.filter((stage) => stage && typeof stage === 'object' && toSafeIdentifier(stage.id));
+};
+
+const getExamStageConfig = (exam, requestedStageId = '') => {
+    const stages = getExamStageList(exam);
+    if (!stages.length) return null;
+
+    const safeStageId = toSafeIdentifier(requestedStageId || exam?.paperConfig?.defaultStageId || stages[0]?.id);
+    return stages.find((stage) => toSafeIdentifier(stage.id) === safeStageId) || null;
+};
+
+const getExamAvailablePaperIds = (exam, requestedStageId = '') => {
+    const stage = getExamStageConfig(exam, requestedStageId);
+    if (stage) {
+        const stagePaperIds = sanitizePaperIdList(stage.availablePaperIds);
+        if (toSafeIdentifier(requestedStageId)) {
+            return stagePaperIds;
         }
-    });
 
-    return Array.from(unique);
+        if (stagePaperIds.length) {
+            return stagePaperIds;
+        }
+    }
+
+    return sanitizePaperIdList(exam?.paperConfig?.availablePaperIds);
+};
+
+const getExamDefaultPaperId = (exam, requestedStageId = '') => {
+    const stage = getExamStageConfig(exam, requestedStageId);
+    const stageDefaultPaperId = toSafeString(stage?.defaultPaperId).toLowerCase();
+    if (toSafeIdentifier(requestedStageId) && stage) {
+        return stageDefaultPaperId;
+    }
+    if (stageDefaultPaperId) {
+        return stageDefaultPaperId;
+    }
+
+    return toSafeString(exam?.paperConfig?.defaultPaperId).toLowerCase();
+};
+
+const normalizePaperScope = (scope) => {
+    const source = isPlainObject(scope) ? scope : {};
+    const normalized = {
+        sectionId: toSafeIdentifier(source.sectionId || source.section?.id || ''),
+        sectionName: toSafeString(source.sectionName || source.section?.name || ''),
+        subjectId: toSafeIdentifier(source.subjectId || source.subject?.id || ''),
+        subjectName: toSafeString(source.subjectName || source.subject?.name || ''),
+        chapterId: toSafeIdentifier(source.chapterId || source.chapter?.id || ''),
+        chapterName: toSafeString(source.chapterName || source.chapter?.name || ''),
+        topicId: toSafeIdentifier(source.topicId || source.topic?.id || ''),
+        topicName: toSafeString(source.topicName || source.topic?.name || '')
+    };
+
+    if (!normalized.sectionId && normalized.subjectId) {
+        normalized.sectionId = normalized.subjectId;
+    }
+    if (!normalized.sectionName && normalized.subjectName) {
+        normalized.sectionName = normalized.subjectName;
+    }
+
+    return normalized;
+};
+
+const isScopedPracticeTestType = (testType) => ['section-test', 'subject-test', 'chapter-test', 'topic-test', 'custom-practice'].includes(normalizeTestType(testType));
+
+const normalizePaperMetadataForRuntime = (paper, exam) => {
+    const source = isPlainObject(paper) ? paper : {};
+    const safePaperId = toSafeString(source.paperId).toLowerCase();
+    const resolvedStageId = toSafeIdentifier(
+        source.stageId
+        || source.stage?.id
+        || inferStageIdFromValue(source.paperId)
+        || source.paperConfig?.defaultStageId
+        || exam?.paperConfig?.defaultStageId
+    );
+    const resolvedStage = getExamStageConfig(exam, resolvedStageId);
+    const resolvedScope = normalizePaperScope(source.scope);
+    const resolvedTestType = normalizeTestType(source.testType || source.paperType || source.mode || 'previous-year-paper');
+
+    return {
+        ...source,
+        paperId: safePaperId,
+        examId: toSafeString(source.examId || exam?.id).toLowerCase(),
+        stageId: resolvedStage?.id || resolvedStageId || toSafeIdentifier(exam?.paperConfig?.defaultStageId) || '',
+        stageTitle: toSafeString(source.stageTitle || source.stage?.title || resolvedStage?.title) || buildStageTitle(resolvedStage?.id || resolvedStageId || 'default'),
+        testType: resolvedTestType || 'previous-year-paper',
+        scope: resolvedScope,
+        languageSupport: sanitizeLanguageSupport(
+            source.languageSupport
+            || resolvedStage?.languageSupport
+            || exam?.paperConfig?.languageSupport
+        ),
+        sections: Array.isArray(source.sections)
+            ? source.sections.map((section) => ({
+                ...section,
+                sectionId: toSafeIdentifier(section?.sectionId),
+                name: toSafeString(section?.name || section?.title),
+                questionCount: Number(section?.questionCount)
+            }))
+            : []
+    };
 };
 
 const sanitizePreferenceExamId = (value) => {
@@ -2098,35 +2531,38 @@ const validatePaperMetadata = (paper, examId, paperId) => {
         return { ok: false, message: 'Paper metadata must be a JSON object.' };
     }
 
-    if (toSafeString(paper.paperId).toLowerCase() !== paperId) {
+    const exam = examById.get(examId) || null;
+    const normalizedPaper = normalizePaperMetadataForRuntime(paper, exam);
+
+    if (toSafeString(normalizedPaper.paperId).toLowerCase() !== paperId) {
         return { ok: false, message: 'Paper metadata paperId mismatch.' };
     }
 
-    if (toSafeString(paper.examId).toLowerCase() !== examId) {
+    if (toSafeString(normalizedPaper.examId).toLowerCase() !== examId) {
         return { ok: false, message: 'Paper metadata examId mismatch.' };
     }
 
-    const totalQuestions = Number(paper.totalQuestions);
+    const totalQuestions = Number(normalizedPaper.totalQuestions);
     if (!Number.isInteger(totalQuestions) || totalQuestions <= 0) {
         return { ok: false, message: 'Paper totalQuestions must be a positive integer.' };
     }
 
-    const marksPerQuestion = Number(paper.marksPerQuestion);
+    const marksPerQuestion = Number(normalizedPaper.marksPerQuestion);
     if (!Number.isFinite(marksPerQuestion) || marksPerQuestion <= 0) {
         return { ok: false, message: 'Paper marksPerQuestion must be a positive number.' };
     }
 
-    const negativeMarks = Number(paper.negativeMarks);
+    const negativeMarks = Number(normalizedPaper.negativeMarks);
     if (!Number.isFinite(negativeMarks) || negativeMarks < 0) {
         return { ok: false, message: 'Paper negativeMarks must be zero or positive.' };
     }
 
-    const durationMinutes = Number(paper.durationMinutes);
+    const durationMinutes = Number(normalizedPaper.durationMinutes);
     if (!Number.isInteger(durationMinutes) || durationMinutes <= 0) {
         return { ok: false, message: 'Paper durationMinutes must be a positive integer.' };
     }
 
-    const maxScore = Number(paper.maxScore);
+    const maxScore = Number(normalizedPaper.maxScore);
     if (!Number.isFinite(maxScore) || maxScore <= 0) {
         return { ok: false, message: 'Paper maxScore must be a positive number.' };
     }
@@ -2136,11 +2572,11 @@ const validatePaperMetadata = (paper, examId, paperId) => {
         return { ok: false, message: `Paper maxScore mismatch. Expected ${expectedMaxScore}.` };
     }
 
-    if (!Array.isArray(paper.sections) || !paper.sections.length) {
+    if (!Array.isArray(normalizedPaper.sections) || !normalizedPaper.sections.length) {
         return { ok: false, message: 'Paper sections must be a non-empty array.' };
     }
 
-    const sectionCount = paper.sections.reduce((sum, section) => {
+    const sectionCount = normalizedPaper.sections.reduce((sum, section) => {
         const nextCount = Number(section?.questionCount);
         return sum + (Number.isInteger(nextCount) && nextCount > 0 ? nextCount : 0);
     }, 0);
@@ -2149,7 +2585,7 @@ const validatePaperMetadata = (paper, examId, paperId) => {
         return { ok: false, message: 'Paper section totals do not match totalQuestions.' };
     }
 
-    const invalidSection = paper.sections.find((section) => {
+    const invalidSection = normalizedPaper.sections.find((section) => {
         const sectionId = toSafeString(section?.sectionId);
         const sectionName = toSafeString(section?.name);
         const count = Number(section?.questionCount);
@@ -2161,8 +2597,9 @@ const validatePaperMetadata = (paper, examId, paperId) => {
         return { ok: false, message: 'Paper contains invalid section definitions.' };
     }
 
+    const safeTestType = normalizeTestType(normalizedPaper.testType);
     const rule = getExamPatternRule(examId);
-    if (rule) {
+    if (rule && !isScopedPracticeTestType(safeTestType)) {
         if (Number(rule.totalQuestions) !== totalQuestions) {
             return { ok: false, message: `Paper totalQuestions must match exam rule (${rule.totalQuestions}).` };
         }
@@ -2180,13 +2617,13 @@ const validatePaperMetadata = (paper, examId, paperId) => {
         }
 
         const ruleSections = Array.isArray(rule.sections) ? rule.sections : [];
-        if (ruleSections.length !== paper.sections.length) {
+        if (ruleSections.length !== normalizedPaper.sections.length) {
             return { ok: false, message: 'Paper sections do not match exam pattern section count.' };
         }
 
         for (let index = 0; index < ruleSections.length; index += 1) {
             const ruleSection = ruleSections[index];
-            const paperSection = paper.sections[index];
+            const paperSection = normalizedPaper.sections[index];
             const paperSectionId = toSafeString(paperSection?.sectionId).toLowerCase();
             const paperSectionCount = Number(paperSection?.questionCount || 0);
 
@@ -2200,7 +2637,10 @@ const validatePaperMetadata = (paper, examId, paperId) => {
         }
     }
 
-    return { ok: true };
+    return {
+        ok: true,
+        paper: normalizedPaper
+    };
 };
 
 const normalizeOptions = (value) => {
@@ -2265,6 +2705,21 @@ const resolveQuestionContentByLanguage = (question, requestedLanguage) => {
 const normalizeQuestionMedia = (question) => {
     const media = isPlainObject(question?.media) ? question.media : {};
     const questionImageUrl = toSafeString(media.questionImageUrl || question?.questionImageUrl || question?.imageUrl) || null;
+    const answerImageUrl = toSafeString(
+        media.answerImageUrl
+        || media.answerKeyImageUrl
+        || question?.answerImageUrl
+        || question?.answerKeyImageUrl
+    ) || null;
+    const rawSolutionImageUrls = Array.isArray(media.solutionImageUrls)
+        ? media.solutionImageUrls
+        : (Array.isArray(media.answerImageUrls)
+            ? media.answerImageUrls
+            : (Array.isArray(question?.solutionImageUrls)
+                ? question.solutionImageUrls
+                : (Array.isArray(question?.answerImageUrls) ? question.answerImageUrls : [])));
+    const solutionImageUrls = sanitizeStringList(rawSolutionImageUrls, (value) => toSafeString(value) || '')
+        .slice(0, 8);
     const explanationImageUrl = toSafeString(
         media.explanationImageUrl
         || media.explanationImage
@@ -2272,6 +2727,8 @@ const normalizeQuestionMedia = (question) => {
         || question?.explanationImage
         || question?.solutionImageUrl
         || question?.solutionImage
+        || answerImageUrl
+        || solutionImageUrls[0]
     ) || null;
 
     const rawOptionImageUrls = Array.isArray(media.optionImageUrls)
@@ -2286,7 +2743,9 @@ const normalizeQuestionMedia = (question) => {
     return {
         questionImageUrl,
         optionImageUrls,
-        explanationImageUrl
+        explanationImageUrl,
+        answerImageUrl,
+        solutionImageUrls
     };
 };
 
@@ -2441,7 +2900,7 @@ const resolveQuestionExplanation = (question, options = {}) => {
     return 'Review this question with the official key and concept notes before the next mock.';
 };
 
-const validateAndNormalizeQuestionPayload = (questionPayload, examId, paperId, requestedLanguage, taxonomyResolver) => {
+const validateAndNormalizeQuestionPayload = (questionPayload, examId, paperId, requestedLanguage, taxonomyResolver, paperMetadata = null) => {
     const sourceQuestions = Array.isArray(questionPayload)
         ? questionPayload
         : (Array.isArray(questionPayload?.questions) ? questionPayload.questions : null);
@@ -2452,6 +2911,11 @@ const validateAndNormalizeQuestionPayload = (questionPayload, examId, paperId, r
 
     const normalizedQuestions = [];
     const uniqueQuestionIds = new Set();
+    const normalizedPaper = isPlainObject(paperMetadata) ? normalizePaperMetadataForRuntime(paperMetadata, examById.get(examId) || null) : null;
+    const paperStageId = toSafeIdentifier(normalizedPaper?.stageId);
+    const paperStageTitle = toSafeString(normalizedPaper?.stageTitle);
+    const paperTestType = normalizeTestType(normalizedPaper?.testType || questionPayload?.testType || '');
+    const baseScope = normalizePaperScope(normalizedPaper?.scope || questionPayload?.scope || {});
 
     for (let index = 0; index < sourceQuestions.length; index += 1) {
         const question = sourceQuestions[index];
@@ -2472,6 +2936,7 @@ const validateAndNormalizeQuestionPayload = (questionPayload, examId, paperId, r
 
         const questionExamId = toSafeString(question.examId || examId).toLowerCase();
         const questionPaperId = toSafeString(question.paperId || paperId).toLowerCase();
+        const questionStageId = toSafeIdentifier(question.stageId || question.stage?.id || paperStageId);
         const sectionId = toSafeString(question.sectionId).toLowerCase();
         const content = isPlainObject(question?.content) ? question.content : null;
         const englishContent = isPlainObject(content?.en) ? content.en : null;
@@ -2483,6 +2948,10 @@ const validateAndNormalizeQuestionPayload = (questionPayload, examId, paperId, r
 
         if (questionPaperId !== paperId) {
             return { ok: false, message: `Question ${questionId} paperId mismatch.` };
+        }
+
+        if (paperStageId && questionStageId && questionStageId !== paperStageId) {
+            return { ok: false, message: `Question ${questionId} stageId mismatch.` };
         }
 
         if (!sectionId) {
@@ -2556,11 +3025,20 @@ const validateAndNormalizeQuestionPayload = (questionPayload, examId, paperId, r
                 topicId: `${sectionId || 'general'}-core`,
                 topicName: `${toTitleWords(sectionId || 'General')} Core`
             };
+        const questionScope = normalizePaperScope({
+            ...baseScope,
+            ...(isPlainObject(question.scope) ? question.scope : {})
+        });
+        const questionTestType = normalizeTestType(question.testType || question.mode || paperTestType || '');
 
         normalizedQuestions.push({
             questionId,
             examId,
             paperId,
+            stageId: questionStageId || paperStageId || '',
+            stageTitle: paperStageTitle || buildStageTitle(questionStageId || paperStageId || 'default'),
+            testType: questionTestType || paperTestType || 'previous-year-paper',
+            scope: questionScope,
             sectionId,
             subjectId: toSafeIdentifier(normalizedTaxonomy.subjectId),
             subjectName: toSafeString(normalizedTaxonomy.subjectName),
@@ -2572,6 +3050,7 @@ const validateAndNormalizeQuestionPayload = (questionPayload, examId, paperId, r
             options: resolvedContent.options,
             media,
             explanationImageUrl: media.explanationImageUrl,
+            answerImageUrl: media.answerImageUrl,
             availableLanguages: resolvedContent.availableLanguages,
             language: resolvedContent.resolvedLanguage,
             explanation,
@@ -2647,21 +3126,23 @@ const getValidatedPaperPayload = (examId, paperId, requestedLanguage = 'en') => 
     if (!paperValidation.ok) {
         return { ok: false, message: paperValidation.message };
     }
+    const normalizedPaper = paperValidation.paper;
 
     const questionPayload = readJsonFileSafe(getQuestionFilePath(safePaperId, safeExamId));
-    const taxonomyResolver = buildQuestionTaxonomyResolver(safeExamId, safePaperId, paper);
+    const taxonomyResolver = buildQuestionTaxonomyResolver(safeExamId, safePaperId, normalizedPaper);
     const questionsValidation = validateAndNormalizeQuestionPayload(
         questionPayload,
         safeExamId,
         safePaperId,
         safeLanguage,
-        taxonomyResolver
+        taxonomyResolver,
+        normalizedPaper
     );
     if (!questionsValidation.ok) {
         return { ok: false, message: questionsValidation.message };
     }
 
-    const consistencyValidation = validatePaperQuestionConsistency(paper, questionsValidation.questions);
+    const consistencyValidation = validatePaperQuestionConsistency(normalizedPaper, questionsValidation.questions);
     if (!consistencyValidation.ok) {
         return { ok: false, message: consistencyValidation.message };
     }
@@ -2671,13 +3152,13 @@ const getValidatedPaperPayload = (examId, paperId, requestedLanguage = 'en') => 
         examId: safeExamId,
         paperId: safePaperId,
         language: questionsValidation.effectiveLanguage,
-        paper,
+        paper: normalizedPaper,
         questions: questionsValidation.questions
     };
 };
 
-const getValidatedPaperIdsForExam = (exam) => {
-    const paperIds = sanitizePaperIdList(exam?.paperConfig?.availablePaperIds);
+const getValidatedPaperIdsForExam = (exam, requestedStageId = '') => {
+    const paperIds = getExamAvailablePaperIds(exam, requestedStageId);
     return paperIds.filter((paperId) => getValidatedPaperPayload(exam.id, paperId, 'en').ok);
 };
 
@@ -3946,7 +4427,10 @@ const buildExamCatalogResponse = () => {
                 stream: exam.stream,
                 isLive: exam.isLive !== false,
                 dataFolder: toSafeString(exam.dataFolder).toLowerCase(),
-                languageSupport: sanitizePaperIdList(exam?.paperConfig?.languageSupport),
+                defaultStageId: toSafeIdentifier(exam?.paperConfig?.defaultStageId),
+                availableStageIds: sanitizeStringList(exam?.paperConfig?.availableStageIds, toSafeIdentifier),
+                stages: getExamStageList(exam),
+                languageSupport: sanitizeLanguageSupport(exam?.paperConfig?.languageSupport),
                 availablePaperIds: sanitizePaperIdList(exam?.paperConfig?.availablePaperIds)
             })),
             liveCount: (examsByBody.get(body.id) || []).filter((exam) => exam.isLive !== false).length
@@ -4120,7 +4604,8 @@ app.get('/api/test-series', (req, res) => {
         target: req.query?.target,
         sort: req.query?.sort,
         page: req.query?.page,
-        limit: req.query?.limit
+        limit: req.query?.limit,
+        stageId: req.query?.stageId
     });
 
     if (!result.ok) {
@@ -4143,6 +4628,7 @@ app.get('/api/test-series', (req, res) => {
     return res.json({
         target: result.target,
         sort: result.sort,
+        stageId: result.stageId || '',
         subjectId: '',
         chapterId: '',
         topicId: '',
@@ -4163,6 +4649,7 @@ app.get('/api/chapter-tests', (req, res) => {
         sort: req.query?.sort,
         page: req.query?.page,
         limit: req.query?.limit,
+        stageId: req.query?.stageId,
         subjectId: req.query?.subjectId,
         chapterId: req.query?.chapterId,
         topicId: req.query?.topicId
@@ -4175,6 +4662,7 @@ app.get('/api/chapter-tests', (req, res) => {
     return res.json({
         target: result.target,
         sort: result.sort,
+        stageId: result.stageId || '',
         subjectId: result.subjectId,
         chapterId: result.chapterId,
         topicId: result.topicId,
@@ -4190,12 +4678,13 @@ app.get('/api/chapter-tests', (req, res) => {
 
 app.get('/api/papers/:examId', (req, res) => {
     const examId = toSafeString(req.params?.examId).toLowerCase();
+    const requestedStageId = toSafeIdentifier(req.query?.stageId);
     if (!examId || !examById.has(examId)) {
         return res.status(404).json({ message: 'Exam not found.' });
     }
 
     const exam = examById.get(examId);
-    const validatedPaperIds = getValidatedPaperIdsForExam(exam);
+    const validatedPaperIds = getValidatedPaperIdsForExam(exam, requestedStageId);
     const papers = validatedPaperIds
         .map((paperId) => {
             const payload = getValidatedPaperPayload(examId, paperId, 'en');
@@ -4205,6 +4694,7 @@ app.get('/api/papers/:examId', (req, res) => {
 
     return res.json({
         examId,
+        stageId: requestedStageId || '',
         papers,
         count: papers.length,
         source: 'local-api'
@@ -4221,7 +4711,7 @@ app.get('/api/questions/:examId/:paperId', (req, res) => {
     }
 
     const exam = examById.get(examId);
-    const supportedPaperIds = sanitizePaperIdList(exam?.paperConfig?.availablePaperIds);
+    const supportedPaperIds = getExamAvailablePaperIds(exam);
     if (!paperId || !supportedPaperIds.includes(paperId)) {
         return res.status(404).json({ message: 'Paper not found for selected exam.' });
     }
@@ -4237,6 +4727,8 @@ app.get('/api/questions/:examId/:paperId', (req, res) => {
     return res.json({
         examId,
         paperId,
+        stageId: toSafeIdentifier(payload?.paper?.stageId),
+        testType: normalizeTestType(payload?.paper?.testType),
         language: payload.language,
         paper: payload.paper,
         questions: payload.questions,
@@ -4783,6 +5275,7 @@ app.get('/api/auth/session', async (req, res) => {
 app.post('/api/mocks/launch', requireAuth, requireCsrfForCookieAuth, (req, res) => {
     const examId = toSafeString(req.body?.examId).toLowerCase();
     const requestedPaperId = toSafeString(req.body?.paperId).toLowerCase();
+    const requestedStageId = toSafeIdentifier(req.body?.stageId);
     const userEmail = toSafeEmail(req.auth?.email);
 
     if (!examId || !examById.has(examId)) {
@@ -4790,8 +5283,8 @@ app.post('/api/mocks/launch', requireAuth, requireCsrfForCookieAuth, (req, res) 
     }
 
     const exam = examById.get(examId);
-    const availablePaperIds = sanitizePaperIdList(exam?.paperConfig?.availablePaperIds);
-    const defaultPaperId = toSafeString(exam?.paperConfig?.defaultPaperId).toLowerCase();
+    const availablePaperIds = getExamAvailablePaperIds(exam, requestedStageId);
+    const defaultPaperId = getExamDefaultPaperId(exam, requestedStageId);
 
     const candidatePaperIds = sanitizePaperIdList([
         requestedPaperId,
@@ -4811,18 +5304,21 @@ app.post('/api/mocks/launch', requireAuth, requireCsrfForCookieAuth, (req, res) 
     const launchToken = crypto.randomBytes(8).toString('hex');
     const startUrl = resolvedPaperId
         ? `/mock/${exam.id}?paperId=${encodeURIComponent(resolvedPaperId)}&session=${launchToken}`
-        : `/mock/${exam.id}?session=${launchToken}`;
+        : `/mock/${exam.id}?${requestedStageId ? `stageId=${encodeURIComponent(requestedStageId)}&` : ''}session=${launchToken}`;
     const emailText = userEmail ? ` for ${userEmail}` : '';
     const launchMode = resolvedPaperId ? 'dynamic' : 'legacy';
     const modeText = resolvedPaperId
         ? ` with validated paper ${resolvedPaperId}`
         : ' using legacy mock mode (validated paper unavailable)';
+    const resolvedPaperPayload = resolvedPaperId ? getValidatedPaperPayload(exam.id, resolvedPaperId, 'en') : null;
+    const resolvedStageId = toSafeIdentifier(resolvedPaperPayload?.paper?.stageId || requestedStageId || exam?.paperConfig?.defaultStageId);
 
     return res.json({
         message: `Launch prepared${emailText}${modeText}. Start ${exam.title} now.`,
         startUrl,
         token: launchToken,
         examId: exam.id,
+        stageId: resolvedStageId,
         paperId: resolvedPaperId,
         launchMode
     });
@@ -5063,6 +5559,10 @@ app.get('/pyq-questions', (req, res) => {
 
 app.get('/analysis', (req, res) => {
     return res.sendFile(path.join(FRONTEND_DIR, 'analysis.html'));
+});
+
+app.get('/mockly-pro', (req, res) => {
+    return res.sendFile(path.join(FRONTEND_DIR, 'mockly-pro.html'));
 });
 
 app.use('/assets', express.static(ASSET_DATA_DIR));

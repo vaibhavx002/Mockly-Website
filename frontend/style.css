@@ -4,6 +4,7 @@
     --primary-hover: #4338CA;
     --accent-color: #10B981;      /* Emerald Green for Trust & Correctness */
     --accent-hover: #059669;
+    --site-max-width: 1320px;
     --text-main: #0F172A;         /* Rich Slate */
     --text-muted: #475569;
     --bg-light: #F8FAFC;
@@ -60,7 +61,7 @@ a {
     position: sticky;
     top: 20px;
     z-index: 1000;
-    max-width: 1200px;
+    max-width: var(--site-max-width);
     width: 95%; /* Adjusts automatically on screens < 1200px */
     margin: 20px auto;
     border-radius: 50px;
@@ -920,8 +921,8 @@ body.dark-theme .google-btn[disabled]:hover {
 }
 
 .btn-outline:hover {
-    color: white;
-    border-color: var(--text-main);
+    color: #ffffff;
+    border-color: #5b57e9;
 }
 
 .btn-hover-sweep::after {
@@ -929,13 +930,13 @@ body.dark-theme .google-btn[disabled]:hover {
     position: absolute;
     top: 0; left: 0;
     width: 0%; height: 100%;
-    background-color: var(--text-main);
+    background: linear-gradient(135deg, rgba(79, 70, 229, 0.92), rgba(20, 184, 166, 0.9));
     transition: all 0.4s ease;
     z-index: -1;
 }
 
 body.dark-theme .btn-hover-sweep::after {
-    background-color: var(--primary-color);
+    background: linear-gradient(135deg, rgba(79, 70, 229, 0.92), rgba(20, 184, 166, 0.9));
 }
 
 .btn-outline:hover::after {
@@ -972,7 +973,7 @@ body.dark-theme .btn-outline:hover {
 /* --- HERO SECTION LAYOUT (re-arranged to use new animation system) --- */
 .hero {
     padding: 6rem 2rem 4rem;
-    max-width: 1200px;
+    max-width: var(--site-max-width);
     margin: 0 auto;
     width: 100%;
 }
@@ -1516,7 +1517,7 @@ body.dark-theme .btn-outline:hover {
 
 /* --- EXAM HUB SECTION --- */
 .exam-hub {
-    max-width: 1200px;
+    max-width: var(--site-max-width);
     width: 100%;
     margin: 1.2rem auto 4.8rem;
     padding: 0 2rem;
@@ -2131,7 +2132,7 @@ body.dark-theme .btn-outline:hover {
 }
 
 .mock-launch {
-    max-width: 1200px;
+    max-width: var(--site-max-width);
     width: 100%;
     margin: 0 auto 4.8rem;
     padding: 0 2rem;
@@ -2844,8 +2845,8 @@ body.dark-theme .trust-item i {
 }
 
 .btn-outline:hover {
-    border-color: var(--primary-color);
-    color: var(--primary-color);
+    border-color: #5b57e9;
+    color: #ffffff;
 }
 
 .btn-primary {
@@ -2916,7 +2917,7 @@ body.dark-theme .hero-buttons .btn-outline:hover {
 }
 
 .features-container {
-    max-width: 1200px;
+    max-width: var(--site-max-width);
     margin: 0 auto;
 }
 
@@ -3100,7 +3101,7 @@ body.dark-theme .hero-buttons .btn-outline:hover {
 }
 
 .exams-container {
-    max-width: 1200px;
+    max-width: var(--site-max-width);
     margin: 0 auto;
 }
 
@@ -3234,7 +3235,7 @@ body.dark-theme .hero-buttons .btn-outline:hover {
 }
 
 .live-tests-container {
-    max-width: 1200px;
+    max-width: var(--site-max-width);
     margin: 0 auto;
 }
 
@@ -3378,7 +3379,7 @@ body.dark-theme .hero-buttons .btn-outline:hover {
 }
 
 .current-affairs-container {
-    max-width: 1200px;
+    max-width: var(--site-max-width);
     margin: 0 auto;
 }
 
@@ -3503,7 +3504,7 @@ body.dark-theme .hero-buttons .btn-outline:hover {
 }
 
 .footer-top-cta {
-    max-width: 1200px;
+    max-width: var(--site-max-width);
     margin: 0 auto;
     padding: 1.35rem 5%;
     border-bottom: 1px solid #dbe5f2;
@@ -3526,7 +3527,7 @@ body.dark-theme .hero-buttons .btn-outline:hover {
 }
 
 .footer-container {
-    max-width: 1200px;
+    max-width: var(--site-max-width);
     margin: 0 auto;
     padding: 2.1rem 5% 1.6rem;
     display: grid;
@@ -3650,7 +3651,7 @@ body.dark-theme .hero-buttons .btn-outline:hover {
 
 .footer-newsletter {
     display: grid;
-    grid-template-columns: 1fr auto;
+    grid-template-columns: 1fr;
     gap: 0.5rem;
 }
 
@@ -3671,8 +3672,10 @@ body.dark-theme .hero-buttons .btn-outline:hover {
 }
 
 .footer-newsletter .btn {
-    padding: 0.62rem 0.85rem;
-    font-size: 0.83rem;
+    width: 100%;
+    justify-content: center;
+    padding: 0.72rem 1rem;
+    font-size: 0.9rem;
 }
 
 .footer-app-badges {
@@ -3683,21 +3686,20 @@ body.dark-theme .hero-buttons .btn-outline:hover {
 }
 
 .footer-app-badges a {
-    display: inline-flex;
-    align-items: center;
-    gap: 0.35rem;
-    padding: 0.4rem 0.55rem;
-    border-radius: 10px;
-    border: 1px solid #dbe5f2;
+    flex: 1 1 150px;
+    justify-content: center;
+    min-height: 44px;
+    padding: 0.7rem 0.95rem;
+    border-width: 1px;
+    border-color: #dbe5f2;
     color: #334155;
     font-size: 0.77rem;
-    font-weight: 700;
     background: #ffffff;
 }
 
 .footer-app-badges a:hover {
-    border-color: #4f46e5;
-    color: #4f46e5;
+    border-color: #5b57e9;
+    color: #ffffff;
 }
 
 .footer-bottom {
@@ -6375,6 +6377,10 @@ body.dark-theme .dashboard-preferences-form input:focus {
 .pass-cta-row .btn {
     font-size: 1.1rem;
     padding: 1rem 2.5rem;
+}
+
+button#get-mockly-pass-btn {
+    display: none;
 }
 
 .pass-note {

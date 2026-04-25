@@ -1,12 +1,20 @@
 {
   "paperId": "ssc-chsl-tier1-2025-set1",
   "examId": "ssc-chsl",
+  "stageId": "tier1",
+  "testType": "previous-year-paper",
   "title": "SSC CHSL Tier-I 2025 Set 1",
   "totalQuestions": 100,
   "durationMinutes": 60,
   "marksPerQuestion": 2,
   "maxScore": 200,
   "negativeMarks": 0.5,
+  "scope": {
+    "sectionId": "",
+    "subjectId": "",
+    "chapterId": "",
+    "topicId": ""
+  },
   "sections": [
     {
       "sectionId": "reasoning",

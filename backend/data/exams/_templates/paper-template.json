@@ -1,12 +1,20 @@
 {
   "paperId": "ssc-cgl-tier1-2026-set1",
   "examId": "ssc-cgl",
+  "stageId": "tier1",
+  "testType": "previous-year-paper",
   "title": "SSC CGL Tier 1 2026 Set 1",
   "totalQuestions": 100,
   "durationMinutes": 60,
   "marksPerQuestion": 2,
   "maxScore": 200,
   "negativeMarks": 0.5,
+  "scope": {
+    "sectionId": "",
+    "subjectId": "",
+    "chapterId": "",
+    "topicId": ""
+  },
   "sections": [
     {
       "sectionId": "quant",

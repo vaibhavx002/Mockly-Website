@@ -62,10 +62,47 @@
       "recommendedLevel": "Moderate",
       "isLive": true,
       "dataFolder": "cgl",
+      "stages": [
+        {
+          "id": "tier1",
+          "title": "Tier 1",
+          "defaultPaperId": "ssc-cgl-tier1-2025-set1",
+          "availablePaperIds": ["ssc-cgl-tier1-2025-set1"],
+          "languageSupport": ["en", "hi"],
+          "supportedTestTypes": ["full-paper", "previous-year-paper", "section-test", "chapter-test", "topic-test"]
+        },
+        {
+          "id": "tier2",
+          "title": "Tier 2",
+          "defaultPaperId": "",
+          "availablePaperIds": [],
+          "languageSupport": ["en", "hi"],
+          "supportedTestTypes": ["full-paper", "section-test", "chapter-test", "topic-test"]
+        }
+      ],
       "paperConfig": {
+        "defaultStageId": "tier1",
         "defaultPaperId": "ssc-cgl-tier1-2025-set1",
         "availablePaperIds": ["ssc-cgl-tier1-2025-set1"],
-        "languageSupport": ["en", "hi"]
+        "languageSupport": ["en", "hi"],
+        "stages": [
+          {
+            "id": "tier1",
+            "title": "Tier 1",
+            "defaultPaperId": "ssc-cgl-tier1-2025-set1",
+            "availablePaperIds": ["ssc-cgl-tier1-2025-set1"],
+            "languageSupport": ["en", "hi"],
+            "supportedTestTypes": ["full-paper", "previous-year-paper", "section-test", "chapter-test", "topic-test"]
+          },
+          {
+            "id": "tier2",
+            "title": "Tier 2",
+            "defaultPaperId": "",
+            "availablePaperIds": [],
+            "languageSupport": ["en", "hi"],
+            "supportedTestTypes": ["full-paper", "section-test", "chapter-test", "topic-test"]
+          }
+        ]
       }
     },
     {
@@ -80,10 +117,47 @@
       "recommendedLevel": "Beginner to Moderate",
       "isLive": true,
       "dataFolder": "chsl",
+      "stages": [
+        {
+          "id": "tier1",
+          "title": "Tier 1",
+          "defaultPaperId": "ssc-chsl-tier1-2025-set1",
+          "availablePaperIds": ["ssc-chsl-tier1-2025-set1"],
+          "languageSupport": ["en", "hi"],
+          "supportedTestTypes": ["full-paper", "previous-year-paper", "section-test", "chapter-test", "topic-test"]
+        },
+        {
+          "id": "tier2",
+          "title": "Tier 2",
+          "defaultPaperId": "",
+          "availablePaperIds": [],
+          "languageSupport": ["en", "hi"],
+          "supportedTestTypes": ["full-paper", "section-test", "chapter-test", "topic-test"]
+        }
+      ],
       "paperConfig": {
+        "defaultStageId": "tier1",
         "defaultPaperId": "ssc-chsl-tier1-2025-set1",
         "availablePaperIds": ["ssc-chsl-tier1-2025-set1"],
-        "languageSupport": ["en", "hi"]
+        "languageSupport": ["en", "hi"],
+        "stages": [
+          {
+            "id": "tier1",
+            "title": "Tier 1",
+            "defaultPaperId": "ssc-chsl-tier1-2025-set1",
+            "availablePaperIds": ["ssc-chsl-tier1-2025-set1"],
+            "languageSupport": ["en", "hi"],
+            "supportedTestTypes": ["full-paper", "previous-year-paper", "section-test", "chapter-test", "topic-test"]
+          },
+          {
+            "id": "tier2",
+            "title": "Tier 2",
+            "defaultPaperId": "",
+            "availablePaperIds": [],
+            "languageSupport": ["en", "hi"],
+            "supportedTestTypes": ["full-paper", "section-test", "chapter-test", "topic-test"]
+          }
+        ]
       }
     },
     {
@@ -98,10 +172,47 @@
       "recommendedLevel": "Moderate",
       "isLive": true,
       "dataFolder": "ntpc",
+      "stages": [
+        {
+          "id": "cbt1",
+          "title": "CBT 1",
+          "defaultPaperId": "rrb-ntpc-cbt1-2025-set1",
+          "availablePaperIds": ["rrb-ntpc-cbt1-2025-set1"],
+          "languageSupport": ["en", "hi"],
+          "supportedTestTypes": ["full-paper", "previous-year-paper", "section-test", "chapter-test", "topic-test"]
+        },
+        {
+          "id": "cbt2",
+          "title": "CBT 2",
+          "defaultPaperId": "",
+          "availablePaperIds": [],
+          "languageSupport": ["en", "hi"],
+          "supportedTestTypes": ["full-paper", "section-test", "chapter-test", "topic-test"]
+        }
+      ],
       "paperConfig": {
+        "defaultStageId": "cbt1",
         "defaultPaperId": "rrb-ntpc-cbt1-2025-set1",
         "availablePaperIds": ["rrb-ntpc-cbt1-2025-set1"],
-        "languageSupport": ["en", "hi"]
+        "languageSupport": ["en", "hi"],
+        "stages": [
+          {
+            "id": "cbt1",
+            "title": "CBT 1",
+            "defaultPaperId": "rrb-ntpc-cbt1-2025-set1",
+            "availablePaperIds": ["rrb-ntpc-cbt1-2025-set1"],
+            "languageSupport": ["en", "hi"],
+            "supportedTestTypes": ["full-paper", "previous-year-paper", "section-test", "chapter-test", "topic-test"]
+          },
+          {
+            "id": "cbt2",
+            "title": "CBT 2",
+            "defaultPaperId": "",
+            "availablePaperIds": [],
+            "languageSupport": ["en", "hi"],
+            "supportedTestTypes": ["full-paper", "section-test", "chapter-test", "topic-test"]
+          }
+        ]
       }
     },
     {
@@ -116,10 +227,31 @@
       "recommendedLevel": "Beginner",
       "isLive": true,
       "dataFolder": "group-d",
+      "stages": [
+        {
+          "id": "cbt",
+          "title": "CBT",
+          "defaultPaperId": "rrb-group-d-cbt-2025-set1",
+          "availablePaperIds": ["rrb-group-d-cbt-2025-set1"],
+          "languageSupport": ["en", "hi"],
+          "supportedTestTypes": ["full-paper", "previous-year-paper", "section-test", "chapter-test", "topic-test"]
+        }
+      ],
       "paperConfig": {
+        "defaultStageId": "cbt",
         "defaultPaperId": "rrb-group-d-cbt-2025-set1",
         "availablePaperIds": ["rrb-group-d-cbt-2025-set1"],
-        "languageSupport": ["en", "hi"]
+        "languageSupport": ["en", "hi"],
+        "stages": [
+          {
+            "id": "cbt",
+            "title": "CBT",
+            "defaultPaperId": "rrb-group-d-cbt-2025-set1",
+            "availablePaperIds": ["rrb-group-d-cbt-2025-set1"],
+            "languageSupport": ["en", "hi"],
+            "supportedTestTypes": ["full-paper", "previous-year-paper", "section-test", "chapter-test", "topic-test"]
+          }
+        ]
       }
     },
     {
@@ -134,10 +266,31 @@
       "recommendedLevel": "Advanced",
       "isLive": true,
       "dataFolder": "upsc-gs",
+      "stages": [
+        {
+          "id": "gs1",
+          "title": "GS Paper 1",
+          "defaultPaperId": "upsc-prelims-gs1-2025-set1",
+          "availablePaperIds": ["upsc-prelims-gs1-2025-set1"],
+          "languageSupport": ["en"],
+          "supportedTestTypes": ["full-paper", "previous-year-paper", "section-test", "chapter-test", "topic-test"]
+        }
+      ],
       "paperConfig": {
+        "defaultStageId": "gs1",
         "defaultPaperId": "upsc-prelims-gs1-2025-set1",
         "availablePaperIds": ["upsc-prelims-gs1-2025-set1"],
-        "languageSupport": ["en"]
+        "languageSupport": ["en"],
+        "stages": [
+          {
+            "id": "gs1",
+            "title": "GS Paper 1",
+            "defaultPaperId": "upsc-prelims-gs1-2025-set1",
+            "availablePaperIds": ["upsc-prelims-gs1-2025-set1"],
+            "languageSupport": ["en"],
+            "supportedTestTypes": ["full-paper", "previous-year-paper", "section-test", "chapter-test", "topic-test"]
+          }
+        ]
       }
     },
     {
@@ -152,10 +305,31 @@
       "recommendedLevel": "Advanced",
       "isLive": true,
       "dataFolder": "csat",
+      "stages": [
+        {
+          "id": "csat",
+          "title": "CSAT",
+          "defaultPaperId": "upsc-csat-2025-set1",
+          "availablePaperIds": ["upsc-csat-2025-set1"],
+          "languageSupport": ["en"],
+          "supportedTestTypes": ["full-paper", "previous-year-paper", "section-test", "chapter-test", "topic-test"]
+        }
+      ],
       "paperConfig": {
+        "defaultStageId": "csat",
         "defaultPaperId": "upsc-csat-2025-set1",
         "availablePaperIds": ["upsc-csat-2025-set1"],
-        "languageSupport": ["en"]
+        "languageSupport": ["en"],
+        "stages": [
+          {
+            "id": "csat",
+            "title": "CSAT",
+            "defaultPaperId": "upsc-csat-2025-set1",
+            "availablePaperIds": ["upsc-csat-2025-set1"],
+            "languageSupport": ["en"],
+            "supportedTestTypes": ["full-paper", "previous-year-paper", "section-test", "chapter-test", "topic-test"]
+          }
+        ]
       }
     },
     {

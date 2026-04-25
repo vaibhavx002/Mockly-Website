@@ -2,7 +2,14 @@
   "questionId": "replace-with-unique-id",
   "examId": "ssc-cgl",
   "paperId": "ssc-cgl-tier1-2026-set1",
+  "stageId": "tier1",
+  "testType": "previous-year-paper",
   "sectionId": "quant",
+  "scope": {
+    "subjectId": "quant",
+    "chapterId": "arithmetic",
+    "topicId": "ratio"
+  },
   "content": {
     "en": {
       "questionText": "Sample English question text.",
@@ -25,7 +32,10 @@
   },
   "media": {
     "questionImageUrl": null,
-    "optionImageUrls": [null, null, null, null]
+    "optionImageUrls": [null, null, null, null],
+    "explanationImageUrl": null,
+    "answerImageUrl": null,
+    "solutionImageUrls": []
   },
   "correctOptionIndex": 0,
   "difficulty": "easy",

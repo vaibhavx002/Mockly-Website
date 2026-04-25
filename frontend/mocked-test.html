@@ -2408,6 +2408,17 @@
             .replace(/'/g, '&#39;');
     }
 
+    function formatAuthorText(value) {
+        const normalized = String(value ?? '')
+            .replace(/\/n/g, '\n')
+            .replace(/\r\n/g, '\n');
+
+        return escapeHtml(normalized)
+            .replace(/&lt;b&gt;/gi, '<b>')
+            .replace(/&lt;\/b&gt;/gi, '</b>')
+            .replace(/\n/g, '<br>');
+    }
+
     function updateLanguageToggleButtons(language) {
         document.querySelectorAll('.lang-btn').forEach((button) => {
             const isMatch = String(button?.textContent || '').trim().toLowerCase() === (language === 'hi' ? 'हिंदी' : 'english');
@@ -2600,6 +2611,13 @@
                 ? String(explanationSource?.en || explanationSource?.hi || '').trim()
                 : '');
         const rawQuestionImageUrl = String(question?.media?.questionImageUrl || '').trim();
+        const rawExplanationImageUrl = String(
+            question?.media?.explanationImageUrl
+            || question?.media?.answerImageUrl
+            || question?.explanationImageUrl
+            || question?.answerImageUrl
+            || ''
+        ).trim();
         const rawOptionImageUrls = Array.isArray(question?.media?.optionImageUrls)
             ? question.media.optionImageUrls
             : [];
@@ -2621,6 +2639,8 @@
             q: questionText,
             opts: options,
             ans: correctOptionIndex,
+            stageId: String(question?.stageId || '').trim().toLowerCase(),
+            testType: String(question?.testType || '').trim().toLowerCase(),
             sectionId: String(question?.sectionId || '').trim().toLowerCase(),
             subjectId: String(question?.subjectId || '').trim().toLowerCase(),
             subjectName: String(question?.subjectName || '').trim(),
@@ -2636,6 +2656,7 @@
             difficulty: String(question?.difficulty || '').trim().toLowerCase(),
             sourceYear: String(question?.sourceYear || '').trim(),
             questionImageUrl: rawQuestionImageUrl || null,
+            explanationImageUrl: rawExplanationImageUrl || null,
             optionImageUrls
         };
     }
@@ -2964,15 +2985,7 @@
             ? `<img class="question-image" src="${escapeHtml(data.questionImageUrl)}" alt="Question visual" onerror="this.style.display='none'">`
             : '';
 
-        // Analogy formatting: if question contains '\n', split and bold the second part
-        let formattedQuestionText = '';
-        if (questionText.includes('\n')) {
-            const [first, ...rest] = questionText.split('\n');
-            const second = rest.join('\n');
-            formattedQuestionText = `${escapeHtml(first)}<br><b>${escapeHtml(second)}</b>`;
-        } else {
-            formattedQuestionText = escapeHtml(questionText);
-        }
+        const formattedQuestionText = formatAuthorText(questionText);
 
         let optionsHTML = '';
         options.forEach((opt, idx) => {
@@ -2986,7 +2999,7 @@
                 <div class="option-item ${selected}" onclick="selectOption(${idx})">
                     <input type="radio" name="q${currentQ}" id="q${currentQ}_${idx}" ${checked}>
                     <label for="q${currentQ}_${idx}">
-                        <span><span class="option-letter">${letters[idx]}.</span> ${escapeHtml(opt)}</span>
+                        <span><span class="option-letter">${letters[idx]}.</span> ${formatAuthorText(opt)}</span>
                         ${optionImageHtml}
                     </label>
                 </div>
@@ -3687,10 +3700,10 @@
                     <td>${index + 1}</td>
                     <td>${escapeHtml(getSectionNameByQuestionIndex(index))}</td>
                     <td><span class="status-chip ${statusClass}">${escapeHtml(statusLabel)}</span></td>
-                    <td>${escapeHtml(question.q)}</td>
-                    <td>${escapeHtml(yourAnswer)}</td>
-                    <td>${escapeHtml(correctAnswer)}</td>
-                    <td>${escapeHtml(explanationText)}</td>
+                    <td>${formatAuthorText(question.q)}</td>
+                    <td>${formatAuthorText(yourAnswer)}</td>
+                    <td>${formatAuthorText(correctAnswer)}</td>
+                    <td>${formatAuthorText(explanationText)}</td>
                 </tr>
             `;
         }).join('');

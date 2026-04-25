@@ -1872,16 +1872,16 @@ document.addEventListener('DOMContentLoaded', async () => {
 
         if (mockLaunchCopy) {
             mockLaunchCopy.textContent = selectedExam
-                ? `You selected ${selectedExam.title}. Continue to authentication and start your targeted mock flow.`
-                : 'Pick an exam card above. We will lock the right track and guide you into the mock flow instantly.';
+                ? `You selected ${selectedExam.title}. Continue and we will guide you into the right mock for your preparation.`
+                : 'Choose an exam above and we will guide you to the most suitable mock, just like a teacher setting the right practice set for the day.';
         }
 
         if (startSelectedMockBtn) {
             startSelectedMockBtn.disabled = !selectedExam;
             startSelectedMockBtn.setAttribute('data-exam-id', selectedExam ? selectedExam.id : '');
             startSelectedMockBtn.textContent = selectedExam
-                ? (authSession.isAuthenticated ? `Start ${selectedExam.title} Now` : `Continue with ${selectedExam.title}`)
-                : 'Continue with Selected Exam';
+                ? (authSession.isAuthenticated ? `Start ${selectedExam.title} Mock` : `Continue with ${selectedExam.title}`)
+                : 'Continue with This Exam';
         }
 
         pendingMockExam = selectedExam;
@@ -1907,7 +1907,7 @@ document.addEventListener('DOMContentLoaded', async () => {
         }
 
         if (!selectedExam) {
-            setMockLaunchStatus('Select an exam card to continue.', 'info');
+            setMockLaunchStatus('Choose an exam card to continue.', 'info');
         }
     };
 
@@ -1915,7 +1915,7 @@ document.addEventListener('DOMContentLoaded', async () => {
         if (!selectedExam) return;
 
         if (mockLaunchInProgress) {
-            setMockLaunchStatus('A mock launch is already in progress. Please wait.', 'info');
+            setMockLaunchStatus('A mock is already being prepared. Please wait.', 'info');
             return;
         }
 
@@ -1927,7 +1927,7 @@ document.addEventListener('DOMContentLoaded', async () => {
             startSelectedMockBtn.disabled = true;
         }
 
-        setMockLaunchStatus(`Preparing ${selectedExam.title} mock...`, 'info');
+        setMockLaunchStatus(`Preparing your ${selectedExam.title} mock...`, 'info');
 
         try {
             const apiLaunchPayload = await getMockLaunchPayloadFromApi(selectedExam);
@@ -1941,7 +1941,7 @@ document.addEventListener('DOMContentLoaded', async () => {
                 : (API_ENABLED ? ' Live launch API is unavailable right now, so demo launch mode is active.' : '');
 
             if (!launchStartUrl) {
-                setMockLaunchStatus('Could not start a verified mock right now. Please retry in a moment.', 'warn');
+                setMockLaunchStatus('We could not start a verified mock right now. Please try again in a moment.', 'warn');
                 return;
             }
 
@@ -1949,11 +1949,11 @@ document.addEventListener('DOMContentLoaded', async () => {
                 refreshUi: true,
                 source: resolvedLaunchSource
             });
-            setMockLaunchStatus(`Mock session for ${selectedExam.title} is ready${userText}. You can begin ${sourceText}.${fallbackNote}`, 'success');
+            setMockLaunchStatus(`Your ${selectedExam.title} mock is ready${userText}. You can begin ${sourceText}.${fallbackNote}`, 'success');
 
             const didNavigate = openMockTestWindow(launchStartUrl);
             if (!didNavigate) {
-                setMockLaunchStatus('Mock launch is already being processed. Please wait a moment.', 'info');
+                setMockLaunchStatus('Your mock launch is already being processed. Please wait a moment.', 'info');
             }
 
             if (mockLaunchShell) {
@@ -2060,7 +2060,7 @@ document.addEventListener('DOMContentLoaded', async () => {
                 return;
             }
 
-            setMockLaunchStatus(`Create an account or log in once to start ${selectedExam.title} mock.`, 'warn');
+            setMockLaunchStatus(`Create an account or log in once, and we will start your ${selectedExam.title} mock.`, 'warn');
             openModal('signup', { preservePendingExam: true });
         });
     }
@@ -2068,7 +2068,7 @@ document.addEventListener('DOMContentLoaded', async () => {
     if (startSelectedMockBtn) {
         startSelectedMockBtn.addEventListener('click', () => {
             if (mockLaunchInProgress) {
-                setMockLaunchStatus('Mock launch is already in progress. Please wait.', 'info');
+                setMockLaunchStatus('A mock is already being prepared. Please wait.', 'info');
                 return;
             }
 
@@ -2086,7 +2086,7 @@ document.addEventListener('DOMContentLoaded', async () => {
                 return;
             }
 
-            setMockLaunchStatus('Create an account or log in once to start your selected mock.', 'warn');
+            setMockLaunchStatus('Create an account or log in once, and we will start your selected mock.', 'warn');
             openModal('signup', { preservePendingExam: true });
         });
     }
@@ -2122,7 +2122,7 @@ document.addEventListener('DOMContentLoaded', async () => {
     });
 
     if (!initialMockExam) {
-        setMockLaunchStatus('Select an exam card to continue.', 'info');
+        setMockLaunchStatus('Choose an exam card to continue.', 'info');
     }
 
     loadExamCatalogFromApi();
@@ -4165,8 +4165,8 @@ document.addEventListener('DOMContentLoaded', async () => {
 
         if (authIntent === 'login') {
             modalSubtitle.textContent = authView === 'forgot' || authView === 'reset'
-                ? `Recover access to continue with ${pendingMockExam.title} mock.`
-                : `Log in to continue with ${pendingMockExam.title} mock.`;
+                ? `Recover access to continue with your ${pendingMockExam.title} mock.`
+                : `Log in to continue with your ${pendingMockExam.title} mock.`;
             return;
         }
 
@@ -4188,14 +4188,14 @@ document.addEventListener('DOMContentLoaded', async () => {
         const configs = {
             login: {
                 title: 'Welcome Back',
-                subtitle: 'Log in to continue your preparation.',
-                chip: 'Secure access',
-                footer: "Don't have an account? <button type=\"button\" class=\"text-link\" id=\"toggle-auth-mode\">Sign up for free</button>"
+                subtitle: 'Log in to continue your guided preparation.',
+                chip: 'Student access',
+                footer: "New to Mockly? <button type=\"button\" class=\"text-link\" id=\"toggle-auth-mode\">Sign up for free</button>"
             },
             signup: {
                 title: 'Create Your Account',
-                subtitle: 'Set up your Mockly access in one short form, then verify by email OTP.',
-                chip: 'Quick signup',
+                subtitle: 'Set up your Mockly access in one short form, then verify it with an email OTP.',
+                chip: 'Quick setup',
                 footer: "Already have an account? <button type=\"button\" class=\"text-link\" id=\"toggle-auth-mode\">Log in here</button>"
             },
             verify: {

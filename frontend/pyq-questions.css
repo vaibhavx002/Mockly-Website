@@ -1,5 +1,5 @@
 .pyq-page {
-    max-width: 1200px;
+    max-width: var(--site-max-width);
     margin: 0 auto;
     padding: 1.2rem 2rem 2rem;
 }

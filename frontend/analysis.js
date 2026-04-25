@@ -63,6 +63,15 @@
         .replace(/\"/g, '&quot;')
         .replace(/'/g, '&#39;');
 
+    const normalizeAuthorText = (value) => String(value || '')
+        .replace(/\/n/g, '\n')
+        .replace(/\r\n/g, '\n');
+
+    const formatAuthorText = (value) => escapeHtml(normalizeAuthorText(value))
+        .replace(/&lt;b&gt;/gi, '<b>')
+        .replace(/&lt;\/b&gt;/gi, '</b>')
+        .replace(/\n/g, '<br>');
+
     const formatMarks = (value) => {
         const numeric = Number(value);
         if (!Number.isFinite(numeric)) return '--';
@@ -717,10 +726,16 @@
         const candidates = [
             question?.explanationImageUrl,
             question?.explanationImage,
+            question?.answerImageUrl,
+            question?.answerImage,
             question?.explanation?.image,
             question?.explanation?.imageUrl,
             question?.solutionImage,
             question?.solutionImageUrl,
+            Array.isArray(question?.media?.solutionImageUrls) ? question.media.solutionImageUrls[0] : '',
+            Array.isArray(question?.media?.answerImageUrls) ? question.media.answerImageUrls[0] : '',
+            question?.media?.answerImage,
+            question?.media?.answerImageUrl,
             question?.media?.explanationImage,
             question?.media?.explanationImageUrl
         ];
@@ -929,10 +944,10 @@
     };
 
     const getExplanationHtml = (value, item) => {
-        const lines = toSafeString(value).split(/\r?\n/);
+        const lines = normalizeAuthorText(value).split(/\r?\n/);
         return lines
             .map((line) => {
-                const escaped = escapeHtml(line);
+                const escaped = formatAuthorText(line);
                 if (shouldHighlightCorrectExplanationLine(line, item)) {
                     return `<strong class="analysis-correct-explanation-line">${escaped}</strong>`;
                 }
@@ -980,7 +995,7 @@
         }
 
         if (questionDetailTextNode) {
-            questionDetailTextNode.textContent = toSafeString(item.questionText || 'Question text unavailable.');
+            questionDetailTextNode.innerHTML = formatAuthorText(item.questionText || 'Question text unavailable.');
         }
 
         if (questionDetailOptionsNode) {
@@ -992,14 +1007,14 @@
                 if (isSelected && !isCorrect) optionClass += ' selected-wrong';
                 if (isSelected && isCorrect) optionClass += ' selected-correct';
 
-                return `<li class="${optionClass}"><span>${getOptionLabel(optionIndex)}.</span> ${escapeHtml(toSafeString(option))}</li>`;
+                return `<li class="${optionClass}"><span>${getOptionLabel(optionIndex)}.</span> ${formatAuthorText(toSafeString(option))}</li>`;
             }).join('');
         }
 
         if (questionDetailAnswersNode) {
             questionDetailAnswersNode.innerHTML = `
-                <span><strong>Your Answer:</strong> ${escapeHtml(selectedText)}</span>
-                <span><strong>Correct:</strong> ${escapeHtml(correctText)}</span>
+                <span><strong>Your Answer:</strong> ${formatAuthorText(selectedText)}</span>
+                <span><strong>Correct:</strong> ${formatAuthorText(correctText)}</span>
             `;
         }
 

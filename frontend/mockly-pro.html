@@ -1,0 +1,405 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mockly Pro | Focused Upgrade For Serious Aspirants</title>
+    <script>
+        (function () {
+            try {
+                var prefersReducedMotion = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+                var lowMemory = typeof navigator.deviceMemory === 'number' && navigator.deviceMemory <= 4;
+                var lowCpu = typeof navigator.hardwareConcurrency === 'number' && navigator.hardwareConcurrency <= 4;
+
+                if (prefersReducedMotion || lowMemory || lowCpu) {
+                    document.documentElement.classList.add('performance-lite');
+                }
+            } catch (error) {
+                // Ignore browser-specific capability checks.
+            }
+        })();
+    </script>
+    <link rel="preload" href="vendor/fontawesome/css/all.min.css" as="style">
+    <link href="vendor/fontawesome/css/all.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="mockly-pro.css">
+</head>
+<body>
+    <header class="navbar">
+        <div class="nav-container">
+            <a href="/#home" class="logo">
+                <div class="logo-icon">M</div>
+                <span class="logo-text">Mockly</span>
+            </a>
+
+            <nav class="nav-links">
+                <a href="/#home">Home</a>
+                <a href="/all-exams">All Exams</a>
+                <a href="/test-series">Test Series</a>
+                <a href="/chapter-wise">Chapter Wise</a>
+                <a href="/pyq-questions">PYQ Questions</a>
+                <a href="/mockly-pro" class="active" aria-current="page">Mockly Pro <span class="tag-pro">PRO</span></a>
+            </nav>
+
+            <div class="nav-actions">
+                <button class="dark-mode-toggle" id="theme-toggle" aria-label="Toggle theme">
+                    <div class="toggle-track">
+                        <div class="toggle-thumb">
+                            <i class="fa-solid fa-moon moon-icon"></i>
+                            <i class="fa-solid fa-sun sun-icon"></i>
+                        </div>
+                    </div>
+                </button>
+                <div class="auth-actions">
+                    <button id="nav-login-btn" class="btn-text" type="button">Log In</button>
+                    <button id="nav-signup-btn" class="btn-small-primary" type="button">Sign Up</button>
+                </div>
+            </div>
+
+            <button class="menu-toggle" aria-label="Toggle navigation menu" aria-expanded="false" title="Menu">
+                <i class="fas fa-bars"></i>
+            </button>
+        </div>
+    </header>
+
+    <main class="pro-page">
+        <section class="pro-hero">
+            <div class="pro-hero-shell">
+                <div class="pro-hero-copy">
+                    <span class="badge pro-badge"><i class="fa-solid fa-crown" aria-hidden="true"></i> Mockly Pro Preview</span>
+                    <h1>Build a Pro plan that feels like a serious study system, not just a premium badge.</h1>
+                    <p>
+                        Mockly Pro should help aspirants decide what to do next, recover weak topics faster, and review mocks with more
+                        clarity. This page makes that value concrete before pricing or payments go live.
+                    </p>
+
+                    <div class="pro-hero-points">
+                        <span><i class="fa-solid fa-check"></i> Clear free vs Pro boundaries</span>
+                        <span><i class="fa-solid fa-check"></i> Better weekly study direction</span>
+                        <span><i class="fa-solid fa-check"></i> Exam-specific depth for SSC, RRB, and UPSC</span>
+                    </div>
+
+                    <div class="pro-hero-actions">
+                        <a href="#comparison" class="btn btn-primary">Compare The Upgrade</a>
+                        <a href="/all-exams" class="btn btn-outline btn-hover-sweep">Start Free First</a>
+                    </div>
+
+                    <div class="pro-hero-trust">
+                        <article>
+                            <strong>Honest by default</strong>
+                            <span>No fake checkout, no fake unlocks, no vague “AI-powered” promise.</span>
+                        </article>
+                        <article>
+                            <strong>Candidate-first framing</strong>
+                            <span>Every section answers: what changes after I upgrade, and why should I care?</span>
+                        </article>
+                    </div>
+                </div>
+
+                <aside class="pro-summary-card">
+                    <div class="pro-summary-head">
+                        <span class="pro-status">Preview Mode</span>
+                        <strong>What this page should communicate</strong>
+                    </div>
+
+                    <div class="pro-summary-price">
+                        <span>Mockly Pro</span>
+                        <strong>Focused depth for serious aspirants</strong>
+                        <p>Launch pricing should appear only after the guided review, revision support, and deeper analytics are genuinely ready.</p>
+                    </div>
+
+                    <ul class="pro-summary-list">
+                        <li>Topic-wise recovery loops after every mock</li>
+                        <li>Exam-specific practice paths instead of one generic premium bundle</li>
+                        <li>Revision prompts built from mistakes, not just score charts</li>
+                        <li>Weekly study direction that tells the candidate what to do next</li>
+                    </ul>
+
+                    <div class="pro-summary-foot">
+                        <a href="#competition" class="btn btn-outline btn-hover-sweep">Why It Can Win</a>
+                        <span>Better differentiation beats louder claims.</span>
+                    </div>
+                </aside>
+            </div>
+        </section>
+
+        <section class="pro-principles">
+            <div class="pro-principles-shell">
+                <article class="pro-principle-card">
+                    <i class="fa-solid fa-layer-group"></i>
+                    <h2>Not more clutter</h2>
+                    <p>Pro should reduce candidate confusion by turning attempts, mistakes, and upcoming mocks into one guided flow.</p>
+                </article>
+                <article class="pro-principle-card">
+                    <i class="fa-solid fa-map"></i>
+                    <h2>Not generic prep</h2>
+                    <p>SSC, RRB, and UPSC candidates do not need the same revision logic. The page should show exam-specific depth.</p>
+                </article>
+                <article class="pro-principle-card">
+                    <i class="fa-solid fa-scale-balanced"></i>
+                    <h2>Not vague premium language</h2>
+                    <p>Keep the page concrete: what stays free, what Pro adds, and what a user should expect after upgrading.</p>
+                </article>
+                <article class="pro-principle-card">
+                    <i class="fa-solid fa-bullseye"></i>
+                    <h2>Not vanity analytics</h2>
+                    <p>Position Pro around next actions, recovery priorities, and weekly confidence, not decorative charts alone.</p>
+                </article>
+            </div>
+        </section>
+
+        <section class="pro-comparison" id="comparison">
+            <div class="pro-section-head">
+                <span class="section-eyebrow">Free vs Pro</span>
+                <h2>Make the difference obvious in 20 seconds.</h2>
+                <p>The strongest Pro page does not hide the free tier. It makes the upgrade feel sharper because the extra value is specific.</p>
+            </div>
+
+            <div class="pro-comparison-grid">
+                <article class="pro-tier-card free-tier">
+                    <div class="pro-tier-top">
+                        <span class="pro-tier-label">Free</span>
+                        <h3>Good for getting started</h3>
+                    </div>
+                    <ul class="pro-tier-list">
+                        <li>Browse exams, launch starter mocks, and explore the product safely</li>
+                        <li>Use the current mock flow, dashboard, and practice surfaces without pressure</li>
+                        <li>See enough value to trust the platform before considering an upgrade</li>
+                        <li>Keep discovery and basic practice open so the product stays believable</li>
+                    </ul>
+                </article>
+
+                <article class="pro-tier-card pro-tier">
+                    <div class="pro-tier-top">
+                        <span class="pro-tier-label pro-label">Mockly Pro</span>
+                        <h3>Worth it when time is limited and mistakes repeat</h3>
+                    </div>
+                    <ul class="pro-tier-list">
+                        <li>Guided mistake-to-revision loops after every attempt</li>
+                        <li>Study plans that update by exam, weakness, and weekly target</li>
+                        <li>Deeper mock packs and clearer comparison across tiers or papers</li>
+                        <li>Action-first analysis that answers what to fix before the next mock</li>
+                    </ul>
+                </article>
+
+                <aside class="pro-launch-card">
+                    <h3>What must be real before launch</h3>
+                    <ul class="pro-launch-list">
+                        <li>One or two truly useful Pro flows, not ten placeholder promises</li>
+                        <li>Real comparison between free and Pro, without hidden terms</li>
+                        <li>Clear CTA path from page to sign up, dashboard, or upgrade trigger</li>
+                        <li>Strong exam-specific copy so the page does not feel like any generic edtech plan</li>
+                    </ul>
+                </aside>
+            </div>
+        </section>
+
+        <section class="pro-weekflow">
+            <div class="pro-section-head">
+                <span class="section-eyebrow">Weekly Flow</span>
+                <h2>Show how Pro changes the candidate’s actual week.</h2>
+                <p>Competitors usually stop at “unlimited tests” and “advanced analytics.” This page should show the rhythm of preparation after upgrading.</p>
+            </div>
+
+            <div class="pro-week-grid">
+                <article class="pro-week-card">
+                    <span class="pro-week-step">01</span>
+                    <h3>Baseline your current level</h3>
+                    <p>Start with the right mock, not a random one, and set a realistic weekly target based on the exam path.</p>
+                </article>
+                <article class="pro-week-card">
+                    <span class="pro-week-step">02</span>
+                    <h3>Recover repeated mistakes</h3>
+                    <p>Turn low-confidence topics into a daily recovery list instead of leaving analysis stuck inside old attempt summaries.</p>
+                </article>
+                <article class="pro-week-card">
+                    <span class="pro-week-step">03</span>
+                    <h3>Revise with direction</h3>
+                    <p>Use guided revision loops, shortlist the next mock, and stop guessing whether you should revise, practice, or reattempt.</p>
+                </article>
+                <article class="pro-week-card">
+                    <span class="pro-week-step">04</span>
+                    <h3>Measure improvement honestly</h3>
+                    <p>Track whether your weakness is speed, accuracy, topic confidence, or consistency, then close the loop before the next test.</p>
+                </article>
+            </div>
+        </section>
+
+        <section class="pro-competition" id="competition">
+            <div class="pro-section-head">
+                <span class="section-eyebrow">Competitive Edge</span>
+                <h2>What can make Mockly Pro more interesting than typical mock-test subscriptions.</h2>
+                <p>This is where the page should feel different from the market. The differentiator is not price alone. It is better decision support.</p>
+            </div>
+
+            <div class="pro-competition-grid">
+                <article class="pro-competition-card">
+                    <i class="fa-solid fa-route"></i>
+                    <h3>Exam-specific Pro paths</h3>
+                    <p>Offer different Pro stories for SSC speed, RRB consistency, and UPSC reasoning depth instead of one flat benefits list.</p>
+                </article>
+                <article class="pro-competition-card">
+                    <i class="fa-solid fa-repeat"></i>
+                    <h3>Revision from mistakes</h3>
+                    <p>Most competitors stop at analytics. Mockly Pro can feel smarter if it turns errors into next-day revision actions automatically.</p>
+                </article>
+                <article class="pro-competition-card">
+                    <i class="fa-solid fa-language"></i>
+                    <h3>Bilingual confidence</h3>
+                    <p>Keep Hindi and English support central in the Pro story so the page speaks to real aspirants, not just polished urban UX expectations.</p>
+                </article>
+                <article class="pro-competition-card">
+                    <i class="fa-solid fa-clipboard-check"></i>
+                    <h3>Clear next step after every mock</h3>
+                    <p>The best “premium” feeling is not more data. It is a simple answer to what the candidate should do tomorrow.</p>
+                </article>
+                <article class="pro-competition-card">
+                    <i class="fa-solid fa-ranking-star"></i>
+                    <h3>Rank context that teaches</h3>
+                    <p>Show why the score moved, what percentile means, and where the candidate is leaking marks instead of dumping abstract comparison stats.</p>
+                </article>
+                <article class="pro-competition-card">
+                    <i class="fa-solid fa-eye"></i>
+                    <h3>Honest premium framing</h3>
+                    <p>If a feature is not live, label it as upcoming. That honesty itself becomes a differentiator in a category full of inflated promises.</p>
+                </article>
+            </div>
+        </section>
+
+        <section class="pro-checklist">
+            <div class="pro-checklist-shell">
+                <div class="pro-checklist-copy">
+                    <span class="section-eyebrow">Launch Checklist</span>
+                    <h2>Keep these on the final page to make it stronger.</h2>
+                    <p>These elements will make the page more persuasive without making it feel salesy or fake.</p>
+                </div>
+
+                <div class="pro-checklist-grid">
+                    <article>
+                        <h3>Keep</h3>
+                        <ul>
+                            <li>A clear free vs Pro comparison above the fold</li>
+                            <li>One honest line that explains Pro is launching in stages</li>
+                            <li>Exam-specific value blocks instead of generic “premium features” language</li>
+                            <li>A weekly workflow section so the candidate can picture the benefit</li>
+                        </ul>
+                    </article>
+                    <article>
+                        <h3>Add next</h3>
+                        <ul>
+                            <li>Real pricing only after checkout and access logic exist</li>
+                            <li>A true waitlist or upgrade CTA path, not a dead-end button</li>
+                            <li>One visual proof block from actual dashboard or analysis states</li>
+                            <li>Specific “who Pro is for” guidance so users self-select faster</li>
+                        </ul>
+                    </article>
+                </div>
+            </div>
+        </section>
+
+        <section class="pro-faq">
+            <div class="pro-section-head">
+                <span class="section-eyebrow">FAQ</span>
+                <h2>Answer the doubts a serious candidate will have before upgrading.</h2>
+            </div>
+
+            <div class="pro-faq-list">
+                <details open>
+                    <summary>Can I buy Mockly Pro today?</summary>
+                    <p>Not yet. This page is intentionally framed as a Pro preview so the product stays honest until pricing, payments, and gated benefits are ready.</p>
+                </details>
+                <details>
+                    <summary>What should remain free even after Pro launches?</summary>
+                    <p>Exam discovery, starter mock access, and enough dashboard value to build trust should remain visible. Hiding everything behind paywalls weakens credibility.</p>
+                </details>
+                <details>
+                    <summary>What makes this page more competitive than a normal pricing page?</summary>
+                    <p>It explains the study workflow after upgrading, not just the feature checklist. That is stronger than competing only on discounts, badges, or inflated claims.</p>
+                </details>
+                <details>
+                    <summary>What should be the first real Pro feature to ship?</summary>
+                    <p>A mistake-to-revision loop with better next-step guidance is a stronger first differentiator than just unlocking more mock counts.</p>
+                </details>
+            </div>
+        </section>
+    </main>
+
+    <footer class="site-footer">
+        <div class="footer-top-cta">
+            <div>
+                <h3>Start free now, then make Pro worth upgrading to.</h3>
+                <p>Use the current mock flow, study your weak areas, and see where a deeper guided plan would create the biggest jump.</p>
+            </div>
+            <a href="/all-exams" class="btn btn-primary">Explore Free Mocks <i class="fa-solid fa-arrow-right"></i></a>
+        </div>
+
+        <div class="footer-container">
+            <div class="footer-brand">
+                <div class="logo">
+                    <div class="logo-icon">M</div>
+                    <span class="logo-text">Mockly</span>
+                </div>
+                <p>Mockly helps SSC, RRB, and UPSC aspirants practice with better clarity, bilingual support, and sharper next-step guidance.</p>
+                <div class="footer-trust-chips">
+                    <span><i class="fa-solid fa-map-signs"></i> Candidate-first design</span>
+                    <span><i class="fa-solid fa-chart-line"></i> Clear improvement focus</span>
+                    <span><i class="fa-solid fa-language"></i> Bilingual support</span>
+                </div>
+                <div class="footer-contact">
+                    <a href="mailto:support@mockly.in"><i class="fa-regular fa-envelope"></i> support@mockly.in</a>
+                    <a href="tel:+919876543210"><i class="fa-solid fa-phone"></i> +91 98765 43210</a>
+                </div>
+            </div>
+
+            <div class="footer-links-grid">
+                <div>
+                    <h4>Explore</h4>
+                    <a href="/all-exams">All Exams</a>
+                    <a href="/test-series">Test Series</a>
+                    <a href="/chapter-wise">Chapter Wise</a>
+                    <a href="/pyq-questions">PYQ Questions</a>
+                </div>
+                <div>
+                    <h4>Mockly Pro</h4>
+                    <a href="#comparison">Free vs Pro</a>
+                    <a href="#competition">Competitive Edge</a>
+                    <a href="#comparison">Launch Checklist</a>
+                    <a href="/#dashboard">Dashboard</a>
+                </div>
+                <div>
+                    <h4>Legal & Help</h4>
+                    <a href="/privacy">Privacy Policy</a>
+                    <a href="/terms">Terms of Use</a>
+                    <a href="/refund">Refund Policy</a>
+                    <a href="/help">Help Center</a>
+                </div>
+            </div>
+
+            <aside class="footer-app-card">
+                <h4>Get Daily Updates</h4>
+                <p>Receive exam alerts, daily quizzes, and strategy tips directly in your inbox.</p>
+                <form class="footer-newsletter" onsubmit="event.preventDefault();">
+                    <label class="sr-only" for="footer-email">Email address</label>
+                    <input id="footer-email" type="email" placeholder="Enter your email" required>
+                    <button type="submit" class="btn btn-primary">Subscribe</button>
+                </form>
+                <div class="footer-app-badges">
+                    <a href="/#dashboard" class="btn btn-outline btn-hover-sweep"><i class="fa-solid fa-chart-column"></i> Open Dashboard</a>
+                    <a href="/all-exams" class="btn btn-outline btn-hover-sweep"><i class="fa-solid fa-file-pen"></i> Start Mock</a>
+                </div>
+            </aside>
+        </div>
+
+        <div class="footer-bottom">
+            <p>&copy; 2026 Mockly. Built to support serious government exam aspirants.</p>
+            <div class="footer-bottom-links">
+                <a href="/privacy">Privacy</a>
+                <a href="/terms">Terms</a>
+                <a href="/help">Contact</a>
+            </div>
+        </div>
+    </footer>
+
+    <script src="page-shell.js"></script>
+</body>
+</html>

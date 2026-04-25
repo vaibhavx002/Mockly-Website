@@ -8,7 +8,7 @@
 .premium-section,
 .confidence-section,
 .faq-section {
-    max-width: 1200px;
+    max-width: var(--site-max-width);
     width: 100%;
     margin: 0 auto;
     padding: 0 2rem;

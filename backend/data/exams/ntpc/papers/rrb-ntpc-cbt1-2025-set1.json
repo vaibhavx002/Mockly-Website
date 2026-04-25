@@ -1,12 +1,20 @@
 {
   "paperId": "rrb-ntpc-cbt1-2025-set1",
   "examId": "rrb-ntpc",
+  "stageId": "cbt1",
+  "testType": "previous-year-paper",
   "title": "RRB NTPC CBT-1 2025 Set 1",
   "totalQuestions": 20,
   "durationMinutes": 25,
   "marksPerQuestion": 1,
   "maxScore": 20,
   "negativeMarks": 0.33,
+  "scope": {
+    "sectionId": "",
+    "subjectId": "",
+    "chapterId": "",
+    "topicId": ""
+  },
   "sections": [
     {
       "sectionId": "reasoning",

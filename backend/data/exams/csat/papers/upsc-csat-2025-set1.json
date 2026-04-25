@@ -1,12 +1,20 @@
 {
   "paperId": "upsc-csat-2025-set1",
   "examId": "upsc-csat",
+  "stageId": "csat",
+  "testType": "previous-year-paper",
   "title": "UPSC CSAT 2025 Set 1",
   "totalQuestions": 20,
   "durationMinutes": 25,
   "marksPerQuestion": 2,
   "maxScore": 40,
   "negativeMarks": 0.66,
+  "scope": {
+    "sectionId": "",
+    "subjectId": "",
+    "chapterId": "",
+    "topicId": ""
+  },
   "sections": [
     {
       "sectionId": "reasoning",

@@ -3,6 +3,8 @@
   "required": [
     "paperId",
     "examId",
+    "stageId",
+    "testType",
     "title",
     "totalQuestions",
     "durationMinutes",
@@ -16,15 +18,28 @@
     "name",
     "questionCount"
   ],
+  "notes": {
+    "stageId": "Required for future-proof exam modeling. Examples: tier1, tier2, cbt1, cbt2, gs1, csat.",
+    "testType": "Recommended values: full-paper, previous-year-paper, section-test, chapter-test, topic-test.",
+    "scope": "Optional scope object for generated or targeted papers. Can include sectionId, subjectId, chapterId, topicId and matching names."
+  },
   "example": {
     "paperId": "rrb-group-d-cbt-2025-set1",
     "examId": "rrb-group-d",
+    "stageId": "cbt",
+    "testType": "previous-year-paper",
     "title": "RRB Group D CBT 2025 Set 1",
     "totalQuestions": 20,
     "durationMinutes": 18,
     "marksPerQuestion": 1,
     "maxScore": 20,
     "negativeMarks": 0.33,
+    "scope": {
+      "sectionId": "",
+      "subjectId": "",
+      "chapterId": "",
+      "topicId": ""
+    },
     "sections": [
       { "sectionId": "math", "name": "Mathematics", "questionCount": 5 },
       { "sectionId": "reasoning", "name": "General Intelligence and Reasoning", "questionCount": 5 },

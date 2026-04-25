@@ -6,7 +6,7 @@
     --analysis-success: #166534;
     --analysis-danger: #b91c1c;
     --analysis-warning: #92400e;
-    max-width: 1160px;
+    max-width: var(--site-max-width);
     margin: 0 auto;
     padding: 1.35rem 2rem 2.4rem;
 }

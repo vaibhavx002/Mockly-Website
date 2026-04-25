@@ -4,6 +4,7 @@
     "questionId",
     "examId",
     "paperId",
+    "stageId",
     "sectionId",
     "content",
     "correctOptionIndex",
@@ -17,15 +18,18 @@
     "correctOptionIndexRange": "0 to 3",
     "languageFallback": "Default fallback is English when Hindi content is missing, except SSC CGL non-English sections where Hindi is mandatory.",
     "sscCglLanguageRule": "SSC CGL requires content.en for every section. For non-English sections, content.hi is required. English section may remain English-only.",
-    "media": "questionImageUrl, optionImageUrls, and explanationImageUrl are optional",
+    "media": "questionImageUrl, optionImageUrls, explanationImageUrl, answerImageUrl, and solutionImageUrls are optional",
     "hindiExplanation": "If exam languageSupport includes hi, explanation.hi is strongly recommended.",
-    "taxonomyFields": "Optional per-question overrides: subjectId/subjectName/chapterId/chapterName/topicId/topicName. If missing, backend can resolve via <family>/topics.json or chapterwise fallback."
+    "taxonomyFields": "Optional per-question overrides: subjectId/subjectName/chapterId/chapterName/topicId/topicName. If missing, backend can resolve via <family>/topics.json or chapterwise fallback.",
+    "stageAndScope": "stageId should match the paper stage. testType and scope are optional overrides for generated or targeted practice payloads."
   },
   "example": {
     "questionId": "rrbgd-2025-s1-q001",
     "examId": "rrb-group-d",
     "paperId": "rrb-group-d-cbt-2025-set1",
+    "stageId": "cbt",
     "sectionId": "math",
+    "testType": "previous-year-paper",
     "content": {
       "en": {
         "questionText": "What is 18 + 27?",
@@ -39,11 +43,18 @@
     "media": {
       "questionImageUrl": null,
       "optionImageUrls": [null, null, null, null],
-      "explanationImageUrl": null
+      "explanationImageUrl": null,
+      "answerImageUrl": null,
+      "solutionImageUrls": []
     },
     "correctOptionIndex": 2,
     "difficulty": "easy",
     "sourceYear": "2025",
+    "scope": {
+      "subjectId": "math",
+      "chapterId": "arithmetic",
+      "topicId": "addition"
+    },
     "explanation": {
       "en": "18 + 27 equals 45. Add ones place then tens place.",
       "hi": "18 + 27 ka yog 45 hota hai. Pehle ones place, phir tens place jodiye."

@@ -9,7 +9,7 @@
       "sectionId": "reasoning",
       "content": {
         "en": {
-          "questionText": "In the following question, select the related word from the given alternatives. \nWatt: Power :: Pascal: ?",
+          "questionText": "In the following question, select the related word from the given alternatives. <b>\nWatt: Power :: Pascal: ?</b>",
           "options": [
             "Energy",
             "Temperature",
@@ -18,7 +18,7 @@
           ]
         },
         "hi": {
-          "questionText": "निम्नलिखित प्रश्न में दिए गए विकल्पों में से संबंधित शब्द का चयन कीजिए। \nवाट : शक्ति :: पास्कल : ?",
+          "questionText": "निम्नलिखित प्रश्न में दिए गए विकल्पों में से संबंधित शब्द का चयन कीजिए। <b>\nवाट : शक्ति :: पास्कल : ?</b>",
           "options": [
             "ऊर्जा",
             "तापमान",
@@ -40,8 +40,8 @@
       "difficulty": "easy",
       "sourceYear": "2025",
       "explanation": {
-        "en": "Watt is the SI unit of Power. Similarly, Pascal is the SI unit of Pressure. The relationship is 'Unit : Physical Quantity it measures'.\n\nWhy others are wrong:\n- Energy: The SI unit of Energy is Joule, not Pascal.\n- Temperature: The SI unit of Temperature is Kelvin, not Pascal.\n- Force: The SI unit of Force is Newton, not Pascal.",
-        "hi": "वाट, शक्ति (पावर) की SI इकाई है। उसी प्रकार, पास्कल, दबाव (प्रेशर) की SI इकाई है। संबंध 'इकाई : मापी जाने वाली भौतिक राशि' है।\n\nअन्य विकल्प गलत क्यों हैं:\n- ऊर्जा: ऊर्जा की SI इकाई जूल है, पास्कल नहीं।\n- तापमान: तापमान की SI इकाई केल्विन है, पास्कल नहीं।\n- बल: बल की SI इकाई न्यूटन है, पास्कल नहीं।"
+        "en": "Watt is the SI unit of Power. Similarly, <b>Pascal is the SI unit of Pressure</b>. The relationship is 'Unit : Physical Quantity it measures'.\nWhy others are wrong:\n- Energy: The SI unit of Energy is Joule, not Pascal.\n- Temperature: The SI unit of Temperature is Kelvin, not Pascal.\n- Force: The SI unit of Force is Newton, not Pascal.",
+        "hi": "वाट, शक्ति (पावर) की SI इकाई है। उसी प्रकार, पास्कल, दबाव (प्रेशर) की SI इकाई है। संबंध 'इकाई : मापी जाने वाली भौतिक राशि' है।\nअन्य विकल्प गलत क्यों हैं:\n- ऊर्जा: ऊर्जा की SI इकाई जूल है, पास्कल नहीं।\n- तापमान: तापमान की SI इकाई केल्विन है, पास्कल नहीं।\n- बल: बल की SI इकाई न्यूटन है, पास्कल नहीं।"
       }
     },
     {
@@ -349,7 +349,7 @@
     "sectionId": "reasoning",
     "content": {
       "en": {
-        "questionText": "Which of the following addresses are identical to each other?\n1. Arjun Mehta A-101, Emerald Towers, Surat, 395001\n2. Arjun Mehta A-101, Emerald Tower, Surat , 395001\n3. Arjun M. A-101, Emerald Tower, Surat , 395001\n4. Arjun Mehta A-101, Emerald Tower, Surat , 395001",
+        "questionText": "Which of the following addresses are identical to each other? <b> \n1. Arjun Mehta A-101, Emerald Towers, Surat, 395001\n2. Arjun Mehta A-101, Emerald Tower, Surat , 395001\n3. Arjun M. A-101, Emerald Tower, Surat , 395001\n4. Arjun Mehta A-101, Emerald Tower, Surat , 395001 </b> ",
         "options": ["1 and 2", "1 and 3", "2 and 4", "3 and 4"]
       },
       "hi": {
